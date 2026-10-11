@@ -78,7 +78,8 @@ def live_adapters(vendors: list[dict], *, scribe_client=None, claude_client=None
         if not key:
             raise ValueError("Live adapters require ANTHROPIC_API_KEY")
         claude_client = Anthropic(api_key=key)
-    model = config.value("CLAUDE_MODEL", "claude-sonnet-5-5")
+    # Sonnet 5.5 rejects forced tool selection; 4.6 supports this extraction flow.
+    model = config.value("CLAUDE_MODEL", "claude-sonnet-4-6")
     # Include prompt/schema/catalog/model versions so changed extraction semantics
     # cannot reuse stale terms. API keys and source paths are deliberately absent.
     fingerprint = hashlib.sha256(json.dumps({

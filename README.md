@@ -111,7 +111,7 @@ Ground-truth labels are used only by tests and the oracle, never to extract or a
 
 `ADAPTERS=fixture` is the default even when keys exist. Set `ADAPTERS=live`
 for real audio files and configure `ELEVENLABS_API_KEY`, `ANTHROPIC_API_KEY`, and
-optionally `CLAUDE_MODEL` (default `claude-sonnet-5-5`). Missing keys or API errors
+optionally `CLAUDE_MODEL` (default `claude-sonnet-4-6`). Missing keys or API errors
 fail visibly; live mode never silently substitutes fixture data. Readback stays
 text-only. Inject an `interfaces.Adapters` bundle for isolated/offline tests.
 
@@ -133,6 +133,9 @@ Claude calls `messages.create` with `EXTRACT_TERMS_TOOL`, `strict=True`, and a
 forced named `tool_choice` with `disable_parallel_tool_use=True`. These parameters
 were verified against the installed SDKs (ElevenLabs 2.71.0, Anthropic 0.125.0) and
 [Claude strict tool-use docs](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use).
+A real Sonnet 4.6 request passed strict forced-tool extraction. Sonnet 5.5 rejects
+forced tool selection, so it is unsuitable for this adapter without changing the
+flow (see [its model notes](https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5)).
 The SDK's `transform_schema` removes constraints unsupported by the wire schema;
 `validate_terms` still enforces positive 64-bit integer cents and real ISO dates
 locally. Refusals, truncated or multiple tool calls, and invalid payloads fail.

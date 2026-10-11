@@ -92,6 +92,16 @@ def test_configured_adapters_choose_fixture_by_default(monkeypatch):
         interfaces.configured_adapters()
 
 
+def test_live_default_model_supports_forced_extraction_tool(monkeypatch):
+    monkeypatch.delenv("CLAUDE_MODEL", raising=False)
+    bundle = live_adapters([], scribe_client=object(), claude_client=object())
+    assert bundle.extract_terms.model == "claude-sonnet-4-6"
+    monkeypatch.setenv("CLAUDE_MODEL", "explicit-model")
+    overridden = live_adapters([], scribe_client=object(), claude_client=object())
+    assert overridden.extract_terms.model == "explicit-model"
+    assert overridden.cache_key != bundle.cache_key
+
+
 @pytest.mark.integration
 def test_live_mode_requires_keys_without_fixture_fallback(db, monkeypatch):
     monkeypatch.setenv("ADAPTERS", "live")
