@@ -61,14 +61,19 @@ def enqueue(db):
     def create(*, vendor_id="vendor-001", destination_account="demo-account-001", amount_cents=12550):
         now = datetime.now(timezone.utc)
         run_id, evidence_id, intent_id, queue_id = (str(uuid.uuid4()) for _ in range(4))
+        terms = {"vendor_id": vendor_id, "amount_cents": amount_cents,
+                 "destination_account": destination_account, "date": "2026-10-11"}
         db.evidence.insert_one({
             "_id": evidence_id, "run_id": run_id, "audio_path": "demo-invoice.wav",
-            "verbatim": True, "text": "Fictional invoice", "created_at": now,
+            "verbatim_text": "Fictional invoice", "cleaned_text": "Fictional invoice",
+            "verbatim_terms": terms, "cleaned_terms": terms, "created_at": now,
         })
         db.intents.insert_one({
             "_id": intent_id, "run_id": run_id, "evidence_id": evidence_id,
-            "vendor_id": vendor_id, "amount_cents": amount_cents,
-            "destination_account": destination_account, "date": "2026-10-11", "created_at": now,
+            **terms, "created_at": now, "status": "confirmed", "confirmed_terms": terms,
+            "confirmed_at": now, "confirmation_source": "manual",
+            "approved_bank_account": db.vendors.find_one({"_id": vendor_id})["bank_account"],
+            "approved_fence_version": db.fences.find_one({"_id": f"fence:{vendor_id}"})["version"],
         })
         item = {
             "_id": queue_id, "run_id": run_id, "intent_id": intent_id,

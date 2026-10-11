@@ -11,6 +11,11 @@ TERMS = {
     "destination_account": STRING,
     "date": DATE,
 }
+TERM_OBJECT = {
+    "bsonType": "object", "required": list(TERMS),
+    "additionalProperties": False, "properties": TERMS,
+}
+OPTIONAL_TERMS = {"anyOf": [TERM_OBJECT, {"bsonType": "null"}]}
 
 
 def schema(required: list[str], properties: dict) -> dict:
@@ -27,12 +32,20 @@ VALIDATORS = {
         "name": STRING, "bank_account": STRING, "updated_at": TIMESTAMP,
     }),
     "fences": schema(["version"], {"version": INTEGER}),
-    "evidence": schema(["run_id", "audio_path", "verbatim", "text", "created_at"], {
-        "run_id": STRING, "audio_path": STRING, "verbatim": {"bsonType": "bool"},
-        "text": STRING, "created_at": TIMESTAMP,
+    "evidence": schema([
+        "run_id", "audio_path", "verbatim_text", "cleaned_text",
+        "verbatim_terms", "cleaned_terms", "created_at",
+    ], {
+        "run_id": STRING, "audio_path": STRING,
+        "verbatim_text": {"bsonType": "string"}, "cleaned_text": {"bsonType": "string"},
+        "verbatim_terms": OPTIONAL_TERMS, "cleaned_terms": OPTIONAL_TERMS, "created_at": TIMESTAMP,
     }),
-    "intents": schema([*TERMS, "run_id", "evidence_id", "created_at"], {
-        **TERMS, "run_id": STRING, "evidence_id": STRING, "created_at": TIMESTAMP,
+    "intents": schema([*TERMS, "run_id", "evidence_id", "status", "created_at"], {
+        **TERMS, "run_id": STRING, "evidence_id": STRING,
+        "status": {"enum": ["draft", "confirmed"]}, "created_at": TIMESTAMP,
+        "confirmed_terms": TERM_OBJECT, "confirmed_at": TIMESTAMP,
+        "approved_bank_account": STRING, "approved_fence_version": INTEGER,
+        "confirmation_source": {"enum": ["verbatim", "cleaned", "manual"]},
     }),
     "queue": schema(["intent_id", "vendor_id", "run_id", "status", "created_at"], {
         "intent_id": STRING, "vendor_id": STRING, "run_id": STRING,
@@ -63,3 +76,12 @@ VALIDATORS = {
         },
     }},
 }
+
+CONFIRMATION_FIELDS = [
+    "confirmed_terms", "confirmed_at", "approved_bank_account", "approved_fence_version", "confirmation_source",
+]
+VALIDATORS["intents"]["$jsonSchema"]["oneOf"] = [
+    {"properties": {"status": {"enum": ["draft"]}},
+     "not": {"anyOf": [{"required": [field]} for field in CONFIRMATION_FIELDS]}},
+    {"properties": {"status": {"enum": ["confirmed"]}}, "required": CONFIRMATION_FIELDS},
+]

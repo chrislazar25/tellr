@@ -7,7 +7,7 @@ from pymongo.errors import DuplicateKeyError, OperationFailure
 from db.schemas import VALIDATORS
 from db.seed import seed
 from db.vendors import update_vendor_bank_account
-from pipeline import run_pipeline
+from pipeline import confirm_intent, enqueue_intent, prepare_intent, run_pipeline
 from worker import process_one
 
 pytestmark = pytest.mark.integration
@@ -36,18 +36,28 @@ def test_offline_pipeline_end_to_end_logs_every_step(db, monkeypatch, verbatim):
         monkeypatch.delenv(key, raising=False)
     result = run_pipeline(db, verbatim=verbatim)
     assert result["outcome"]["status"] == "done"
-    assert db.evidence.count_documents({"run_id": result["run_id"], "verbatim": verbatim}) == 1
+    evidence = db.evidence.find_one({"run_id": result["run_id"]})
+    assert evidence["verbatim_text"].startswith("Um,")
+    assert evidence["cleaned_text"] != evidence["verbatim_text"]
+    assert evidence["verbatim_terms"] == evidence["cleaned_terms"]
+    intent = db.intents.find_one({"run_id": result["run_id"]})
+    assert intent["confirmed_terms"] == evidence["verbatim_terms"]
+    assert intent["confirmed_at"] is not None
+    assert intent["approved_bank_account"] == "demo-account-001"
+    assert intent["approved_fence_version"] == 0
     assert db.intents.count_documents({"run_id": result["run_id"]}) == 1
     assert db.payments.count_documents({"run_id": result["run_id"]}) == 1
     records = list(db.runs.find({"run_id": result["run_id"]}))
     assert {record["step"] for record in records} == {
-        "transcribe", "extract_terms", "readback", "store_evidence", "store_intent", "enqueue",
+        "transcribe", "extract_terms", "readback", "store_evidence", "store_intent", "confirm", "enqueue",
         "claim", "fence", "load_vendor", "load_intent", "load_rules", "payment_receipt", "done", "transaction_complete",
     }
     for record in records:
         assert isinstance(record["inputs"], dict)
         assert isinstance(record["outputs"], dict)
         assert isinstance(record["ts"], datetime)
+    assert sum(record["step"] == "transcribe" for record in records) == 2
+    assert sum(record["step"] == "extract_terms" for record in records) == 2
 
 
 @pytest.mark.parametrize("collection", ["intents", "payments"])
@@ -74,3 +84,69 @@ def test_payment_idempotency_key_is_unique(db, enqueue):
     duplicate["created_at"] = datetime.now(timezone.utc)
     with pytest.raises(DuplicateKeyError):
         db.payments.insert_one(duplicate)
+
+
+def test_hold_allows_account_change_between_approval_and_payment(db):
+    result = run_pipeline(db, hold=True)
+    assert result["outcome"]["status"] == "pending"
+    assert db.payments.count_documents({}) == 0
+    intent = db.intents.find_one({"_id": result["intent_id"]})
+    assert intent["approved_bank_account"] == "demo-account-001"
+    assert intent["approved_fence_version"] == 0
+    update_vendor_bank_account(db, "vendor-001", "demo-account-after-approval")
+    outcome = process_one(db, queue_id=result["outcome"]["queue_id"])
+    assert outcome["paid_to"] == "demo-account-after-approval"
+    assert db.intents.find_one({"_id": result["intent_id"]})["confirmed_terms"] == intent["confirmed_terms"]
+
+
+def test_only_confirmed_intents_can_be_enqueued(db):
+    prepared = prepare_intent(db)
+    assert prepared["status"] == "awaiting_confirmation"
+    with pytest.raises(ValueError, match="Only confirmed"):
+        enqueue_intent(db, prepared["intent_id"])
+    assert db.queue.count_documents({}) == 0
+
+
+def test_confirmation_records_current_account_and_version_and_is_immutable(db):
+    prepared = prepare_intent(db)
+    update_vendor_bank_account(db, "vendor-001", "demo-account-at-approval")
+    terms = prepared["candidates"]["verbatim"]
+    intent = confirm_intent(db, prepared["intent_id"], terms, source="verbatim")
+    assert intent["approved_bank_account"] == "demo-account-at-approval"
+    assert intent["approved_fence_version"] == 1
+    update_vendor_bank_account(db, "vendor-001", "demo-account-later")
+    assert confirm_intent(db, prepared["intent_id"], terms) == intent
+    with pytest.raises(ValueError, match="immutable"):
+        confirm_intent(db, prepared["intent_id"], {**terms, "amount_cents": 50})
+
+
+def test_enqueue_is_idempotent_even_after_payment(db):
+    result = run_pipeline(db, hold=True)
+    item = enqueue_intent(db, result["intent_id"])
+    assert item["_id"] == result["outcome"]["queue_id"]
+    assert db.queue.count_documents({}) == 1
+    process_one(db, queue_id=item["_id"])
+    assert enqueue_intent(db, result["intent_id"])["status"] == "done"
+    assert process_one(db) is None
+    assert db.payments.count_documents({}) == 1
+
+
+@pytest.mark.parametrize("field,value", [
+    ("confirmed_terms", {"vendor_id": "vendor-001"}),
+    ("confirmed_at", "2026-10-11"),
+    ("approved_bank_account", ""),
+    ("approved_fence_version", 1.5),
+    ("confirmation_source", "automatic-guess"),
+])
+def test_confirmation_metadata_is_validated(db, enqueue, field, value):
+    item = enqueue()
+    with pytest.raises(OperationFailure) as error:
+        db.intents.update_one({"_id": item["intent_id"]}, {"$set": {field: value}})
+    assert error.value.code == 121
+
+
+def test_nested_confirmed_amounts_reject_floats(db, enqueue):
+    item = enqueue()
+    with pytest.raises(OperationFailure) as error:
+        db.intents.update_one({"_id": item["intent_id"]}, {"$set": {"confirmed_terms.amount_cents": 1.5}})
+    assert error.value.code == 121

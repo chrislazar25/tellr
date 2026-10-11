@@ -78,9 +78,11 @@ def process_claimed(
             return block("Vendor or intent is missing")
         if intent["vendor_id"] != vendor["_id"]:
             return block("Intent vendor does not match the queue vendor")
-        terms = validate_terms({key: intent[key] for key in (
-            "vendor_id", "amount_cents", "destination_account", "date",
-        )})
+        if intent.get("status") != "confirmed" or "confirmed_terms" not in intent:
+            return block("Intent has not been confirmed")
+        terms = validate_terms(intent["confirmed_terms"])
+        if terms["vendor_id"] != vendor["_id"]:
+            return block("Confirmed vendor does not match the queue vendor")
         log_step(db, run_id, "load_vendor", {"vendor_id": vendor["_id"]},
                  {"bank_account": vendor["bank_account"]}, session=session)
         log_step(db, run_id, "load_intent", {"intent_id": intent["_id"]}, terms, session=session)
