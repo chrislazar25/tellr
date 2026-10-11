@@ -37,21 +37,22 @@ def transcribe(audio_path: str | Path, verbatim: bool) -> str:
     """Match the fixture basename; no audio file or API key is needed."""
     for recording in _recordings():
         if recording["audio_file"] == Path(audio_path).name:
-            return recording["verbatim_text" if verbatim else "text"]
+            return recording["verbatim_text" if verbatim else "cleaned_text"]
     raise ValueError("No transcription fixture for that audio filename")
 
 
-def extract_terms(text: str) -> Terms:
+def extract_terms(text: str) -> Terms | None:
     for recording in _recordings():
-        if text in (recording["text"], recording["verbatim_text"]):
-            return validate_terms(recording["terms"])
+        for mode in ("verbatim", "cleaned"):
+            if text == recording[f"{mode}_text"]:
+                terms = recording[f"{mode}_terms"]
+                return None if terms is None else validate_terms(terms)
     raise ValueError("No extraction fixture for that transcript")
 
 
 def readback(terms: Terms) -> str:
     """Text readback now; a real speech adapter may return audio later."""
     terms = validate_terms(terms)
-    for recording in _recordings():
-        if recording["terms"] == terms:
-            return recording["readback"]
-    raise ValueError("No readback fixture for those terms")
+    template = json.loads(files("fixtures").joinpath("pipeline.json").read_text())["readback_template"]
+    dollars, cents = divmod(terms["amount_cents"], 100)
+    return template.format(**terms, dollars=dollars, cents=cents)
