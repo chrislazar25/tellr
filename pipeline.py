@@ -10,6 +10,7 @@ from pathlib import Path
 from pymongo.database import Database
 
 import interfaces
+from config import print_error
 from db.connection import connect
 from db.evidence import collect_candidates
 from db.transactions import run_transaction
@@ -180,8 +181,8 @@ def main(argv: list[str] | None = None) -> int:
                 result = {**result, "status": outcome["status"], "outcome": outcome}
         print(json.dumps(result, indent=2))
         return 0
-    except Exception:
-        print("fail", file=sys.stderr)
+    except Exception as error:
+        print_error(error)
         return 1
     finally:
         if db is not None:

@@ -2,7 +2,6 @@
 
 import argparse
 import json
-import sys
 import uuid
 from datetime import datetime, timezone
 
@@ -156,8 +155,8 @@ def main() -> int:
         db = connect()
         print(json.dumps(process_one(db, queue_id=args.queue_id)))
         return 0
-    except Exception:
-        print("fail", file=sys.stderr)
+    except Exception as error:
+        config.print_error(error)
         return 1
     finally:
         if db is not None:

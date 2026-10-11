@@ -1,12 +1,12 @@
 """Idempotently install validators/indexes and three fictional vendors."""
 
 import uuid
-import sys
 
 from pymongo.database import Database
 from pymongo.errors import CollectionInvalid
 
 from db.connection import connect
+from config import print_error
 from db.schemas import VALIDATORS
 from db.transactions import run_transaction
 from observability import log_step
@@ -51,8 +51,8 @@ def main() -> int:
         seed(db)
         print("Seeded eight validated collections, indexes, and three demo vendors.")
         return 0
-    except Exception:
-        print("fail", file=sys.stderr)
+    except Exception as error:
+        print_error(error)
         return 1
     finally:
         if db is not None:

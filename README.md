@@ -31,7 +31,10 @@ uv run python scripts/change_vendor_account.py vendor-001 demo-account-updated
 uv run python pipeline.py process --queue-id 'queue:YOUR_INTENT_ID'
 ```
 
-`db.ping` prints exactly `ok` or `fail` and exits 0 or 1. `db.seed` installs eight
+`db.ping` prints exactly `ok` or `fail` on stdout and exits 0 or 1. CLI errors
+print the exception type and a sanitized message to stderr. Configured secrets,
+encoded credentials, connection URIs, and IP addresses are redacted; tracebacks
+are not printed. `db.seed` installs eight
 collections (`vendors`, `fences`, `evidence`, `intents`, `queue`, `payments`,
 `rule_versions`, `runs`), strict validators, a unique payments idempotency index,
 and three fictional vendors with version-zero fences. Re-running seed preserves

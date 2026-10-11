@@ -2,9 +2,9 @@
 
 import argparse
 import json
-import sys
 
 from db.connection import connect
+from config import print_error
 from db.vendors import update_vendor_bank_account
 
 
@@ -19,8 +19,8 @@ def main() -> int:
         update_vendor_bank_account(db, args.vendor_id, args.bank_account)
         print(json.dumps({"status": "ok", "vendor_id": args.vendor_id}))
         return 0
-    except Exception:
-        print("fail", file=sys.stderr)
+    except Exception as error:
+        print_error(error)
         return 1
     finally:
         if db is not None:

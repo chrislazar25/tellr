@@ -1,6 +1,7 @@
 """Connectivity check for configured MongoDB; output is exactly ok or fail."""
 
 from db.connection import connect
+from config import print_error
 
 
 def ping() -> bool:
@@ -9,8 +10,8 @@ def ping() -> bool:
         db = connect()
         db.client.admin.command("ping")
         return True
-    except Exception:
-        # Connection/authentication errors can contain private connection details.
+    except Exception as error:
+        print_error(error)
         return False
     finally:
         if db is not None:
