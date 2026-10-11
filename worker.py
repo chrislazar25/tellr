@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from pymongo import ReturnDocument
 from pymongo.database import Database
 
+import config
 import rules
 from db.connection import connect
 from db.transactions import RetryObserver, run_transaction
@@ -35,6 +36,7 @@ def process_claimed(
 ) -> dict:
     """Also safe to call again with the same claim after an uncertain result."""
     evaluator = evaluator or rules.evaluate
+    guard_enabled = config.static_guard()
     run_id, queue_id = item["run_id"], item["_id"]
 
     def process(session):
@@ -45,7 +47,7 @@ def process_claimed(
             payment = db.payments.find_one({"idempotency_key": queue_id}, session=session)
             if payment is None:
                 raise ValueError("Completed queue item has no receipt")
-            return {"queue_id": queue_id, "status": "done", "payment_id": payment["_id"]}
+            return {"queue_id": queue_id, "status": "done", "payment_id": payment["_id"], "paid_to": payment["paid_to"]}
         if current["status"] == "blocked":
             return {"queue_id": queue_id, "status": "blocked", "reason": current["reason"]}
         if current["status"] != "claimed":
@@ -87,13 +89,13 @@ def process_claimed(
         rule_ids = [rule["_id"] for rule in active_rules]
         log_step(db, run_id, "load_rules", {}, {"rule_version_ids": rule_ids}, session=session)
 
-        # Even with no business rules, never send to an account different from
-        # the vendor account read under the fence. Stale instructions need review.
-        if terms["destination_account"] != vendor["bank_account"]:
+        # Optional static comparison. With no rules and the guard off, route the
+        # receipt to the vendor's current account, retaining the requested account.
+        if guard_enabled and terms["destination_account"] != vendor["bank_account"]:
             return block("Destination account does not match the current vendor account")
 
         context = {"vendor": vendor, "intent": intent, "queue": current,
-                   "terms": terms, "fence_version": fence["version"]}
+                   "terms": terms, "fence_version": fence["version"], "paid_to": vendor["bank_account"]}
         for rule in active_rules:
             reason = evaluator(rule, context)
             if reason is not None and (not isinstance(reason, str) or not reason.strip()):
@@ -107,16 +109,18 @@ def process_claimed(
         receipt = {
             "_id": payment_id, "idempotency_key": queue_id, "queue_id": queue_id,
             "run_id": run_id, **terms, "vendor_account": vendor["bank_account"],
+            "paid_to": vendor["bank_account"],
             "fence_version": fence["version"], "rule_version_ids": rule_ids,
             "created_at": datetime.now(timezone.utc),
         }
         db.payments.insert_one(receipt, session=session)
         log_step(db, run_id, "payment_receipt", {"queue_id": queue_id},
-                 {"payment_id": payment_id, "amount_cents": terms["amount_cents"]}, session=session)
+                 {"payment_id": payment_id, "amount_cents": terms["amount_cents"],
+                  "paid_to": vendor["bank_account"]}, session=session)
         db.queue.update_one({"_id": queue_id}, {"$set": {
             "status": "done", "payment_id": payment_id, "completed_at": datetime.now(timezone.utc),
         }}, session=session)
-        outcome = {"queue_id": queue_id, "status": "done", "payment_id": payment_id}
+        outcome = {"queue_id": queue_id, "status": "done", "payment_id": payment_id, "paid_to": vendor["bank_account"]}
         log_step(db, run_id, "done", {"queue_id": queue_id}, outcome, session=session)
         return outcome
 

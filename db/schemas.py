@@ -41,11 +41,11 @@ VALIDATORS = {
         "completed_at": TIMESTAMP, "reason": STRING, "payment_id": STRING,
     }),
     "payments": schema([
-        "idempotency_key", "queue_id", "run_id", *TERMS, "vendor_account",
+        "idempotency_key", "queue_id", "run_id", *TERMS, "vendor_account", "paid_to",
         "fence_version", "rule_version_ids", "created_at",
     ], {
         **TERMS, "idempotency_key": STRING, "queue_id": STRING, "run_id": STRING,
-        "vendor_account": STRING, "fence_version": INTEGER,
+        "vendor_account": STRING, "paid_to": STRING, "fence_version": INTEGER,
         "rule_version_ids": {"bsonType": "array", "items": STRING},
         "created_at": TIMESTAMP,
     }),

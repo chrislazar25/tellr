@@ -13,6 +13,11 @@ from db.seed import seed
 TEST_URI = "mongodb://127.0.0.1:27017/?replicaSet=rs0&directConnection=true"
 
 
+@pytest.fixture(autouse=True)
+def default_static_guard(monkeypatch):
+    monkeypatch.setenv("STATIC_GUARD", "off")
+
+
 @pytest.fixture(scope="session")
 def mongo_client():
     # Never consult MONGODB_URI or load .env: tests cannot reach Atlas by accident.

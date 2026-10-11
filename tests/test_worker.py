@@ -79,9 +79,11 @@ def test_vendor_account_change_racing_commit_conflicts_on_fence(db, enqueue):
     assert db.fences.find_one({"_id": "fence:vendor-001"})["version"] == 2
 
 
-def test_account_update_wins_stale_worker_snapshot_retries_and_blocks(db, enqueue, monkeypatch):
+@pytest.mark.parametrize("guard", [False, True])
+def test_account_update_wins_stale_worker_snapshot_retries(db, enqueue, monkeypatch, guard):
     """Pause after the worker's snapshot starts, immediately before its fence write."""
     item = enqueue()
+    monkeypatch.setenv("STATIC_GUARD", "on" if guard else "off")
     snapshot_started, update_committed = Event(), Event()
     conflicts = []
     original = Collection.find_one_and_update
@@ -105,14 +107,37 @@ def test_account_update_wins_stale_worker_snapshot_retries_and_blocks(db, enqueu
         outcome = future.result(timeout=20)
 
     assert any(error.code == 112 and error.has_error_label("TransientTransactionError") for error in conflicts)
-    assert outcome["status"] == "blocked"
-    assert "Destination account" in outcome["reason"]
-    assert db.payments.count_documents({}) == 0
-    assert db.queue.find_one({"_id": item["_id"]})["status"] == "blocked"
+    if guard:
+        assert outcome["status"] == "blocked"
+        assert "Destination account" in outcome["reason"]
+        assert db.payments.count_documents({}) == 0
+    else:
+        assert outcome["status"] == "done"
+        receipt = db.payments.find_one()
+        assert receipt["destination_account"] == "demo-account-001"
+        assert receipt["paid_to"] == receipt["vendor_account"] == "demo-account-new"
+    assert db.queue.find_one({"_id": item["_id"]})["status"] == outcome["status"]
     assert db.fences.find_one({"_id": "fence:vendor-001"})["version"] == 2
     assert db.runs.count_documents({"run_id": item["run_id"], "step": "transaction_retry"}) >= 1
     # Only the successfully retried attempt's transactional logs survive.
     assert db.runs.count_documents({"run_id": item["run_id"], "step": "fence"}) == 1
+
+
+def test_empty_rules_pay_current_account_after_enqueue(db, enqueue):
+    item = enqueue()
+    update_vendor_bank_account(db, "vendor-001", "demo-account-updated")
+    assert process_one(db)["paid_to"] == "demo-account-updated"
+    receipt = db.payments.find_one({"idempotency_key": item["_id"]})
+    assert receipt["destination_account"] == "demo-account-001"
+    assert receipt["paid_to"] == receipt["vendor_account"] == "demo-account-updated"
+
+
+def test_static_guard_opt_in_blocks_changed_account(db, enqueue, monkeypatch):
+    enqueue()
+    update_vendor_bank_account(db, "vendor-001", "demo-account-updated")
+    monkeypatch.setenv("STATIC_GUARD", "on")
+    assert process_one(db)["status"] == "blocked"
+    assert db.payments.count_documents({}) == 0
 
 
 def test_blocking_hook_produces_reason_and_no_receipt(db, enqueue):
