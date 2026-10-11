@@ -1,0 +1,16 @@
+{
+  "recordings": [
+    {
+      "audio_file": "demo-invoice.wav",
+      "verbatim_text": "Um, pay Demo Paper Supply one hundred twenty-five dollars and fifty cents to demo-account-001 on October eleventh, 2026.",
+      "text": "Pay Demo Paper Supply $125.50 to demo-account-001 on 2026-10-11.",
+      "terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "readback": "Confirm payment of 125 dollars and 50 cents to Demo Paper Supply, account demo-account-001, dated 2026-10-11."
+    }
+  ]
+}
