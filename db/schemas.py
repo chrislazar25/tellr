@@ -68,7 +68,12 @@ VALIDATORS = {
     }),
     "rule_versions": schema(["version", "active", "rule"], {
         "version": INTEGER, "active": {"bsonType": "bool"},
-        "rule": bson_rule_schema(), "created_at": TIMESTAMP,
+        "rule": {"anyOf": [bson_rule_schema(), {"bsonType": "null"}]}, "created_at": TIMESTAMP,
+        "heal_id": STRING, "iteration": INTEGER, "candidate_index": INTEGER,
+        "proposal": {"bsonType": "object"}, "base_fingerprint": STRING,
+        "decision": {"enum": ["pending", "accepted", "rejected", "activated"]},
+        "rejected_reason": {"anyOf": [STRING, {"bsonType": "null"}]},
+        "gate": {"bsonType": "object"},
     }),
     "runs": {"$jsonSchema": {
         "bsonType": "object", "additionalProperties": False,
@@ -78,13 +83,44 @@ VALIDATORS = {
             "inputs": {"bsonType": "object"}, "outputs": {"bsonType": "object"},
             "ts": TIMESTAMP,
             "label": {"enum": ["ok", "unsafe_commit", "benign_block", "duplicate"]},
+            "iteration": INTEGER,
         },
     }},
 }
 
 VALIDATORS["runs"]["$jsonSchema"]["oneOf"] = [
     {"properties": {"step": {"enum": ["oracle"]}}, "required": ["label"]},
-    {"properties": {"step": {"not": {"enum": ["oracle"]}}}, "not": {"required": ["label"]}},
+    {"properties": {"step": {"enum": ["heal_iteration"]}}, "required": ["iteration"], "not": {"required": ["label"]}},
+    {"properties": {"step": {"not": {"enum": ["oracle", "heal_iteration"]}}}, "not": {"required": ["label"]}},
+]
+
+COUNT_SCHEMA = {"bsonType": "object", "additionalProperties": False,
+                "required": ["N", "unsafe_commit", "benign_block", "ok", "duplicate"],
+                "properties": {field: INTEGER for field in ("N", "unsafe_commit", "benign_block", "ok", "duplicate")}}
+SET_COUNTS = {"bsonType": "object", "additionalProperties": False,
+              "required": ["must_catch", "must_pass", "holdout"],
+              "properties": {name: COUNT_SCHEMA for name in ("must_catch", "must_pass", "holdout")}}
+GATE_SCHEMA = {"bsonType": "object", "additionalProperties": False,
+               "required": ["accepted", "reasons", "before", "after"], "properties": {
+                   "accepted": {"bsonType": "bool"}, "reasons": {"bsonType": "array", "items": STRING},
+                   "before": SET_COUNTS, "after": {"anyOf": [SET_COUNTS, {"bsonType": "null"}]},
+               }}
+VALIDATORS["rule_versions"]["$jsonSchema"]["properties"]["gate"] = GATE_SCHEMA
+VALIDATORS["rule_versions"]["$jsonSchema"]["oneOf"] = [
+    {"not": {"required": ["heal_id"]}, "properties": {"rule": bson_rule_schema()}},
+    {"required": ["heal_id", "iteration", "candidate_index", "proposal", "gate", "decision", "rejected_reason", "base_fingerprint"],
+     "oneOf": [
+         {"properties": {"decision": {"enum": ["pending"]}, "active": {"enum": [False]},
+                         "rejected_reason": {"bsonType": "null"}}},
+         {"properties": {"decision": {"enum": ["accepted"]}, "active": {"enum": [False]},
+                         "rule": bson_rule_schema(), "gate": {"properties": {"accepted": {"enum": [True]}}},
+                         "rejected_reason": {"bsonType": "null"}}},
+         {"properties": {"decision": {"enum": ["activated"]}, "active": {"enum": [True]},
+                         "rule": bson_rule_schema(), "gate": {"properties": {"accepted": {"enum": [True]}}},
+                         "rejected_reason": {"bsonType": "null"}}},
+         {"properties": {"decision": {"enum": ["rejected"]}, "active": {"enum": [False]},
+                         "rejected_reason": STRING, "gate": {"properties": {"accepted": {"enum": [False]}}}}},
+     ]},
 ]
 
 # The evidence collection also owns partial cache records. Per-run evidence is

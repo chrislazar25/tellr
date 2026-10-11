@@ -45,6 +45,7 @@ def test_error_redacts_overridden_file_secret_and_ipv6(monkeypatch, tmp_path):
     ("pipeline", ["pipeline.py", "enqueue"]), ("worker", ["worker.py"]),
     ("db.seed", ["seed.py"]), ("db.ping", ["ping.py"]),
     ("oracle", ["oracle.py"]),
+    ("heal", ["heal.py"]),
     ("scripts.change_vendor_account", ["change_vendor_account.py", "vendor-001", "acct-test"]),
 ])
 def test_all_clis_report_exception_type_and_safe_message(monkeypatch, capsys, module_name, argv):

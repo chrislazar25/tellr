@@ -238,3 +238,22 @@ The proposer sends `betas=["server-side-fallback-2026-07-01"]` and
 `fallbacks="default"`, without `tool_choice`. Its requested/served models and
 fallback use are available for audit. Extraction remains Sonnet 4.6. See
 [server-side fallback parameters](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback).
+
+Run healing against the configured database (Atlas for the demo):
+
+```sh
+uv run python heal.py                         # Live Opus proposer
+uv run python heal.py --proposer fixture      # Explicit offline alternative
+uv run python heal.py --iterations 1          # At most 1 attempt
+```
+
+Each candidate is added to current rules for a fresh scratch replay. The gate
+requires fewer must_catch failures, zero must_pass benign blocks, and no holdout
+regression. All proposals are persisted before replay, then receive a per-set
+gate audit and decision/rejection reason in `rule_versions`. Invalid predicates
+remain inactive with their raw proposal retained. Only the best accepted rule is
+activated; existing rules remain active. Activation checks the exact replayed
+policy under a shared fence. Limits are three iterations, five candidates per
+proposal, and eight active rules. Empty proposals are logged and end the attempt
+with `no_candidates`. Provider errors do not switch to fixtures. Baseline and
+post-attempt score snapshots live in `runs` with `step: heal_iteration`.

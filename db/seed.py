@@ -31,6 +31,8 @@ def seed(db: Database) -> None:
     db.runs.create_index([("run_id", 1), ("ts", 1)])
     db.runs.create_index([("run_id", 1), ("step", 1)], unique=True,
                          partialFilterExpression={"step": "oracle"}, name="one_oracle_label_per_run")
+    db.runs.create_index([("run_id", 1), ("iteration", 1)], unique=True,
+                         partialFilterExpression={"step": "heal_iteration"}, name="one_score_per_iteration")
 
     def insert_defaults(session):
         for vendor in SAMPLE_VENDORS:
