@@ -16,7 +16,7 @@ class Terms(TypedDict):
 
 
 class TranscriptionAdapter(Protocol):
-    def __call__(self, audio_path: str | Path, *, no_verbatim: bool) -> str: ...
+    def __call__(self, audio_path: str | Path | bytes, *, no_verbatim: bool) -> str: ...
 
 
 class ExtractionAdapter(Protocol):
@@ -32,6 +32,9 @@ class Adapters:
     transcribe: TranscriptionAdapter
     extract_terms: ExtractionAdapter
     readback: ReadbackAdapter
+    # A nonempty fingerprint enables evidence caching and immutable audio bytes.
+    cache_key: str | None = None
+    transcription_key: str | None = None
 
 
 # JSON Schema for the future Claude tool-use adapter. Null means no payment
@@ -100,6 +103,23 @@ def _fixture_readback(terms: Terms) -> str:
 
 
 DEFAULT_ADAPTERS = Adapters(_fixture_transcribe, _fixture_extract_terms, _fixture_readback)
+
+
+def configured_adapters(db=None) -> Adapters:
+    """Fixture is the default; live failures never silently become fixtures."""
+    import config
+
+    mode = config.value("ADAPTERS", "fixture").strip().lower()
+    if mode == "fixture":
+        return DEFAULT_ADAPTERS
+    if mode != "live":
+        raise ValueError("ADAPTERS must be fixture or live")
+    if db is None:
+        raise ValueError("Live adapters require a database vendor catalog")
+    from live_adapters import live_adapters
+
+    vendors = list(db.vendors.find({}, {"_id": 1, "name": 1, "bank_account": 1}).sort("_id", 1))
+    return live_adapters(vendors)
 
 
 def transcribe(audio_path: str | Path, verbatim: bool) -> str:

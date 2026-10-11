@@ -20,6 +20,7 @@ def default_static_guard(monkeypatch, tmp_path):
     # Tests never read the project's real .env or .env.secrets files.
     monkeypatch.setattr(config, "ROOT", tmp_path)
     monkeypatch.setenv("STATIC_GUARD", "off")
+    monkeypatch.setenv("ADAPTERS", "fixture")
 
 
 @pytest.fixture(scope="session")

@@ -1,6 +1,6 @@
 # MongoDB Hackathon
 
-Python 3.11 backend with fixture adapters, dual transcription, explicit approval,
+Python 3.11 backend with fixture/live adapters, dual transcription, explicit approval,
 and fenced MongoDB transactions. No UI. Payments are database receipts; this
 prototype does not send money.
 
@@ -100,15 +100,35 @@ No actual audio files are needed for stubs. Cleaned candidates intentionally
 simulate lost corrections in three cases; these are not measured Scribe results.
 Ground-truth labels are used only by tests, never to extract or approve terms.
 
-Adapters stay offline even when API keys exist. Inject an `interfaces.Adapters`
-bundle into `prepare_intent`, `approve_and_enqueue`, or `run_pipeline` to replace
-one or all of transcription, extraction, and readback. The transcription protocol
-accepts `no_verbatim` directly, matching [ElevenLabs Scribe v2's API](https://elevenlabs.io/docs/api-reference/speech-to-text/convert).
-A future adapter can return `client.speech_to_text.convert(file=audio_file,
-model_id='scribe_v2', no_verbatim=no_verbatim).text`. `EXTRACT_TERMS_TOOL` supplies
-the strict JSON Schema for [Claude tool-use extraction](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools);
-consume its `tool_use` input's `terms` and validate with `validate_terms`. Null
-means no payment instruction. No live speech/LLM adapter is enabled yet.
+`ADAPTERS=fixture` is the default even when keys exist. Set `ADAPTERS=live`
+for real audio files and configure `ELEVENLABS_API_KEY`, `ANTHROPIC_API_KEY`, and
+optionally `CLAUDE_MODEL` (default `claude-sonnet-5-5`). Missing keys or API errors
+fail visibly; live mode never silently substitutes fixture data. Readback stays
+text-only. Inject an `interfaces.Adapters` bundle for isolated/offline tests.
+
+```sh
+ADAPTERS=live uv run python pipeline.py enqueue /path/to/audio.wav --confirm-from cleaned
+```
+
+The live adapter uses [Scribe v2](https://elevenlabs.io/docs/api-reference/speech-to-text/convert)
+with `no_verbatim=False` and `True`, using identical audio bytes read once.
+SHA-256 cache records live in `evidence` (`kind: cache`), distinct from complete
+per-run evidence. Successful transcripts and extractions persist immediately,
+so sequential reruns, renamed files, partial failures, and null terms reuse prior
+calls. Cache hits are logged. Extraction caches include the model, prompt, tool
+schema, and vendor catalog; changing these re-extracts but reuses Scribe transcripts.
+Changed audio bytes invalidate both caches. Concurrent first-time submissions can
+still make duplicate API calls; the cache does not implement distributed leases.
+
+Claude calls `messages.create` with `EXTRACT_TERMS_TOOL`, `strict=True`, and a
+forced named `tool_choice` with `disable_parallel_tool_use=True`. These parameters
+were verified against the installed SDKs (ElevenLabs 2.71.0, Anthropic 0.125.0) and
+[Claude strict tool-use docs](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use).
+The SDK's `transform_schema` removes constraints unsupported by the wire schema;
+`validate_terms` still enforces positive 64-bit integer cents and real ISO dates
+locally. Refusals, truncated or multiple tool calls, and invalid payloads fail.
+Null means no complete payment instruction. The model sees the vendor catalog
+and transcript, never fixture `true_terms`.
 
 `runs` logs `{run_id, step, inputs, outputs, ts}`, including each transcription and
 extraction variant, confirmation, queueing, and worker outcome. Transaction logs

@@ -11,6 +11,7 @@ from pymongo.database import Database
 
 import interfaces
 from db.connection import connect
+from db.evidence import collect_candidates
 from db.transactions import run_transaction
 from observability import log_step
 from worker import process_one
@@ -19,24 +20,16 @@ from worker import process_one
 def prepare_intent(
     db: Database, audio_path: str = "demo-invoice.wav", *, adapters: interfaces.Adapters | None = None,
 ) -> dict:
-    adapters = adapters or interfaces.DEFAULT_ADAPTERS
+    adapters = adapters or interfaces.configured_adapters(db)
     run_id, evidence_id, intent_id = (str(uuid.uuid4()) for _ in range(3))
-    texts, candidates = {}, {}
-    for mode in ("verbatim", "cleaned"):
-        no_verbatim = mode == "cleaned"
-        texts[mode] = adapters.transcribe(audio_path, no_verbatim=no_verbatim)
-        log_step(db, run_id, "transcribe", {"audio_path": audio_path, "mode": mode,
-                 "no_verbatim": no_verbatim}, {"text": texts[mode]})
-        terms = adapters.extract_terms(texts[mode])
-        candidates[mode] = None if terms is None else interfaces.validate_terms(terms)
-        log_step(db, run_id, "extract_terms", {"text": texts[mode], "mode": mode}, {"terms": candidates[mode]})
+    texts, candidates, metadata = collect_candidates(db, run_id, audio_path, adapters)
 
     terms = candidates["verbatim"] or candidates["cleaned"]
     now = datetime.now(timezone.utc)
 
     def store(session):
         db.evidence.insert_one({
-            "_id": evidence_id, "run_id": run_id, "audio_path": audio_path,
+            "_id": evidence_id, "run_id": run_id, "audio_path": str(audio_path), **metadata,
             "verbatim_text": texts["verbatim"], "cleaned_text": texts["cleaned"],
             "verbatim_terms": candidates["verbatim"], "cleaned_terms": candidates["cleaned"], "created_at": now,
         }, session=session)
@@ -118,7 +111,7 @@ def approve_and_enqueue(
     db: Database, prepared: dict, *, confirmation_source: str | None = None,
     confirmed_terms: dict | None = None, adapters: interfaces.Adapters | None = None,
 ) -> dict:
-    adapters = adapters or interfaces.DEFAULT_ADAPTERS
+    adapters = adapters or interfaces.configured_adapters(db)
     if prepared["status"] == "no_terms":
         return prepared
     if confirmed_terms is None and confirmation_source is None:

@@ -39,6 +39,7 @@ VALIDATORS = {
         "run_id": STRING, "audio_path": STRING,
         "verbatim_text": {"bsonType": "string"}, "cleaned_text": {"bsonType": "string"},
         "verbatim_terms": OPTIONAL_TERMS, "cleaned_terms": OPTIONAL_TERMS, "created_at": TIMESTAMP,
+        "audio_hash": {"bsonType": "string", "pattern": "^[a-f0-9]{64}$"}, "adapter_key": STRING,
     }),
     "intents": schema([*TERMS, "run_id", "evidence_id", "status", "created_at"], {
         **TERMS, "run_id": STRING, "evidence_id": STRING,
@@ -76,6 +77,17 @@ VALIDATORS = {
         },
     }},
 }
+
+# The evidence collection also owns partial cache records. Per-run evidence is
+# always complete; cached modes are filled after each successful external call.
+RUN_EVIDENCE_SCHEMA = VALIDATORS["evidence"]["$jsonSchema"]
+CACHE_EVIDENCE_SCHEMA = schema(["kind", "audio_hash", "adapter_key", "created_at"], {
+    "kind": {"enum": ["cache"]}, "audio_hash": {"bsonType": "string", "pattern": "^[a-f0-9]{64}$"},
+    "adapter_key": STRING, "created_at": TIMESTAMP,
+    "verbatim_text": {"bsonType": "string"}, "cleaned_text": {"bsonType": "string"},
+    "verbatim_terms": OPTIONAL_TERMS, "cleaned_terms": OPTIONAL_TERMS,
+})["$jsonSchema"]
+VALIDATORS["evidence"] = {"$jsonSchema": {"oneOf": [RUN_EVIDENCE_SCHEMA, CACHE_EVIDENCE_SCHEMA]}}
 
 CONFIRMATION_FIELDS = [
     "confirmed_terms", "confirmed_at", "approved_bank_account", "approved_fence_version", "confirmation_source",
