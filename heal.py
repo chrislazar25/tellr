@@ -87,6 +87,7 @@ def run_heal(db, proposer, *, max_iterations=MAX_ITERATIONS, replayer=replay_sui
             break
         iteration = attempt
         base_fingerprint = fingerprint(current)
+        log_step(db, heal_id, "collect_failures", {"iteration": iteration}, {"failures": deepcopy(failures)})
         try:
             proposals = proposer(failures, current, VOCABULARY)
         except Exception as error:

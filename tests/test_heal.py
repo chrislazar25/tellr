@@ -37,6 +37,9 @@ def test_healer_uses_real_gate_audits_every_candidate_and_activates_best(db):
     assert all(document["decision"] != "pending" for document in candidates)
     assert "holdout" not in json.dumps(calls) and "vendor-003" not in json.dumps(calls)
     assert len(calls[0]) == 4 and len(calls[1]) == 1
+    traces = list(db.runs.find({"run_id": result["heal_id"], "step": "collect_failures"}).sort("ts", 1))
+    assert [len(row["outputs"]["failures"]) for row in traces] == [4, 1]
+    assert "holdout" not in json.dumps([row["outputs"] for row in traces])
     assert list(db.vendors.find().sort("_id", 1)) == before
     assert db.payments.count_documents({}) == 0
     assert [row["iteration"] for row in db.runs.find({"step": "heal_iteration"}).sort("iteration", 1)] == [0, 1, 2]
