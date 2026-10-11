@@ -7,9 +7,11 @@ from rules import RULE_SCHEMA, TERM_FIELDS, VOCABULARY, validate_rule
 
 PROPOSAL_SCHEMA = {
     "type": "object", "additionalProperties": False, "required": ["candidates"],
-    "properties": {"candidates": {"type": "array", "minItems": 3, "maxItems": 3, "items": RULE_SCHEMA}},
+    "properties": {"candidates": {"type": "array", "minItems": 0, "maxItems": 5, "items": RULE_SCHEMA}},
 }
-SYSTEM_PROMPT = """Propose exactly three payment safety predicates in the supplied rule language.
+SYSTEM_PROMPT = """Propose payment safety predicates in the supplied rule language.
+Choose how many candidates are useful, from zero to five. An empty list is valid
+when no useful candidate is available. Never pad the response with duplicate rules.
 All clauses in a rule must pass for payment; otherwise its on_fail action blocks.
 Use only the supplied field vocabulary, eq/neq comparisons, and clarify/reapprove.
 No literal values, code, labels, or external data may appear in predicates.
@@ -45,16 +47,22 @@ class ClaudeProposer:
                 raise ValueError("Live proposer requires ANTHROPIC_API_KEY")
             client = Anthropic(api_key=key)
         self.client = client
-        self.model = model or config.value("CLAUDE_MODEL", "claude-sonnet-4-6")
+        self.model = model or "claude-opus-5-5"
         self.schema = transform_schema(PROPOSAL_SCHEMA)
+        self.last_response = {}
 
     def __call__(self, failures, current_rules, vocabulary=VOCABULARY):
         payload = _payload(failures, current_rules, vocabulary)
-        response = self.client.messages.create(
-            model=self.model, max_tokens=4096, system=SYSTEM_PROMPT,
+        response = self.client.beta.messages.create(
+            model=self.model, max_tokens=16384, system=SYSTEM_PROMPT,
             messages=[{"role": "user", "content": json.dumps(payload, sort_keys=True)}],
-            output_config={"format": {"type": "json_schema", "schema": self.schema}},
+            output_config={"effort": "high", "format": {"type": "json_schema", "schema": self.schema}},
+            betas=["server-side-fallback-2026-07-01"], fallbacks="default",
         )
+        usage = getattr(response, "usage", None)
+        self.last_response = {"requested_model": self.model, "served_model": getattr(response, "model", self.model),
+                              "fallback_used": any(getattr(item, "type", None) == "fallback_message"
+                                                   for item in getattr(usage, "iterations", None) or [])}
         texts = [block.text for block in response.content if block.type == "text"]
         if response.stop_reason != "end_turn" or len(texts) != 1:
             raise ValueError("Claude did not complete a structured rule proposal")
@@ -62,8 +70,8 @@ class ClaudeProposer:
         if not isinstance(result, dict) or set(result) != {"candidates"}:
             raise ValueError("Proposal must contain exactly candidates")
         candidates = result["candidates"]
-        if not isinstance(candidates, list) or len(candidates) != 3 or any(not isinstance(rule, dict) for rule in candidates):
-            raise ValueError("Claude must propose exactly three rule objects")
+        if not isinstance(candidates, list) or len(candidates) > 5 or any(not isinstance(rule, dict) for rule in candidates):
+            raise ValueError("Claude proposals must contain zero to five rule objects")
         # Local predicate validation happens at the gate, where every returned
         # candidate (including an invalid one) receives a persisted decision.
         return candidates
