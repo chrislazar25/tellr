@@ -1,6 +1,8 @@
 .env
 .env.*
 !.env.example
+# Local secrets and private connection details (including IP addresses).
+.env.secrets
 node_modules/
 .DS_Store
 dist/
