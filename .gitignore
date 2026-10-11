@@ -7,3 +7,12 @@ node_modules/
 .DS_Store
 dist/
 coverage/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+build/
