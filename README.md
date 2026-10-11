@@ -69,7 +69,10 @@ uses the vendor's **current** bank account read inside the payment transaction.
 Receipts retain `destination_account` from the approved instruction and record the
 actual target in `paid_to` (also recorded as `vendor_account`). These may differ
 after an account change. Set `STATIC_GUARD=on` to opt into blocking a requested
-destination that differs from the current vendor account.
+destination that differs from the current vendor account. Numeric destinations
+represent spoken account endings: `24` matches `acct-0024`, while `42` does not.
+Other destination identifiers require an exact match. Seed defaults vendor-002 to
+`acct-0024`; existing seeded accounts remain untouched on reruns.
 
 The worker atomically claims one pending queue item, then one transaction
 increments the vendor fence, loads current vendor data and active rules, evaluates
@@ -92,7 +95,7 @@ The six fictional fixtures have independent, hand-labeled `true_terms`:
 | 500, no, 50 | `amount-correction.wav` | 5,000 cents |
 | 500, no wait, 500 is right | `amount-reaffirmation.wav` | 50,000 cents |
 | Fifteen vs fifty | `fifteen-vs-fifty.wav` | 1,500 cents |
-| Account 42, sorry, 24 | `account-correction.wav` | Account 24 |
+| Account ending 42, sorry, 24 | `account-correction.wav` | Vendor-002 `acct-0024` |
 | Filler only | `filler-only.wav` | No terms; evidence only |
 | Clean | `demo-invoice.wav` | 12,550 cents |
 

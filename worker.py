@@ -12,6 +12,7 @@ from pymongo.database import Database
 import config
 import rules
 from db.connection import connect
+from db.accounts import destination_matches
 from db.transactions import RetryObserver, run_transaction
 from interfaces import validate_terms
 from observability import log_step
@@ -95,7 +96,7 @@ def process_claimed(
 
         # Optional static comparison. With no rules and the guard off, route the
         # receipt to the vendor's current account, retaining the requested account.
-        if guard_enabled and terms["destination_account"] != vendor["bank_account"]:
+        if guard_enabled and not destination_matches(terms["destination_account"], vendor["bank_account"]):
             return block("Destination account does not match the current vendor account")
 
         context = {"vendor": vendor, "intent": intent, "queue": current,

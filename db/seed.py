@@ -13,7 +13,7 @@ from observability import log_step
 
 SAMPLE_VENDORS = (
     {"_id": "vendor-001", "name": "Demo Paper Supply", "bank_account": "demo-account-001"},
-    {"_id": "vendor-002", "name": "Demo Catering", "bank_account": "demo-account-002"},
+    {"_id": "vendor-002", "name": "Demo Catering", "bank_account": "acct-0024"},
     {"_id": "vendor-003", "name": "Demo Equipment", "bank_account": "demo-account-003"},
 )
 

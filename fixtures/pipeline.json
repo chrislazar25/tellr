@@ -32,8 +32,8 @@
     {
       "case_id": "account_42_sorry_24",
       "audio_file": "account-correction.wav",
-      "verbatim_text": "Pay Demo Catering 50 dollars to account 42, sorry, 24 on 2026-10-11.",
-      "cleaned_text": "Pay Demo Catering 50 dollars to account 42 on 2026-10-11.",
+      "verbatim_text": "Pay Demo Catering 50 dollars to account ending 42, sorry, 24 on 2026-10-11.",
+      "cleaned_text": "Pay Demo Catering 50 dollars to account ending 42 on 2026-10-11.",
       "verbatim_terms": {"vendor_id": "vendor-002", "amount_cents": 5000, "destination_account": "24", "date": "2026-10-11"},
       "cleaned_terms": {"vendor_id": "vendor-002", "amount_cents": 5000, "destination_account": "42", "date": "2026-10-11"},
       "true_terms": {"vendor_id": "vendor-002", "amount_cents": 5000, "destination_account": "24", "date": "2026-10-11"}
