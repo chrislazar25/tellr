@@ -82,6 +82,12 @@ def process_claimed(
             return block("Intent vendor does not match the queue vendor")
         if intent.get("status") != "confirmed" or "confirmed_terms" not in intent:
             return block("Intent has not been confirmed")
+        evidence = db.evidence.find_one({"_id": intent["evidence_id"]}, session=session)
+        if evidence is None:
+            return block("Intent evidence is missing")
+        log_step(db, run_id, "load_evidence", {"evidence_id": evidence["_id"]},
+                 {"verbatim_terms": evidence["verbatim_terms"], "cleaned_terms": evidence["cleaned_terms"]},
+                 session=session)
         terms = validate_terms(intent["confirmed_terms"])
         if terms["vendor_id"] != vendor["_id"]:
             return block("Confirmed vendor does not match the queue vendor")
@@ -98,7 +104,7 @@ def process_claimed(
         if guard_enabled and not destination_matches(terms["destination_account"], vendor["bank_account"]):
             return block("Destination account does not match the current vendor account")
 
-        context = {"vendor": vendor, "intent": intent, "queue": current,
+        context = {"vendor": vendor, "intent": intent, "evidence": evidence, "queue": current,
                    "terms": terms, "fence_version": fence["version"], "paid_to": vendor["bank_account"]}
         for rule in active_rules:
             reason = evaluator(rule, context)

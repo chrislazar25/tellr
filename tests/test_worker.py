@@ -43,7 +43,7 @@ def test_empty_rules_is_allow_all_baseline(db, enqueue):
 def test_vendor_account_change_racing_commit_conflicts_on_fence(db, enqueue):
     """Payment holds the fence; account updater must abort/retry behind it."""
     item = enqueue()
-    db.rule_versions.insert_one({"_id": "pause-rule", "version": 1, "active": True, "rule": {}})
+    db.rule_versions.insert_one({"_id": "pause-rule", "version": 1, "active": True, "rule": {"clauses": [{"left": "vendor.bank_account", "cmp": "eq", "right": "vendor.bank_account"}], "on_fail": "clarify"}})
     vendor_read, release_payment, updater_conflicted = Event(), Event(), Event()
     observed_accounts, conflicts = [], []
 
@@ -142,7 +142,7 @@ def test_static_guard_opt_in_blocks_changed_account(db, enqueue, monkeypatch):
 
 def test_blocking_hook_produces_reason_and_no_receipt(db, enqueue):
     item = enqueue()
-    db.rule_versions.insert_one({"_id": "deny-rule", "version": 1, "active": True, "rule": {}})
+    db.rule_versions.insert_one({"_id": "deny-rule", "version": 1, "active": True, "rule": {"clauses": [{"left": "vendor.bank_account", "cmp": "eq", "right": "vendor.bank_account"}], "on_fail": "clarify"}})
     result = process_one(db, evaluator=lambda rule, context: "Approval required")
     assert result["status"] == "blocked"
     assert result["reason"] == "Approval required"
@@ -152,7 +152,7 @@ def test_blocking_hook_produces_reason_and_no_receipt(db, enqueue):
 
 def test_inactive_rules_are_not_evaluated(db, enqueue):
     enqueue()
-    db.rule_versions.insert_one({"_id": "inactive", "version": 1, "active": False, "rule": {}})
+    db.rule_versions.insert_one({"_id": "inactive", "version": 1, "active": False, "rule": {"clauses": [{"left": "vendor.bank_account", "cmp": "eq", "right": "vendor.bank_account"}], "on_fail": "clarify"}})
 
     def unexpected(rule, context):
         raise AssertionError("Inactive rules must not run")
@@ -171,7 +171,7 @@ def test_processing_same_claim_again_does_not_duplicate_receipt(db, enqueue):
 
 def test_rule_error_rolls_back_fence_receipt_and_transactional_logs(db, enqueue):
     item = enqueue()
-    db.rule_versions.insert_one({"_id": "error-rule", "version": 1, "active": True, "rule": {}})
+    db.rule_versions.insert_one({"_id": "error-rule", "version": 1, "active": True, "rule": {"clauses": [{"left": "vendor.bank_account", "cmp": "eq", "right": "vendor.bank_account"}], "on_fail": "clarify"}})
 
     def fail(rule, context):
         raise RuntimeError("Evaluation unavailable")

@@ -91,8 +91,13 @@ All bank changes go through `db.vendors.update_vendor_bank_account` (used by the
 change-account script): it increments the same vendor fence and changes the bank
 account in one transaction. Real write conflicts cause callback retries; uncertain
 commit results retry only the commit. See the [PyMongo transaction documentation](https://www.mongodb.com/docs/languages/python/pymongo-driver/current/crud/transactions/).
-`rules.evaluate(rule, context)` remains an allow-all stub; injected evaluators
-return `None` or a blocking reason. They must be free of external side effects.
+`rules.evaluate(rule, context)` evaluates a conjunction of fixed-field comparisons.
+All clauses must pass; otherwise it returns `on_fail` (`clarify` or `reapprove`).
+Unknown fields, literals, arbitrary expressions, and malformed predicates are
+rejected. Missing/null fields fail closed. The worker reads evidence in the same
+payment snapshot. Evaluation performs no I/O or mutation; empty active rules still
+allow payment. `rules.VOCABULARY` lists the 15 permitted fields; `eq`/`neq` compare
+exact values, without account suffix coercion.
 
 The six fictional fixtures have independent, hand-labeled `true_terms`:
 
@@ -204,3 +209,9 @@ reapprove case only `reapprove` is correct. Other blocks are `benign_block`.
 Paying when clarification or reapproval is required is unsafe even if the chosen
 terms happened to match truth. Name/memo edits use `update_vendor_profile`, which
 advances the fence in the same transaction while preserving the bank account.
+
+Example rule:
+
+```json
+{"clauses":[{"left":"intent.approved_bank_account","cmp":"eq","right":"vendor.bank_account"}],"on_fail":"reapprove"}
+```

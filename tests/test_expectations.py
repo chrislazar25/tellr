@@ -28,7 +28,7 @@ def test_oracle_scores_expected_block_action(db, expected, reason, label):
     db.evidence.update_one({"_id": result["evidence_id"]}, {"$set": {"fixture_case_id": case_id}})
     if expected == "reapprove":
         update_vendor_bank_account(db, "vendor-001", "demo-account-after-approval")
-    db.rule_versions.insert_one({"_id": "test-block", "version": 1, "active": True, "rule": {}})
+    db.rule_versions.insert_one({"_id": "test-block", "version": 1, "active": True, "rule": {"clauses": [{"left": "vendor.bank_account", "cmp": "eq", "right": "vendor.bank_account"}], "on_fail": "clarify"}})
     process_one(db, evaluator=lambda rule, context: reason)
     assert label_run(db, result["run_id"])["label"] == label
 

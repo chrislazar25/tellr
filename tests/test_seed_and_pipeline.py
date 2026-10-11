@@ -50,7 +50,7 @@ def test_offline_pipeline_end_to_end_logs_every_step(db, monkeypatch, verbatim):
     records = list(db.runs.find({"run_id": result["run_id"]}))
     assert {record["step"] for record in records} == {
         "transcribe", "extract_terms", "readback", "store_evidence", "store_intent", "confirm", "enqueue",
-        "claim", "fence", "load_vendor", "load_intent", "load_rules", "payment_receipt", "done", "transaction_complete",
+        "claim", "fence", "load_vendor", "load_intent", "load_evidence", "load_rules", "payment_receipt", "done", "transaction_complete",
     }
     for record in records:
         assert isinstance(record["inputs"], dict)

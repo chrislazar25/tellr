@@ -1,5 +1,7 @@
 """Strict collection shapes. BSON doubles, decimals, and booleans are not cents."""
 
+from rules import bson_rule_schema
+
 STRING = {"bsonType": "string", "minLength": 1}
 INTEGER = {"bsonType": ["int", "long"], "minimum": 0}
 CENTS = {"bsonType": ["int", "long"], "minimum": 1, "maximum": 2**63 - 1}
@@ -66,7 +68,7 @@ VALIDATORS = {
     }),
     "rule_versions": schema(["version", "active", "rule"], {
         "version": INTEGER, "active": {"bsonType": "bool"},
-        "rule": {"bsonType": "object"}, "created_at": TIMESTAMP,
+        "rule": bson_rule_schema(), "created_at": TIMESTAMP,
     }),
     "runs": {"$jsonSchema": {
         "bsonType": "object", "additionalProperties": False,
