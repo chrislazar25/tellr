@@ -16,13 +16,18 @@ from observability import log_step
 from worker import process_one
 
 
-def prepare_intent(db: Database, audio_path: str = "demo-invoice.wav") -> dict:
+def prepare_intent(
+    db: Database, audio_path: str = "demo-invoice.wav", *, adapters: interfaces.Adapters | None = None,
+) -> dict:
+    adapters = adapters or interfaces.DEFAULT_ADAPTERS
     run_id, evidence_id, intent_id = (str(uuid.uuid4()) for _ in range(3))
     texts, candidates = {}, {}
     for mode in ("verbatim", "cleaned"):
-        texts[mode] = interfaces.transcribe(audio_path, mode == "verbatim")
-        log_step(db, run_id, "transcribe", {"audio_path": audio_path, "mode": mode}, {"text": texts[mode]})
-        terms = interfaces.extract_terms(texts[mode])
+        no_verbatim = mode == "cleaned"
+        texts[mode] = adapters.transcribe(audio_path, no_verbatim=no_verbatim)
+        log_step(db, run_id, "transcribe", {"audio_path": audio_path, "mode": mode,
+                 "no_verbatim": no_verbatim}, {"text": texts[mode]})
+        terms = adapters.extract_terms(texts[mode])
         candidates[mode] = None if terms is None else interfaces.validate_terms(terms)
         log_step(db, run_id, "extract_terms", {"text": texts[mode], "mode": mode}, {"terms": candidates[mode]})
 
@@ -66,6 +71,10 @@ def confirm_intent(db: Database, intent_id: str, terms: dict, *, source: str = "
             if intent["confirmed_terms"] != terms:
                 raise ValueError("Confirmed terms are immutable; create a new intent")
             return intent
+        if source != "manual":
+            evidence = db.evidence.find_one({"_id": intent["evidence_id"]}, session=session)
+            if evidence is None or evidence[f"{source}_terms"] != terms:
+                raise ValueError("Confirmed terms do not match the chosen evidence candidate")
         vendor = db.vendors.find_one({"_id": terms["vendor_id"]}, session=session)
         fence = db.fences.find_one({"_id": f"fence:{terms['vendor_id']}"}, session=session)
         if vendor is None or fence is None:
@@ -107,8 +116,9 @@ def enqueue_intent(db: Database, intent_id: str) -> dict:
 
 def approve_and_enqueue(
     db: Database, prepared: dict, *, confirmation_source: str | None = None,
-    confirmed_terms: dict | None = None,
+    confirmed_terms: dict | None = None, adapters: interfaces.Adapters | None = None,
 ) -> dict:
+    adapters = adapters or interfaces.DEFAULT_ADAPTERS
     if prepared["status"] == "no_terms":
         return prepared
     if confirmed_terms is None and confirmation_source is None:
@@ -122,7 +132,7 @@ def approve_and_enqueue(
     if terms is None:
         raise ValueError("Selected transcript has no payment terms")
     terms = interfaces.validate_terms(terms)
-    confirmation = interfaces.readback(terms)
+    confirmation = adapters.readback(terms)
     log_step(db, prepared["run_id"], "readback", terms, {"text": confirmation})
     confirm_intent(db, prepared["intent_id"], terms, source=source)
     item = enqueue_intent(db, prepared["intent_id"])
@@ -132,10 +142,11 @@ def approve_and_enqueue(
 
 def run_pipeline(
     db: Database, audio_path: str = "demo-invoice.wav", *, confirmation_source: str | None = None,
-    confirmed_terms: dict | None = None, hold: bool = False,
+    confirmed_terms: dict | None = None, hold: bool = False, adapters: interfaces.Adapters | None = None,
 ) -> dict:
-    result = approve_and_enqueue(db, prepare_intent(db, audio_path),
-                                 confirmation_source=confirmation_source, confirmed_terms=confirmed_terms)
+    result = approve_and_enqueue(db, prepare_intent(db, audio_path, adapters=adapters),
+                                 confirmation_source=confirmation_source, confirmed_terms=confirmed_terms,
+                                 adapters=adapters)
     if result["status"] != "pending" or hold:
         return result
     outcome = process_one(db, queue_id=result["outcome"]["queue_id"])

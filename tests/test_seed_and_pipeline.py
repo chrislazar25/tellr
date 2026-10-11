@@ -150,3 +150,17 @@ def test_nested_confirmed_amounts_reject_floats(db, enqueue):
     with pytest.raises(OperationFailure) as error:
         db.intents.update_one({"_id": item["intent_id"]}, {"$set": {"confirmed_terms.amount_cents": 1.5}})
     assert error.value.code == 121
+
+
+def test_pipeline_without_approval_cannot_pay(db):
+    result = run_pipeline(db)
+    assert result["status"] == "awaiting_confirmation"
+    assert db.queue.count_documents({}) == db.payments.count_documents({}) == 0
+
+
+def test_confirmation_source_must_match_evidence_candidate(db):
+    result = prepare_intent(db)
+    wrong = {**result["candidates"]["verbatim"], "amount_cents": 1}
+    with pytest.raises(ValueError, match="chosen evidence"):
+        confirm_intent(db, result["intent_id"], wrong, source="verbatim")
+    assert db.intents.find_one({"_id": result["intent_id"]})["status"] == "draft"
