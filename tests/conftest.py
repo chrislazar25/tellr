@@ -8,13 +8,17 @@ from pymongo.errors import PyMongoError
 from pymongo.uri_parser import parse_uri
 from pymongo.write_concern import WriteConcern
 
+import config
+
 from db.seed import seed
 
 TEST_URI = "mongodb://127.0.0.1:27017/?replicaSet=rs0&directConnection=true"
 
 
 @pytest.fixture(autouse=True)
-def default_static_guard(monkeypatch):
+def default_static_guard(monkeypatch, tmp_path):
+    # Tests never read the project's real .env or .env.secrets files.
+    monkeypatch.setattr(config, "ROOT", tmp_path)
     monkeypatch.setenv("STATIC_GUARD", "off")
 
 

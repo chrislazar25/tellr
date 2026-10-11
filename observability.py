@@ -1,12 +1,13 @@
 """Local step records, with an optional future Raindrop transport hook."""
 
 import logging
-import os
 from datetime import datetime, timezone
 from typing import Callable
 
 from pymongo.client_session import ClientSession
 from pymongo.database import Database
+
+import config
 
 TraceSink = Callable[[dict], None]
 _trace_sink: TraceSink | None = None
@@ -20,7 +21,7 @@ def configure_trace(sink: TraceSink | None) -> None:
 
 def trace(event: dict) -> None:
     """No-op without a write key and an explicitly installed transport."""
-    if not os.getenv("RAINDROP_WRITE_KEY", "").strip() or _trace_sink is None:
+    if _trace_sink is None or not config.value("RAINDROP_WRITE_KEY").strip():
         return
     try:
         _trace_sink(event)
