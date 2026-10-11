@@ -25,8 +25,8 @@ def _payload(failures, current_rules, vocabulary):
         raise ValueError("Proposer vocabulary must match the fixed rule language")
     # Allowlist keys so gate results, cached holdout rows, or other metadata on
     # current rule documents cannot accidentally become proposal context.
-    allowed = {"case_id", "label", "expected", "reasons", "block_reason", "field_diffs"}
-    if any(not isinstance(failure, dict) or set(failure) != allowed for failure in failures):
+    allowed = {"case_id", "label", "expected", "reasons", "block_reason", "field_diffs", "eval_set"}
+    if any(not isinstance(failure, dict) or set(failure) != allowed or failure.get("eval_set") != "must_catch" for failure in failures):
         raise ValueError("Proposer accepts only training failure records")
     return {
         "failures": failures,

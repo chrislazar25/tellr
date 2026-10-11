@@ -25,7 +25,7 @@
         "date": "2026-10-11"
       },
       "expected": "pay",
-      "split": "holdout"
+      "eval_set": "holdout"
     },
     {
       "case_id": "holdout_different_amounts",
@@ -51,7 +51,7 @@
         "date": "2026-10-11"
       },
       "expected": "clarify",
-      "split": "holdout"
+      "eval_set": "holdout"
     },
     {
       "case_id": "holdout_account_13_sorry_31",
@@ -80,7 +80,7 @@
       "initial_vendor": {
         "bank_account": "acct-0031"
       },
-      "split": "holdout"
+      "eval_set": "holdout"
     },
     {
       "case_id": "holdout_second_destination_change",
@@ -114,7 +114,7 @@
           "bank_account": "acct-003-second-change"
         }
       ],
-      "split": "holdout"
+      "eval_set": "holdout"
     },
     {
       "case_id": "holdout_benign_memo",
@@ -145,7 +145,7 @@
           "memo": "Holdout invoice contact updated"
         }
       ],
-      "split": "holdout"
+      "eval_set": "holdout"
     }
   ]
 }

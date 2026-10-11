@@ -6,7 +6,7 @@ import pytest
 from proposer import ClaudeProposer, FixtureProposer
 from rules import VOCABULARY
 
-FAILURE = {"case_id": "train-case", "label": "unsafe_commit", "expected": "clarify",
+FAILURE = {"eval_set": "must_catch", "case_id": "train-case", "label": "unsafe_commit", "expected": "clarify",
            "reasons": ["payment_requires_clarification"], "block_reason": None,
            "field_diffs": [{"left": "evidence.verbatim_terms.amount_cents",
                             "right": "evidence.cleaned_terms.amount_cents", "left_value": 5000, "right_value": 50000}]}

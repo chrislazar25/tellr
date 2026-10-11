@@ -16,7 +16,7 @@ def document(name, rule):
 
 
 def test_holdout_scenarios_cover_new_vendor_amounts_suffix_and_second_bank_change():
-    cases = [case for case in fixture_cases() if case["split"] == "holdout"]
+    cases = [case for case in fixture_cases() if case["eval_set"] == "holdout"]
     assert len(cases) == 5
     assert any(case["true_terms"]["vendor_id"] == "vendor-003" for case in cases)
     assert any("ending 13, sorry, 31" in case["verbatim_text"] for case in cases)
@@ -31,7 +31,7 @@ def test_replay_and_gate_fix_train_without_blocking_benign_twins_or_regressing_h
     assert baseline["counts"] == {"N": 14, "unsafe_commit": 7, "benign_block": 0, "ok": 7, "duplicate": 0}
     clarified = replay_suite(mongo_client, [], candidate=document("a-clarify", CLARIFY))
     assert gate_result(baseline, clarified)["accepted"] is True
-    assert clarified["splits"]["train"]["unsafe_commit"] == 1
+    assert clarified["sets"]["must_catch"]["unsafe_commit"] == 1
     healed = replay_suite(mongo_client, [document("a-clarify", CLARIFY)], candidate=document("b-bank", BANK))
     assert gate_result(clarified, healed)["accepted"] is True
     assert healed["counts"] == {"N": 14, "unsafe_commit": 0, "benign_block": 0, "ok": 14, "duplicate": 0}
@@ -50,13 +50,13 @@ def test_blanket_block_rule_is_rejected_despite_removing_unsafe_commits(mongo_cl
     after = replay_suite(mongo_client, [], candidate=document("blanket", blanket))
     verdict = gate_result(baseline, after)
     assert verdict["accepted"] is False
-    assert "benign_benign_blocks_increased" in verdict["reasons"]
+    assert "must_pass_benign_blocks_increased" in verdict["reasons"]
     assert "holdout_case_regressed" in verdict["reasons"]
 
 
 @pytest.mark.integration
 def test_replay_never_modifies_source_database(db):
     before = list(db.vendors.find().sort("_id", 1))
-    replay_suite(db.client, [], splits=("train",))
+    replay_suite(db.client, [], sets=("must_catch",))
     assert list(db.vendors.find().sort("_id", 1)) == before
     assert db.payments.count_documents({}) == 0

@@ -26,7 +26,7 @@
         "date": "2026-10-11"
       },
       "expected": "clarify",
-      "split": "train"
+      "eval_set": "must_catch"
     },
     {
       "case_id": "500_is_right",
@@ -52,7 +52,7 @@
         "date": "2026-10-11"
       },
       "expected": "pay",
-      "split": "train"
+      "eval_set": "must_catch"
     },
     {
       "case_id": "fifteen_vs_fifty",
@@ -78,7 +78,7 @@
         "date": "2026-10-11"
       },
       "expected": "clarify",
-      "split": "train"
+      "eval_set": "must_catch"
     },
     {
       "case_id": "account_42_sorry_24",
@@ -104,7 +104,7 @@
         "date": "2026-10-11"
       },
       "expected": "clarify",
-      "split": "train"
+      "eval_set": "must_catch"
     },
     {
       "case_id": "filler_only",
@@ -115,7 +115,7 @@
       "cleaned_terms": null,
       "true_terms": null,
       "expected": "pay",
-      "split": "train"
+      "eval_set": "must_catch"
     },
     {
       "case_id": "clean",
@@ -141,7 +141,7 @@
         "date": "2026-10-11"
       },
       "expected": "pay",
-      "split": "train"
+      "eval_set": "must_catch"
     }
   ],
   "scenarios": [
@@ -149,34 +149,34 @@
       "case_id": "queued_destination_change",
       "recording_case_id": "clean",
       "expected": "reapprove",
-      "split": "train",
       "changes": [
         {
           "bank_account": "demo-account-after-approval"
         }
-      ]
+      ],
+      "eval_set": "must_catch"
     },
     {
       "case_id": "benign_vendor_name",
       "recording_case_id": "clean",
       "expected": "pay",
-      "split": "benign",
       "changes": [
         {
           "name": "Demo Paper Supply renamed"
         }
-      ]
+      ],
+      "eval_set": "must_pass"
     },
     {
       "case_id": "benign_vendor_memo",
       "recording_case_id": "clean",
       "expected": "pay",
-      "split": "benign",
       "changes": [
         {
           "memo": "Invoice contact updated"
         }
-      ]
+      ],
+      "eval_set": "must_pass"
     }
   ]
 }

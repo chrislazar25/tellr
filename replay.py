@@ -16,7 +16,7 @@ from rules import TERM_FIELDS, field_value, validate_rule
 from worker import process_one
 
 LABELS = ("unsafe_commit", "benign_block", "ok", "duplicate")
-SPLITS = ("train", "benign", "holdout")
+EVAL_SETS = ("must_catch", "must_pass", "holdout")
 
 
 def summarize(rows):
@@ -74,18 +74,18 @@ def _run_case(db, case):
     }
     outcome = process_one(db, queue_id=result["outcome"]["queue_id"], static_guard=False) if result["status"] == "pending" else None
     verdict = label_run(db, result["run_id"])
-    return {**verdict, "split": case["split"], "block_reason": outcome.get("reason") if outcome else None,
+    return {**verdict, "eval_set": case["eval_set"], "block_reason": outcome.get("reason") if outcome else None,
             "field_diffs": field_diffs(context)}
 
 
 def replay_suite(client, current_rules: list[dict], *, candidate: dict | None = None,
-                 splits=SPLITS) -> dict:
+                 sets=EVAL_SETS) -> dict:
     """Own and drop a fresh scratch database; never copy application data into it."""
     documents = deepcopy(current_rules) + ([deepcopy(candidate)] if candidate is not None else [])
     for document in documents:
         document["rule"] = validate_rule(document["rule"])
-    if any(split not in SPLITS for split in splits):
-        raise ValueError("Unknown replay split")
+    if any(eval_set not in EVAL_SETS for eval_set in sets):
+        raise ValueError("Unknown replay eval_set")
     name = "mongodb_hackathon_replay_" + uuid.uuid4().hex
     db = client[name].with_options(write_concern=WriteConcern("majority"))
     try:
@@ -95,9 +95,9 @@ def replay_suite(client, current_rules: list[dict], *, candidate: dict | None = 
                 {"_id": document["_id"], "version": document["version"], "active": True, "rule": document["rule"]}
                 for document in documents
             ])
-        rows = [_run_case(db, case) for case in fixture_cases() if case["split"] in splits]
+        rows = [_run_case(db, case) for case in fixture_cases() if case["eval_set"] in sets]
         return {"counts": summarize(rows),
-                "splits": {split: summarize([row for row in rows if row["split"] == split]) for split in splits},
+                "sets": {eval_set: summarize([row for row in rows if row["eval_set"] == eval_set]) for eval_set in sets},
                 "cases": rows}
     finally:
         client.drop_database(name)
@@ -105,26 +105,28 @@ def replay_suite(client, current_rules: list[dict], *, candidate: dict | None = 
 
 def training_failures(result: dict) -> list[dict]:
     """The sole scenario-data boundary into the proposer excludes benign/holdout."""
-    return [{key: deepcopy(row[key]) for key in ("case_id", "label", "expected", "reasons", "block_reason", "field_diffs")}
-            for row in result["cases"] if row["split"] == "train" and row["label"] != "ok"]
+    return [{key: deepcopy(row[key]) for key in ("case_id", "eval_set", "label", "expected", "reasons", "block_reason", "field_diffs")}
+            for row in result["cases"] if row["eval_set"] == "must_catch" and row["label"] != "ok"]
 
 
 def gate_result(before: dict, after: dict) -> dict:
     reasons = []
-    if after["splits"]["train"]["unsafe_commit"] >= before["splits"]["train"]["unsafe_commit"]:
-        reasons.append("train_unsafe_not_decreased")
-    for split in SPLITS:
-        if after["splits"][split]["benign_block"] > before["splits"][split]["benign_block"]:
-            reasons.append(f"{split}_benign_blocks_increased")
-        if after["splits"][split]["duplicate"] > before["splits"][split]["duplicate"]:
-            reasons.append(f"{split}_duplicates_increased")
+    if sum(after["sets"]["must_catch"][label] for label in LABELS if label != "ok") >= sum(before["sets"]["must_catch"][label] for label in LABELS if label != "ok"):
+        reasons.append("must_catch_failures_not_decreased")
+    if after["sets"]["must_pass"]["benign_block"] != 0:
+        reasons.append("must_pass_benign_blocks_nonzero")
+    for eval_set in EVAL_SETS:
+        if after["sets"][eval_set]["benign_block"] > before["sets"][eval_set]["benign_block"]:
+            reasons.append(f"{eval_set}_benign_blocks_increased")
+        if after["sets"][eval_set]["duplicate"] > before["sets"][eval_set]["duplicate"]:
+            reasons.append(f"{eval_set}_duplicates_increased")
     old_rows = {row["case_id"]: row for row in before["cases"]}
     for row in after["cases"]:
         old = old_rows[row["case_id"]]
-        if row["split"] == "holdout" and old["label"] == "ok" and row["label"] != "ok":
+        if row["eval_set"] == "holdout" and old["label"] == "ok" and row["label"] != "ok":
             reasons.append("holdout_case_regressed")
     for label in ("unsafe_commit", "benign_block", "duplicate"):
-        if after["splits"]["holdout"][label] > before["splits"]["holdout"][label]:
+        if after["sets"]["holdout"][label] > before["sets"]["holdout"][label]:
             reasons.append("holdout_worse")
     return {"accepted": not reasons, "reasons": sorted(set(reasons)),
-            "before": deepcopy(before["splits"]), "after": deepcopy(after["splits"])}
+            "before": deepcopy(before["sets"]), "after": deepcopy(after["sets"])}
