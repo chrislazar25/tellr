@@ -28,7 +28,7 @@ jobs:
       - name: Run offline CLI demo
         run: |
           uv run --frozen python -m db.seed
-          uv run --frozen python pipeline.py
+          uv run --frozen python pipeline.py demo --confirm-from verbatim
       - name: MongoDB diagnostics on failure
         if: failure()
         run: docker compose logs --tail 80

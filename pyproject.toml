@@ -21,7 +21,7 @@ dev = ["pytest>=8,<10"]
 
 [tool.setuptools]
 py-modules = ["config", "interfaces", "observability", "pipeline", "rules", "worker"]
-packages = ["db", "fixtures"]
+packages = ["db", "fixtures", "scripts"]
 
 [tool.setuptools.package-data]
 fixtures = ["*.json"]

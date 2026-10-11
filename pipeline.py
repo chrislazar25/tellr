@@ -2,8 +2,10 @@
 
 import argparse
 import json
+import sys
 import uuid
 from datetime import datetime, timezone
+from pathlib import Path
 
 from pymongo.database import Database
 
@@ -103,36 +105,93 @@ def enqueue_intent(db: Database, intent_id: str) -> dict:
     return run_transaction(db, enqueue)
 
 
-def run_pipeline(
-    db: Database, audio_path: str = "demo-invoice.wav", *, verbatim: bool = True, hold: bool = False,
+def approve_and_enqueue(
+    db: Database, prepared: dict, *, confirmation_source: str | None = None,
+    confirmed_terms: dict | None = None,
 ) -> dict:
-    prepared = prepare_intent(db, audio_path)
     if prepared["status"] == "no_terms":
         return prepared
-    source = "verbatim" if verbatim else "cleaned"
-    terms = prepared["candidates"][source]
+    if confirmed_terms is None and confirmation_source is None:
+        return prepared
+    if confirmed_terms is not None and confirmation_source is not None:
+        raise ValueError("Choose a transcript or supply manual confirmed terms, not both")
+    source = "manual" if confirmed_terms is not None else confirmation_source
+    if source not in {"verbatim", "cleaned", "manual"}:
+        raise ValueError("Unknown confirmation source")
+    terms = confirmed_terms if source == "manual" else prepared["candidates"][source]
     if terms is None:
         raise ValueError("Selected transcript has no payment terms")
+    terms = interfaces.validate_terms(terms)
     confirmation = interfaces.readback(terms)
     log_step(db, prepared["run_id"], "readback", terms, {"text": confirmation})
     confirm_intent(db, prepared["intent_id"], terms, source=source)
     item = enqueue_intent(db, prepared["intent_id"])
-    outcome = {"queue_id": item["_id"], "status": item["status"]} if hold else process_one(db, queue_id=item["_id"])
-    return {**prepared, "status": outcome["status"], "readback": confirmation, "outcome": outcome}
+    return {**prepared, "status": item["status"], "readback": confirmation,
+            "outcome": {"queue_id": item["_id"], "status": item["status"]}}
 
 
-def main() -> None:
+def run_pipeline(
+    db: Database, audio_path: str = "demo-invoice.wav", *, confirmation_source: str | None = None,
+    confirmed_terms: dict | None = None, hold: bool = False,
+) -> dict:
+    result = approve_and_enqueue(db, prepare_intent(db, audio_path),
+                                 confirmation_source=confirmation_source, confirmed_terms=confirmed_terms)
+    if result["status"] != "pending" or hold:
+        return result
+    outcome = process_one(db, queue_id=result["outcome"]["queue_id"])
+    return {**result, "status": outcome["status"], "outcome": outcome}
+
+
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("audio_path", nargs="?", default="demo-invoice.wav")
-    parser.add_argument("--normalized", action="store_true")
-    parser.add_argument("--hold", action="store_true")
-    args = parser.parse_args()
-    db = connect()
+    commands = parser.add_subparsers(dest="command", required=True)
+    for name in ("enqueue", "demo"):
+        command = commands.add_parser(name)
+        command.add_argument("audio_path", nargs="?", default="demo-invoice.wav")
+        choice = command.add_mutually_exclusive_group()
+        choice.add_argument("--confirm-from", choices=["verbatim", "cleaned"])
+        choice.add_argument("--confirmed-terms", type=Path, help="JSON file with manually approved terms")
+        if name == "demo":
+            command.add_argument("--hold", action="store_true", help="Stop after enqueue, before payment")
+    process = commands.add_parser("process")
+    process.add_argument("--queue-id", help="Only claim this queue item; otherwise claim the oldest pending item")
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if not argv or argv[0] == "--hold":
+        argv.insert(0, "demo")
+    args = parser.parse_args(argv)
+    if args.command != "process" and not (args.confirm_from or args.confirmed_terms) and not sys.stdin.isatty():
+        parser.error("Non-interactive approval requires --confirm-from or --confirmed-terms")
+    db = None
     try:
-        print(json.dumps(run_pipeline(db, args.audio_path, verbatim=not args.normalized, hold=args.hold), indent=2))
+        db = connect()
+        if args.command == "process":
+            result = process_one(db, queue_id=args.queue_id)
+        else:
+            prepared = prepare_intent(db, args.audio_path)
+            source = args.confirm_from
+            terms = json.loads(args.confirmed_terms.read_text()) if args.confirmed_terms else None
+            if prepared["status"] != "no_terms" and source is None and terms is None:
+                for mode, candidate in prepared["candidates"].items():
+                    if candidate is not None:
+                        print(f"{mode}: {interfaces.readback(candidate)}")
+                selected = input("Approve [verbatim/cleaned/cancel]: ").strip().lower()
+                if selected in {"verbatim", "cleaned"}:
+                    source = selected
+                elif selected != "cancel":
+                    raise ValueError("Unknown approval selection")
+            result = approve_and_enqueue(db, prepared, confirmation_source=source, confirmed_terms=terms)
+            if args.command == "demo" and not args.hold and result["status"] == "pending":
+                outcome = process_one(db, queue_id=result["outcome"]["queue_id"])
+                result = {**result, "status": outcome["status"], "outcome": outcome}
+        print(json.dumps(result, indent=2))
+        return 0
+    except Exception:
+        print("fail", file=sys.stderr)
+        return 1
     finally:
-        db.client.close()
+        if db is not None:
+            db.client.close()
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

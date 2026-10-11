@@ -1,6 +1,8 @@
 """Atomically claim work; fence, evaluate, and record the outcome together."""
 
+import argparse
 import json
+import sys
 import uuid
 from datetime import datetime, timezone
 
@@ -144,13 +146,22 @@ def process_one(
     return None if item is None else process_claimed(db, item, evaluator=evaluator, on_retry=on_retry)
 
 
-def main() -> None:
-    db = connect()
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--queue-id")
+    args = parser.parse_args()
+    db = None
     try:
-        print(json.dumps(process_one(db)))
+        db = connect()
+        print(json.dumps(process_one(db, queue_id=args.queue_id)))
+        return 0
+    except Exception:
+        print("fail", file=sys.stderr)
+        return 1
     finally:
-        db.client.close()
+        if db is not None:
+            db.client.close()
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

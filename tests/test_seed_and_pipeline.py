@@ -34,7 +34,7 @@ def test_seed_is_idempotent_and_preserves_vendor_changes(db):
 def test_offline_pipeline_end_to_end_logs_every_step(db, monkeypatch, verbatim):
     for key in ("ANTHROPIC_API_KEY", "ELEVENLABS_API_KEY", "RAINDROP_WRITE_KEY"):
         monkeypatch.delenv(key, raising=False)
-    result = run_pipeline(db, verbatim=verbatim)
+    result = run_pipeline(db, confirmation_source="verbatim" if verbatim else "cleaned")
     assert result["outcome"]["status"] == "done"
     evidence = db.evidence.find_one({"run_id": result["run_id"]})
     assert evidence["verbatim_text"].startswith("Um,")
@@ -87,7 +87,7 @@ def test_payment_idempotency_key_is_unique(db, enqueue):
 
 
 def test_hold_allows_account_change_between_approval_and_payment(db):
-    result = run_pipeline(db, hold=True)
+    result = run_pipeline(db, confirmation_source="verbatim", hold=True)
     assert result["outcome"]["status"] == "pending"
     assert db.payments.count_documents({}) == 0
     intent = db.intents.find_one({"_id": result["intent_id"]})
@@ -121,7 +121,7 @@ def test_confirmation_records_current_account_and_version_and_is_immutable(db):
 
 
 def test_enqueue_is_idempotent_even_after_payment(db):
-    result = run_pipeline(db, hold=True)
+    result = run_pipeline(db, confirmation_source="verbatim", hold=True)
     item = enqueue_intent(db, result["intent_id"])
     assert item["_id"] == result["outcome"]["queue_id"]
     assert db.queue.count_documents({}) == 1
