@@ -1,81 +1,129 @@
 # MongoDB Hackathon
 
-Python 3.11 backend for a fixture-driven payment approval pipeline. No UI or API
-keys are required for local development. Payments are database receipts; no money
-is sent by this prototype.
+Python 3.11 backend with fixture adapters, dual transcription, explicit approval,
+and fenced MongoDB transactions. No UI. Payments are database receipts; this
+prototype does not send money.
 
 ```sh
 uv sync --frozen --python 3.11
 docker compose up -d --wait
-cp .env.example .env
-uv run python -m db.seed
-uv run python pipeline.py
 uv run pytest -q
 ```
 
-An empty `MONGODB_URI` uses the local single-node `rs0` replica set. Local MongoDB
-is exposed only on loopback. Real credentials belong in ignored `.env` files.
-The existing `.env.secrets` file is not loaded automatically.
+Tests always use the local `rs0` replica set and isolated databases. They never
+read this project's `.env` or `.env.secrets`, and never use its Atlas URI. Each
+test database is removed afterward. `TEST_MONGODB_URI` can select another loopback
+port; include `replicaSet=rs0&directConnection=true`. Remote test hosts are rejected.
+For unit tests only: `uv run pytest -m 'not integration'`.
 
-Without uv, use Python 3.11: `python3.11 -m venv .venv`, activate it, then
-`pip install -e . pytest`. Run the same seed/demo commands using `python` and tests
-using `pytest`.
+The app loads settings in this order: process environment, `.env.secrets`, `.env`.
+`.env.secrets` therefore wins over the blank URI in `.env.example`. An absent or
+blank final `MONGODB_URI` falls back to local MongoDB. Keep real values in ignored
+files, not `.env.example`. Keys and connection strings are never printed or logged.
+The configured demo uses Atlas when its URI is in `.env.secrets`:
 
-`python -m db.seed` creates `vendors`, `fences`, `evidence`, `intents`, `queue`,
-`payments`, `rule_versions`, and `runs` with strict `$jsonSchema` validators.
-It installs a unique index on `payments.idempotency_key` and seeds three fictional
-vendors with version-zero fences. Re-running it preserves existing vendor accounts
-and fence versions. Monetary fields accept only positive signed 64-bit integer
-cents, never floats, decimal values, or booleans.
+```sh
+uv run python -m db.ping
+uv run python -m db.seed
+uv run python pipeline.py enqueue demo-invoice.wav --confirm-from verbatim
+# Copy outcome.queue_id from the enqueue output.
+uv run python scripts/change_vendor_account.py vendor-001 demo-account-updated
+uv run python pipeline.py process --queue-id 'queue:YOUR_INTENT_ID'
+```
 
-`pipeline.py` uses `fixtures/pipeline.json`: transcription (verbatim by default),
-term extraction, text readback, evidence/intent storage, queue insertion, and one
-worker pass. No actual audio file is needed for `demo-invoice.wav`. Use
-`python pipeline.py --normalized` for the normalized transcript. Evidence, intent,
-and queue insertion share one transaction. Each demo invocation creates a new
-intent, so running it twice intentionally creates two receipts.
+`db.ping` prints exactly `ok` or `fail` and exits 0 or 1. `db.seed` installs eight
+collections (`vendors`, `fences`, `evidence`, `intents`, `queue`, `payments`,
+`rule_versions`, `runs`), strict validators, a unique payments idempotency index,
+and three fictional vendors with version-zero fences. Re-running seed preserves
+existing accounts and fence versions. Existing historical documents are not
+migrated when validators are refreshed; unconfirmed legacy intents cannot pay.
 
-`python worker.py` claims one pending queue item using `find_one_and_update`.
-After claiming, one transaction writes the vendor fence, reads the vendor/intent
-and active rules, evaluates the rules, and inserts the receipt plus marks the queue
-done, or marks it blocked with a reason. The receipt's idempotency key is exactly
-the queue item's string ID. No active rules means allow all; the independent
-destination check still requires the intent's account to match the vendor account
-read in that transaction. A changed account requires reviewed instructions.
+`enqueue` never processes payments. For a combined demo or the `--hold` shortcut:
 
-`db.vendors.update_vendor_bank_account(db, vendor_id, bank_account)` updates the
-account and increments that same fence in one transaction. All account changes
-must use this function. The shared write causes conflicting snapshots to abort;
-PyMongo's `with_transaction` retries `TransientTransactionError` and retries commit
-on `UnknownTransactionCommitResult`. See the [PyMongo transaction documentation](https://www.mongodb.com/docs/languages/python/pymongo-driver/current/crud/transactions/).
+```sh
+uv run python pipeline.py demo demo-invoice.wav --confirm-from verbatim
+uv run python pipeline.py demo amount-correction.wav --confirm-from verbatim --hold
+# Equivalent shortcut for a held demo:
+uv run python pipeline.py --hold --confirm-from verbatim
+```
 
-`rules.evaluate(rule, context)` is the pluggable allow-all stub. It returns `None`
-to allow, or a non-empty reason string to block. Pass `evaluator=` to worker
-functions to replace it. Hooks must have no external side effects because the
-transaction callback may run again. A receipt stores the vendor account, fence
-version, and evaluated rule-version IDs for audit.
+Enqueue/demo commands transcribe the same audio twice, using `no_verbatim=False`
+for verbatim and `True` for cleaned text. They independently extract terms from
+each transcript and store both texts and both results in one evidence document.
+A draft intent cannot be enqueued or paid. Explicit confirmation stores
+`confirmed_terms`, `confirmed_at`, `confirmation_source`, `approved_bank_account`,
+and `approved_fence_version`. The account/version pair is read from one snapshot
+at approval. Worker evaluation can inspect that snapshot through `context['intent']`.
 
-`runs` records `{run_id, step, inputs, outputs, ts}`. Logs for transaction steps
-commit or roll back with the payment; retry/error records are separate. The
-`observability.trace` wrapper no-ops until `RAINDROP_WRITE_KEY` and an explicit
-`configure_trace` transport are supplied. Transcription, extraction, readback,
-and remote tracing remain stubs; merely setting keys does not switch them to
-live services. Keys and connection URIs are never logged.
+Use `--confirm-from cleaned` to approve the cleaned candidate, or
+`--confirmed-terms /path/to/approved-terms.json` for manually reviewed corrections.
+The file must contain exactly `vendor_id`, `amount_cents`, `destination_account`,
+and an ISO `date`. Without either option, an interactive terminal displays both
+readbacks and asks which to approve; non-interactive commands require an explicit
+choice. The Python API also leaves work awaiting confirmation unless approval is
+supplied. Repeating confirmation with the same terms preserves its original
+snapshot, and repeating enqueue does not create a second queue item.
 
-Tests use only local MongoDB and a fresh randomly named database per test, removed
-afterward. They do not load `.env` or consult `MONGODB_URI`. If you use another
-loopback port, set `MONGO_PORT` for Compose and `TEST_MONGODB_URI` for tests (including
-`replicaSet=rs0&directConnection=true`); set `MONGODB_URI` separately for the app.
-Integration tests fail clearly if the replica set is unavailable. To run just
-the key-free unit tests, use `uv run pytest -m 'not integration'`.
+`STATIC_GUARD` defaults to `off`. With no active rules and the guard off, payment
+uses the vendor's **current** bank account read inside the payment transaction.
+Receipts retain `destination_account` from the approved instruction and record the
+actual target in `paid_to` (also recorded as `vendor_account`). These may differ
+after an account change. Set `STATIC_GUARD=on` to opt into blocking a requested
+destination that differs from the current vendor account.
 
-The suite covers competing workers, real fence write conflicts in both race
-orders, stale-destination blocking, empty rules, receipt uniqueness, integer cents,
-seed idempotence, transaction rollback, adapters, logging, and trace gating.
-GitHub Actions runs the full suite against this Compose replica set on Python 3.11.
+The worker atomically claims one pending queue item, then one transaction
+increments the vendor fence, loads current vendor data and active rules, evaluates
+them, inserts the receipt and marks done, or marks blocked with a reason.
+Idempotency keys are exactly queue IDs. All monetary fields, including nested
+candidate/confirmed terms, require positive signed 64-bit integer cents; floats,
+decimals, and booleans are rejected. All new fields have validators.
 
-On an unrecoverable worker error, the item stays claimed. Lease expiry and automatic
-crash recovery are not implemented yet. `process_claimed(db, claimed_item)` can
-resume the existing claim and returns an existing completed receipt without
-duplicating it. Avoid resetting ambiguous claims to pending. Stop local MongoDB
-with `docker compose down`; its named volume persists between starts.
+All bank changes go through `db.vendors.update_vendor_bank_account` (used by the
+change-account script): it increments the same vendor fence and changes the bank
+account in one transaction. Real write conflicts cause callback retries; uncertain
+commit results retry only the commit. See the [PyMongo transaction documentation](https://www.mongodb.com/docs/languages/python/pymongo-driver/current/crud/transactions/).
+`rules.evaluate(rule, context)` remains an allow-all stub; injected evaluators
+return `None` or a blocking reason. They must be free of external side effects.
+
+The six fictional fixtures have independent, hand-labeled `true_terms`:
+
+| Case | Audio fixture | Correct instruction |
+| --- | --- | --- |
+| 500, no, 50 | `amount-correction.wav` | 5,000 cents |
+| 500, no wait, 500 is right | `amount-reaffirmation.wav` | 50,000 cents |
+| Fifteen vs fifty | `fifteen-vs-fifty.wav` | 1,500 cents |
+| Account 42, sorry, 24 | `account-correction.wav` | Account 24 |
+| Filler only | `filler-only.wav` | No terms; evidence only |
+| Clean | `demo-invoice.wav` | 12,550 cents |
+
+No actual audio files are needed for stubs. Cleaned candidates intentionally
+simulate lost corrections in three cases; these are not measured Scribe results.
+Ground-truth labels are used only by tests, never to extract or approve terms.
+
+Adapters stay offline even when API keys exist. Inject an `interfaces.Adapters`
+bundle into `prepare_intent`, `approve_and_enqueue`, or `run_pipeline` to replace
+one or all of transcription, extraction, and readback. The transcription protocol
+accepts `no_verbatim` directly, matching [ElevenLabs Scribe v2's API](https://elevenlabs.io/docs/api-reference/speech-to-text/convert).
+A future adapter can return `client.speech_to_text.convert(file=audio_file,
+model_id='scribe_v2', no_verbatim=no_verbatim).text`. `EXTRACT_TERMS_TOOL` supplies
+the strict JSON Schema for [Claude tool-use extraction](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools);
+consume its `tool_use` input's `terms` and validate with `validate_terms`. Null
+means no payment instruction. No live speech/LLM adapter is enabled yet.
+
+`runs` logs `{run_id, step, inputs, outputs, ts}`, including each transcription and
+extraction variant, confirmation, queueing, and worker outcome. Transaction logs
+commit or roll back with their writes; retry/error records are separate. Remote
+tracing no-ops until both `RAINDROP_WRITE_KEY` and an explicit `configure_trace`
+transport exist. No network calls run inside retryable payment callbacks.
+
+GitHub Actions runs Python 3.11 tests and the split CLI demo against local Compose.
+Compose binds MongoDB to loopback and sets its open-file limit to 64,000, following
+[MongoDB's recommendation](https://www.mongodb.com/docs/manual/reference/ulimit/),
+so repeated creation of isolated test databases cannot hit Docker's low default.
+Stop it with `docker compose down`; the named data volume persists.
+
+On an unrecoverable worker error, the item stays claimed. Lease expiry and
+automatic crash recovery remain future work. `process_claimed(db, claimed_item)`
+can resume a known claim without duplicating a completed receipt. Avoid resetting
+ambiguous claims to pending. Without uv, install with Python 3.11 using
+`pip install -e . pytest` inside a virtual environment.

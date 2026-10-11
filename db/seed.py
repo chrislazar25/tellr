@@ -1,6 +1,7 @@
 """Idempotently install validators/indexes and three fictional vendors."""
 
 import uuid
+import sys
 
 from pymongo.database import Database
 from pymongo.errors import CollectionInvalid
@@ -43,14 +44,20 @@ def seed(db: Database) -> None:
     log_step(db, run_id, "seed", {}, {"collections": list(VALIDATORS), "sample_vendors": 3})
 
 
-def main() -> None:
-    db = connect()
+def main() -> int:
+    db = None
     try:
+        db = connect()
         seed(db)
         print("Seeded eight validated collections, indexes, and three demo vendors.")
+        return 0
+    except Exception:
+        print("fail", file=sys.stderr)
+        return 1
     finally:
-        db.client.close()
+        if db is not None:
+            db.client.close()
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
