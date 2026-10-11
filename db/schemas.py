@@ -40,6 +40,7 @@ VALIDATORS = {
         "verbatim_text": {"bsonType": "string"}, "cleaned_text": {"bsonType": "string"},
         "verbatim_terms": OPTIONAL_TERMS, "cleaned_terms": OPTIONAL_TERMS, "created_at": TIMESTAMP,
         "audio_hash": {"bsonType": "string", "pattern": "^[a-f0-9]{64}$"}, "adapter_key": STRING,
+        "fixture_case_id": STRING,
     }),
     "intents": schema([*TERMS, "run_id", "evidence_id", "status", "created_at"], {
         **TERMS, "run_id": STRING, "evidence_id": STRING,
@@ -74,9 +75,15 @@ VALIDATORS = {
             "_id": {"bsonType": "objectId"}, "run_id": STRING, "step": STRING,
             "inputs": {"bsonType": "object"}, "outputs": {"bsonType": "object"},
             "ts": TIMESTAMP,
+            "label": {"enum": ["ok", "unsafe_commit", "benign_block", "duplicate"]},
         },
     }},
 }
+
+VALIDATORS["runs"]["$jsonSchema"]["oneOf"] = [
+    {"properties": {"step": {"enum": ["oracle"]}}, "required": ["label"]},
+    {"properties": {"step": {"not": {"enum": ["oracle"]}}}, "not": {"required": ["label"]}},
+]
 
 # The evidence collection also owns partial cache records. Per-run evidence is
 # always complete; cached modes are filled after each successful external call.

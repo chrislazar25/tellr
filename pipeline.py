@@ -24,6 +24,10 @@ def prepare_intent(
     adapters = adapters or interfaces.configured_adapters(db)
     run_id, evidence_id, intent_id = (str(uuid.uuid4()) for _ in range(3))
     texts, candidates, metadata = collect_candidates(db, run_id, audio_path, adapters)
+    if adapters is interfaces.DEFAULT_ADAPTERS:
+        recording = next(record for record in interfaces._recordings()
+                         if record["audio_file"] == Path(audio_path).name)
+        metadata["fixture_case_id"] = recording["case_id"]
 
     terms = candidates["verbatim"] or candidates["cleaned"]
     now = datetime.now(timezone.utc)

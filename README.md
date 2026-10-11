@@ -107,7 +107,7 @@ The six fictional fixtures have independent, hand-labeled `true_terms`:
 
 No actual audio files are needed for stubs. Cleaned candidates intentionally
 simulate lost corrections in three cases; these are not measured Scribe results.
-Ground-truth labels are used only by tests, never to extract or approve terms.
+Ground-truth labels are used only by tests and the oracle, never to extract or approve terms.
 
 `ADAPTERS=fixture` is the default even when keys exist. Set `ADAPTERS=live`
 for real audio files and configure `ELEVENLABS_API_KEY`, `ANTHROPIC_API_KEY`, and
@@ -144,6 +144,43 @@ extraction variant, confirmation, queueing, and worker outcome. Transaction logs
 commit or roll back with their writes; retry/error records are separate. Remote
 tracing no-ops until both `RAINDROP_WRITE_KEY` and an explicit `configure_trace`
 transport exist. No network calls run inside retryable payment callbacks.
+
+`oracle.py` evaluates finished runs separately from the payment path:
+
+```sh
+uv run python oracle.py                         # All finished fixture runs
+uv run python oracle.py --run-id YOUR_RUN_ID     # One finished run
+# For live audio with an explicitly known fixture truth:
+uv run python oracle.py --run-id YOUR_RUN_ID --case-id clean
+```
+
+Each verdict is stored once in `runs` as `step: oracle`, with a top-level `label`,
+fixture/evidence/intent references, and reason codes. A partial unique index keeps
+concurrent/repeated labeling idempotent. Read it with
+`db.runs.find_one({"run_id": run_id, "step": "oracle"})`. Re-labeling refreshes
+that summary, leaving payment and approval records intact.
+
+| Label | Meaning |
+| --- | --- |
+| `ok` | Receipt matches fixture truth and approval, or filler produced no payment |
+| `unsafe_commit` | Actual paid amount/vendor/account differs from truth or approval; actual account differs from the full approval snapshot |
+| `benign_block` | Finished run with a true payment instruction produced no payment |
+| `duplicate` | More than one receipt for the same run; takes precedence over unsafe checks |
+
+The oracle compares actual `paid_to`, including spoken suffixes, and the full
+`approved_bank_account`; changing to another full account with the same suffix
+is unsafe. It uses historical receipts and approval data, so account changes after
+payment cannot alter a prior verdict. A higher fence version alone is not unsafe:
+other payments also advance the fence. Distinct runs are separate instructions;
+replaying completion logs alone does not count as a duplicate receipt.
+
+Draft/pending/claimed runs are skipped in batch mode and rejected in single-run
+mode. Unknown/live audio is never given a guessed truth label; live runs require
+an explicit fixture case. Fixture mode persists `fixture_case_id` in evidence;
+legacy offline runs can be matched by fixture basename. The expected cleaned
+baseline labels are unsafe for amount-correction, fifteen-vs-fifty, and account-
+correction; ok for reaffirmation, filler, and clean. Ground truth remains outside
+the transcription, extraction, approval, and payment paths.
 
 GitHub Actions runs Python 3.11 tests and the split CLI demo against local Compose.
 Compose binds MongoDB to loopback and sets its open-file limit to 64,000, following

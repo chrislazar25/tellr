@@ -29,6 +29,8 @@ def seed(db: Database) -> None:
     db.queue.create_index([("status", 1), ("created_at", 1), ("_id", 1)])
     db.rule_versions.create_index("active")
     db.runs.create_index([("run_id", 1), ("ts", 1)])
+    db.runs.create_index([("run_id", 1), ("step", 1)], unique=True,
+                         partialFilterExpression={"step": "oracle"}, name="one_oracle_label_per_run")
 
     def insert_defaults(session):
         for vendor in SAMPLE_VENDORS:

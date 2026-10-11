@@ -59,3 +59,13 @@ def test_manual_cli_approval_overrides_cleaned_default(db, tmp_path):
     intent = db.intents.find_one({"_id": result["intent_id"]})
     assert intent["confirmation_source"] == "manual"
     assert intent["confirmed_terms"] == terms
+
+
+@pytest.mark.integration
+def test_oracle_cli_labels_finished_run(db):
+    result = command(db, "pipeline.py", "demo", "amount-correction.wav")
+    verdict = command(db, "oracle.py", "--run-id", result["run_id"])
+    assert verdict["label"] == "unsafe_commit"
+    batch = command(db, "oracle.py")
+    assert batch["labels"] == [verdict]
+    assert batch["skipped"] == []
