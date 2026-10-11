@@ -1,4 +1,4 @@
-"""Dual transcription -> evidence -> explicit confirmation -> queue -> receipt."""
+"""Dual transcription -> cleaned baseline approval -> queue -> receipt."""
 
 import argparse
 import json
@@ -137,6 +137,8 @@ def run_pipeline(
     db: Database, audio_path: str = "demo-invoice.wav", *, confirmation_source: str | None = None,
     confirmed_terms: dict | None = None, hold: bool = False, adapters: interfaces.Adapters | None = None,
 ) -> dict:
+    if confirmation_source is None and confirmed_terms is None:
+        confirmation_source = "cleaned"
     result = approve_and_enqueue(db, prepare_intent(db, audio_path, adapters=adapters),
                                  confirmation_source=confirmation_source, confirmed_terms=confirmed_terms,
                                  adapters=adapters)
@@ -163,8 +165,6 @@ def main(argv: list[str] | None = None) -> int:
     if not argv or argv[0] == "--hold":
         argv.insert(0, "demo")
     args = parser.parse_args(argv)
-    if args.command != "process" and not (args.confirm_from or args.confirmed_terms) and not sys.stdin.isatty():
-        parser.error("Non-interactive approval requires --confirm-from or --confirmed-terms")
     db = None
     try:
         db = connect()
@@ -172,17 +172,8 @@ def main(argv: list[str] | None = None) -> int:
             result = process_one(db, queue_id=args.queue_id)
         else:
             prepared = prepare_intent(db, args.audio_path)
-            source = args.confirm_from
+            source = None if args.confirmed_terms else (args.confirm_from or "cleaned")
             terms = json.loads(args.confirmed_terms.read_text()) if args.confirmed_terms else None
-            if prepared["status"] != "no_terms" and source is None and terms is None:
-                for mode, candidate in prepared["candidates"].items():
-                    if candidate is not None:
-                        print(f"{mode}: {interfaces.readback(candidate)}")
-                selected = input("Approve [verbatim/cleaned/cancel]: ").strip().lower()
-                if selected in {"verbatim", "cleaned"}:
-                    source = selected
-                elif selected != "cancel":
-                    raise ValueError("Unknown approval selection")
             result = approve_and_enqueue(db, prepared, confirmation_source=source, confirmed_terms=terms)
             if args.command == "demo" and not args.hold and result["status"] == "pending":
                 outcome = process_one(db, queue_id=result["outcome"]["queue_id"])

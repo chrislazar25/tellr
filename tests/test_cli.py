@@ -39,9 +39,23 @@ def test_demo_hold_stops_before_payment(db):
     assert db.payments.count_documents({}) == 0
 
 
-def test_noninteractive_cli_requires_confirmation_choice():
-    result = subprocess.run([sys.executable, "pipeline.py", "enqueue"], cwd=ROOT,
-                            input="", capture_output=True, text=True, timeout=10)
-    assert result.returncode == 2
-    assert "requires --confirm-from" in result.stderr
-    assert "mongodb" not in result.stderr.lower()
+@pytest.mark.integration
+def test_noninteractive_cli_defaults_to_cleaned_approval(db):
+    result = command(db, "pipeline.py", "enqueue", "amount-correction.wav")
+    assert result["status"] == "pending"
+    intent = db.intents.find_one({"_id": result["intent_id"]})
+    assert intent["confirmation_source"] == "cleaned"
+    assert intent["confirmed_terms"]["amount_cents"] == 50000
+    assert db.payments.count_documents({}) == 0
+
+
+@pytest.mark.integration
+def test_manual_cli_approval_overrides_cleaned_default(db, tmp_path):
+    terms = {"vendor_id": "vendor-001", "amount_cents": 5000,
+             "destination_account": "demo-account-001", "date": "2026-10-11"}
+    path = tmp_path / "approval.json"
+    path.write_text(json.dumps(terms))
+    result = command(db, "pipeline.py", "enqueue", "amount-correction.wav", "--confirmed-terms", str(path))
+    intent = db.intents.find_one({"_id": result["intent_id"]})
+    assert intent["confirmation_source"] == "manual"
+    assert intent["confirmed_terms"] == terms

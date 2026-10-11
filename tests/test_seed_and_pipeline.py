@@ -152,10 +152,20 @@ def test_nested_confirmed_amounts_reject_floats(db, enqueue):
     assert error.value.code == 121
 
 
-def test_pipeline_without_approval_cannot_pay(db):
-    result = run_pipeline(db)
+def test_preparation_without_approval_cannot_pay(db):
+    result = prepare_intent(db)
     assert result["status"] == "awaiting_confirmation"
     assert db.queue.count_documents({}) == db.payments.count_documents({}) == 0
+
+
+def test_baseline_defaults_to_cleaned_terms_and_records_approval(db):
+    result = run_pipeline(db, "amount-correction.wav")
+    assert result["status"] == "done"
+    intent = db.intents.find_one({"run_id": result["run_id"]})
+    assert intent["confirmation_source"] == "cleaned"
+    assert intent["confirmed_terms"]["amount_cents"] == 50000
+    assert intent["approved_bank_account"] == "demo-account-001"
+    assert db.payments.find_one({"run_id": result["run_id"]})["amount_cents"] == 50000
 
 
 def test_confirmation_source_must_match_evidence_candidate(db):

@@ -1,6 +1,6 @@
 # MongoDB Hackathon
 
-Python 3.11 backend with fixture/live adapters, dual transcription, explicit approval,
+Python 3.11 backend with fixture/live adapters, dual transcription, baseline approval,
 and fenced MongoDB transactions. No UI. Payments are database receipts; this
 prototype does not send money.
 
@@ -55,14 +55,17 @@ A draft intent cannot be enqueued or paid. Explicit confirmation stores
 and `approved_fence_version`. The account/version pair is read from one snapshot
 at approval. Worker evaluation can inspect that snapshot through `context['intent']`.
 
-Use `--confirm-from cleaned` to approve the cleaned candidate, or
-`--confirmed-terms /path/to/approved-terms.json` for manually reviewed corrections.
-The file must contain exactly `vendor_id`, `amount_cents`, `destination_account`,
-and an ISO `date`. Without either option, an interactive terminal displays both
-readbacks and asks which to approve; non-interactive commands require an explicit
-choice. The Python API also leaves work awaiting confirmation unless approval is
-supplied. Repeating confirmation with the same terms preserves its original
-snapshot, and repeating enqueue does not create a second queue item.
+The naive baseline automatically approves the cleaned candidate by default,
+including non-interactive CLI invocations and `run_pipeline`. Its approval
+snapshot records this choice; it can preserve transcription mistakes deliberately
+for oracle evaluation. `--confirm-from verbatim` overrides the baseline, while
+`--confirm-from cleaned` is explicit default behavior. Use
+`--confirmed-terms /path/to/approved-terms.json` for manual corrections. The file
+must contain exactly `vendor_id`, `amount_cents`, `destination_account`, and an
+ISO `date`. No interactive prompt is shown. `prepare_intent` remains a draft-only
+API for future deliberate approval flows. Repeating confirmation with the same
+terms preserves its original snapshot, and repeating enqueue does not create a
+second queue item.
 
 `STATIC_GUARD` defaults to `off`. With no active rules and the guard off, payment
 uses the vendor's **current** bank account read inside the payment transaction.
