@@ -1,4 +1,5 @@
 import json
+from copy import deepcopy
 
 import pytest
 
@@ -69,3 +70,14 @@ def test_replay_never_modifies_source_database(db):
     replay_suite(db.client, [], sets=("must_catch",))
     assert list(db.vendors.find().sort("_id", 1)) == before
     assert db.payments.count_documents({}) == 0
+
+
+@pytest.mark.integration
+def test_truth_vendor_cannot_choose_the_pipeline_destination_change_target(db):
+    from replay import _run_case
+    case = deepcopy(next(case for case in fixture_cases() if case["case_id"] == "queued_destination_change"))
+    case["true_terms"]["vendor_id"] = "vendor-003"
+    result = _run_case(db, case)
+    payment = db.payments.find_one({"run_id": result["run_id"]})
+    assert payment["vendor_id"] == "vendor-001"
+    assert payment["paid_to"] == "demo-account-after-approval"

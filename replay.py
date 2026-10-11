@@ -56,7 +56,8 @@ def _run_case(db, case):
         db.vendors.replace_one({"_id": vendor["_id"]}, dict(vendor), upsert=True)
         db.fences.replace_one({"_id": f"fence:{vendor['_id']}"},
                               {"_id": f"fence:{vendor['_id']}", "version": 0}, upsert=True)
-    terms = case["true_terms"] or case["cleaned_terms"] or case["verbatim_terms"]
+    # Scenario setup follows extracted candidates; truth is oracle-only data.
+    terms = case["cleaned_terms"] or case["verbatim_terms"]
     vendor_id = terms["vendor_id"] if terms else None
     if case.get("initial_vendor"):
         db.vendors.update_one({"_id": vendor_id}, {"$set": case["initial_vendor"]})
