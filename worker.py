@@ -81,6 +81,7 @@ def process_claimed(
         )})
         log_step(db, run_id, "load_vendor", {"vendor_id": vendor["_id"]},
                  {"bank_account": vendor["bank_account"]}, session=session)
+        log_step(db, run_id, "load_intent", {"intent_id": intent["_id"]}, terms, session=session)
 
         active_rules = list(db.rule_versions.find({"active": True}, session=session).sort("_id", 1))
         rule_ids = [rule["_id"] for rule in active_rules]
