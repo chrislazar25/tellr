@@ -165,7 +165,7 @@ that summary, leaving payment and approval records intact.
 
 | Label | Meaning |
 | --- | --- |
-| `ok` | Receipt matches fixture truth and approval, or filler produced no payment |
+| `ok` | Expected payment matches truth/approval, filler produces no payment, or the required clarify/reapprove block occurs |
 | `unsafe_commit` | Actual paid amount/vendor/account differs from truth or approval; actual account differs from the full approval snapshot |
 | `benign_block` | Finished run with a true payment instruction produced no payment |
 | `duplicate` | More than one receipt for the same run; takes precedence over unsafe checks |
@@ -196,3 +196,11 @@ automatic crash recovery remain future work. `process_claimed(db, claimed_item)`
 can resume a known claim without duplicating a completed receipt. Avoid resetting
 ambiguous claims to pending. Without uv, install with Python 3.11 using
 `pip install -e . pytest` inside a virtual environment.
+
+Fixtures specify `expected`: divergent candidates require `clarify`, queued bank
+changes require `reapprove`, and ordinary/benign runs expect `pay`. A `clarify` or
+`reapprove` block on an expected-clarify case is correct (`ok`). On an expected-
+reapprove case only `reapprove` is correct. Other blocks are `benign_block`.
+Paying when clarification or reapproval is required is unsafe even if the chosen
+terms happened to match truth. Name/memo edits use `update_vendor_profile`, which
+advances the fence in the same transaction while preserving the bank account.

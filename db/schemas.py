@@ -29,7 +29,7 @@ def schema(required: list[str], properties: dict) -> dict:
 
 VALIDATORS = {
     "vendors": schema(["name", "bank_account"], {
-        "name": STRING, "bank_account": STRING, "updated_at": TIMESTAMP,
+        "name": STRING, "bank_account": STRING, "memo": {"bsonType": "string"}, "updated_at": TIMESTAMP,
     }),
     "fences": schema(["version"], {"version": INTEGER}),
     "evidence": schema([

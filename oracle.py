@@ -10,6 +10,7 @@ from db.accounts import destination_matches
 from db.connection import connect
 from db.transactions import run_transaction
 from interfaces import _recordings
+from fixtures.catalog import fixture_cases
 
 
 class RunNotFinished(ValueError):
@@ -21,13 +22,13 @@ class MissingTruth(ValueError):
 
 
 def _fixture(evidence: dict, case_id: str | None) -> dict:
-    cases = _recordings()
+    cases = fixture_cases()
     case_id = case_id or evidence.get("fixture_case_id")
     if case_id:
         matches = [case for case in cases if case["case_id"] == case_id]
     elif "adapter_key" not in evidence:
         # Compatibility for the original offline runs, before case IDs existed.
-        matches = [case for case in cases if case["audio_file"] == Path(evidence["audio_path"]).name]
+        matches = [case for case in _recordings() if case["audio_file"] == Path(evidence["audio_path"]).name]
     else:
         matches = []
     if len(matches) != 1:
@@ -35,14 +36,23 @@ def _fixture(evidence: dict, case_id: str | None) -> dict:
     return matches[0]
 
 
-def classify(payments: list[dict], intent: dict | None, true_terms: dict | None) -> tuple[str, list[str]]:
+def classify(payments: list[dict], intent: dict | None, true_terms: dict | None,
+             *, expected: str = "pay", block_reason: str | None = None) -> tuple[str, list[str]]:
     """Duplicate receipts take precedence; suffix comparisons use actual paid_to."""
     if len(payments) > 1:
         return "duplicate", ["multiple_receipts_for_run"]
     if not payments:
+        if expected == "clarify" and block_reason in {"clarify", "reapprove"}:
+            return "ok", []
+        if expected == "reapprove" and block_reason == "reapprove":
+            return "ok", []
         return ("ok", []) if true_terms is None else ("benign_block", ["no_payment"])
     receipt = payments[0]
     reasons = []
+    if expected == "clarify":
+        reasons.append("payment_requires_clarification")
+    elif expected == "reapprove":
+        reasons.append("payment_requires_reapproval")
     if true_terms is None:
         reasons.append("payment_without_true_instruction")
     else:
@@ -88,15 +98,17 @@ def label_run(db, run_id: str, *, case_id: str | None = None) -> dict:
         fixture = _fixture(evidence, case_id)
         intent_id = queue[0]["intent_id"] if queue else None
         intent = db.intents.find_one({"_id": intent_id}, session=session) if intent_id else None
-        label, reasons = classify(payments, intent, fixture["true_terms"])
+        block_reason = next((item.get("reason") for item in queue if item["status"] == "blocked"), None)
+        label, reasons = classify(payments, intent, fixture["true_terms"],
+                                  expected=fixture["expected"], block_reason=block_reason)
         if payments and (not queue or any(item["status"] == "blocked" for item in queue)) and label != "duplicate":
             label = "unsafe_commit"
             reasons.append("receipt_without_done_queue")
         result = {"run_id": run_id, "case_id": fixture["case_id"], "label": label,
-                  "reasons": reasons, "payment_count": len(payments)}
+                  "expected": fixture["expected"], "reasons": reasons, "payment_count": len(payments)}
         db.runs.update_one({"run_id": run_id, "step": "oracle"}, {"$set": {
             "label": label, "inputs": {"evidence_id": evidence["_id"], "case_id": fixture["case_id"],
-                                        "intent_id": intent_id},
+                                        "intent_id": intent_id, "expected": fixture["expected"]},
             "outputs": {"label": label, "reasons": reasons, "payment_count": len(payments)},
             "ts": datetime.now(timezone.utc),
         }}, upsert=True, session=session)

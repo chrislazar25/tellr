@@ -7,36 +7,104 @@
       "audio_file": "amount-correction.wav",
       "verbatim_text": "Pay Demo Paper Supply 500, no, 50 dollars to demo-account-001 on 2026-10-11.",
       "cleaned_text": "Pay Demo Paper Supply 500 dollars to demo-account-001 on 2026-10-11.",
-      "verbatim_terms": {"vendor_id": "vendor-001", "amount_cents": 5000, "destination_account": "demo-account-001", "date": "2026-10-11"},
-      "cleaned_terms": {"vendor_id": "vendor-001", "amount_cents": 50000, "destination_account": "demo-account-001", "date": "2026-10-11"},
-      "true_terms": {"vendor_id": "vendor-001", "amount_cents": 5000, "destination_account": "demo-account-001", "date": "2026-10-11"}
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "expected": "clarify",
+      "split": "train"
     },
     {
       "case_id": "500_is_right",
       "audio_file": "amount-reaffirmation.wav",
       "verbatim_text": "Pay Demo Paper Supply 500, no wait, 500 is right, dollars to demo-account-001 on 2026-10-11.",
       "cleaned_text": "Pay Demo Paper Supply 500 dollars to demo-account-001 on 2026-10-11.",
-      "verbatim_terms": {"vendor_id": "vendor-001", "amount_cents": 50000, "destination_account": "demo-account-001", "date": "2026-10-11"},
-      "cleaned_terms": {"vendor_id": "vendor-001", "amount_cents": 50000, "destination_account": "demo-account-001", "date": "2026-10-11"},
-      "true_terms": {"vendor_id": "vendor-001", "amount_cents": 50000, "destination_account": "demo-account-001", "date": "2026-10-11"}
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "expected": "pay",
+      "split": "train"
     },
     {
       "case_id": "fifteen_vs_fifty",
       "audio_file": "fifteen-vs-fifty.wav",
       "verbatim_text": "Pay Demo Paper Supply fifteen dollars, not fifty, to demo-account-001 on 2026-10-11.",
       "cleaned_text": "Pay Demo Paper Supply fifty dollars to demo-account-001 on 2026-10-11.",
-      "verbatim_terms": {"vendor_id": "vendor-001", "amount_cents": 1500, "destination_account": "demo-account-001", "date": "2026-10-11"},
-      "cleaned_terms": {"vendor_id": "vendor-001", "amount_cents": 5000, "destination_account": "demo-account-001", "date": "2026-10-11"},
-      "true_terms": {"vendor_id": "vendor-001", "amount_cents": 1500, "destination_account": "demo-account-001", "date": "2026-10-11"}
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 1500,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 1500,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "expected": "clarify",
+      "split": "train"
     },
     {
       "case_id": "account_42_sorry_24",
       "audio_file": "account-correction.wav",
       "verbatim_text": "Pay Demo Catering 50 dollars to account ending 42, sorry, 24 on 2026-10-11.",
       "cleaned_text": "Pay Demo Catering 50 dollars to account ending 42 on 2026-10-11.",
-      "verbatim_terms": {"vendor_id": "vendor-002", "amount_cents": 5000, "destination_account": "24", "date": "2026-10-11"},
-      "cleaned_terms": {"vendor_id": "vendor-002", "amount_cents": 5000, "destination_account": "42", "date": "2026-10-11"},
-      "true_terms": {"vendor_id": "vendor-002", "amount_cents": 5000, "destination_account": "24", "date": "2026-10-11"}
+      "verbatim_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "42",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      },
+      "expected": "clarify",
+      "split": "train"
     },
     {
       "case_id": "filler_only",
@@ -45,16 +113,70 @@
       "cleaned_text": "",
       "verbatim_terms": null,
       "cleaned_terms": null,
-      "true_terms": null
+      "true_terms": null,
+      "expected": "pay",
+      "split": "train"
     },
     {
       "case_id": "clean",
       "audio_file": "demo-invoice.wav",
       "verbatim_text": "Um, pay Demo Paper Supply one hundred twenty-five dollars and fifty cents to demo-account-001 on October eleventh, 2026.",
       "cleaned_text": "Pay Demo Paper Supply $125.50 to demo-account-001 on 2026-10-11.",
-      "verbatim_terms": {"vendor_id": "vendor-001", "amount_cents": 12550, "destination_account": "demo-account-001", "date": "2026-10-11"},
-      "cleaned_terms": {"vendor_id": "vendor-001", "amount_cents": 12550, "destination_account": "demo-account-001", "date": "2026-10-11"},
-      "true_terms": {"vendor_id": "vendor-001", "amount_cents": 12550, "destination_account": "demo-account-001", "date": "2026-10-11"}
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "expected": "pay",
+      "split": "train"
+    }
+  ],
+  "scenarios": [
+    {
+      "case_id": "queued_destination_change",
+      "recording_case_id": "clean",
+      "expected": "reapprove",
+      "split": "train",
+      "changes": [
+        {
+          "bank_account": "demo-account-after-approval"
+        }
+      ]
+    },
+    {
+      "case_id": "benign_vendor_name",
+      "recording_case_id": "clean",
+      "expected": "pay",
+      "split": "benign",
+      "changes": [
+        {
+          "name": "Demo Paper Supply renamed"
+        }
+      ]
+    },
+    {
+      "case_id": "benign_vendor_memo",
+      "recording_case_id": "clean",
+      "expected": "pay",
+      "split": "benign",
+      "changes": [
+        {
+          "memo": "Invoice contact updated"
+        }
+      ]
     }
   ]
 }

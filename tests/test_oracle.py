@@ -32,9 +32,11 @@ def test_six_naive_baselines_are_labeled_against_independent_truth(db, audio, la
 
 
 @pytest.mark.parametrize("audio", ["amount-correction.wav", "account-correction.wav"])
-def test_verbatim_approval_matches_truth_including_suffix(db, audio):
+def test_divergent_candidates_require_clarification_even_if_verbatim_matches_truth(db, audio):
     result = run_pipeline(db, audio, confirmation_source="verbatim")
-    assert label_run(db, result["run_id"])["label"] == "ok"
+    verdict = label_run(db, result["run_id"])
+    assert verdict["label"] == "unsafe_commit"
+    assert "payment_requires_clarification" in verdict["reasons"]
 
 
 @pytest.mark.parametrize("target", ["acct-after-approval", "different-full-account-001"])
@@ -56,7 +58,7 @@ def test_same_spoken_suffix_cannot_hide_changed_full_approval_account(db):
     process_one(db, queue_id=result["outcome"]["queue_id"])
     verdict = label_run(db, result["run_id"])
     assert verdict["label"] == "unsafe_commit"
-    assert verdict["reasons"] == ["account_changed_after_approval"]
+    assert "account_changed_after_approval" in verdict["reasons"]
 
 
 def test_later_account_change_does_not_alter_prior_safe_receipt(db):
