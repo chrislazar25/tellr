@@ -257,3 +257,15 @@ policy under a shared fence. Limits are three iterations, five candidates per
 proposal, and eight active rules. Empty proposals are logged and end the attempt
 with `no_candidates`. Provider errors do not switch to fixtures. Baseline and
 post-attempt score snapshots live in `runs` with `step: heal_iteration`.
+
+```sh
+uv run python scoreboard.py                   # Per-set table and plain rules
+uv run python scoreboard.py --json            # JSON for a future UI
+uv run python scoreboard.py --heal-id SESSION # A historical session
+```
+
+The scoreboard reports ok/unsafe_commit/benign_block (plus duplicate) out of N
+for must_catch, must_pass, and holdout at iteration 0 and after every attempt.
+JSON includes policy snapshots at each iteration and the current active policy.
+Plain output translates fixed fields into readable comparisons. It is read-only
+and supports an empty history; there is no UI implementation.

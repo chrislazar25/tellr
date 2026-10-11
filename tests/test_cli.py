@@ -69,3 +69,9 @@ def test_oracle_cli_labels_finished_run(db):
     batch = command(db, "oracle.py")
     assert batch["labels"] == [verdict]
     assert batch["skipped"] == []
+
+
+@pytest.mark.integration
+def test_scoreboard_cli_json_is_ready_for_ui(db):
+    data = command(db, "scoreboard.py", "--json")
+    assert data == {"heal_id": None, "status": "no_history", "iterations": [], "active_rules": []}

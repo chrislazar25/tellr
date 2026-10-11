@@ -167,6 +167,8 @@ def run_heal(db, proposer, *, max_iterations=MAX_ITERATIONS, replayer=replay_sui
         _score(db, heal_id, iteration, before, current, status, len(proposals))
         if status in {"healed", "active_rule_limit"}:
             break
+    if iteration == 0:
+        _score(db, heal_id, 0, before, current, status)
     return {"heal_id": heal_id, "iterations": iteration, "status": status,
             "counts": before["counts"], "sets": before["sets"], "active_rule_ids": [rule["_id"] for rule in current]}
 
