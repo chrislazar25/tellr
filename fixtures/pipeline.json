@@ -52,7 +52,7 @@
         "date": "2026-10-11"
       },
       "expected": "pay",
-      "eval_set": "must_catch"
+      "eval_set": "must_pass"
     },
     {
       "case_id": "fifteen_vs_fifty",
@@ -115,7 +115,7 @@
       "cleaned_terms": null,
       "true_terms": null,
       "expected": "pay",
-      "eval_set": "must_catch"
+      "eval_set": "must_pass"
     },
     {
       "case_id": "clean",
@@ -141,7 +141,7 @@
         "date": "2026-10-11"
       },
       "expected": "pay",
-      "eval_set": "must_catch"
+      "eval_set": "must_pass"
     }
   ],
   "scenarios": [

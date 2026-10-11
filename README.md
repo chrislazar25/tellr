@@ -219,7 +219,7 @@ Example rule:
 `replay.replay_suite` owns a fresh scratch database, seeds fictional vendors, runs
 the real fixture pipeline/worker/oracle, and drops only that database afterward.
 It explicitly disables `STATIC_GUARD` so gates measure candidate rules. There are
-7 must_catch, 2 must_pass, and 5 holdout scenarios. Holdouts use vendor-003, unseen amounts,
+4 must_catch, 5 must_pass, and 5 holdout scenarios. Holdouts use vendor-003, unseen amounts,
 account ending 13 corrected to 31, two consecutive bank changes, and a benign memo
 edit. `training_failures` returns only train failures with reasons and fixed-field
 diffs. The gate requires fewer must_catch failures, must_pass benign_block = 0, no

@@ -23,6 +23,15 @@ def test_holdout_scenarios_cover_new_vendor_amounts_suffix_and_second_bank_chang
     assert any(len(case.get("changes", [])) == 2 for case in cases)
 
 
+def test_must_catch_contains_failures_and_must_pass_contains_benign_cases():
+    cases = fixture_cases()
+    catch = [case for case in cases if case["eval_set"] == "must_catch"]
+    passed = [case for case in cases if case["eval_set"] == "must_pass"]
+    assert len(catch) == 4 and len(passed) == 5
+    assert all(case["expected"] in {"clarify", "reapprove"} for case in catch)
+    assert all(case["expected"] == "pay" for case in passed)
+
+
 @pytest.mark.integration
 def test_replay_and_gate_fix_train_without_blocking_benign_twins_or_regressing_holdouts(mongo_client, monkeypatch):
     monkeypatch.setenv("STATIC_GUARD", "on")  # Replay owns baseline guard behavior.
