@@ -1,0 +1,130 @@
+"""Replay isolated fixture suites through the real worker and oracle."""
+
+import uuid
+from collections import Counter
+from copy import deepcopy
+
+from pymongo.write_concern import WriteConcern
+
+from db.seed import SAMPLE_VENDORS, seed
+from db.vendors import update_vendor_bank_account, update_vendor_profile
+from fixtures.catalog import fixture_cases
+from interfaces import Adapters, DEFAULT_ADAPTERS, validate_terms
+from oracle import label_run
+from pipeline import run_pipeline
+from rules import TERM_FIELDS, field_value, validate_rule
+from worker import process_one
+
+LABELS = ("unsafe_commit", "benign_block", "ok", "duplicate")
+SPLITS = ("train", "benign", "holdout")
+
+
+def summarize(rows):
+    counts = Counter(row["label"] for row in rows)
+    return {"N": len(rows), **{label: counts[label] for label in LABELS}}
+
+
+def field_diffs(context):
+    pairs = [(f"evidence.verbatim_terms.{field}", f"evidence.cleaned_terms.{field}") for field in TERM_FIELDS]
+    pairs += [(f"intent.confirmed_terms.{field}", f"evidence.verbatim_terms.{field}") for field in TERM_FIELDS]
+    pairs += [("intent.approved_bank_account", "vendor.bank_account")]
+    diffs = []
+    for left, right in pairs:
+        values = [field_value(context, name) for name in (left, right)]
+        values = [value if isinstance(value, (str, int)) else None for value in values]
+        if values[0] != values[1]:
+            diffs.append({"left": left, "right": right, "left_value": values[0], "right_value": values[1]})
+    return diffs
+
+
+def _adapters(case):
+    def transcribe(path, *, no_verbatim):
+        return case["cleaned_text" if no_verbatim else "verbatim_text"]
+    def extract(text):
+        for mode in ("verbatim", "cleaned"):
+            if text == case[f"{mode}_text"]:
+                terms = case[f"{mode}_terms"]
+                return None if terms is None else validate_terms(terms)
+        raise ValueError("Transcript is outside the replay scenario")
+    return Adapters(transcribe, extract, DEFAULT_ADAPTERS.readback)
+
+
+def _run_case(db, case):
+    # Only this private scratch database is reset. Stored receipts and approval
+    # snapshots remain sufficient for historical oracle checks across cases.
+    for vendor in SAMPLE_VENDORS:
+        db.vendors.replace_one({"_id": vendor["_id"]}, dict(vendor), upsert=True)
+        db.fences.replace_one({"_id": f"fence:{vendor['_id']}"},
+                              {"_id": f"fence:{vendor['_id']}", "version": 0}, upsert=True)
+    terms = case["true_terms"] or case["cleaned_terms"] or case["verbatim_terms"]
+    vendor_id = terms["vendor_id"] if terms else None
+    if case.get("initial_vendor"):
+        db.vendors.update_one({"_id": vendor_id}, {"$set": case["initial_vendor"]})
+    result = run_pipeline(db, case["audio_file"], hold=True, adapters=_adapters(case))
+    db.evidence.update_one({"_id": result["evidence_id"]}, {"$set": {"fixture_case_id": case["case_id"]}})
+    for change in case.get("changes", []):
+        if "bank_account" in change:
+            update_vendor_bank_account(db, vendor_id, change["bank_account"], run_id=result["run_id"])
+        else:
+            update_vendor_profile(db, vendor_id, **change, run_id=result["run_id"])
+    context = {
+        "evidence": db.evidence.find_one({"_id": result["evidence_id"]}),
+        "intent": db.intents.find_one({"_id": result["intent_id"]}) if result["intent_id"] else {},
+        "vendor": db.vendors.find_one({"_id": vendor_id}) if vendor_id else {},
+    }
+    outcome = process_one(db, queue_id=result["outcome"]["queue_id"], static_guard=False) if result["status"] == "pending" else None
+    verdict = label_run(db, result["run_id"])
+    return {**verdict, "split": case["split"], "block_reason": outcome.get("reason") if outcome else None,
+            "field_diffs": field_diffs(context)}
+
+
+def replay_suite(client, current_rules: list[dict], *, candidate: dict | None = None,
+                 splits=SPLITS) -> dict:
+    """Own and drop a fresh scratch database; never copy application data into it."""
+    documents = deepcopy(current_rules) + ([deepcopy(candidate)] if candidate is not None else [])
+    for document in documents:
+        document["rule"] = validate_rule(document["rule"])
+    if any(split not in SPLITS for split in splits):
+        raise ValueError("Unknown replay split")
+    name = "mongodb_hackathon_replay_" + uuid.uuid4().hex
+    db = client[name].with_options(write_concern=WriteConcern("majority"))
+    try:
+        seed(db)
+        if documents:
+            db.rule_versions.insert_many([
+                {"_id": document["_id"], "version": document["version"], "active": True, "rule": document["rule"]}
+                for document in documents
+            ])
+        rows = [_run_case(db, case) for case in fixture_cases() if case["split"] in splits]
+        return {"counts": summarize(rows),
+                "splits": {split: summarize([row for row in rows if row["split"] == split]) for split in splits},
+                "cases": rows}
+    finally:
+        client.drop_database(name)
+
+
+def training_failures(result: dict) -> list[dict]:
+    """The sole scenario-data boundary into the proposer excludes benign/holdout."""
+    return [{key: deepcopy(row[key]) for key in ("case_id", "label", "expected", "reasons", "block_reason", "field_diffs")}
+            for row in result["cases"] if row["split"] == "train" and row["label"] != "ok"]
+
+
+def gate_result(before: dict, after: dict) -> dict:
+    reasons = []
+    if after["splits"]["train"]["unsafe_commit"] >= before["splits"]["train"]["unsafe_commit"]:
+        reasons.append("train_unsafe_not_decreased")
+    for split in SPLITS:
+        if after["splits"][split]["benign_block"] > before["splits"][split]["benign_block"]:
+            reasons.append(f"{split}_benign_blocks_increased")
+        if after["splits"][split]["duplicate"] > before["splits"][split]["duplicate"]:
+            reasons.append(f"{split}_duplicates_increased")
+    old_rows = {row["case_id"]: row for row in before["cases"]}
+    for row in after["cases"]:
+        old = old_rows[row["case_id"]]
+        if row["split"] == "holdout" and old["label"] == "ok" and row["label"] != "ok":
+            reasons.append("holdout_case_regressed")
+    for label in ("unsafe_commit", "benign_block", "duplicate"):
+        if after["splits"]["holdout"][label] > before["splits"]["holdout"][label]:
+            reasons.append("holdout_worse")
+    return {"accepted": not reasons, "reasons": sorted(set(reasons)),
+            "before": deepcopy(before["splits"]), "after": deepcopy(after["splits"])}

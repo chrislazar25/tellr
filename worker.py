@@ -35,10 +35,11 @@ def claim_one(db: Database, *, queue_id: str | None = None) -> dict | None:
 def process_claimed(
     db: Database, item: dict, *, evaluator: rules.Evaluator | None = None,
     on_retry: RetryObserver | None = None,
+    static_guard: bool | None = None,
 ) -> dict:
     """Also safe to call again with the same claim after an uncertain result."""
     evaluator = evaluator or rules.evaluate
-    guard_enabled = config.static_guard()
+    guard_enabled = config.static_guard() if static_guard is None else static_guard
     run_id, queue_id = item["run_id"], item["_id"]
 
     def process(session):
@@ -147,9 +148,11 @@ def process_claimed(
 def process_one(
     db: Database, *, queue_id: str | None = None,
     evaluator: rules.Evaluator | None = None, on_retry: RetryObserver | None = None,
+    static_guard: bool | None = None,
 ) -> dict | None:
     item = claim_one(db, queue_id=queue_id)
-    return None if item is None else process_claimed(db, item, evaluator=evaluator, on_retry=on_retry)
+    return None if item is None else process_claimed(db, item, evaluator=evaluator, on_retry=on_retry,
+                                                  static_guard=static_guard)
 
 
 def main() -> int:

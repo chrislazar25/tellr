@@ -215,3 +215,12 @@ Example rule:
 ```json
 {"clauses":[{"left":"intent.approved_bank_account","cmp":"eq","right":"vendor.bank_account"}],"on_fail":"reapprove"}
 ```
+
+`replay.replay_suite` owns a fresh scratch database, seeds fictional vendors, runs
+the real fixture pipeline/worker/oracle, and drops only that database afterward.
+It explicitly disables `STATIC_GUARD` so gates measure candidate rules. There are
+7 train, 2 benign, and 5 holdout scenarios. Holdouts use vendor-003, unseen amounts,
+account ending 13 corrected to 31, two consecutive bank changes, and a benign memo
+edit. `training_failures` returns only train failures with reasons and fixed-field
+diffs. The gate requires fewer train unsafe commits, no increased benign blocks
+or duplicates in any split, and no holdout count/case regression.

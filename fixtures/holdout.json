@@ -1,0 +1,151 @@
+{
+  "description": "Gate-only scenarios. Never pass these cases or their failures to the proposer.",
+  "recordings": [
+    {
+      "case_id": "holdout_different_vendor",
+      "audio_file": "holdout-vendor.wav",
+      "verbatim_text": "Pay Demo Equipment 87 dollars and 65 cents to demo-account-003 on 2026-10-11.",
+      "cleaned_text": "Pay Demo Equipment $87.65 to demo-account-003 on 2026-10-11.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 8765,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 8765,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 8765,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      },
+      "expected": "pay",
+      "split": "holdout"
+    },
+    {
+      "case_id": "holdout_different_amounts",
+      "audio_file": "holdout-amount.wav",
+      "verbatim_text": "Pay Demo Catering 800, no, 80 dollars to account ending 24 on 2026-10-11.",
+      "cleaned_text": "Pay Demo Catering 800 dollars to account ending 24 on 2026-10-11.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 8000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 80000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 8000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      },
+      "expected": "clarify",
+      "split": "holdout"
+    },
+    {
+      "case_id": "holdout_account_13_sorry_31",
+      "audio_file": "holdout-account.wav",
+      "verbatim_text": "Pay Demo Equipment 73 dollars and 10 cents to account ending 13, sorry, 31 on 2026-10-11.",
+      "cleaned_text": "Pay Demo Equipment 73 dollars and 10 cents to account ending 13 on 2026-10-11.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 7310,
+        "destination_account": "31",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 7310,
+        "destination_account": "13",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 7310,
+        "destination_account": "31",
+        "date": "2026-10-11"
+      },
+      "expected": "clarify",
+      "initial_vendor": {
+        "bank_account": "acct-0031"
+      },
+      "split": "holdout"
+    },
+    {
+      "case_id": "holdout_second_destination_change",
+      "audio_file": "holdout-destination.wav",
+      "verbatim_text": "Pay Demo Equipment 234 dollars and 56 cents to demo-account-003 on 2026-10-11.",
+      "cleaned_text": "Pay Demo Equipment $234.56 to demo-account-003 on 2026-10-11.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 23456,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 23456,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 23456,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      },
+      "expected": "reapprove",
+      "changes": [
+        {
+          "bank_account": "acct-003-first-change"
+        },
+        {
+          "bank_account": "acct-003-second-change"
+        }
+      ],
+      "split": "holdout"
+    },
+    {
+      "case_id": "holdout_benign_memo",
+      "audio_file": "holdout-memo.wav",
+      "verbatim_text": "Pay Demo Equipment 87 dollars and 65 cents to demo-account-003 on 2026-10-11.",
+      "cleaned_text": "Pay Demo Equipment $87.65 to demo-account-003 on 2026-10-11.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 8765,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 8765,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 8765,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      },
+      "expected": "pay",
+      "changes": [
+        {
+          "memo": "Holdout invoice contact updated"
+        }
+      ],
+      "split": "holdout"
+    }
+  ]
+}
