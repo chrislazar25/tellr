@@ -224,3 +224,12 @@ account ending 13 corrected to 31, two consecutive bank changes, and a benign me
 edit. `training_failures` returns only train failures with reasons and fixed-field
 diffs. The gate requires fewer train unsafe commits, no increased benign blocks
 or duplicates in any split, and no holdout count/case regression.
+
+`proposer.ClaudeProposer` uses Claude `messages.create` with
+`output_config.format = {type: json_schema, schema: ...}` for exactly three rule
+objects. The installed SDK's `transform_schema` prepares the wire schema; local
+gating validates every predicate. Only training failures, current predicate
+bodies, and the vocabulary are serialized. Candidate gate metadata and holdout
+rows are never part of that request. See the [structured output API](https://platform.claude.com/docs/en/build-with-claude/structured-outputs).
+An explicit `FixtureProposer` supplies offline demo proposals, including a blanket
+block that the gate must reject; provider failures never select it automatically.

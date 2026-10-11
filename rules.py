@@ -15,10 +15,11 @@ RULE_SCHEMA = {
     "properties": {
         "clauses": {"type": "array", "minItems": 1, "maxItems": 16, "items": {
             "type": "object", "additionalProperties": False, "required": ["left", "cmp", "right"],
-            "properties": {"left": {"enum": list(VOCABULARY)}, "cmp": {"enum": ["eq", "neq"]},
-                           "right": {"enum": list(VOCABULARY)}},
+            "properties": {"left": {"type": "string", "enum": list(VOCABULARY)},
+                           "cmp": {"type": "string", "enum": ["eq", "neq"]},
+                           "right": {"type": "string", "enum": list(VOCABULARY)}},
         }},
-        "on_fail": {"enum": ["clarify", "reapprove"]},
+        "on_fail": {"type": "string", "enum": ["clarify", "reapprove"]},
     },
 }
 

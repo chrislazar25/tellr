@@ -20,7 +20,7 @@ dependencies = [
 dev = ["pytest>=8,<10"]
 
 [tool.setuptools]
-py-modules = ["config", "interfaces", "live_adapters", "observability", "oracle", "pipeline", "replay", "rules", "worker"]
+py-modules = ["config", "interfaces", "live_adapters", "observability", "oracle", "pipeline", "proposer", "replay", "rules", "worker"]
 packages = ["db", "fixtures", "scripts"]
 
 [tool.setuptools.package-data]
