@@ -79,3 +79,25 @@ Complete reproducible exports: [experiment.json](artifacts/experiment.json) and
 [fixture_stress.json](artifacts/fixture_stress.json), validated against
 [experiment.schema.json](artifacts/experiment.schema.json). Their scoreboards
 include every iteration and set; receipt amounts are integer cents.
+
+## Failure-hunt confirmation finding
+
+The supplied synthetic hunt includes **33 confirmation attempts**, with cached
+Scribe and faster-whisper transcripts and Sonnet classifications for each
+(66 recognizer/classifier outcomes). For Alice's generated “No, don't send it”
+through the phone channel at target SNR 0, Whisper returned **“Thank you very
+much.”** Sonnet labeled that transcript **UNCLEAR**. Scribe returned “So don't
+send it,” classified **DENY**. The linked channel is
+[ch_c9767111e8006440.wav](experiments/failure_hunt/audio/ch_c9767111e8006440.wav).
+
+Across the 33 cached attempts, neither recognizer's Sonnet classification falsely
+returned AFFIRM for a non-affirmative source. Scribe had one UNCLEAR on a true
+affirmation; Whisper classified all nine affirmative sources as AFFIRM. Counts:
+Scribe 8 AFFIRM / 9 DENY / 16 UNCLEAR; Whisper 9 AFFIRM / 7 DENY / 17 UNCLEAR.
+
+This is a cached transcription/classification finding, **not a rule experiment**.
+Those labels were not used to authorize worker payments or train healing rules.
+All confirmation attempts, including generated non-speech inputs, are retained in
+[confirm_scored.json](experiments/failure_hunt/confirm_scored.json) and linked by
+the supplied [manifest](experiments/failure_hunt/manifest.json). Acquisition API
+usage was not recorded; this is synthetic audio from an exploratory search.
