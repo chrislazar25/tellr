@@ -22,7 +22,11 @@ MP3 sources, 213 channel WAVs, 3 generated non-speech WAVs, and 426 transcript
 JSON caches. Existing channel hashes and noise seeds use absolute source paths;
 ffmpeg and NumPy versions can also affect regenerated samples. Keeping exact
 evaluated bytes avoids claiming portable bit-for-bit regeneration. No TTS or
-STT calls are necessary to replay the experiment. `audio_manifest.json` records
+STT calls are necessary to replay the experiment. The supplied `manifest.json`
+links each attempt directly to its source, channel and recognizer caches; replay
+uses these links, never reconstructed absolute paths. Future acquisition hashes
+repo-relative paths and logs filenames explicitly (channel hash version 2).
+`audio_manifest.json` records
 the byte hashes used during integration.
 
 All generation/classification keys go through `keys.py`, which reads ignored

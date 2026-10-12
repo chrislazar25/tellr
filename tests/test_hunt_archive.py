@@ -44,3 +44,22 @@ def test_rescoring_is_cache_only_without_key_access(monkeypatch):
     monkeypatch.setattr(keys, "get", lambda *args: pytest.fail("Cached replay needs no keys"))
     assert score() == json.loads((ROOT / "scored.json").read_text())
     assert confirm_score() == json.loads((ROOT / "confirm_scored.json").read_text())
+
+
+def test_future_channel_identity_is_portable_between_checkouts(monkeypatch, tmp_path):
+    from experiments.failure_hunt import hunt
+    identities = []
+    for name in ["checkout-a", "checkout-b"]:
+        root = tmp_path / name
+        monkeypatch.setattr(hunt, "ROOT", root)
+        identities.append(hunt.channel_identity(root / "experiments/failure_hunt/audio/source.mp3"))
+    assert identities == ["experiments/failure_hunt/audio/source.mp3"] * 2
+    assert hunt.h(identities[0], "phone_snr5") == hunt.h(identities[1], "phone_snr5")
+
+
+def test_supplied_manifest_links_every_cache_without_path_reconstruction():
+    manifest = json.loads((ROOT / "manifest.json").read_text())
+    assert len(manifest["attempts"]) == 213
+    for entry in manifest["attempts"]:
+        for key in ["tts_file", "channel_file", "scribe_cache", "whisper_cache"]:
+            assert (ROOT / entry[key]).is_file()

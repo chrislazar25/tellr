@@ -1,8 +1,10 @@
 """Failure hunt: text -> ElevenLabs TTS -> channel -> STT (Scribe v2 + local Whisper) -> parse -> did it fail?"""
 import hashlib, io, json, os, re, subprocess, sys, time
+from pathlib import Path
 from experiments.failure_hunt import keys
 D = os.path.dirname(os.path.abspath(__file__)); A = f"{D}/audio"; os.makedirs(A, exist_ok=True)
 LOG = f"{D}/attempts.jsonl"
+ROOT = Path(__file__).resolve().parents[2]
 _el = None; _wh = {}
 def el():
     global _el
@@ -10,6 +12,8 @@ def el():
         from elevenlabs.client import ElevenLabs; _el = ElevenLabs(api_key=keys.get("ELEVENLABS_API_KEY"))
     return _el
 def h(*a): return hashlib.sha256(json.dumps(a, sort_keys=True).encode()).hexdigest()[:16]
+def channel_identity(src):
+    return Path(src).resolve().relative_to(ROOT).as_posix()
 
 def tts(text, voice, speed=1.0, model="eleven_flash_v2_5"):
     p = f"{A}/tts_{h(text,voice,speed,model)}.mp3"
@@ -32,7 +36,8 @@ def wav(x, path):
 def channel(src, ch):
     import numpy as np
     """ch: clean | phone | phone_snr10 | phone_snr5 | phone_snr0 | trunc_X (cut X s off end of speech) | phone_trunc_X"""
-    out = f"{A}/ch_{h(src,ch)}.wav"
+    identity = channel_identity(src)
+    out = f"{A}/ch_{h(identity,ch)}.wav"
     if os.path.exists(out): return out
     x = pcm(src)
     if "trunc" in ch:
@@ -45,7 +50,7 @@ def channel(src, ch):
         x = pcm(out+".mu.wav"); os.remove(out+".mu.wav")
         m = re.search(r"snr(\d+)", ch)
         if m:
-            snr = float(m.group(1)); rng = np.random.default_rng(int(h(src,ch)[:8],16))
+            snr = float(m.group(1)); rng = np.random.default_rng(int(h(identity,ch)[:8],16))
             sig = np.sqrt(np.mean(x[np.abs(x)>0.01]**2)) if np.any(np.abs(x)>0.01) else 0.05
             n = rng.standard_normal(len(x)).astype(np.float32); n = np.convolve(n, np.ones(8)/8, "same")  # pinkish
             n *= sig / (10**(snr/20)) / (np.sqrt(np.mean(n**2))+1e-9); x = x + n
@@ -113,7 +118,8 @@ def run(case, text, truth, voice, speed=1.0, ch="clean", recognizers=("whisper_s
         else: w = stt_whisper(p, r.split("_")[1]); tx=w["text"]; extra={k:w[k] for k in ("no_speech_prob","avg_logprob")}
         pr = parse(tx); fail = [k for k in ("amount","acct") if truth.get(k) is not None and pr[k]!=truth[k]]
         res[r] = {"text": tx, **pr, "fail": fail, **extra}
-    rec = {"ts": time.strftime("%H:%M:%S"), "case": case, "text": text, "voice": voice, "speed": speed, "channel": ch, "truth": truth, "results": res}
+    rec = {"ts": time.strftime("%H:%M:%S"), "case": case, "text": text, "voice": voice, "speed": speed, "channel": ch, "truth": truth, "results": res,
+           "tts_file": channel_identity(src), "channel_file": channel_identity(p), "channel_hash_version": 2}
     open(LOG,"a").write(json.dumps(rec)+"\n"); return rec
 
 def gen_noise(kind, secs=6):
@@ -134,5 +140,6 @@ def run_confirm(case, src, truth_affirm, ch="clean"):
         if r == "scribe": tx = stt_scribe(p); extra = {}
         else: w = stt_whisper(p, "small"); tx = w["text"]; extra = {k: w[k] for k in ("no_speech_prob", "avg_logprob")}
         res[r] = {"text": tx, **extra}
-    rec = {"ts": time.strftime("%H:%M:%S"), "case": case, "src": os.path.basename(src), "channel": ch, "truth_affirm": truth_affirm, "results": res, "kind": "confirm"}
+    rec = {"ts": time.strftime("%H:%M:%S"), "case": case, "src": os.path.basename(src), "channel": ch, "truth_affirm": truth_affirm, "results": res, "kind": "confirm",
+           "source_file": channel_identity(src), "channel_file": channel_identity(p), "channel_hash_version": 2}
     open(f"{D}/confirm_attempts.jsonl", "a").write(json.dumps(rec)+"\n"); return rec
