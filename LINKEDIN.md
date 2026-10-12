@@ -1,39 +1,44 @@
 # LinkedIn post draft
 
-I built a payment-approval prototype around one question: when a worker commits,
-does the payment still match what the caller authorized?
+For tellr, I tested whether adding a second speech recognizer makes payment
+approval safer.
 
-First, I tested the transcription hypothesis. I ran six recordings through
-ElevenLabs Scribe’s verbatim and cleaned modes, then extracted payment terms
-independently with Claude Sonnet 4.6. Both modes retained the corrections:
-“500, no, 50,” “fifteen, not fifty,” and “42, sorry, 24.” I observed zero
-money-term divergences in those six clips. This experiment did not reproduce
-cleanup dropping a payment correction.
+I compared cached ElevenLabs Scribe v2 and local faster-whisper small transcripts,
+extracted payment terms with the repo’s Sonnet 4.6 adapter, then replayed policies
+through the real MongoDB worker and oracle on Atlas.
 
-The failure I did measure was downstream: change a vendor’s bank account after
-approval but before payment, and the empty-rules baseline pays the new account.
-A MongoDB transaction fence handles concurrent writes; an approval snapshot is
-also needed to check account identity.
+The corpus is an exploratory failure hunt: 180 selected payment clips generated
+with ElevenLabs stock voices, with simulated phone channels. I kept every attempt.
+Twelve requested an account absent from the vendor file and were marked for
+clarification outside the commit comparison; seven had no complete A instruction.
+Roger and Charlie supplied training cases; Alice was withheld from the proposer.
 
-Claude Opus 5.5 proposed that check. After replay gating, the account-change case
-was blocked for reapproval, while all eight recording-based must-pass cases
-still passed. Two synthetic transcription holdouts remained unsafe; the live
-training data had no transcription failure to teach that rule.
+On the same eligible suite:
 
-In a separate, explicitly synthetic stress suite, live model proposals reduced
-unsafe commits from 7/14 to 0/14 in two iterations, with no benign blocks.
-Holdout scenarios stayed outside the proposal prompt. Every candidate and gate
-decision is recorded.
+- Requiring both recognizers to agree caught 22 of 23 unsafe commits, but blocked
+  42 of 138 correct payments.
+- Checking the spoken account against the vendor file caught the same 22, with
+  zero correct payments blocked.
+- Live Opus 5.5 proposed that account check. Its replay-gated rule reached the
+  same result in one iteration.
 
-These are small evaluations, and “payments” are MongoDB receipts, not transfers.
-The project started at the MongoDB x Cerebral Valley harness hackathon; I’m
-developing it as a portfolio project with saved transcripts, measured results,
-and reproducible replay artifacts.
+One Alice holdout still failed: “fourteen” became $40 in both recognizers. Its
+available rule fields match 12 correct $40 cases, so this rule language cannot
+separate them without false blocks.
+
+A separate confirmation finding was striking: Whisper turned “No, don't send it”
+into “Thank you very much.” Sonnet labeled that UNCLEAR, not authorization. That
+was an observation across the saved confirmation data, not a payment rule test.
+
+These are synthetic voices and selected inputs, not deployment error rates.
+Holdouts participate in gating, and the corpus designers had already seen all
+voices. “Payments” are MongoDB receipts, not transfers. All transcripts, candidate
+decisions, per-set scores and audio remain saved for review.
 
 #MongoDB #AIEvaluation #Python
 
 ---
 
-Fact sources: [RESULTS.md](RESULTS.md), [measured experiment](artifacts/experiment.json),
-[synthetic stress experiment](artifacts/fixture_stress.json). This is an unpublished
-draft. The repository remains private.
+Fact sources: [RESULTS.md](RESULTS.md), [failure-hunt experiment](artifacts/failure_hunt_experiment.json).
+Generated audio: [ElevenLabs](https://elevenlabs.io), stock Roger, Charlie and Alice.
+This is an unpublished draft; [tellr](https://github.com/chrislazar25/tellr) remains private.
