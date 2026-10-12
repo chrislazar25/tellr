@@ -4,6 +4,7 @@ import hashlib
 import json
 from io import BytesIO
 from pathlib import Path
+from datetime import date
 
 import config
 from interfaces import Adapters, DEFAULT_ADAPTERS, EXTRACT_TERMS_TOOL, validate_terms
@@ -34,11 +35,15 @@ class ScribeTranscriber:
 
 
 class ClaudeExtractor:
-    def __init__(self, client, *, model: str, vendors: list[dict]):
+    def __init__(self, client, *, model: str, vendors: list[dict], reference_date: str | None = None):
         from anthropic import transform_schema
 
         self.client, self.model = client, model
         self.system = EXTRACTION_PROMPT + "\nVendor catalog: " + json.dumps(vendors, sort_keys=True)
+        if reference_date is not None:
+            if date.fromisoformat(reference_date).isoformat() != reference_date:
+                raise ValueError("Reference date must be YYYY-MM-DD")
+            self.system += f"\nRecording reference date: {reference_date}. Resolve 'today' to this date."
         self.tool = {**EXTRACT_TERMS_TOOL,
                      "input_schema": transform_schema(EXTRACT_TERMS_TOOL["input_schema"])}
 
@@ -63,7 +68,8 @@ class ClaudeExtractor:
         return validate_terms(payload["terms"])
 
 
-def live_adapters(vendors: list[dict], *, scribe_client=None, claude_client=None) -> Adapters:
+def live_adapters(vendors: list[dict], *, scribe_client=None, claude_client=None,
+                  reference_date: str | None = None) -> Adapters:
     """Inject clients for offline SDK contract tests; secrets never enter metadata."""
     from anthropic import Anthropic
     from elevenlabs.client import ElevenLabs
@@ -80,12 +86,13 @@ def live_adapters(vendors: list[dict], *, scribe_client=None, claude_client=None
         claude_client = Anthropic(api_key=key)
     # Sonnet 5.5 rejects forced tool selection; 4.6 supports this extraction flow.
     model = config.value("CLAUDE_MODEL", "claude-sonnet-4-6")
+    reference_date = reference_date or config.value("RECORDING_REFERENCE_DATE") or None
     # Include prompt/schema/catalog/model versions so changed extraction semantics
     # cannot reuse stale terms. API keys and source paths are deliberately absent.
     fingerprint = hashlib.sha256(json.dumps({
         "scribe": "scribe_v2", "model": model, "prompt": EXTRACTION_PROMPT,
-        "tool": EXTRACT_TERMS_TOOL, "vendors": vendors, "version": 1,
+        "tool": EXTRACT_TERMS_TOOL, "vendors": vendors, "reference_date": reference_date, "version": 1,
     }, sort_keys=True).encode()).hexdigest()
     return Adapters(ScribeTranscriber(scribe_client),
-                    ClaudeExtractor(claude_client, model=model, vendors=vendors),
+                    ClaudeExtractor(claude_client, model=model, vendors=vendors, reference_date=reference_date),
                     DEFAULT_ADAPTERS.readback, cache_key=fingerprint, transcription_key="scribe_v2:v1")

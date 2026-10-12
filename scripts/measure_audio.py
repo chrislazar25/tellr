@@ -61,11 +61,12 @@ class MeasuredCall:
         return response
 
 
-def measure(db, audio_dir, output, *, adapters=None, events=None):
+def measure(db, audio_dir, output, *, adapters=None, events=None, reference_date="2026-10-11"):
     events = events if events is not None else []
     started = time.perf_counter()
     result = {"schema_version": 1, "experiment_id": str(uuid.uuid4()), "started_at": now(),
-              "source": "live_api", "approval_performed": False, "clips": [], "api_calls": events,
+              "source": "live_api", "reference_date": reference_date,
+              "approval_performed": False, "clips": [], "api_calls": events,
               "cost": {"billed_usd": None, "reason": "Provider responses do not include invoiced cost; no estimate substituted."}}
     clients = []
     try:
@@ -80,7 +81,7 @@ def measure(db, audio_dir, output, *, adapters=None, events=None):
                 clients[1].messages.create, events, "anthropic", "extraction")))
             vendors = list(db.vendors.find({}, {"_id": 1, "name": 1, "bank_account": 1}).sort("_id", 1))
             result["vendor_catalog"] = vendors
-            adapters = live_adapters(vendors, scribe_client=scribe, claude_client=claude)
+            adapters = live_adapters(vendors, scribe_client=scribe, claude_client=claude, reference_date=reference_date)
         for case in _recordings():
             path = Path(audio_dir) / case["audio_file"]
             clip_start, run_id = time.perf_counter(), str(uuid.uuid4())
@@ -93,7 +94,9 @@ def measure(db, audio_dir, output, *, adapters=None, events=None):
                 "audio_sha256": hashlib.sha256(path.read_bytes()).hexdigest(), "duration_seconds": duration,
                 "run_id": run_id, "verbatim": texts["verbatim"], "cleaned": texts["cleaned"],
                 "verbatim_terms": terms["verbatim"], "cleaned_terms": terms["cleaned"],
-                "true_terms": case["true_terms"], "truth_source": "existing hand-labeled fixture; independent of API output",
+                "true_terms": ({**case["true_terms"], "destination_account": "24" if case["case_id"] == "account_42_sorry_24" else "001"}
+                               if case["true_terms"] else None),
+                "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
                 "money_terms_diverged": money_diverged(terms["verbatim"], terms["cleaned"]),
                 "wall_seconds": round(time.perf_counter() - clip_start, 6),
                 "cache": [{"step": row["step"], "mode": row["inputs"]["mode"],
@@ -118,6 +121,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--audio-dir", type=Path, default=Path("audio"))
     parser.add_argument("--output", type=Path, default=Path("artifacts/live_clips.json"))
+    parser.add_argument("--reference-date", default="2026-10-11", help="Recording date for relative dates such as today")
     args = parser.parse_args(argv)
     db = None
     try:
@@ -125,7 +129,7 @@ def main(argv=None):
             raise ValueError("This measurement command requires ADAPTERS=live")
         db = connect()
         seed(db)
-        measure(db, args.audio_dir, args.output)
+        measure(db, args.audio_dir, args.output, reference_date=args.reference_date)
         return 0
     except Exception as error:
         config.print_error(error)

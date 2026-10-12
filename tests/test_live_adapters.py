@@ -7,6 +7,26 @@ from pymongo.errors import OperationFailure
 import interfaces
 from interfaces import Adapters, EXTRACT_TERMS_TOOL
 from live_adapters import ClaudeExtractor, ScribeTranscriber, live_adapters
+
+
+def test_reference_date_resolves_today_in_prompt_without_inventing_current_date():
+    calls = []
+    def create(**request):
+        calls.append(request)
+        return SimpleNamespace(stop_reason="tool_use", content=[SimpleNamespace(type="tool_use", name="extract_payment_terms", input={"terms": None})])
+    client = SimpleNamespace(messages=SimpleNamespace(create=create))
+    ClaudeExtractor(client, model="test", vendors=[], reference_date="2026-10-11")("pay today")
+    assert "Recording reference date: 2026-10-11" in calls[0]["system"]
+    with pytest.raises(ValueError):
+        ClaudeExtractor(client, model="test", vendors=[], reference_date="2026-02-30")
+
+
+def test_reference_date_invalidates_terms_cache_but_preserves_audio_cache():
+    clients = {"scribe_client": SimpleNamespace(), "claude_client": SimpleNamespace()}
+    first = live_adapters([], reference_date="2026-10-11", **clients)
+    second = live_adapters([], reference_date="2026-10-12", **clients)
+    assert first.cache_key != second.cache_key
+    assert first.transcription_key == second.transcription_key
 from pipeline import prepare_intent
 
 TERMS = {"vendor_id": "vendor-001", "amount_cents": 5000,
