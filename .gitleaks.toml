@@ -1,0 +1,13 @@
+# Retain every default detector. This exemption is limited to a documented
+# SHA-256 cache fingerprint field, never an API key field or an entire file.
+# Configuration syntax: https://github.com/gitleaks/gitleaks/blob/v8.30.1/README.md
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Non-secret SHA-256 adapter cache fingerprints in experiment exports"
+targetRules = ["generic-api-key"]
+condition = "AND"
+paths = ['''^artifacts/(live_clips|experiment)\.json$''']
+regexTarget = "line"
+regexes = ['''^\s*"adapter_key": "[0-9a-f]{64}",?\s*$''']
