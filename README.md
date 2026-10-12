@@ -1,14 +1,78 @@
 # tellr
 
-Generated failure-hunt audio is attributed to [ElevenLabs](https://elevenlabs.io),
-using `eleven_flash_v2_5` with stock Roger, Charlie and Alice voices. These are
-synthetic utterances with simulated channels, separate from the six supplied
-recordings below. The full archive and replay methods are documented in
-[experiments/failure_hunt](experiments/failure_hunt/README.md).
-
 A caller can correct an amount mid-sentence, approve a payment, and then have the vendor’s bank account change before the worker commits. What commits must still match what the caller authorized. This Python 3.11 prototype stores both transcript candidates, an immutable approval snapshot, and an actual payment receipt, then evaluates commit-time rules inside a fenced MongoDB transaction. An oracle checks the result against independently labeled intent; a model proposes rule changes that must pass replay gates before activation. Payments here are database receipts, not money transfers. The project started at the MongoDB x Cerebral Valley harness hackathon and is now a portfolio experiment.
 
-## What was actually observed
+## Failure hunt: measured policy comparisons
+
+The current hunt uses **180 synthetic payment clips plus 33 confirmation clips**:
+ElevenLabs stock voices Roger, Charlie and Alice, two speech speeds, and clean
+or simulated phone channels. Generated audio is attributed to
+[ElevenLabs](https://elevenlabs.io), using `eleven_flash_v2_5`. Cached Scribe v2
+(recognizer A), local faster-whisper small (B), and Sonnet 4.6 terms are frozen
+inputs. The comparison ran the real worker/oracle and live Opus 5.5 proposer on
+Atlas; it made no new TTS, STT or extraction requests.
+
+Twelve spoken account-13 requests are absent from the vendor file and are
+explicitly excluded, expected=clarify. All 180 attempts remain in the export.
+The eligible 168 cases comprise **must_catch 12**, **must_pass 100**, and
+**holdout 56**. Roger/Charlie supply training and benign cases; Alice alone is
+held out from the proposer. Seven missing-A instructions stay as intake
+clarification outcomes; B never supplies their approval. All policies use the
+same suites and approve from A.
+
+| Policy | Unsafe caught | Correct payments blocked | Unsafe remaining |
+|---|---:|---:|---:|
+| Empty rules | 0/23 | 0/138 | 23 |
+| A/B amount + account agreement | 22/23 | 42/138 | 1 |
+| Spoken account on file | 22/23 | 0/138 | 1 |
+| Live Opus healing | 22/23 | 0/138 | 1 |
+
+The agreement comparator fails the replay gate because it blocks correct
+payments. The account rule passes. Opus proposed two account-check candidates
+in one iteration; both passed, and the shorter activated. It checks that A's
+spoken destination matches the vendor account, otherwise requesting clarification.
+The other candidate stays accepted/inactive; no rejection was invented.
+
+The remaining Alice holdout says **fourteen**, but both recognizers/extractions
+produce **$40**. Its permitted rule fields equal those of 12 correct $40 cases.
+This rule language cannot separate them without false blocks. `healed` means
+training failures are gone, not that holdouts are all safe.
+
+These inputs were selected by an iterative search using stock TTS voices and
+simulated channels. The split withholds a voice, not phrases; designers already
+saw all voices, and holdouts participate in gating. The counts are not deployment
+error rates. **All 705 supplied source/channel/cache files are retained**
+(30,974,242 bytes), linked by the verified manifest. Original channels used
+absolute-path noise seeds; future hashes use repo-relative paths. Keeping exact
+bytes avoids claiming portable reconstruction of the original experiment.
+
+[RESULTS.md](RESULTS.md) has per-set scores, candidate decisions, measured timing
+and the separate confirmation finding: Whisper turned a refusal into “Thank you
+very much,” which Sonnet labeled UNCLEAR. Confirmation labels did not enter the
+payment rule experiment. [failure_hunt_experiment.json](artifacts/failure_hunt_experiment.json)
+contains every supplied attempt and comparator outcome, including exclusions.
+
+Replay or inspect from the repository root:
+
+```sh
+# Cached classification only: no API key or speech model needed.
+uv run python -m experiments.failure_hunt.rescore
+uv run python -m experiments.failure_hunt.confirm_score
+# Real Atlas transactions and live Opus proposals; reads ignored env files.
+uv run python -m experiments.failure_hunt.compare
+# Saved results only: no MongoDB or API access.
+uv run python scoreboard.py --artifact artifacts/failure_hunt_experiment.json
+uv run python scoreboard.py --artifact artifacts/failure_hunt_experiment.json --json
+```
+
+Hunt API keys come only through `experiments/failure_hunt/keys.py`, from ignored
+`.env`/`.env.secrets`. Compare seeds Atlas and owns a fresh audit database; each
+scratch replay is cleaned up. Pass `--output` to preserve an additional run.
+Details, provenance and optional acquisition commands are in
+[experiments/failure_hunt/README.md](experiments/failure_hunt/README.md).
+
+## Earlier six-recording experiment
+
 
 Six supplied recordings were processed with ElevenLabs Scribe v2 (`no_verbatim=false` and `true`) and independent Claude Sonnet 4.6 extraction. **No extracted money terms diverged between modes.** Cleanup retained the amount and account corrections. All extracted terms matched the speaker-confirmed labels, including spoken account suffixes and “today” resolved to recording date 2026-10-11. This experiment did not reproduce cleanup losing a payment correction.
 
@@ -29,15 +93,19 @@ Measured healing took one iteration; synthetic stress took two. **Two synthetic 
 
 ## Pipeline and healing loop
 
+The hunt path below uses frozen A/B evidence and A approval. The earlier pipeline
+also supports dual Scribe modes and cleaned approval; both share the same worker,
+oracle and replay gates.
+
 ```mermaid
 flowchart TD
-    A[Same audio bytes] --> V[Scribe verbatim]
-    A --> C[Scribe cleaned]
-    V --> EV[Sonnet terms]
-    C --> EC[Sonnet terms]
+    A[Provided recognition caches] --> V[Recognizer A transcript]
+    A --> C[Recognizer B transcript]
+    V --> EV[Cached Sonnet terms A]
+    C --> EC[Cached Sonnet terms B]
     EV --> E[Evidence: both transcripts and terms]
     EC --> E
-    E --> I[Cleaned approval: terms + bank account + fence version]
+    E --> I[A approval: terms + bank account + fence version]
     I --> Q[Queue]
     Q --> W[Worker transaction: fence + current vendor + rules]
     W --> P[Receipt or clarify/reapprove block]
