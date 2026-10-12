@@ -2,6 +2,89 @@
 
 Dates below use America/Los_Angeles; artifact timestamps use UTC.
 
+## Failure hunt: voice-disjoint cached replay
+
+The supplied archive contains **213 logged attempts: 180 payment clips and 33
+confirmation clips**. Every attempt is retained. Audio is ElevenLabs stock-voice
+TTS (Roger, Charlie, Alice), speeds 1.0/1.15, followed by clean or simulated
+phone channels (8 kHz band-pass mu-law, target noise SNR 10/5/0). Recognizer A
+is Scribe v2; B is local faster-whisper small. The experiment replays their cached
+transcripts and the supplied repo Sonnet 4.6 extraction results. No TTS, STT or
+extraction API calls were made during this Atlas comparison.
+
+Twelve `eighteen13` clips request account ending 13, absent from vendor-002's
+account ending 24. They are retained as **excluded, expected=clarify**, rather
+than counted as valid payment requests. The remaining **168 cases** contain 138
+correct A payment candidates, 23 unsafe A candidates, and seven missing A
+instructions. Missing A instructions produce intake clarification, never a B
+approval. All 180 payment attempts have explicit outcomes or exclusion reasons
+for every comparator in [failure_hunt_experiment.json](artifacts/failure_hunt_experiment.json).
+
+Roger and Charlie supply training/benign cases; **Alice alone is holdout**:
+
+| Set | N | Composition |
+|---|---:|---|
+| must_catch | 12 | Charlie's baseline unsafe candidates |
+| must_pass | 100 | 95 correct A payments + 5 intake clarifications, Roger/Charlie |
+| holdout | 56 | Alice: 43 correct A payments + 11 unsafe candidates + 2 intake clarifications |
+| Excluded | 12 | Four off-file-account requests per voice; expected clarification |
+
+All comparators used the same 168 cases, the real worker/oracle on Atlas, empty
+initial policy, A-only naive approval, and fresh isolated replay databases. The
+following **reproduces the supplied offline counts through real transactions**:
+
+| Policy | Unsafe caught | Unsafe remaining | Correct payments blocked | Replay gate |
+|---|---:|---:|---:|---|
+| Empty rules | 0 / 23 | 23 | 0 / 138 | Baseline |
+| A/B amount + account agreement | 22 / 23 | 1 | 42 / 138 | Reject |
+| Spoken account on file | 22 / 23 | 1 | 0 / 138 | Pass |
+| Live Opus healing | 22 / 23 | 1 | 0 / 138 | Pass |
+
+Per-set scores are **ok / unsafe_commit / benign_block**; duplicates were zero:
+
+| Policy | must_catch (12) | must_pass (100) | holdout (56) |
+|---|---|---|---|
+| Empty rules | 0 / 12 / 0 | 100 / 0 / 0 | 45 / 11 / 0 |
+| A/B amount + account agreement | 12 / 0 / 0 | 74 / 0 / 26 | 39 / 1 / 16 |
+| Spoken account on file | 12 / 0 / 0 | 100 / 0 / 0 | 55 / 1 / 0 |
+| Live Opus healing | 12 / 0 / 0 | 100 / 0 / 0 | 55 / 1 / 0 |
+
+Opus 5.5 proposed two candidates in one healing iteration: A's spoken destination
+must match the current bank account, or that check plus a redundant check on the
+approved destination. Both passed the gate. The shorter rule activated; the other
+remained accepted/inactive. **No live candidate was rejected**. The static
+agreement comparator fails the same gate because of its 26 must-pass and 16
+holdout benign blocks. Every candidate's before/after set scores and decision are
+exported. The active rule requests clarification when A's spoken destination
+does not match the account on file. Numeric endings use suffix matching; full
+identifiers require equality.
+
+**One unsafe holdout remains.** Alice's `fourteen`, speed 1.0, target SNR 0 clip
+is recognized as $40 by both systems. Both extracted 4000 cents; the labeled
+source says 1400. Its entire 23-field rule context is identical to 12 correct
+$40 cases, recorded in `identical_rule_contexts`. The allowed deterministic
+predicates cannot distinguish that error without blocking some correct payments.
+`healed` indicates zero remaining must-catch failures, not a safe holdout or a
+production guarantee.
+
+Measured experiment wall time: **943.918 s**; healing time
+**322.202 s** includes the two candidate replays and reuses
+the already measured baseline. A fresh final replay is also exported. One Opus
+request returned **6786 input / 714 output tokens**. Acquisition usage was not recorded
+in the supplied hunt; invoiced dollar cost is unavailable/null.
+
+Limits: these are stock TTS voices and simulated channels, with inputs chosen by
+an iterative failure search. The voice split is not a phrase split; all voices
+were already examined during corpus discovery. Alice was withheld from the
+proposer, while holdout results are used by the gate. This is not an untouched
+prospective test set or a production failure-rate estimate. Dates use the
+extractor's fixed reference date 2026-10-11, not a spoken date in these prompts.
+All **705 supplied files** (30,974,242 bytes) are kept, including source/channel
+audio and transcript caches. The verified manifest supplies file links; future
+channel hashing uses repo-relative paths, while original bytes stay frozen.
+
+## Earlier six-recording experiment
+
 Audio was recorded on 2026-10-11. Live Scribe v2 / Sonnet 4.6 acquisition was
 completed on 2026-10-11; Atlas baseline, gate replays and live Opus 5.5 proposals
 were measured on 2026-10-12. Amounts and vendors were independently confirmed
