@@ -1,0 +1,698 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:payment-approval:portfolio-experiment:1",
+  "title": "Measured payment approval experiment",
+  "description": "Complete exports only. Integer cents throughout. Live audio and synthetic replay sources are explicit. Billed cost is null when unavailable.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "experiment_id": {
+      "type": "string"
+    },
+    "suite": {
+      "enum": [
+        "measured",
+        "fixture"
+      ]
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "finished_at": {
+      "type": "string"
+    },
+    "database_backend": {
+      "type": "string"
+    },
+    "audit_database": {
+      "type": "string"
+    },
+    "reference_date": {
+      "type": "string"
+    },
+    "amount_unit": {
+      "const": "integer_cents"
+    },
+    "status": {
+      "const": "complete"
+    },
+    "clips": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/clip"
+      }
+    },
+    "case_manifest": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "replay_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "phase": {
+            "enum": [
+              "baseline",
+              "candidate",
+              "policy_replay"
+            ]
+          },
+          "candidate_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "wall_seconds": {
+            "type": "number",
+            "minimum": 0
+          },
+          "results": {
+            "$ref": "#/$defs/replay"
+          }
+        },
+        "required": [
+          "phase",
+          "candidate_id",
+          "wall_seconds",
+          "results"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "api_calls": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "acquisition": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "cost": {
+      "type": "object",
+      "properties": {
+        "billed_usd": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "billed_usd",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "git_revision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "baseline_replay": {
+      "$ref": "#/$defs/replay"
+    },
+    "baseline_runs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/run"
+      }
+    },
+    "heal_wall_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "heal": {
+      "type": "object"
+    },
+    "heal_iterations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/iteration"
+      }
+    },
+    "active_rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/active_rule"
+      }
+    },
+    "proposal_events": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "final_replay": {
+      "$ref": "#/$defs/replay"
+    },
+    "wall_seconds": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "suite",
+    "started_at",
+    "finished_at",
+    "database_backend",
+    "audit_database",
+    "reference_date",
+    "amount_unit",
+    "status",
+    "clips",
+    "case_manifest",
+    "replay_log",
+    "api_calls",
+    "acquisition",
+    "cost",
+    "git_revision",
+    "baseline_replay",
+    "baseline_runs",
+    "heal_wall_seconds",
+    "heal",
+    "heal_iterations",
+    "active_rules",
+    "proposal_events",
+    "final_replay",
+    "wall_seconds"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "terms": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": [
+            "vendor_id",
+            "amount_cents",
+            "destination_account",
+            "date"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "vendor_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "amount_cents": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9223372036854775807
+            },
+            "destination_account": {
+              "type": "string",
+              "minLength": 1
+            },
+            "date": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clauses",
+        "on_fail"
+      ],
+      "properties": {
+        "clauses": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "left",
+              "cmp",
+              "right"
+            ],
+            "properties": {
+              "left": {
+                "type": "string",
+                "enum": [
+                  "evidence.verbatim_terms.vendor_id",
+                  "evidence.verbatim_terms.amount_cents",
+                  "evidence.verbatim_terms.destination_account",
+                  "evidence.verbatim_terms.date",
+                  "evidence.cleaned_terms.vendor_id",
+                  "evidence.cleaned_terms.amount_cents",
+                  "evidence.cleaned_terms.destination_account",
+                  "evidence.cleaned_terms.date",
+                  "intent.confirmed_terms.vendor_id",
+                  "intent.confirmed_terms.amount_cents",
+                  "intent.confirmed_terms.destination_account",
+                  "intent.confirmed_terms.date",
+                  "intent.approved_bank_account",
+                  "intent.approved_fence_version",
+                  "vendor.bank_account"
+                ]
+              },
+              "cmp": {
+                "type": "string",
+                "enum": [
+                  "eq",
+                  "neq"
+                ]
+              },
+              "right": {
+                "type": "string",
+                "enum": [
+                  "evidence.verbatim_terms.vendor_id",
+                  "evidence.verbatim_terms.amount_cents",
+                  "evidence.verbatim_terms.destination_account",
+                  "evidence.verbatim_terms.date",
+                  "evidence.cleaned_terms.vendor_id",
+                  "evidence.cleaned_terms.amount_cents",
+                  "evidence.cleaned_terms.destination_account",
+                  "evidence.cleaned_terms.date",
+                  "intent.confirmed_terms.vendor_id",
+                  "intent.confirmed_terms.amount_cents",
+                  "intent.confirmed_terms.destination_account",
+                  "intent.confirmed_terms.date",
+                  "intent.approved_bank_account",
+                  "intent.approved_fence_version",
+                  "vendor.bank_account"
+                ]
+              }
+            }
+          }
+        },
+        "on_fail": {
+          "type": "string",
+          "enum": [
+            "clarify",
+            "reapprove"
+          ]
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "N": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ok": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unsafe_commit": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "benign_block": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "duplicate": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "N",
+        "ok",
+        "unsafe_commit",
+        "benign_block",
+        "duplicate"
+      ],
+      "additionalProperties": false
+    },
+    "sets": {
+      "type": "object",
+      "properties": {
+        "must_catch": {
+          "$ref": "#/$defs/counts"
+        },
+        "must_pass": {
+          "$ref": "#/$defs/counts"
+        },
+        "holdout": {
+          "$ref": "#/$defs/counts"
+        }
+      },
+      "required": [
+        "must_catch",
+        "must_pass",
+        "holdout"
+      ],
+      "additionalProperties": false
+    },
+    "active_rule": {
+      "type": "object",
+      "properties": {
+        "rule_id": {
+          "type": "string"
+        },
+        "rule": {
+          "$ref": "#/$defs/rule"
+        },
+        "rule_text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "rule_id",
+        "rule"
+      ],
+      "additionalProperties": false
+    },
+    "gate": {
+      "type": "object",
+      "properties": {
+        "accepted": {
+          "type": "boolean"
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "before": {
+          "$ref": "#/$defs/sets"
+        },
+        "after": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/sets"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "accepted",
+        "reasons",
+        "before",
+        "after"
+      ],
+      "additionalProperties": false
+    },
+    "candidate": {
+      "type": "object",
+      "properties": {
+        "candidate_id": {
+          "type": "string"
+        },
+        "iteration": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "candidate_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rule": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/rule"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "proposal": {
+          "type": "object"
+        },
+        "rule_text": {
+          "type": "string"
+        },
+        "decision": {
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected",
+            "activated"
+          ]
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "gate": {
+          "$ref": "#/$defs/gate"
+        },
+        "rejected_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "candidate_id",
+        "iteration",
+        "candidate_index",
+        "rule",
+        "proposal",
+        "rule_text",
+        "decision",
+        "active",
+        "gate",
+        "rejected_reason"
+      ],
+      "additionalProperties": false
+    },
+    "clip": {
+      "type": "object",
+      "properties": {
+        "case_id": {
+          "type": "string"
+        },
+        "audio_file": {
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "measured_live_audio",
+            "synthetic_fixture"
+          ]
+        },
+        "verbatim": {
+          "type": "string"
+        },
+        "cleaned": {
+          "type": "string"
+        },
+        "verbatim_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "cleaned_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "true_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "money_terms_diverged": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "case_id",
+        "audio_file",
+        "source",
+        "verbatim",
+        "cleaned",
+        "verbatim_terms",
+        "cleaned_terms",
+        "true_terms",
+        "money_terms_diverged"
+      ],
+      "additionalProperties": true
+    },
+    "run": {
+      "type": "object",
+      "properties": {
+        "run_id": {
+          "type": "string"
+        },
+        "case_id": {
+          "type": "string"
+        },
+        "label": {
+          "enum": [
+            "ok",
+            "unsafe_commit",
+            "benign_block",
+            "duplicate"
+          ]
+        },
+        "expected": {
+          "enum": [
+            "pay",
+            "clarify",
+            "reapprove"
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "payment_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "eval_set": {
+          "enum": [
+            "must_catch",
+            "must_pass",
+            "holdout"
+          ]
+        },
+        "block_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "field_diffs": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "approved_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "approval_snapshot": {
+          "type": "object"
+        },
+        "paid_to": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "amount_paid": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "amount_unit": {
+          "const": "integer_cents"
+        },
+        "evidence_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "case_id",
+        "label",
+        "expected",
+        "reasons",
+        "payment_count",
+        "eval_set",
+        "block_reason",
+        "field_diffs",
+        "approved_terms",
+        "approval_snapshot",
+        "paid_to",
+        "amount_paid",
+        "amount_unit",
+        "evidence_id"
+      ],
+      "additionalProperties": false
+    },
+    "replay": {
+      "type": "object",
+      "properties": {
+        "counts": {
+          "$ref": "#/$defs/counts"
+        },
+        "sets": {
+          "$ref": "#/$defs/sets"
+        },
+        "cases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/run"
+          }
+        }
+      },
+      "required": [
+        "counts",
+        "sets",
+        "cases"
+      ],
+      "additionalProperties": false
+    },
+    "iteration": {
+      "type": "object",
+      "properties": {
+        "iteration": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "candidate_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "counts": {
+          "$ref": "#/$defs/counts"
+        },
+        "sets": {
+          "$ref": "#/$defs/sets"
+        },
+        "status": {
+          "type": "string"
+        },
+        "active_rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/active_rule"
+          }
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/candidate"
+          }
+        }
+      },
+      "required": [
+        "iteration",
+        "candidate_count",
+        "counts",
+        "sets",
+        "status",
+        "active_rules",
+        "candidates"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
