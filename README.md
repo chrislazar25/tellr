@@ -1,5 +1,11 @@
 # tellr
 
+Generated failure-hunt audio is attributed to [ElevenLabs](https://elevenlabs.io),
+using `eleven_flash_v2_5` with stock Roger, Charlie and Alice voices. These are
+synthetic utterances with simulated channels, separate from the six supplied
+recordings below. The full archive and replay methods are documented in
+[experiments/failure_hunt](experiments/failure_hunt/README.md).
+
 A caller can correct an amount mid-sentence, approve a payment, and then have the vendor’s bank account change before the worker commits. What commits must still match what the caller authorized. This Python 3.11 prototype stores both transcript candidates, an immutable approval snapshot, and an actual payment receipt, then evaluates commit-time rules inside a fenced MongoDB transaction. An oracle checks the result against independently labeled intent; a model proposes rule changes that must pass replay gates before activation. Payments here are database receipts, not money transfers. The project started at the MongoDB x Cerebral Valley harness hackathon and is now a portfolio experiment.
 
 ## What was actually observed
@@ -46,7 +52,7 @@ flowchart TD
 
 The worker atomically claims one pending queue item. One transaction increments the vendor fence, reads current vendor/evidence/intent/rules, and records either an idempotent receipt or a block. Bank-account updates increment the same fence in their transaction, causing conflicting payments to retry and reread coherent state. Fence versions also change for harmless name or memo edits: version equality alone is not an account-identity check. The naive empty-rules baseline intentionally pays the current bank account; the oracle exposes whether that differs from approval.
 
-Rules are deterministic, side-effect-free conjunctions of `eq`/`neq` comparisons between 15 permitted fields in verbatim/cleaned evidence, confirmed terms, approval account/fence version, and current bank account. No generated Python, literal values, or external calls execute inside the transaction. For example:
+Rules are deterministic, side-effect-free conjunctions of `eq`/`neq` comparisons between 23 permitted fields in verbatim/cleaned evidence, recognizer A/B terms, confirmed terms, approval account/fence version, and current bank account. `suffix_match` compares a spoken destination to `vendor.bank_account`: numeric endings use suffix matching; full identifiers require equality. No generated Python, literal values, or external calls execute inside the transaction. For example:
 
 ```json
 {"clauses":[{"left":"intent.approved_bank_account","cmp":"eq","right":"vendor.bank_account"}],"on_fail":"reapprove"}
