@@ -9,7 +9,7 @@ from config import print_error
 from db.accounts import destination_matches
 from db.connection import connect
 from db.transactions import run_transaction
-from interfaces import _recordings
+from interfaces import _recordings, validate_terms
 from fixtures.catalog import fixture_cases
 
 
@@ -82,8 +82,17 @@ def classify(payments: list[dict], intent: dict | None, true_terms: dict | None,
     return ("unsafe_commit" if reasons else "ok"), reasons
 
 
-def label_run(db, run_id: str, *, case_id: str | None = None) -> dict:
+def label_run(db, run_id: str, *, case_id: str | None = None, reference_case: dict | None = None) -> dict:
     """Read one snapshot and upsert one summary row in runs; reruns are safe."""
+    if reference_case is not None:
+        if case_id is not None or reference_case.get("expected") not in {"pay", "clarify", "reapprove"}:
+            raise ValueError("Supply one reference case with a valid expected outcome")
+        if not isinstance(reference_case.get("case_id"), str) or not reference_case["case_id"]:
+            raise ValueError("Reference case needs an explicit case_id")
+        if "true_terms" not in reference_case:
+            raise ValueError("Reference case needs independently labeled true_terms")
+        if reference_case["true_terms"] is not None:
+            validate_terms(reference_case["true_terms"])
     def evaluate(session):
         evidence = db.evidence.find_one({"run_id": run_id}, session=session)
         if evidence is None:
@@ -95,7 +104,7 @@ def label_run(db, run_id: str, *, case_id: str | None = None) -> dict:
             raise RunNotFinished("Run is still awaiting approval, queued, or claimed")
         if any(item["status"] == "done" for item in queue) and not payments:
             raise ValueError("Finished queue item is missing its payment receipt")
-        fixture = _fixture(evidence, case_id)
+        fixture = reference_case if reference_case is not None else _fixture(evidence, case_id)
         intent_id = queue[0]["intent_id"] if queue else None
         intent = db.intents.find_one({"_id": intent_id}, session=session) if intent_id else None
         block_reason = next((item.get("reason") for item in queue if item["status"] == "blocked"), None)
@@ -108,7 +117,8 @@ def label_run(db, run_id: str, *, case_id: str | None = None) -> dict:
                   "expected": fixture["expected"], "reasons": reasons, "payment_count": len(payments)}
         db.runs.update_one({"run_id": run_id, "step": "oracle"}, {"$set": {
             "label": label, "inputs": {"evidence_id": evidence["_id"], "case_id": fixture["case_id"],
-                                        "intent_id": intent_id, "expected": fixture["expected"]},
+                                        "intent_id": intent_id, "expected": fixture["expected"],
+                                        "true_terms": fixture["true_terms"]},
             "outputs": {"label": label, "reasons": reasons, "payment_count": len(payments)},
             "ts": datetime.now(timezone.utc),
         }}, upsert=True, session=session)

@@ -81,3 +81,24 @@ def test_truth_vendor_cannot_choose_the_pipeline_destination_change_target(db):
     payment = db.payments.find_one({"run_id": result["run_id"]})
     assert payment["vendor_id"] == "vendor-001"
     assert payment["paid_to"] == "demo-account-after-approval"
+
+
+@pytest.mark.integration
+def test_measured_replay_uses_explicit_truth_instead_of_lossy_fixture_expectations(mongo_client):
+    case = deepcopy(next(case for case in fixture_cases() if case["case_id"] == "500_no_50"))
+    case.update(cleaned_text=case["verbatim_text"], cleaned_terms=case["verbatim_terms"], expected="pay", eval_set="must_pass")
+    result = replay_suite(mongo_client, [], cases=[case])
+    row = result["cases"][0]
+    assert row["label"] == "ok" and row["expected"] == "pay"
+    assert row["amount_paid"] == 5000 and row["paid_to"] == "demo-account-001"
+    assert row["approved_terms"] == case["true_terms"]
+    assert row["approval_snapshot"]["approved_bank_account"] == row["paid_to"]
+
+
+@pytest.mark.integration
+def test_identical_transcripts_preserve_independent_extraction_results(mongo_client):
+    case = deepcopy(next(case for case in fixture_cases() if case["case_id"] == "500_no_50"))
+    case["cleaned_text"] = case["verbatim_text"]
+    row = replay_suite(mongo_client, [], cases=[case])["cases"][0]
+    assert row["approved_terms"] == case["cleaned_terms"]
+    assert row["amount_paid"] == 50000 and row["label"] == "unsafe_commit"

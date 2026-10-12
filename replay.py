@@ -40,12 +40,13 @@ def field_diffs(context):
 def _adapters(case):
     def transcribe(path, *, no_verbatim):
         return case["cleaned_text" if no_verbatim else "verbatim_text"]
+    modes = iter(("verbatim", "cleaned"))
     def extract(text):
-        for mode in ("verbatim", "cleaned"):
-            if text == case[f"{mode}_text"]:
-                terms = case[f"{mode}_terms"]
-                return None if terms is None else validate_terms(terms)
-        raise ValueError("Transcript is outside the replay scenario")
+        mode = next(modes)
+        if text != case[f"{mode}_text"]:
+            raise ValueError("Transcript is outside the replay scenario")
+        terms = case[f"{mode}_terms"]
+        return None if terms is None else validate_terms(terms)
     return Adapters(transcribe, extract, DEFAULT_ADAPTERS.readback)
 
 
@@ -74,13 +75,19 @@ def _run_case(db, case):
         "vendor": db.vendors.find_one({"_id": vendor_id}) if vendor_id else {},
     }
     outcome = process_one(db, queue_id=result["outcome"]["queue_id"], static_guard=False) if result["status"] == "pending" else None
-    verdict = label_run(db, result["run_id"])
+    verdict = label_run(db, result["run_id"], reference_case=case)
+    receipt = db.payments.find_one({"run_id": result["run_id"]})
+    intent = context["intent"]
     return {**verdict, "eval_set": case["eval_set"], "block_reason": outcome.get("reason") if outcome else None,
-            "field_diffs": field_diffs(context)}
+            "field_diffs": field_diffs(context), "approved_terms": intent.get("confirmed_terms"),
+            "approval_snapshot": {key: intent.get(key) for key in ("approved_bank_account", "approved_fence_version")},
+            "paid_to": receipt["paid_to"] if receipt else None,
+            "amount_paid": receipt["amount_cents"] if receipt else None,
+            "amount_unit": "integer_cents", "evidence_id": result["evidence_id"]}
 
 
 def replay_suite(client, current_rules: list[dict], *, candidate: dict | None = None,
-                 sets=EVAL_SETS) -> dict:
+                 sets=EVAL_SETS, cases=None) -> dict:
     """Own and drop a fresh scratch database; never copy application data into it."""
     documents = deepcopy(current_rules) + ([deepcopy(candidate)] if candidate is not None else [])
     for document in documents:
@@ -96,7 +103,7 @@ def replay_suite(client, current_rules: list[dict], *, candidate: dict | None = 
                 {"_id": document["_id"], "version": document["version"], "active": True, "rule": document["rule"]}
                 for document in documents
             ])
-        rows = [_run_case(db, case) for case in fixture_cases() if case["eval_set"] in sets]
+        rows = [_run_case(db, case) for case in (fixture_cases() if cases is None else cases) if case["eval_set"] in sets]
         return {"counts": summarize(rows),
                 "sets": {eval_set: summarize([row for row in rows if row["eval_set"] == eval_set]) for eval_set in sets},
                 "cases": rows}
