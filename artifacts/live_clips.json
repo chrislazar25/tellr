@@ -1,0 +1,754 @@
+{
+  "schema_version": 1,
+  "experiment_id": "a45458b3-e64f-4e3d-9f14-d983c07ad4e4",
+  "started_at": "2026-10-12T00:48:02.045687+00:00",
+  "source": "live_api",
+  "reference_date": "2026-10-11",
+  "approval_performed": false,
+  "clips": [
+    {
+      "case_id": "500_no_50",
+      "audio_file": "audio/amount-correction.wav",
+      "audio_sha256": "162d38c92d6f9f77c7fc5d74da3abf3f2231675273a556534b29606aea88401f",
+      "duration_seconds": 10.0,
+      "run_id": "b651725c-ba64-4bd0-92a2-c566554a9eed",
+      "verbatim": "Pay demo paper supply five hundred no fifty dollars to account ending zero zero one today.",
+      "cleaned": "Pay demo paper supply 500 No. $50 to account ending 001 today.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+      "money_terms_diverged": false,
+      "wall_seconds": 3.411115,
+      "cache": [
+        {
+          "step": "transcribe",
+          "mode": "verbatim",
+          "hit": true
+        },
+        {
+          "step": "extract_terms",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "transcribe",
+          "mode": "cleaned",
+          "hit": true
+        },
+        {
+          "step": "extract_terms",
+          "mode": "cleaned",
+          "hit": false
+        }
+      ],
+      "adapter_metadata": {
+        "audio_hash": "162d38c92d6f9f77c7fc5d74da3abf3f2231675273a556534b29606aea88401f",
+        "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+      }
+    },
+    {
+      "case_id": "500_is_right",
+      "audio_file": "audio/amount-reaffirmation.wav",
+      "audio_sha256": "a842af2a757ee34c11ce429e82f998313c2862bd22cf3ec44332ab18f3632768",
+      "duration_seconds": 10.0,
+      "run_id": "8a9397ec-4a1b-4ec6-b4b6-a15e28d1164d",
+      "verbatim": "Pay demo paper supply 500. No wait 500 is right to account ending zero zero one today.",
+      "cleaned": "Pay demo paper supply 500. No wait, 500 is right to account ending 001 today.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+      "money_terms_diverged": false,
+      "wall_seconds": 4.921868,
+      "cache": [
+        {
+          "step": "transcribe",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "transcribe",
+          "mode": "cleaned",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "cleaned",
+          "hit": false
+        }
+      ],
+      "adapter_metadata": {
+        "audio_hash": "a842af2a757ee34c11ce429e82f998313c2862bd22cf3ec44332ab18f3632768",
+        "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+      }
+    },
+    {
+      "case_id": "fifteen_vs_fifty",
+      "audio_file": "audio/fifteen-vs-fifty.wav",
+      "audio_sha256": "8f3a8d0db55459f1f3d9fec09ca1ccb6dd9323749cb0e81fd1a1e8482a0c2cab",
+      "duration_seconds": 10.0,
+      "run_id": "d653046f-40ce-4852-a7a9-1067aa4536da",
+      "verbatim": "Pay demo paper supply $15 not 50 to account ending zero zero one today.",
+      "cleaned": "Pay demo paper supply $15, not 50 to account ending 001 today.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 1500,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 1500,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 1500,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+      "money_terms_diverged": false,
+      "wall_seconds": 4.493825,
+      "cache": [
+        {
+          "step": "transcribe",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "transcribe",
+          "mode": "cleaned",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "cleaned",
+          "hit": false
+        }
+      ],
+      "adapter_metadata": {
+        "audio_hash": "8f3a8d0db55459f1f3d9fec09ca1ccb6dd9323749cb0e81fd1a1e8482a0c2cab",
+        "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+      }
+    },
+    {
+      "case_id": "account_42_sorry_24",
+      "audio_file": "audio/account-correction.wav",
+      "audio_sha256": "af33fe84e5cf26845bd8c375696a50e5919f9630ab402a2fbb9abb943868d42c",
+      "duration_seconds": 10.0,
+      "run_id": "97450955-5ebd-4cc6-bd87-7a4880b2bc7b",
+      "verbatim": "Pay demo catering $50 to account ending 42, sorry 24 today.",
+      "cleaned": "Pay demo catering $50 to account ending 42, sorry, 24 today.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      },
+      "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+      "money_terms_diverged": false,
+      "wall_seconds": 6.059646,
+      "cache": [
+        {
+          "step": "transcribe",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "transcribe",
+          "mode": "cleaned",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "cleaned",
+          "hit": false
+        }
+      ],
+      "adapter_metadata": {
+        "audio_hash": "af33fe84e5cf26845bd8c375696a50e5919f9630ab402a2fbb9abb943868d42c",
+        "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+      }
+    },
+    {
+      "case_id": "filler_only",
+      "audio_file": "audio/filler-only.wav",
+      "audio_sha256": "3fa5d2b6c3d4fb7177159fe129a3c4023bdec8ee9ce466deb082b5560096e056",
+      "duration_seconds": 5.0,
+      "run_id": "305ce86c-3cc8-48d3-8fad-24a54e631dbd",
+      "verbatim": "Um, uh, well, hmm.",
+      "cleaned": "Um, uh, well, hmm.",
+      "verbatim_terms": null,
+      "cleaned_terms": null,
+      "true_terms": null,
+      "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+      "money_terms_diverged": false,
+      "wall_seconds": 3.758079,
+      "cache": [
+        {
+          "step": "transcribe",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "transcribe",
+          "mode": "cleaned",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "cleaned",
+          "hit": false
+        }
+      ],
+      "adapter_metadata": {
+        "audio_hash": "3fa5d2b6c3d4fb7177159fe129a3c4023bdec8ee9ce466deb082b5560096e056",
+        "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+      }
+    },
+    {
+      "case_id": "clean",
+      "audio_file": "audio/demo-invoice.wav",
+      "audio_sha256": "7865f9a237a7eb56418f9f8d7b0db2995ea3aebc86a36dfa0dbc9f0901e26279",
+      "duration_seconds": 10.0,
+      "run_id": "03928782-03c4-4dee-af7d-83d670d5d534",
+      "verbatim": "Um, pay demo paper supply $125.50 to account ending 001 today.",
+      "cleaned": "Paid demo paper supply $125.50 to account ending 001 today.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+      "money_terms_diverged": false,
+      "wall_seconds": 4.622746,
+      "cache": [
+        {
+          "step": "transcribe",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "transcribe",
+          "mode": "cleaned",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "cleaned",
+          "hit": false
+        }
+      ],
+      "adapter_metadata": {
+        "audio_hash": "7865f9a237a7eb56418f9f8d7b0db2995ea3aebc86a36dfa0dbc9f0901e26279",
+        "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+      }
+    }
+  ],
+  "api_calls": [
+    {
+      "provider": "anthropic",
+      "purpose": "extraction",
+      "ts": "2026-10-12T00:48:06.323682+00:00",
+      "wall_seconds": 1.782215,
+      "requested_model": "claude-sonnet-4-6",
+      "served_model": "claude-sonnet-4-6",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1100,
+        "output_tokens": 61,
+        "output_tokens_details": null,
+        "server_tool_use": null,
+        "service_tier": "standard"
+      },
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "anthropic",
+      "purpose": "extraction",
+      "ts": "2026-10-12T00:48:07.801859+00:00",
+      "wall_seconds": 1.415275,
+      "requested_model": "claude-sonnet-4-6",
+      "served_model": "claude-sonnet-4-6",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1103,
+        "output_tokens": 61,
+        "output_tokens_details": null,
+        "server_tool_use": null,
+        "service_tier": "standard"
+      },
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "elevenlabs",
+      "purpose": "transcription",
+      "ts": "2026-10-12T00:48:08.843000+00:00",
+      "wall_seconds": 0.905127,
+      "requested_model": "scribe_v2",
+      "served_model": null,
+      "no_verbatim": false,
+      "usage": null,
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "anthropic",
+      "purpose": "extraction",
+      "ts": "2026-10-12T00:48:10.463828+00:00",
+      "wall_seconds": 1.574763,
+      "requested_model": "claude-sonnet-4-6",
+      "served_model": "claude-sonnet-4-6",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1105,
+        "output_tokens": 61,
+        "output_tokens_details": null,
+        "server_tool_use": null,
+        "service_tier": "standard"
+      },
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "elevenlabs",
+      "purpose": "transcription",
+      "ts": "2026-10-12T00:48:11.283458+00:00",
+      "wall_seconds": 0.770331,
+      "requested_model": "scribe_v2",
+      "served_model": null,
+      "no_verbatim": true,
+      "usage": null,
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "anthropic",
+      "purpose": "extraction",
+      "ts": "2026-10-12T00:48:12.723949+00:00",
+      "wall_seconds": 1.39275,
+      "requested_model": "claude-sonnet-4-6",
+      "served_model": "claude-sonnet-4-6",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1106,
+        "output_tokens": 61,
+        "output_tokens_details": null,
+        "server_tool_use": null,
+        "service_tier": "standard"
+      },
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "elevenlabs",
+      "purpose": "transcription",
+      "ts": "2026-10-12T00:48:13.490177+00:00",
+      "wall_seconds": 0.629697,
+      "requested_model": "scribe_v2",
+      "served_model": null,
+      "no_verbatim": false,
+      "usage": null,
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "anthropic",
+      "purpose": "extraction",
+      "ts": "2026-10-12T00:48:14.969348+00:00",
+      "wall_seconds": 1.441629,
+      "requested_model": "claude-sonnet-4-6",
+      "served_model": "claude-sonnet-4-6",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1102,
+        "output_tokens": 61,
+        "output_tokens_details": null,
+        "server_tool_use": null,
+        "service_tier": "standard"
+      },
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "elevenlabs",
+      "purpose": "transcription",
+      "ts": "2026-10-12T00:48:15.694582+00:00",
+      "wall_seconds": 0.68076,
+      "requested_model": "scribe_v2",
+      "served_model": null,
+      "no_verbatim": true,
+      "usage": null,
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "anthropic",
+      "purpose": "extraction",
+      "ts": "2026-10-12T00:48:17.222292+00:00",
+      "wall_seconds": 1.480979,
+      "requested_model": "claude-sonnet-4-6",
+      "served_model": "claude-sonnet-4-6",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1102,
+        "output_tokens": 61,
+        "output_tokens_details": null,
+        "server_tool_use": null,
+        "service_tier": "standard"
+      },
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "elevenlabs",
+      "purpose": "transcription",
+      "ts": "2026-10-12T00:48:18.048121+00:00",
+      "wall_seconds": 0.691237,
+      "requested_model": "scribe_v2",
+      "served_model": null,
+      "no_verbatim": false,
+      "usage": null,
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "anthropic",
+      "purpose": "extraction",
+      "ts": "2026-10-12T00:48:19.579634+00:00",
+      "wall_seconds": 1.482593,
+      "requested_model": "claude-sonnet-4-6",
+      "served_model": "claude-sonnet-4-6",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1102,
+        "output_tokens": 61,
+        "output_tokens_details": null,
+        "server_tool_use": null,
+        "service_tier": "standard"
+      },
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "elevenlabs",
+      "purpose": "transcription",
+      "ts": "2026-10-12T00:48:21.143250+00:00",
+      "wall_seconds": 1.518604,
+      "requested_model": "scribe_v2",
+      "served_model": null,
+      "no_verbatim": true,
+      "usage": null,
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "anthropic",
+      "purpose": "extraction",
+      "ts": "2026-10-12T00:48:23.280906+00:00",
+      "wall_seconds": 2.095563,
+      "requested_model": "claude-sonnet-4-6",
+      "served_model": "claude-sonnet-4-6",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1103,
+        "output_tokens": 61,
+        "output_tokens_details": null,
+        "server_tool_use": null,
+        "service_tier": "standard"
+      },
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "elevenlabs",
+      "purpose": "transcription",
+      "ts": "2026-10-12T00:48:24.089035+00:00",
+      "wall_seconds": 0.671656,
+      "requested_model": "scribe_v2",
+      "served_model": null,
+      "no_verbatim": false,
+      "usage": null,
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "anthropic",
+      "purpose": "extraction",
+      "ts": "2026-10-12T00:48:25.209457+00:00",
+      "wall_seconds": 1.077808,
+      "requested_model": "claude-sonnet-4-6",
+      "served_model": "claude-sonnet-4-6",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1093,
+        "output_tokens": 24,
+        "output_tokens_details": null,
+        "server_tool_use": null,
+        "service_tier": "standard"
+      },
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "elevenlabs",
+      "purpose": "transcription",
+      "ts": "2026-10-12T00:48:25.819254+00:00",
+      "wall_seconds": 0.568394,
+      "requested_model": "scribe_v2",
+      "served_model": null,
+      "no_verbatim": true,
+      "usage": null,
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "anthropic",
+      "purpose": "extraction",
+      "ts": "2026-10-12T00:48:27.053467+00:00",
+      "wall_seconds": 1.193174,
+      "requested_model": "claude-sonnet-4-6",
+      "served_model": "claude-sonnet-4-6",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1093,
+        "output_tokens": 24,
+        "output_tokens_details": null,
+        "server_tool_use": null,
+        "service_tier": "standard"
+      },
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "elevenlabs",
+      "purpose": "transcription",
+      "ts": "2026-10-12T00:48:27.816062+00:00",
+      "wall_seconds": 0.631889,
+      "requested_model": "scribe_v2",
+      "served_model": null,
+      "no_verbatim": false,
+      "usage": null,
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "anthropic",
+      "purpose": "extraction",
+      "ts": "2026-10-12T00:48:29.308394+00:00",
+      "wall_seconds": 1.447497,
+      "requested_model": "claude-sonnet-4-6",
+      "served_model": "claude-sonnet-4-6",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1102,
+        "output_tokens": 61,
+        "output_tokens_details": null,
+        "server_tool_use": null,
+        "service_tier": "standard"
+      },
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "elevenlabs",
+      "purpose": "transcription",
+      "ts": "2026-10-12T00:48:30.133623+00:00",
+      "wall_seconds": 0.776831,
+      "requested_model": "scribe_v2",
+      "served_model": null,
+      "no_verbatim": true,
+      "usage": null,
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "anthropic",
+      "purpose": "extraction",
+      "ts": "2026-10-12T00:48:31.670136+00:00",
+      "wall_seconds": 1.486891,
+      "requested_model": "claude-sonnet-4-6",
+      "served_model": "claude-sonnet-4-6",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1101,
+        "output_tokens": 61,
+        "output_tokens_details": null,
+        "server_tool_use": null,
+        "service_tier": "standard"
+      },
+      "billed_cost_usd": null
+    }
+  ],
+  "cost": {
+    "billed_usd": null,
+    "reason": "Provider responses do not include invoiced cost; no estimate substituted."
+  },
+  "vendor_catalog": [
+    {
+      "_id": "vendor-001",
+      "bank_account": "demo-account-001",
+      "name": "Demo Paper Supply"
+    },
+    {
+      "_id": "vendor-002",
+      "bank_account": "acct-0024",
+      "name": "Demo Catering"
+    },
+    {
+      "_id": "vendor-003",
+      "bank_account": "demo-account-003",
+      "name": "Demo Equipment"
+    }
+  ],
+  "wall_seconds": 29.694956,
+  "finished_at": "2026-10-12T00:48:31.740530+00:00"
+}
