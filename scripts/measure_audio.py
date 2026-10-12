@@ -86,7 +86,7 @@ def measure(db, audio_dir, output, *, adapters=None, events=None):
             clip_start, run_id = time.perf_counter(), str(uuid.uuid4())
             with wave.open(str(path)) as recording:
                 duration = recording.getnframes() / recording.getframerate()
-            texts, terms = collect_candidates(db, run_id, path, adapters)
+            texts, terms, metadata = collect_candidates(db, run_id, path, adapters)
             logs = list(db.runs.find({"run_id": run_id, "step": {"$in": ["transcribe", "extract_terms"]}}).sort("ts", 1))
             result["clips"].append({
                 "case_id": case["case_id"], "audio_file": str(path),
@@ -98,6 +98,7 @@ def measure(db, audio_dir, output, *, adapters=None, events=None):
                 "wall_seconds": round(time.perf_counter() - clip_start, 6),
                 "cache": [{"step": row["step"], "mode": row["inputs"]["mode"],
                            "hit": row["outputs"]["cache_hit"]} for row in logs],
+                "adapter_metadata": metadata,
             })
             result["wall_seconds"] = round(time.perf_counter() - started, 6)
             write_json(output, result)
