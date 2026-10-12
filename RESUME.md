@@ -1,75 +1,39 @@
-# Portfolio experiment — paused for computer restart
+# Portfolio phase completed
 
-The user requested a pause on 2026-10-11. Resume the current portfolio phase;
-do not restart the project or repeat live API calls unnecessarily.
+The restart checkpoint has been completed. Acquisition was saved on 2026-10-11;
+the Atlas experiments were run on 2026-10-12 (America/Los_Angeles).
 
-## Saved
+- `artifacts/live_clips.json`: six real recordings, dual Scribe transcripts,
+  independent Sonnet terms, user-confirmed truth, audio hashes and API usage.
+  No money divergence or truth mismatch was observed. Corrections survived.
+- `artifacts/experiment.json`: independent Atlas audit database, empty-rules
+  baseline and one real Opus healing iteration. must_catch 1/1 ok, must_pass
+  8/8 ok; synthetic holdout 3/5 ok with two unsafe transcription cases left.
+- `artifacts/fixture_stress.json`: separately synthetic transcription stress
+  inputs, real Atlas worker/oracle/gate measurements, real Opus proposals.
+  Two iterations, final 4/4 must_catch, 5/5 must_pass, 5/5 holdout ok.
+- Every candidate and gate result is exported; all five measured candidates
+  passed their gates, three activated across two independent experiments.
+  No rejected candidate was invented. Holdouts were not proposal inputs.
+- `RESULTS.md`, rewritten `README.md`, and unpublished `LINKEDIN.md` use measured
+  facts and disclose small-set limits. Dollar API cost is unavailable/null.
+- `artifacts/experiment.schema.json` validates both complete experiment exports.
+- `artifacts/secret_scan.json` records full-history scan scope and findings.
+  `.gitleaks.toml` retains default detection with a narrow exemption for
+  documented SHA-256 cache fingerprints. No credential values are in reports.
+- MIT license added; generated egg-info removed and ignored. Repository remains
+  private and retains the placeholder name. No post was published.
+- Full tests: 220 passed on local MongoDB rs0. Tests never use Atlas/API keys.
 
-- The six supplied WAV files are in `audio/`.
-- `artifacts/live_clips.json` contains the completed live measurement: both
-  Scribe v2 modes, both Sonnet 4.6 term extractions, user-confirmed true terms,
-  audio hashes, cache provenance, measured wall time, and returned API usage.
-- All six clips had equal extracted money terms between modes. Scribe retained
-  the amount correction, reaffirmation, fifteen/not-fifty distinction, and
-  account 42/sorry24 correction in both modes. No cleanup-induced money
-  divergence was observed in these recordings. The clean clip's cleaned text
-  says "Paid" rather than "pay"; this did not alter its extracted money terms.
-- Recordings say "today": extraction receives reference date `2026-10-11`.
-  Vendor-001 destinations are spoken suffix `001`; vendor-002 is suffix `24`.
-  Amounts/vendors were explicitly confirmed by the user. Do not silently
-  relabel any additional discrepancy with these labels.
-- Initial measurement-runner unpacking error was fixed and regression tested.
-  That preliminary attempt had already cached the first clip's transcripts;
-  the completed artifact records those cache hits. Its API usage/cost excludes
-  the failed preliminary attempt. No invoiced API cost was returned; costs are
-  null, not invented or substituted with estimates.
-- Code changes are committed: measurement runner, explicit reference-case
-  oracle/replay support, independent extraction replay, reference-date prompt
-  and cache invalidation. Relevant tests passed on the real local `rs0`.
-- No payments or approvals were made by the live audio measurement command.
-  The existing Atlas active rules and healing history remain untouched.
-
-## Remaining work, in order
-
-1. Check extracted terms against user-confirmed truth (including account suffix
-   matching and date); flag discrepancies. Save a clean complete experiment
-   JSON/schema suitable for a future video. Current file is audio acquisition
-   data, not the completed baseline/healing artifact.
-2. Baseline empty-rules, cleaned approval on measured cases, including queued
-   destination change and benign memo/name twins. Use an owned Atlas experiment
-   database for fresh policy history; seed first, never erase the prior demo.
-   Derive measured expectations from observed divergence, clearly separate
-   live recordings from intentionally lossy synthetic fixture/holdout cases.
-   Existing `replay_suite(..., cases=...)` supports measured cases. Its receipts,
-   approval snapshots and labels are returned before owned scratch DB cleanup.
-3. Use real Opus 5.5 through `heal.run_heal` with a measured-case replayer.
-   Capture every candidate/decision/gate reason, each per-set scoreboard,
-   final replay, English rules, wall time and returned usage. Keep holdouts
-   entirely out of proposal context. Max 3 iterations, 8 active rules, 5 proposals.
-4. Write measured-only `RESULTS.md`, rewrite README with problem, Mermaid flow,
-   oracle/gate method, measured results, fixture/live run instructions and small
-   eval-set limitations. User says it started at MongoDB x Cerebral Valley
-   harness hackathon; make no submission or award claim.
-5. Full-history secret scan (gitleaks if available; otherwise key/password
-   pattern scan without printing secret values), report findings. Check/remove
-   generated egg-info (already ignored; none tracked), add MIT license. Suggest
-   three repository names but do not rename. No UI/video rendering requested.
-6. Full local-rs0 test suite, atomic explicit-path commits, push private repo,
-   report actual divergence, before/after scoreboard and secret-scan result.
-
-## Commands and constraints
+Inspect saved scoreboards without any services:
 
 ```sh
-uv sync --frozen --python 3.11
-docker compose up -d --wait
-uv run pytest -q
-# Only if acquisition needs resuming; evidence cache prevents repeated calls:
-ADAPTERS=live uv run python -m scripts.measure_audio --reference-date 2026-10-11
+uv run python scoreboard.py --artifact artifacts/experiment.json
+uv run python scoreboard.py --artifact artifacts/fixture_stress.json --json
 ```
 
-Tests are local-only; demos/experiment use configured Atlas. `.env.secrets`
-holds credentials, is ignored, and must never be printed or staged. Stage explicit
-paths only; one logical change per commit, commit as soon as relevant tests pass.
-Never stage `.env*`, lockfile churn or other task files. No repository rename.
-
-Private remote: `chrislazar25/mongodb-hackathon-placeholder`.
+Future live acquisition can reuse persisted evidence caches. Do not relabel
+recordings to obtain a preferred result. "Today" uses recording date 2026-10-11;
+spoken destinations are suffix 001 or 24. All actual credentials remain in
+ignored `.env.secrets`; never print or stage them. Continue atomic commits with
+explicit paths, no `.env*` or incidental lockfile changes.
