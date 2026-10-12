@@ -1,271 +1,131 @@
-# MongoDB Hackathon
+# Payment Approval Fences
 
-Python 3.11 backend with fixture/live adapters, dual transcription, baseline approval,
-and fenced MongoDB transactions. No UI. Payments are database receipts; this
-prototype does not send money.
+A caller can correct an amount mid-sentence, approve a payment, and then have the vendor’s bank account change before the worker commits. What commits must still match what the caller authorized. This Python 3.11 prototype stores both transcript candidates, an immutable approval snapshot, and an actual payment receipt, then evaluates commit-time rules inside a fenced MongoDB transaction. An oracle checks the result against independently labeled intent; a model proposes rule changes that must pass replay gates before activation. Payments here are database receipts, not money transfers. The project started at the MongoDB x Cerebral Valley harness hackathon and is now a portfolio experiment.
 
-```sh
-uv sync --frozen --python 3.11
-docker compose up -d --wait
-uv run pytest -q
+## What was actually observed
+
+Six supplied recordings were processed with ElevenLabs Scribe v2 (`no_verbatim=false` and `true`) and independent Claude Sonnet 4.6 extraction. **No extracted money terms diverged between modes.** Cleanup retained the amount and account corrections. All extracted terms matched the speaker-confirmed labels, including spoken account suffixes and “today” resolved to recording date 2026-10-11. This experiment did not reproduce cleanup losing a payment correction.
+
+The baseline still failed when a vendor’s account changed after approval. A live Opus 5.5 proposal learned an account-identity rule that caught that scenario while preserving benign edits. A separate, explicitly synthetic stress suite exercised deliberately lossy transcripts. These are separate results, not additional real Scribe failures.
+
+Scores below are **ok / unsafe_commit / benign_block**; duplicates were zero. Source: [RESULTS.md](RESULTS.md).
+
+| Suite | Set | N | Baseline | Final |
+|---|---|---:|---|---|
+| Measured recordings + edits | must_catch | 1 | 0 / 1 / 0 | 1 / 0 / 0 |
+| Measured recordings + edits | must_pass | 8 | 8 / 0 / 0 | 8 / 0 / 0 |
+| Measured suite, synthetic holdouts | holdout | 5 | 2 / 3 / 0 | 3 / 2 / 0 |
+| Synthetic stress | must_catch | 4 | 0 / 4 / 0 | 4 / 0 / 0 |
+| Synthetic stress | must_pass | 5 | 5 / 0 / 0 | 5 / 0 / 0 |
+| Synthetic stress | holdout | 5 | 2 / 3 / 0 | 5 / 0 / 0 |
+
+Measured healing took one iteration; synthetic stress took two. **Two synthetic holdouts remain unsafe in the measured-suite policy.** Its training data contained no transcript divergence from which to learn the clarification rule. The healer’s `healed` status means must-catch failures are resolved, not that all holdouts pass. Six recordings and these small, labeled scenario sets do not establish production error rates or generalization.
+
+## Pipeline and healing loop
+
+```mermaid
+flowchart TD
+    A[Same audio bytes] --> V[Scribe verbatim]
+    A --> C[Scribe cleaned]
+    V --> EV[Sonnet terms]
+    C --> EC[Sonnet terms]
+    EV --> E[Evidence: both transcripts and terms]
+    EC --> E
+    E --> I[Cleaned approval: terms + bank account + fence version]
+    I --> Q[Queue]
+    Q --> W[Worker transaction: fence + current vendor + rules]
+    W --> P[Receipt or clarify/reapprove block]
+    P --> O[Oracle: true terms + immutable approval]
+    O --> F[Must-catch failures and field diffs only]
+    F --> M[Opus proposes JSON predicates]
+    M --> G[Scratch replay: must_catch + must_pass + holdout]
+    G --> D[Audit every candidate and gate reason]
+    D --> R[Activate best accepted rule]
+    R --> W
 ```
 
-Tests always use the local `rs0` replica set and isolated databases. They never
-read this project's `.env` or `.env.secrets`, and never use its Atlas URI. Each
-test database is removed afterward. `TEST_MONGODB_URI` can select another loopback
-port; include `replicaSet=rs0&directConnection=true`. Remote test hosts are rejected.
-For unit tests only: `uv run pytest -m 'not integration'`.
+The worker atomically claims one pending queue item. One transaction increments the vendor fence, reads current vendor/evidence/intent/rules, and records either an idempotent receipt or a block. Bank-account updates increment the same fence in their transaction, causing conflicting payments to retry and reread coherent state. Fence versions also change for harmless name or memo edits: version equality alone is not an account-identity check. The naive empty-rules baseline intentionally pays the current bank account; the oracle exposes whether that differs from approval.
 
-The app loads settings in this order: process environment, `.env.secrets`, `.env`.
-`.env.secrets` therefore wins over the blank URI in `.env.example`. An absent or
-blank final `MONGODB_URI` falls back to local MongoDB. Keep real values in ignored
-files, not `.env.example`. Keys and connection strings are never printed or logged.
-The configured demo uses Atlas when its URI is in `.env.secrets`:
-
-```sh
-uv run python -m db.ping
-uv run python -m db.seed
-uv run python pipeline.py enqueue demo-invoice.wav --confirm-from verbatim
-# Copy outcome.queue_id from the enqueue output.
-uv run python scripts/change_vendor_account.py vendor-001 demo-account-updated
-uv run python pipeline.py process --queue-id 'queue:YOUR_INTENT_ID'
-```
-
-`db.ping` prints exactly `ok` or `fail` on stdout and exits 0 or 1. CLI errors
-print the exception type and a sanitized message to stderr. Configured secrets,
-encoded credentials, connection URIs, and IP addresses are redacted; tracebacks
-are not printed. `db.seed` installs eight
-collections (`vendors`, `fences`, `evidence`, `intents`, `queue`, `payments`,
-`rule_versions`, `runs`), strict validators, a unique payments idempotency index,
-and three fictional vendors with version-zero fences. Re-running seed preserves
-existing accounts and fence versions. Existing historical documents are not
-migrated when validators are refreshed; unconfirmed legacy intents cannot pay.
-
-`enqueue` never processes payments. For a combined demo or the `--hold` shortcut:
-
-```sh
-uv run python pipeline.py demo demo-invoice.wav --confirm-from verbatim
-uv run python pipeline.py demo amount-correction.wav --confirm-from verbatim --hold
-# Equivalent shortcut for a held demo:
-uv run python pipeline.py --hold --confirm-from verbatim
-```
-
-Enqueue/demo commands transcribe the same audio twice, using `no_verbatim=False`
-for verbatim and `True` for cleaned text. They independently extract terms from
-each transcript and store both texts and both results in one evidence document.
-A draft intent cannot be enqueued or paid. Explicit confirmation stores
-`confirmed_terms`, `confirmed_at`, `confirmation_source`, `approved_bank_account`,
-and `approved_fence_version`. The account/version pair is read from one snapshot
-at approval. Worker evaluation can inspect that snapshot through `context['intent']`.
-
-The naive baseline automatically approves the cleaned candidate by default,
-including non-interactive CLI invocations and `run_pipeline`. Its approval
-snapshot records this choice; it can preserve transcription mistakes deliberately
-for oracle evaluation. `--confirm-from verbatim` overrides the baseline, while
-`--confirm-from cleaned` is explicit default behavior. Use
-`--confirmed-terms /path/to/approved-terms.json` for manual corrections. The file
-must contain exactly `vendor_id`, `amount_cents`, `destination_account`, and an
-ISO `date`. No interactive prompt is shown. `prepare_intent` remains a draft-only
-API for future deliberate approval flows. Repeating confirmation with the same
-terms preserves its original snapshot, and repeating enqueue does not create a
-second queue item.
-
-`STATIC_GUARD` defaults to `off`. With no active rules and the guard off, payment
-uses the vendor's **current** bank account read inside the payment transaction.
-Receipts retain `destination_account` from the approved instruction and record the
-actual target in `paid_to` (also recorded as `vendor_account`). These may differ
-after an account change. Set `STATIC_GUARD=on` to opt into blocking a requested
-destination that differs from the current vendor account. Numeric destinations
-represent spoken account endings: `24` matches `acct-0024`, while `42` does not.
-Other destination identifiers require an exact match. Seed defaults vendor-002 to
-`acct-0024`; existing seeded accounts remain untouched on reruns.
-
-The worker atomically claims one pending queue item, then one transaction
-increments the vendor fence, loads current vendor data and active rules, evaluates
-them, inserts the receipt and marks done, or marks blocked with a reason.
-Idempotency keys are exactly queue IDs. All monetary fields, including nested
-candidate/confirmed terms, require positive signed 64-bit integer cents; floats,
-decimals, and booleans are rejected. All new fields have validators.
-
-All bank changes go through `db.vendors.update_vendor_bank_account` (used by the
-change-account script): it increments the same vendor fence and changes the bank
-account in one transaction. Real write conflicts cause callback retries; uncertain
-commit results retry only the commit. See the [PyMongo transaction documentation](https://www.mongodb.com/docs/languages/python/pymongo-driver/current/crud/transactions/).
-`rules.evaluate(rule, context)` evaluates a conjunction of fixed-field comparisons.
-All clauses must pass; otherwise it returns `on_fail` (`clarify` or `reapprove`).
-Unknown fields, literals, arbitrary expressions, and malformed predicates are
-rejected. Missing/null fields fail closed. The worker reads evidence in the same
-payment snapshot. Evaluation performs no I/O or mutation; empty active rules still
-allow payment. `rules.VOCABULARY` lists the 15 permitted fields; `eq`/`neq` compare
-exact values, without account suffix coercion.
-
-The six fictional fixtures have independent, hand-labeled `true_terms`:
-
-| Case | Audio fixture | Correct instruction |
-| --- | --- | --- |
-| 500, no, 50 | `amount-correction.wav` | 5,000 cents |
-| 500, no wait, 500 is right | `amount-reaffirmation.wav` | 50,000 cents |
-| Fifteen vs fifty | `fifteen-vs-fifty.wav` | 1,500 cents |
-| Account ending 42, sorry, 24 | `account-correction.wav` | Vendor-002 `acct-0024` |
-| Filler only | `filler-only.wav` | No terms; evidence only |
-| Clean | `demo-invoice.wav` | 12,550 cents |
-
-No actual audio files are needed for stubs. Cleaned candidates intentionally
-simulate lost corrections in three cases; these are not measured Scribe results.
-Ground-truth labels are used only by tests and the oracle, never to extract or approve terms.
-
-`ADAPTERS=fixture` is the default even when keys exist. Set `ADAPTERS=live`
-for real audio files and configure `ELEVENLABS_API_KEY`, `ANTHROPIC_API_KEY`, and
-optionally `CLAUDE_MODEL` (default `claude-sonnet-4-6`). Missing keys or API errors
-fail visibly; live mode never silently substitutes fixture data. Readback stays
-text-only. Inject an `interfaces.Adapters` bundle for isolated/offline tests.
-
-```sh
-ADAPTERS=live uv run python pipeline.py enqueue /path/to/audio.wav --confirm-from cleaned
-```
-
-The live adapter uses [Scribe v2](https://elevenlabs.io/docs/api-reference/speech-to-text/convert)
-with `no_verbatim=False` and `True`, using identical audio bytes read once.
-SHA-256 cache records live in `evidence` (`kind: cache`), distinct from complete
-per-run evidence. Successful transcripts and extractions persist immediately,
-so sequential reruns, renamed files, partial failures, and null terms reuse prior
-calls. Cache hits are logged. Extraction caches include the model, prompt, tool
-schema, and vendor catalog; changing these re-extracts but reuses Scribe transcripts.
-Changed audio bytes invalidate both caches. Concurrent first-time submissions can
-still make duplicate API calls; the cache does not implement distributed leases.
-
-Claude calls `messages.create` with `EXTRACT_TERMS_TOOL`, `strict=True`, and a
-forced named `tool_choice` with `disable_parallel_tool_use=True`. These parameters
-were verified against the installed SDKs (ElevenLabs 2.71.0, Anthropic 0.125.0) and
-[Claude strict tool-use docs](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use).
-A real Sonnet 4.6 request passed strict forced-tool extraction. Sonnet 5.5 rejects
-forced tool selection, so it is unsuitable for this adapter without changing the
-flow (see [its model notes](https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5)).
-The SDK's `transform_schema` removes constraints unsupported by the wire schema;
-`validate_terms` still enforces positive 64-bit integer cents and real ISO dates
-locally. Refusals, truncated or multiple tool calls, and invalid payloads fail.
-Null means no complete payment instruction. The model sees the vendor catalog
-and transcript, never fixture `true_terms`.
-
-`runs` logs `{run_id, step, inputs, outputs, ts}`, including each transcription and
-extraction variant, confirmation, queueing, and worker outcome. Transaction logs
-commit or roll back with their writes; retry/error records are separate. Remote
-tracing no-ops until both `RAINDROP_WRITE_KEY` and an explicit `configure_trace`
-transport exist. No network calls run inside retryable payment callbacks.
-
-`oracle.py` evaluates finished runs separately from the payment path:
-
-```sh
-uv run python oracle.py                         # All finished fixture runs
-uv run python oracle.py --run-id YOUR_RUN_ID     # One finished run
-# For live audio with an explicitly known fixture truth:
-uv run python oracle.py --run-id YOUR_RUN_ID --case-id clean
-```
-
-Each verdict is stored once in `runs` as `step: oracle`, with a top-level `label`,
-fixture/evidence/intent references, and reason codes. A partial unique index keeps
-concurrent/repeated labeling idempotent. Read it with
-`db.runs.find_one({"run_id": run_id, "step": "oracle"})`. Re-labeling refreshes
-that summary, leaving payment and approval records intact.
-
-| Label | Meaning |
-| --- | --- |
-| `ok` | Expected payment matches truth/approval, filler produces no payment, or the required clarify/reapprove block occurs |
-| `unsafe_commit` | Actual paid amount/vendor/account differs from truth or approval; actual account differs from the full approval snapshot |
-| `benign_block` | Finished run with a true payment instruction produced no payment |
-| `duplicate` | More than one receipt for the same run; takes precedence over unsafe checks |
-
-The oracle compares actual `paid_to`, including spoken suffixes, and the full
-`approved_bank_account`; changing to another full account with the same suffix
-is unsafe. It uses historical receipts and approval data, so account changes after
-payment cannot alter a prior verdict. A higher fence version alone is not unsafe:
-other payments also advance the fence. Distinct runs are separate instructions;
-replaying completion logs alone does not count as a duplicate receipt.
-
-Draft/pending/claimed runs are skipped in batch mode and rejected in single-run
-mode. Unknown/live audio is never given a guessed truth label; live runs require
-an explicit fixture case. Fixture mode persists `fixture_case_id` in evidence;
-legacy offline runs can be matched by fixture basename. The expected cleaned
-baseline labels are unsafe for amount-correction, fifteen-vs-fifty, and account-
-correction; ok for reaffirmation, filler, and clean. Ground truth remains outside
-the transcription, extraction, approval, and payment paths.
-
-GitHub Actions runs Python 3.11 tests and the split CLI demo against local Compose.
-Compose binds MongoDB to loopback and sets its open-file limit to 64,000, following
-[MongoDB's recommendation](https://www.mongodb.com/docs/manual/reference/ulimit/),
-so repeated creation of isolated test databases cannot hit Docker's low default.
-Stop it with `docker compose down`; the named data volume persists.
-
-On an unrecoverable worker error, the item stays claimed. Lease expiry and
-automatic crash recovery remain future work. `process_claimed(db, claimed_item)`
-can resume a known claim without duplicating a completed receipt. Avoid resetting
-ambiguous claims to pending. Without uv, install with Python 3.11 using
-`pip install -e . pytest` inside a virtual environment.
-
-Fixtures specify `expected`: divergent candidates require `clarify`, queued bank
-changes require `reapprove`, and ordinary/benign runs expect `pay`. A `clarify` or
-`reapprove` block on an expected-clarify case is correct (`ok`). On an expected-
-reapprove case only `reapprove` is correct. Other blocks are `benign_block`.
-Paying when clarification or reapproval is required is unsafe even if the chosen
-terms happened to match truth. Name/memo edits use `update_vendor_profile`, which
-advances the fence in the same transaction while preserving the bank account.
-
-Example rule:
+Rules are deterministic, side-effect-free conjunctions of `eq`/`neq` comparisons between 15 permitted fields in verbatim/cleaned evidence, confirmed terms, approval account/fence version, and current bank account. No generated Python, literal values, or external calls execute inside the transaction. For example:
 
 ```json
 {"clauses":[{"left":"intent.approved_bank_account","cmp":"eq","right":"vendor.bank_account"}],"on_fail":"reapprove"}
 ```
 
-`replay.replay_suite` owns a fresh scratch database, seeds fictional vendors, runs
-the real fixture pipeline/worker/oracle, and drops only that database afterward.
-It explicitly disables `STATIC_GUARD` so gates measure candidate rules. There are
-4 must_catch, 5 must_pass, and 5 holdout scenarios. Holdouts use vendor-003, unseen amounts,
-account ending 13 corrected to 31, two consecutive bank changes, and a benign memo
-edit. `training_failures` returns only train failures with reasons and fixed-field
-diffs. The gate requires fewer must_catch failures, must_pass benign_block = 0, no
-increased benign blocks/duplicates in any set, and no holdout count/case regression.
+The oracle uses independent `true_terms` and `expected: pay | clarify | reapprove`. It checks receipt amount/destination against truth and approval, recognizes requested clarification/reapproval blocks, detects duplicates, and labels ordinary payments that were blocked as `benign_block`. Numeric destinations represent spoken account endings. Ground truth is evaluation data, never an extraction, approval, or payment input.
 
-`proposer.ClaudeProposer` uses Opus 5.5 `beta.messages.create` with
-`output_config.format = {type: json_schema, schema: ...}` with `effort: high` for zero to five rule
-objects; an empty list is valid and logged. The installed SDK's `transform_schema` prepares the wire schema; local
-gating validates every predicate. Only training failures, current predicate
-bodies, and the vocabulary are serialized. Candidate gate metadata and holdout
-rows are never part of that request. See the [structured output API](https://platform.claude.com/docs/en/build-with-claude/structured-outputs).
-An explicit `FixtureProposer` supplies offline demo proposals, including a blanket
-block that the gate must reject; provider failures never select it automatically.
+The proposer sees only `must_catch` failures, their reasons/diffs, current predicate bodies, and vocabulary. `must_pass` and `holdout` scenarios never enter its prompt. Opus 5.5 uses high-effort JSON-schema output, no forced tool choice, and the requested server fallback beta. It may return zero to five candidates. Every candidate receives an audit with per-set before/after counts and rejection reasons. Acceptance requires fewer must-catch failures, zero must-pass benign blocks, and no worse holdouts. Only the best accepted candidate activates; limits are three iterations and eight active rules.
 
-The proposer sends `betas=["server-side-fallback-2026-07-01"]` and
-`fallbacks="default"`, without `tool_choice`. Its requested/served models and
-fallback use are available for audit. Extraction remains Sonnet 4.6. See
-[server-side fallback parameters](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback).
+## Run locally without API keys
 
-Run healing against the configured database (Atlas for the demo):
+Install Python 3.11, Docker Compose, and uv:
 
 ```sh
-uv run python heal.py                         # Live Opus proposer
-uv run python heal.py --proposer fixture      # Explicit offline alternative
-uv run python heal.py --iterations 1          # At most 1 attempt
+uv sync --frozen --python 3.11
+docker compose up -d --wait
+uv run pytest -q
+export MONGODB_URI='mongodb://127.0.0.1:27017/?replicaSet=rs0&directConnection=true'
+export ADAPTERS=fixture
+uv run python -m db.seed
+uv run python pipeline.py demo amount-correction.wav
+uv run python oracle.py
+uv run python heal.py --proposer fixture
+uv run python scoreboard.py
+uv run python scoreboard.py --json
 ```
 
-Each candidate is added to current rules for a fresh scratch replay. The gate
-requires fewer must_catch failures, zero must_pass benign blocks, and no holdout
-regression. All proposals are persisted before replay, then receive a per-set
-gate audit and decision/rejection reason in `rule_versions`. Invalid predicates
-remain inactive with their raw proposal retained. Only the best accepted rule is
-activated; existing rules remain active. Activation checks the exact replayed
-policy under a shared fence. Limits are three iterations, five candidates per
-proposal, and eight active rules. Empty proposals are logged and end the attempt
-with `no_candidates`. Provider errors do not switch to fixtures. Baseline and
-post-attempt score snapshots live in `runs` with `step: heal_iteration`.
+Fixture mode reads labeled JSON by filename; it needs neither recordings nor API keys. Its intentionally lossy cleaned text is a simulator input. The fixture proposer is an explicit deterministic demo alternative; it does not claim a model was called. Local MongoDB is `mongo:7`, single-node `rs0`, so tests exercise real transactions. Tests use isolated loopback databases, ignore project secret files, and reject remote test URIs. Unit-only checks: `uv run pytest -m 'not integration'`.
+
+## Reproduce live acquisition and Atlas experiments
+
+Keep Atlas and API values in ignored `.env.secrets`. Configuration precedence is process environment, `.env.secrets`, then `.env`; absent/blank URI falls back to local MongoDB. Start from the blank names in `.env.example`. Never commit actual values. If the preceding local commands exported `MONGODB_URI`, unset it to use Atlas from the secret file:
 
 ```sh
-uv run python scoreboard.py                   # Per-set table and plain rules
-uv run python scoreboard.py --json            # JSON for a future UI
-uv run python scoreboard.py --heal-id SESSION # A historical session
+unset MONGODB_URI
+uv run python -m db.ping
+uv run python -m db.seed
+ADAPTERS=live uv run python -m scripts.measure_audio --reference-date 2026-10-11
+uv run python -m scripts.portfolio_experiment --suite measured --output artifacts/experiment.json
+uv run python -m scripts.portfolio_experiment --suite fixture --output artifacts/fixture_stress.json
 ```
 
-The scoreboard reports ok/unsafe_commit/benign_block (plus duplicate) out of N
-for must_catch, must_pass, and holdout at iteration 0 and after every attempt.
-JSON includes policy snapshots at each iteration and the current active policy.
-Plain output translates fixed fields into readable comparisons. It is read-only
-and supports an empty history; there is no UI implementation.
+Acquisition records both modes from identical bytes and independently extracts each. SHA-256 evidence caching preserves successful partial results. Transcript cache survives extraction-context changes; terms cache includes prompt, schema, model, catalog and reference date. Live errors do not silently fall back to fixtures. `ADAPTERS=fixture|live` selects the pipeline adapter explicitly. Extraction stays on Sonnet 4.6; the proposer uses Opus 5.5. Readback currently returns text, and Raindrop transport remains a stub; local `runs` contains the step logs.
+
+The portfolio runner seeds Atlas first, then creates a fresh owned audit database with empty rules. Gate replays execute the real pipeline/worker/oracle in disposable Atlas scratch databases using frozen measured outputs or explicitly synthetic fixtures; they do not call speech/extraction APIs again. Source demo policy/history is preserved. Each experiment creates a fresh proposal run; `--output` can save an additional export instead of replacing the checked-in reference result. Successful exports validate against [experiment.schema.json](artifacts/experiment.schema.json).
+
+Inspect the saved results **offline**, without MongoDB or API access:
+
+```sh
+uv run python scoreboard.py --artifact artifacts/experiment.json
+uv run python scoreboard.py --artifact artifacts/fixture_stress.json --json
+```
+
+For an account-change demo, enqueue and pay separately:
+
+```sh
+ADAPTERS=live RECORDING_REFERENCE_DATE=2026-10-11 uv run python pipeline.py enqueue audio/demo-invoice.wav
+# Use outcome.queue_id from the command output.
+uv run python scripts/change_vendor_account.py vendor-001 demo-account-updated
+uv run python pipeline.py process --queue-id 'queue:YOUR_INTENT_ID'
+```
+
+Approval defaults to the cleaned transcript; `--confirm-from verbatim` overrides it. `pipeline.py demo ... --hold` stops after enqueue. Manual `--confirmed-terms` accepts a JSON file with vendor ID, positive integer cents, destination and ISO date. `STATIC_GUARD` defaults off; its optional static destination guard is independent of learned rules. The seed is idempotent and preserves existing vendor accounts and rule history.
+
+## Evidence and repository hygiene
+
+- [RESULTS.md](RESULTS.md): measured findings, separate scoreboards, wall times and returned token usage. Provider responses supplied no invoiced dollar costs; those fields are null. The acquisition log excludes an earlier failed runner attempt and identifies its two cached Scribe outputs.
+- [artifacts/live_clips.json](artifacts/live_clips.json): audio hashes, both transcripts/terms, independently confirmed truth and cache provenance.
+- [artifacts/experiment.json](artifacts/experiment.json): measured baseline receipts, approvals, every candidate/gate, per-iteration scores and final replay.
+- [artifacts/fixture_stress.json](artifacts/fixture_stress.json): separately labeled synthetic stress experiment with live proposals.
+- [artifacts/secret_scan.json](artifacts/secret_scan.json): full-history scan scope and reviewed findings; no credential values.
+- [LINKEDIN.md](LINKEDIN.md): a draft post based on these measurements.
+
+Secrets, generated egg-info and build output are ignored. CLI errors show sanitized exception type/message; `db.ping` prints only `ok`/`fail` on stdout. No real URI or API key is in an artifact. To repeat the history scan with Gitleaks:
+
+```sh
+gitleaks git --log-opts=--all --redact=100 --no-banner .
+```
+
+The configuration retains default detectors and narrowly exempts only SHA-256 adapter-cache fingerprint lines in the two acquisition-containing exports. API key fields remain detectable. See the recorded scan for its exact revision and limitations.
+
+[MIT licensed](LICENSE). Repository name remains the original placeholder.
