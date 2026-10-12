@@ -958,12 +958,23 @@
         },
         "metrics": {
           "$ref": "#/$defs/metrics"
+        },
+        "gate": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/gate"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
         "rules",
         "results",
-        "metrics"
+        "metrics",
+        "gate"
       ],
       "additionalProperties": false
     },

@@ -16,7 +16,9 @@ def test_comparison_exports_every_attempt_outcome_with_real_candidate_gates(db, 
     vendors = {v["_id"]: v for v in SAMPLE_VENDORS}
     bad = next(c for c in data["cases"] if c["eval_set"] == "must_catch" and c["recognizer_a_terms"]["amount_cents"] == c["true_terms"]["amount_cents"]
                and not destination_matches(c["recognizer_a_terms"]["destination_account"], vendors[c["recognizer_a_terms"]["vendor_id"]]["bank_account"]))
-    good = next(c for c in data["cases"] if c["eval_set"] == "must_pass" and c["recognizer_a_terms"] is not None)
+    good = next(c for c in data["cases"] if c["eval_set"] == "must_pass" and c["recognizer_a_terms"] is not None
+                and (c["recognizer_b_terms"] is None or any(c["recognizer_b_terms"][f] != c["recognizer_a_terms"][f]
+                                                          for f in ("amount_cents", "destination_account"))))
     no_terms = next(c for c in data["cases"] if c["eval_set"] == "holdout" and c["recognizer_a_terms"] is None)
     data["cases"] = [bad, good, no_terms]
     ids = {c["case_id"] for c in data["cases"]} | {data["excluded"][0]["case_id"]}
@@ -30,6 +32,8 @@ def test_comparison_exports_every_attempt_outcome_with_real_candidate_gates(db, 
     assert result["comparators"]["live_heal"]["metrics"]["caught_unsafe"] == 1
     assert result["heal_iterations"][1]["candidates"][0]["decision"] == "activated"
     assert result["comparators"]["live_heal"]["metrics"]["intake_clarifications"] == 1
+    assert result["comparators"]["recognizer_agreement"]["gate"]["accepted"] is False
+    assert result["comparators"]["spoken_account_on_file"]["gate"]["accepted"] is True
     assert all(len(r["outcomes"]) == 4 for r in result["payment_attempts"])
     excluded = next(r for r in result["payment_attempts"] if r["eval_set"] == "excluded")
     assert all(v["status"] == "excluded" for v in excluded["outcomes"].values())

@@ -19,7 +19,7 @@ from experiments.failure_hunt import keys
 from experiments.failure_hunt.dataset import HOLDOUT_VOICE, ROOT, VOICES, read_dataset
 from heal import active_rules, run_heal
 from proposer import ClaudeProposer
-from replay import replay_suite
+from replay import gate_result, replay_suite
 from scoreboard import report
 from scripts.measure_audio import MeasuredCall, now, write_json
 from scripts.portfolio_experiment import _candidate, rule_text
@@ -53,6 +53,13 @@ def identical_contexts(baseline):
             for signature, rows in groups.items()
             if any(row["label"] == "unsafe_commit" for row in rows)
             and any(row["label"] == "ok" and row["payment_count"] == 1 for row in rows)]
+
+
+def annotate_comparator_gates(artifact):
+    """Apply the same gate function to each comparator's measured outcomes."""
+    baseline = artifact["comparators"]["empty_rules"]["results"]
+    for name, comparator in artifact["comparators"].items():
+        comparator["gate"] = None if name == "empty_rules" else gate_result(baseline, comparator["results"])
 
 
 def run_experiment(db, output, *, proposer, events=None, data=None):
@@ -131,6 +138,7 @@ def run_experiment(db, output, *, proposer, events=None, data=None):
         final = measured_replay(db.client, active_rules(db), phase="final_healed_replay")
         artifact["comparators"]["live_heal"] = {"rules": artifact["active_rules"], "results": final, "metrics": metrics(baseline, final)}
         artifact["final_replay"] = final
+        annotate_comparator_gates(artifact)
         # Join every measured policy outcome back to all supplied attempts; exclusions
         # remain explicit rather than pretending they received a worker verdict.
         for record in artifact["payment_attempts"]:
