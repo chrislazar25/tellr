@@ -1,0 +1,662 @@
+[
+ {
+  "ts": "15:17:49",
+  "case": "yes",
+  "src": "tts_e6b463a5df097a08.mp3",
+  "channel": "clean",
+  "truth_affirm": true,
+  "results": {
+   "scribe": {
+    "text": "Yes, go ahead",
+    "label": "AFFIRM"
+   },
+   "whisper_small": {
+    "text": "Yes, go ahead.",
+    "no_speech_prob": 0.0021035904064774513,
+    "avg_logprob": -0.4032476618885994,
+    "label": "AFFIRM"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:17:53",
+  "case": "yes",
+  "src": "tts_e6b463a5df097a08.mp3",
+  "channel": "phone_snr5",
+  "truth_affirm": true,
+  "results": {
+   "scribe": {
+    "text": "Yes, go ahead",
+    "label": "AFFIRM"
+   },
+   "whisper_small": {
+    "text": "Yes, go ahead.",
+    "no_speech_prob": 0.14932934939861298,
+    "avg_logprob": -0.4567939266562462,
+    "label": "AFFIRM"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:17:58",
+  "case": "yes",
+  "src": "tts_e6b463a5df097a08.mp3",
+  "channel": "phone_snr0",
+  "truth_affirm": true,
+  "results": {
+   "scribe": {
+    "text": "Yeah, we're going in",
+    "label": "AFFIRM"
+   },
+   "whisper_small": {
+    "text": "Yes, go ahead.",
+    "no_speech_prob": 0.5280643105506897,
+    "avg_logprob": -0.7051854804158211,
+    "label": "AFFIRM"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:18:02",
+  "case": "yes",
+  "src": "tts_ac99241cb58aa0ca.mp3",
+  "channel": "clean",
+  "truth_affirm": true,
+  "results": {
+   "scribe": {
+    "text": "Yes, go ahead",
+    "label": "AFFIRM"
+   },
+   "whisper_small": {
+    "text": "Yes, go ahead.",
+    "no_speech_prob": 0.005398240871727467,
+    "avg_logprob": -0.39991629496216774,
+    "label": "AFFIRM"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:18:07",
+  "case": "yes",
+  "src": "tts_ac99241cb58aa0ca.mp3",
+  "channel": "phone_snr5",
+  "truth_affirm": true,
+  "results": {
+   "scribe": {
+    "text": "Yes, go ahead",
+    "label": "AFFIRM"
+   },
+   "whisper_small": {
+    "text": "Yes, go ahead.",
+    "no_speech_prob": 0.2651927173137665,
+    "avg_logprob": -0.5582947060465813,
+    "label": "AFFIRM"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:18:12",
+  "case": "yes",
+  "src": "tts_ac99241cb58aa0ca.mp3",
+  "channel": "phone_snr0",
+  "truth_affirm": true,
+  "results": {
+   "scribe": {
+    "text": "Let's go in",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "Let's go ahead.",
+    "no_speech_prob": 0.42362961173057556,
+    "avg_logprob": -0.7511738911271095,
+    "label": "AFFIRM"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:18:16",
+  "case": "yes",
+  "src": "tts_73156aebd608d7cc.mp3",
+  "channel": "clean",
+  "truth_affirm": true,
+  "results": {
+   "scribe": {
+    "text": "Yes, go ahead",
+    "label": "AFFIRM"
+   },
+   "whisper_small": {
+    "text": "Yes, go ahead!",
+    "no_speech_prob": 0.0038118052762001753,
+    "avg_logprob": -0.45924099534749985,
+    "label": "AFFIRM"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:18:20",
+  "case": "yes",
+  "src": "tts_73156aebd608d7cc.mp3",
+  "channel": "phone_snr5",
+  "truth_affirm": true,
+  "results": {
+   "scribe": {
+    "text": "Yes, go ahead",
+    "label": "AFFIRM"
+   },
+   "whisper_small": {
+    "text": "Yep, go ahead.",
+    "no_speech_prob": 0.032210398465394974,
+    "avg_logprob": -0.5652258768677711,
+    "label": "AFFIRM"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:18:25",
+  "case": "yes",
+  "src": "tts_73156aebd608d7cc.mp3",
+  "channel": "phone_snr0",
+  "truth_affirm": true,
+  "results": {
+   "scribe": {
+    "text": "Yes, go ahead",
+    "label": "AFFIRM"
+   },
+   "whisper_small": {
+    "text": "Yes, go ahead.",
+    "no_speech_prob": 0.08585189282894135,
+    "avg_logprob": -0.5293198376893997,
+    "label": "AFFIRM"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:18:30",
+  "case": "no",
+  "src": "tts_db0ebd4f6b54a9a7.mp3",
+  "channel": "clean",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "No, don't send it",
+    "label": "DENY"
+   },
+   "whisper_small": {
+    "text": "No, don't send it.",
+    "no_speech_prob": 0.004455655347555876,
+    "avg_logprob": -0.38252967596054077,
+    "label": "DENY"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:18:34",
+  "case": "no",
+  "src": "tts_db0ebd4f6b54a9a7.mp3",
+  "channel": "phone_snr5",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "No, don't say it",
+    "label": "DENY"
+   },
+   "whisper_small": {
+    "text": "No, don't say it.",
+    "no_speech_prob": 0.11296127736568451,
+    "avg_logprob": -0.5353644132614136,
+    "label": "DENY"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:18:39",
+  "case": "no",
+  "src": "tts_db0ebd4f6b54a9a7.mp3",
+  "channel": "phone_snr0",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "No, don't",
+    "label": "DENY"
+   },
+   "whisper_small": {
+    "text": "No, don't.",
+    "no_speech_prob": 0.5086509585380554,
+    "avg_logprob": -0.7277446165680885,
+    "label": "DENY"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:18:44",
+  "case": "no",
+  "src": "tts_255dcc09e66096d0.mp3",
+  "channel": "clean",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "No, don't send it",
+    "label": "DENY"
+   },
+   "whisper_small": {
+    "text": "No, don't send it.",
+    "no_speech_prob": 0.009726883843541145,
+    "avg_logprob": -0.3211451768875122,
+    "label": "DENY"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:18:48",
+  "case": "no",
+  "src": "tts_255dcc09e66096d0.mp3",
+  "channel": "phone_snr5",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "No, don't end it",
+    "label": "DENY"
+   },
+   "whisper_small": {
+    "text": "No, don't take it.",
+    "no_speech_prob": 0.35468754172325134,
+    "avg_logprob": -0.5330312132835389,
+    "label": "DENY"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:18:53",
+  "case": "no",
+  "src": "tts_255dcc09e66096d0.mp3",
+  "channel": "phone_snr0",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "No, don't say that",
+    "label": "DENY"
+   },
+   "whisper_small": {
+    "text": "Thank you.",
+    "no_speech_prob": 0.6848853826522827,
+    "avg_logprob": -0.8097964028517405,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:18:59",
+  "case": "no",
+  "src": "tts_7385bdc5ef562359.mp3",
+  "channel": "clean",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "No, don't send it",
+    "label": "DENY"
+   },
+   "whisper_small": {
+    "text": "No don't send it.",
+    "no_speech_prob": 0.010458773002028465,
+    "avg_logprob": -0.3667697376675076,
+    "label": "DENY"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:19:03",
+  "case": "no",
+  "src": "tts_7385bdc5ef562359.mp3",
+  "channel": "phone_snr5",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "No, don't send it",
+    "label": "DENY"
+   },
+   "whisper_small": {
+    "text": "No, don't send it.",
+    "no_speech_prob": 0.5412841439247131,
+    "avg_logprob": -0.8114499807357788,
+    "label": "DENY"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:19:08",
+  "case": "no",
+  "src": "tts_7385bdc5ef562359.mp3",
+  "channel": "phone_snr0",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "So don't send it",
+    "label": "DENY"
+   },
+   "whisper_small": {
+    "text": "Thank you very much.",
+    "no_speech_prob": 0.5861245393753052,
+    "avg_logprob": -0.7823145613074303,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:19:12",
+  "case": "hold",
+  "src": "tts_ef80dbaa8ad04b60.mp3",
+  "channel": "clean",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "Uh, hold on, let me check",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "Hold on let me check",
+    "no_speech_prob": 0.014084093272686005,
+    "avg_logprob": -0.21387755870819092,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:19:17",
+  "case": "hold",
+  "src": "tts_ef80dbaa8ad04b60.mp3",
+  "channel": "phone_snr5",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "Uh, hold on, let me check",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "Hold on let me check",
+    "no_speech_prob": 0.04663717374205589,
+    "avg_logprob": -0.20014840550720692,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:19:22",
+  "case": "hold",
+  "src": "tts_ef80dbaa8ad04b60.mp3",
+  "channel": "phone_snr0",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "Uh, hold on. Let me check",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "Hold on let me check",
+    "no_speech_prob": 0.1533534824848175,
+    "avg_logprob": -0.37602514401078224,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:19:27",
+  "case": "hold",
+  "src": "tts_0b0444d66cf6a269.mp3",
+  "channel": "clean",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "Uh, hold on. Let me, me check",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "Uh, hold on, let me... meet you...",
+    "no_speech_prob": 0.06291372328996658,
+    "avg_logprob": -0.7864809632301331,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:19:32",
+  "case": "hold",
+  "src": "tts_0b0444d66cf6a269.mp3",
+  "channel": "phone_snr5",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "Uh, hold on. Let me...",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "Hold on, let me...",
+    "no_speech_prob": 0.14939267933368683,
+    "avg_logprob": -0.645441108279758,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:19:37",
+  "case": "hold",
+  "src": "tts_0b0444d66cf6a269.mp3",
+  "channel": "phone_snr0",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "Uh, hold on. Let me",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "Hold on. Thank you.",
+    "no_speech_prob": 0.1672973334789276,
+    "avg_logprob": -0.7383506562974718,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:19:42",
+  "case": "hold",
+  "src": "tts_75c8c036163eeeb1.mp3",
+  "channel": "clean",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "Uh, hold on, let me check",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "Hold on let me check",
+    "no_speech_prob": 0.05565202608704567,
+    "avg_logprob": -0.4379824250936508,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:19:46",
+  "case": "hold",
+  "src": "tts_75c8c036163eeeb1.mp3",
+  "channel": "phone_snr5",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "Uh, hold on, let me check",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "Hold on, let me see.",
+    "no_speech_prob": 0.09117137640714645,
+    "avg_logprob": -0.48483062982559205,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:19:51",
+  "case": "hold",
+  "src": "tts_75c8c036163eeeb1.mp3",
+  "channel": "phone_snr0",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "Uh, hold on. Let me check",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "Uh, hold on, let me try.",
+    "no_speech_prob": 0.2961234152317047,
+    "avg_logprob": -0.7011222988367081,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:19:55",
+  "case": "silence",
+  "src": "gen_silence_6.wav",
+  "channel": "clean",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "You",
+    "no_speech_prob": 0.8163361549377441,
+    "avg_logprob": -0.8211003541946411,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:20:00",
+  "case": "silence",
+  "src": "gen_silence_6.wav",
+  "channel": "phone_snr10",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "[static]",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "",
+    "no_speech_prob": 1.0,
+    "avg_logprob": 0.0,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:20:05",
+  "case": "hiss",
+  "src": "gen_hiss_6.wav",
+  "channel": "clean",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "[static]",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "",
+    "no_speech_prob": 1.0,
+    "avg_logprob": 0.0,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:20:09",
+  "case": "hiss",
+  "src": "gen_hiss_6.wav",
+  "channel": "phone_snr10",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "[static]",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "You",
+    "no_speech_prob": 0.844768762588501,
+    "avg_logprob": -0.9681965410709381,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:20:14",
+  "case": "rustle",
+  "src": "gen_rustle_6.wav",
+  "channel": "clean",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "[static]",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "",
+    "no_speech_prob": 1.0,
+    "avg_logprob": 0.0,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ },
+ {
+  "ts": "15:20:19",
+  "case": "rustle",
+  "src": "gen_rustle_6.wav",
+  "channel": "phone_snr10",
+  "truth_affirm": false,
+  "results": {
+   "scribe": {
+    "text": "[outro jingle]",
+    "label": "UNCLEAR"
+   },
+   "whisper_small": {
+    "text": "",
+    "no_speech_prob": 1.0,
+    "avg_logprob": 0.0,
+    "label": "UNCLEAR"
+   }
+  },
+  "kind": "confirm"
+ }
+]

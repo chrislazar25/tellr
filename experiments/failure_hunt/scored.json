@@ -1,0 +1,5280 @@
+[
+ {
+  "case": "magnitude",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment $1,500 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $1,500 to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo equipment $1,500 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment fifteen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "We'll pay demo equipment $1,500 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment fifteen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo equipment $1,500 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Paid demo equipment, fifteen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment, $1,500 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $1,500 to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment, $1,500 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Paid demo equipment, $1,500 to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo equipment, $1,500 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment, fifteen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "A demo of a good $1,500 discount ending in 0-3.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "magnitude",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment, fifteen hundred dollars to the account ending zero zero zero",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "000",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 000\u2260003"
+  ]
+ },
+ {
+  "case": "magnitude",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment, $1,500 to account ending 003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $1,500 to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment, $1,500 to account ending 003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment fifteen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment, $1,500 to account ending 003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment fifteen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Hey Demo Equipment, $1,500 to account for 003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "magnitude",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment, fifteen hundred dollars to account entity zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 150000,
+   "destination_account": "entity003",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct entity003\u2260003"
+  ]
+ },
+ {
+  "case": "thirteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $13 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $13 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $13 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $13 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $13 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $13 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo papers fly $13.00 for county ending $001.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "thirteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $13 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply, $13 to account ending 001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $13 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply. $13 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $13 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply, $13 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $13 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "paid demo takes place. $13.00 per count ending 0-0-1.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "thirteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay Demo X supplier $13 to account ending 001.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "thirteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $13 to account ending 001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $13 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supplied $13 to account ending $001.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "thirteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $13 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supplies $13 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $13 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1300,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "thirteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Pay demo papers apply $13 to account ending 0-0-1.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "thirteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo taper supplied $13 to account ending 0801",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "fifteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $15 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $15 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $15 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply fifteen dollars to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $15 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $15 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $15 to account in the Aero Zero One.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "Aero Zero One",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct Aero Zero One\u2260001"
+  ]
+ },
+ {
+  "case": "fifteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply fifteen dollars to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply, $15 to account ending 001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $15 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $15 to account ending 001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $15 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $15 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supplies $15 to account ending zero zero one three",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "0013",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 0013\u2260001"
+  ]
+ },
+ {
+  "case": "fifteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "a demo paper to find $15.00 in the $0.01.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "fifteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $15 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $15 to account ending 001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $15 to account ending zero zero one.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $15 to account pending 001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $15 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "The pay demo pays a supply of $15 to account pending 001.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "fifteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supplies $15 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "A demo paper supplies $15 to an altitude of 0.01.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "fifteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply fifteen dollars to account six zero zero one.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1500,
+   "destination_account": "6001",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 6001\u2260001"
+  ]
+ },
+ {
+  "case": "fifty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay Demo Paper Supply $50 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $50 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $50 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $50 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $50 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $50 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $50 to the county ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $50 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply, $50 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $50 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply, $50 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $50 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo papers to fly $50 to account ending 0-0-1.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "fifty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supplier $50 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo papers at 1.50 USD to account in the series you're in.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "fifty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply, $50 to account ending zero zero nine",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "009",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 009\u2260001"
+  ]
+ },
+ {
+  "case": "fifty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $50 to account ending 001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $50 to account ending zero zero one.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $50 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Paid demo paper supply $50 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $50 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $50 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $50 to account entity 001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fifty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $50 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 5000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $50 to account ending 2-4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $50 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $50 to account ending 2-4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $50 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $50 to account ending 2-4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $50 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "We'll pay demo catering $50 to account endings.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "acct24",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo catering fifty dollars to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $50 to account ending $2.4.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "acct24",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $50 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $50 to account ending $2.4.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "acct24",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Paid demo catering $50 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $50 to account ending $2,400.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "2400",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 2400\u226024"
+  ]
+ },
+ {
+  "case": "acct24",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $50 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "A demo featuring $50,000 in your support.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "acct24",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $50 for catering two courses",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "<UNKNOWN>",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct <UNKNOWN>\u226024"
+  ]
+ },
+ {
+  "case": "acct24",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $50 to account ending $2.4.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "acct24",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $50 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $50 to account ending 2.4.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "acct24",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $50 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $50 to account pending 24.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $50 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "acct24",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $50 to a count ending $2.4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "2.4",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 2.4\u226024"
+  ]
+ },
+ {
+  "case": "acct24",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $50 to account NC2 School.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 5000,
+   "destination_account": "NC2 School",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct NC2 School\u226024"
+  ]
+ },
+ {
+  "case": "eighteen13",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $18 to account ending one three.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $18 to account ending one three",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $18 to account ending one three.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo catering eighteen dollars to account ending one three",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $18 to account ending one three",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo catering eighteen dollars to account ending one three",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Okay, demo catering, $18 to account ending 1-3.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo catering eighteen dollars to account ending one three",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $18 to account ending $1.3.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "eighteen13",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Paid demo catering $18 to account ending one three",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $18 to account ending $1.3",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "eighteen13",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Paid demo catering, $18 to account ending one three",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "A demo catering $18 to account ending $1.3",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "eighteen13",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $18 to account ending one three",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "A demonstrate ring $18.00 per count in the 1-3.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "eighteen13",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $18 to account ending one three",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $18 to account ending $1.3",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "eighteen13",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "clean",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $18 to account ending one three",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $18 to account ending $1.3.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "eighteen13",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo catering eighteen dollars to account ending one three",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $18 to accountants in 1.3.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "eighteen13",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo catering eighteen dollars to account ending one three",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1800,
+   "destination_account": "13",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "eighteen13",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "The pay demo is catering $18 to a counter-attempting $1.3.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "eighteen13",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demonstrator eighteen dollars to account six one three",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "fourteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $14 to account ending 0-0-1.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Paid demo paper supply, fourteen dollars to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply, $14 to account, ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Paid demo paper supply, fourteen dollars to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Okay, demo, paper supply, $14 for account ending 0-0-1.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply fourteen dollars for account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo, pay for supply, $14 to account ending $001.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "fourteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply, fourteen dollars to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply, $14 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $14 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Okay, demo, paper supply, $14 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo pay received five, fourteen dollars to account ending zero zero one",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "fourteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $14 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $14 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $14 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $14 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper to the client $14.00 and end in $0.01",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "fourteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supplier $14 for the account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply. $14 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Unpaid demo paper supplies, $14 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "We'll pay demo papers and buy them. $14 to account ending 0-0-1.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "I paid demo paper supplies, $14 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply. $14.00 is now pending $0.00.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "fourteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Hey, demo paper supply, fourteen dollars to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $14 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $14 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $14 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $14 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Okay, Debo paper supplies $40 to account ending 0-0-1.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "amount 40\u226014"
+  ]
+ },
+ {
+  "case": "fourteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $40 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "amount 40\u226014"
+  ]
+ },
+ {
+  "case": "fourteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply, $14 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $14 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo, pay for supply, $14 to a house ending $001.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "fourteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supplies, fourteen dollars to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 1400,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "fourteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo, pay the supply, $14.00 per team, $0.001.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "fourteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "A demo tape of the five, fourteen dollars per account 15001.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "forty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply, $40 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $40 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo, pay for supply, $40 to account ending $001.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "forty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $40 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $40 for the ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $40 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $40 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $40 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $40 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $40 to account ending 001",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $40 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $40 to account ending with zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply at $40 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supplier $40 to account ending 001",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $40 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supplier $40 to account ending 001",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "A demo table supplies $40 to a county from 001.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "forty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supplier $40 to account debit zero zero one.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "debit001",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct debit001\u2260001"
+  ]
+ },
+ {
+  "case": "forty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $40 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $40 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supplied $40 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supplier $40 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "$40 to account ending at 0-0-1.",
+  "terms": {
+   "vendor_id": "<UNKNOWN>",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "a demo paper supply. $40 to account N001",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "N001",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct N001\u2260001"
+  ]
+ },
+ {
+  "case": "forty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $40 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $40 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $40 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $40 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Pay demo paper supply $40 to account in C0-0-1.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "C0-0-1",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct C0-0-1\u2260001"
+  ]
+ },
+ {
+  "case": "forty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $40 to account banking zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "banking001",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct banking001\u2260001"
+  ]
+ },
+ {
+  "case": "forty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo paper supply $40 to account ending $001.",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $40 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo papers apply $40 to account ending $001.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "forty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supply $40 to account ending zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "001",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "forty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "The pay demo paper supplies $40 for an opening in 001.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "forty",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo paper supplied forty dollars to account eighty zero zero one",
+  "terms": {
+   "vendor_id": "vendor-001",
+   "amount_cents": 4000,
+   "destination_account": "80001",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 80001\u2260001"
+  ]
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo equipment $1,700 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment seventeen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo equipment $1,700 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment seventeen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Okay, demo equipment $1,700 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment seventeen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment $1,700 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment seventeen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment $1,700 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment seventeen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo equipment $1,700 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Paid demo equipment seventeen hundred dollars for account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment $1,700 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment seventeen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo equipment, $1,700 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment seventeen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment, $1,700. We are counting zero, zero, three.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment, seventeen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo equipment. $1,700 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Paid demo equipment, $1,700 to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo equipment. $1,700 to account ending 0-0-3.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Paid demo equipment, seventeen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "The height demo is $1,700, keeping on changing zero to zero.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Paid demo equipment, seventeen hundred dollars, account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment $1,700 to a Town Tending 003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment seventeen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment $1,700 to a drone panting 003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment seventeen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo equipment $1,700 to a town setting $0.03.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment seventeen hundred dollars to account debit zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment, $1,700 to account ending 003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment. Seventeen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment, $1,700 to account ending 08003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "08003",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 08003\u2260003"
+  ]
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment seventeen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo equipment, $1,700 to account, and a Zulu Zulu treat.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "seventeen_hundred",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment. Seventeen hundred dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 170000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment $70 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $70 to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment $70 to account ending 0-0-3.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "0-0-3",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 0-0-3\u2260003"
+  ]
+ },
+ {
+  "case": "seventy",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $70 to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment $70 to account ending 0-0-3.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "0-0-3",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 0-0-3\u2260003"
+  ]
+ },
+ {
+  "case": "seventy",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $70 to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay Demo Equipment $70 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment seventy dollars to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment $70 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $70 to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demos with the $70 to account ending 0-0-3.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "seventy",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $70 to account ending in zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo equipment $70 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Paid demo equipment $70 to account ending 003",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo equipment $70 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $70 to account ending 003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "High Demo Equipment, $70 to Accounting, $0.003",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "seventy",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $70 to account number 003",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "a demo equipment, $70 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Paid demo equipment, $70 to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "A demo equipment, $70 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Paid demo equipment, $70 to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Hey, Democrat, $70.00 to count ending $0.00.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "seventy",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "A demo equipment, $70 for account ending 008",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "008",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 008\u2260003"
+  ]
+ },
+ {
+  "case": "seventy",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo equipment $70 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $70 to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment $70 to account ending $0.00 street.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "seventy",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $70 to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "The pay demo equipment was $70 to account for $0.00 free.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "seventy",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $70 to account debit 003",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "debit 003",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct debit 003\u2260003"
+  ]
+ },
+ {
+  "case": "seventy",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment $70 to account ending $003.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $70 to account ending zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "003",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "seventy",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo equipment $70 to account ending 0-0-3.",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "0-0-3",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 0-0-3\u2260003"
+  ]
+ },
+ {
+  "case": "seventy",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment $70 to account MB003",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "MB003",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct MB003\u2260003"
+  ]
+ },
+ {
+  "case": "seventy",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Hey, demo equipment, $70 for a challenge, and thank you very, very much for your time.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "seventy",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo equipment seventy dollars to account entity zero zero three",
+  "terms": {
+   "vendor_id": "vendor-003",
+   "amount_cents": 7000,
+   "destination_account": "entity003",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct entity003\u2260003"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "$19 to account ending 2-4.",
+  "terms": {
+   "vendor_id": "<UNKNOWN>",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $19 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $19 to account ending 2-4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $19 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Okay, demo catering $19 to account ending 2-4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $19 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $19 to account ending 2-4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $19 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $19 to account ending $2.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "2",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 2\u226024"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $19 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Okay, demo catering, $19 to account ending payment.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "You paid Demo Catering $19 to account pending payment",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $19 to account ending 2.4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "2.4",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 2.4\u226024"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $19 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $19 to account ending $2.4",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $19 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "a demo catering $19 discount in return.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $19 to account MP24",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "MP24",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct MP24\u226024"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $19 to account in the 2.4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "2.4",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 2.4\u226024"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $19 to account ME24",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "ME24",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct ME24\u226024"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "a demo catering $19 to account in the 2-4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $19 to account MB two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "MB24",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct MB24\u226024"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "I am a catering officer.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $19 per pound and leave a tip",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $19 to account ending 2.4",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $19 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $19 to account ending 2-4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $19 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $19 to a campaign district 6-4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "campaign district 6-4",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct campaign district 6-4\u226024"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $19 to account ending 2-4",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $19 to account ending 2.4",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $19 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $19 to account heading 24.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $19 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 1900,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "nineteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $90 for now getting to school.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "nineteen",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $90 to account X824",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "X824",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "amount 90\u226019",
+   "acct X824\u226024"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $90 to account ending 2-4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $90 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $90 to account ending 2-4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $90 to account ending 24",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $90 to account in any store.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Hey Demo Catering, $90 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $90 to account ending 2-4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $90 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $90 to account ending 2-4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $90 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "Okay, demo catering, $90 to the show, that thing's too small.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "CwhRBWXzGAHq8TQ4Fs17",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Paid demo catering, $90 discount ending two four",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $90 to account ending 2.4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "2.4",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 2.4\u226024"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $90 to account NP24",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "NP24",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct NP24\u226024"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $90 to account ending 2.4",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Paid demo catering $90 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "a demo catering $90 bill counted in June 4th.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "<UNKNOWN>",
+   "date": "2026-06-04"
+  },
+  "issues": [
+   "acct <UNKNOWN>\u226024"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $90 to account number two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay democatering $90 to account ending $2.4.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $90 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay a demo catering $90 if you count any people.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $90 to the account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay dedicatory $90 to the account of these people.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "IKne3meq5aSn9XLyUdCD",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $90 to the account of 624",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "624",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 624\u226024"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $90 to account ending 2.4.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "2.4",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct 2.4\u226024"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $90 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "Pay demo catering $90 to account ending $2.4",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay Demo Catering $90 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $90 to account and at least two stores.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.0,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo catering ninety dollars to account MB two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "MB24",
+   "date": "2026-10-11"
+  },
+  "issues": [
+   "acct MB24\u226024"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $90 to Account Sending 24.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr10",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $90 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "whisper_small",
+  "text": "pay demo catering $90 to Account Sending 24.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr5",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $90 to account ending two four",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ },
+ {
+  "case": "ninety",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "whisper_small",
+  "text": "pay demo, pay trim, $90 to a term setting to four.",
+  "terms": null,
+  "issues": [
+   "no_terms"
+  ]
+ },
+ {
+  "case": "ninety",
+  "voice": "Xb7hH8MSUJpSbSDYk0k2",
+  "speed": 1.15,
+  "channel": "phone_snr0",
+  "recognizer": "scribe",
+  "text": "Pay demo catering $90 to account ending 24.",
+  "terms": {
+   "vendor_id": "vendor-002",
+   "amount_cents": 9000,
+   "destination_account": "24",
+   "date": "2026-10-11"
+  },
+  "issues": []
+ }
+]
