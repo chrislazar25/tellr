@@ -1,0 +1,5101 @@
+{
+  "schema_version": 1,
+  "experiment_id": "32001786-49f1-4b22-801e-2d3afb729ef8",
+  "suite": "fixture",
+  "started_at": "2026-10-12T20:26:56.220717+00:00",
+  "database_backend": "atlas",
+  "audit_database": "portfolio_experiment_6e7f3aa82d754d5ea3312bf622a737fd",
+  "reference_date": "2026-10-11",
+  "amount_unit": "integer_cents",
+  "status": "complete",
+  "clips": [
+    {
+      "case_id": "500_no_50",
+      "audio_file": "amount-correction.wav",
+      "source": "synthetic_fixture",
+      "verbatim": "Pay Demo Paper Supply 500, no, 50 dollars to demo-account-001 on 2026-10-11.",
+      "cleaned": "Pay Demo Paper Supply 500 dollars to demo-account-001 on 2026-10-11.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "money_terms_diverged": true
+    },
+    {
+      "case_id": "500_is_right",
+      "audio_file": "amount-reaffirmation.wav",
+      "source": "synthetic_fixture",
+      "verbatim": "Pay Demo Paper Supply 500, no wait, 500 is right, dollars to demo-account-001 on 2026-10-11.",
+      "cleaned": "Pay Demo Paper Supply 500 dollars to demo-account-001 on 2026-10-11.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "money_terms_diverged": false
+    },
+    {
+      "case_id": "fifteen_vs_fifty",
+      "audio_file": "fifteen-vs-fifty.wav",
+      "source": "synthetic_fixture",
+      "verbatim": "Pay Demo Paper Supply fifteen dollars, not fifty, to demo-account-001 on 2026-10-11.",
+      "cleaned": "Pay Demo Paper Supply fifty dollars to demo-account-001 on 2026-10-11.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 1500,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 1500,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "money_terms_diverged": true
+    },
+    {
+      "case_id": "account_42_sorry_24",
+      "audio_file": "account-correction.wav",
+      "source": "synthetic_fixture",
+      "verbatim": "Pay Demo Catering 50 dollars to account ending 42, sorry, 24 on 2026-10-11.",
+      "cleaned": "Pay Demo Catering 50 dollars to account ending 42 on 2026-10-11.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "42",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      },
+      "money_terms_diverged": true
+    },
+    {
+      "case_id": "filler_only",
+      "audio_file": "filler-only.wav",
+      "source": "synthetic_fixture",
+      "verbatim": "Um, uh, well, hmm.",
+      "cleaned": "",
+      "verbatim_terms": null,
+      "cleaned_terms": null,
+      "true_terms": null,
+      "money_terms_diverged": false
+    },
+    {
+      "case_id": "clean",
+      "audio_file": "demo-invoice.wav",
+      "source": "synthetic_fixture",
+      "verbatim": "Um, pay Demo Paper Supply one hundred twenty-five dollars and fifty cents to demo-account-001 on October eleventh, 2026.",
+      "cleaned": "Pay Demo Paper Supply $125.50 to demo-account-001 on 2026-10-11.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "money_terms_diverged": false
+    }
+  ],
+  "case_manifest": [
+    {
+      "case_id": "500_no_50",
+      "audio_file": "amount-correction.wav",
+      "eval_set": "must_catch",
+      "expected": "clarify",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "500_is_right",
+      "audio_file": "amount-reaffirmation.wav",
+      "eval_set": "must_pass",
+      "expected": "pay",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "fifteen_vs_fifty",
+      "audio_file": "fifteen-vs-fifty.wav",
+      "eval_set": "must_catch",
+      "expected": "clarify",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 1500,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "account_42_sorry_24",
+      "audio_file": "account-correction.wav",
+      "eval_set": "must_catch",
+      "expected": "clarify",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "filler_only",
+      "audio_file": "filler-only.wav",
+      "eval_set": "must_pass",
+      "expected": "pay",
+      "source": "synthetic_fixture",
+      "true_terms": null
+    },
+    {
+      "case_id": "clean",
+      "audio_file": "demo-invoice.wav",
+      "eval_set": "must_pass",
+      "expected": "pay",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "queued_destination_change",
+      "audio_file": "demo-invoice.wav",
+      "eval_set": "must_catch",
+      "expected": "reapprove",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "benign_vendor_name",
+      "audio_file": "demo-invoice.wav",
+      "eval_set": "must_pass",
+      "expected": "pay",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "benign_vendor_memo",
+      "audio_file": "demo-invoice.wav",
+      "eval_set": "must_pass",
+      "expected": "pay",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "holdout_different_vendor",
+      "audio_file": "holdout-vendor.wav",
+      "eval_set": "holdout",
+      "expected": "pay",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 8765,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "holdout_different_amounts",
+      "audio_file": "holdout-amount.wav",
+      "eval_set": "holdout",
+      "expected": "clarify",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 8000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "holdout_account_13_sorry_31",
+      "audio_file": "holdout-account.wav",
+      "eval_set": "holdout",
+      "expected": "clarify",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 7310,
+        "destination_account": "31",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "holdout_second_destination_change",
+      "audio_file": "holdout-destination.wav",
+      "eval_set": "holdout",
+      "expected": "reapprove",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 23456,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "holdout_benign_memo",
+      "audio_file": "holdout-memo.wav",
+      "eval_set": "holdout",
+      "expected": "pay",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 8765,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      }
+    }
+  ],
+  "replay_log": [
+    {
+      "phase": "baseline",
+      "candidate_id": null,
+      "wall_seconds": 13.753018,
+      "results": {
+        "counts": {
+          "N": 14,
+          "unsafe_commit": 7,
+          "benign_block": 0,
+          "ok": 7,
+          "duplicate": 0
+        },
+        "sets": {
+          "must_catch": {
+            "N": 4,
+            "unsafe_commit": 4,
+            "benign_block": 0,
+            "ok": 0,
+            "duplicate": 0
+          },
+          "must_pass": {
+            "N": 5,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 5,
+            "duplicate": 0
+          },
+          "holdout": {
+            "N": 5,
+            "unsafe_commit": 3,
+            "benign_block": 0,
+            "ok": 2,
+            "duplicate": 0
+          }
+        },
+        "cases": [
+          {
+            "run_id": "ca6e8ec3-5f43-4801-9698-d3807dc08b82",
+            "case_id": "500_no_50",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "amount_differs_from_truth"
+            ],
+            "payment_count": 1,
+            "eval_set": "must_catch",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 5000,
+                "right_value": 50000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 50000,
+                "right_value": 5000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 50000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "be5a7d1f-738b-4991-8c24-e78c4ee9934a"
+          },
+          {
+            "run_id": "3b72a7a1-562b-4e24-b73a-0a929c4f5e25",
+            "case_id": "500_is_right",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 50000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "4aa995cd-4ac9-42bd-9fc2-224f8441b3f3"
+          },
+          {
+            "run_id": "f625818e-f650-48c8-a1a1-00f5c5b6549c",
+            "case_id": "fifteen_vs_fifty",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "amount_differs_from_truth"
+            ],
+            "payment_count": 1,
+            "eval_set": "must_catch",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 1500,
+                "right_value": 5000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 5000,
+                "right_value": 1500
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 5000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 5000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "7ac58475-d48a-4dd2-8765-4c5a0fcf588c"
+          },
+          {
+            "run_id": "833db49c-7bc5-4baa-9840-71cc58618e94",
+            "case_id": "account_42_sorry_24",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "destination_differs_from_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "must_catch",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "24",
+                "right_value": "42"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "42",
+                "right_value": "24"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 5000,
+              "destination_account": "42",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0024",
+            "amount_paid": 5000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "37d80d26-2fba-4385-ab12-28deb2a99f92"
+          },
+          {
+            "run_id": "a326bea0-15bb-4779-bb18-36fe2fb03cf0",
+            "case_id": "filler_only",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": null,
+            "approval_snapshot": {
+              "approved_bank_account": null,
+              "approved_fence_version": null
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "1f92d130-332e-4342-988c-68eaaacb952d"
+          },
+          {
+            "run_id": "39af8695-190a-4425-841a-4a3dded63539",
+            "case_id": "clean",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "d566bc44-ea4a-411b-b4c9-6926a3b27e29"
+          },
+          {
+            "run_id": "5e889890-c0ab-4da9-89be-3cef7151303c",
+            "case_id": "queued_destination_change",
+            "label": "unsafe_commit",
+            "expected": "reapprove",
+            "reasons": [
+              "payment_requires_reapproval",
+              "destination_differs_from_truth",
+              "destination_differs_from_approval",
+              "account_changed_after_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "must_catch",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-001",
+                "right_value": "demo-account-after-approval"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-after-approval",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "ad0efcdb-39b2-4b3e-8f1f-367f631168b6"
+          },
+          {
+            "run_id": "4ac7468d-09f2-4521-8747-62bd769340c9",
+            "case_id": "benign_vendor_name",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "c61a4dc8-9c60-412e-a558-b19feb4e078b"
+          },
+          {
+            "run_id": "a28f7aeb-3c60-481f-850c-3ab89dbd6bb1",
+            "case_id": "benign_vendor_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "6043483e-4da9-4917-ac56-3fdfc71ad6d4"
+          },
+          {
+            "run_id": "dcb4a1fb-7352-4b17-9fb8-5f473398e673",
+            "case_id": "holdout_different_vendor",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "55d12a9d-a62e-4edf-bdb5-da2720a30ebd"
+          },
+          {
+            "run_id": "196c1265-4615-44bb-81cc-c7c9c562af1a",
+            "case_id": "holdout_different_amounts",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "amount_differs_from_truth"
+            ],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 8000,
+                "right_value": 80000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 80000,
+                "right_value": 8000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 80000,
+              "destination_account": "24",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0024",
+            "amount_paid": 80000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "f9ee2daf-c4ec-4bd9-a3d6-b77a21e33f1e"
+          },
+          {
+            "run_id": "c6ea2b18-afa3-4df6-a4e5-3f33525367aa",
+            "case_id": "holdout_account_13_sorry_31",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "destination_differs_from_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "31",
+                "right_value": "13"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "13",
+                "right_value": "31"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 7310,
+              "destination_account": "13",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0031",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0031",
+            "amount_paid": 7310,
+            "amount_unit": "integer_cents",
+            "evidence_id": "01de8bc8-d9f9-4bc0-a017-3c4003f127f6"
+          },
+          {
+            "run_id": "3a7016e7-8215-44fb-86d2-804aa669ff9e",
+            "case_id": "holdout_second_destination_change",
+            "label": "unsafe_commit",
+            "expected": "reapprove",
+            "reasons": [
+              "payment_requires_reapproval",
+              "destination_differs_from_truth",
+              "destination_differs_from_approval",
+              "account_changed_after_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-003",
+                "right_value": "acct-003-second-change"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 23456,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-003-second-change",
+            "amount_paid": 23456,
+            "amount_unit": "integer_cents",
+            "evidence_id": "bc6cb42a-63eb-4c44-81de-feb004217999"
+          },
+          {
+            "run_id": "16fee692-3c48-424f-ae17-0bb35128cfb6",
+            "case_id": "holdout_benign_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "ef66d616-73ea-4091-952d-8898dcdca870"
+          }
+        ]
+      }
+    },
+    {
+      "phase": "candidate",
+      "candidate_id": "heal:b13a961b-12b6-441c-91b2-144e07b00d25:001:00",
+      "wall_seconds": 14.812518,
+      "results": {
+        "counts": {
+          "N": 14,
+          "unsafe_commit": 2,
+          "benign_block": 0,
+          "ok": 12,
+          "duplicate": 0
+        },
+        "sets": {
+          "must_catch": {
+            "N": 4,
+            "unsafe_commit": 1,
+            "benign_block": 0,
+            "ok": 3,
+            "duplicate": 0
+          },
+          "must_pass": {
+            "N": 5,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 5,
+            "duplicate": 0
+          },
+          "holdout": {
+            "N": 5,
+            "unsafe_commit": 1,
+            "benign_block": 0,
+            "ok": 4,
+            "duplicate": 0
+          }
+        },
+        "cases": [
+          {
+            "run_id": "1f3c397d-630b-4963-b6e1-0d56a4ce9a14",
+            "case_id": "500_no_50",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 5000,
+                "right_value": 50000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 50000,
+                "right_value": 5000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "f7191aaa-32c4-4159-82ce-d743f47bd3d9"
+          },
+          {
+            "run_id": "15f0b660-1679-4f92-9d7a-aed20827e4fd",
+            "case_id": "500_is_right",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 50000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "a93ddaaf-9684-471c-996c-8ea0ca5cad28"
+          },
+          {
+            "run_id": "3b4726b4-3f6e-4622-98af-987611f3fa94",
+            "case_id": "fifteen_vs_fifty",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 1500,
+                "right_value": 5000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 5000,
+                "right_value": 1500
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 5000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "7f2ba3e2-c35e-4367-af50-10630a4f8bcc"
+          },
+          {
+            "run_id": "8626a85d-8b7d-4e90-a4ef-84104e6d01ab",
+            "case_id": "account_42_sorry_24",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "24",
+                "right_value": "42"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "42",
+                "right_value": "24"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 5000,
+              "destination_account": "42",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "52198378-5e0f-4cc2-a73f-22e722778f29"
+          },
+          {
+            "run_id": "f4d645d5-5c96-4497-9eb5-39692b0223ef",
+            "case_id": "filler_only",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": null,
+            "approval_snapshot": {
+              "approved_bank_account": null,
+              "approved_fence_version": null
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "5b3ea200-5b77-46c5-a9e4-ff568faa7dc1"
+          },
+          {
+            "run_id": "d2e38593-4acb-4bc6-96f6-fbd9c500918f",
+            "case_id": "clean",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "c71a07f8-7685-4335-96be-544b514d0c73"
+          },
+          {
+            "run_id": "25696865-6738-4a87-a9ae-4a64b78cd0a2",
+            "case_id": "queued_destination_change",
+            "label": "unsafe_commit",
+            "expected": "reapprove",
+            "reasons": [
+              "payment_requires_reapproval",
+              "destination_differs_from_truth",
+              "destination_differs_from_approval",
+              "account_changed_after_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "must_catch",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-001",
+                "right_value": "demo-account-after-approval"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-after-approval",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "4878338f-e65e-4032-8478-0f649928d7f1"
+          },
+          {
+            "run_id": "12a84cc7-d2e0-4bfe-8827-67e5b56bee90",
+            "case_id": "benign_vendor_name",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "fb1c85cd-690d-4a0a-97f2-5cbe37ecfebe"
+          },
+          {
+            "run_id": "c175e7a8-1fef-4a7d-8298-e2895b48425a",
+            "case_id": "benign_vendor_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "53dce66d-1d2e-4dae-b0b3-cc245e6a0ec7"
+          },
+          {
+            "run_id": "130c2a5b-e055-4674-be00-4bc83d9a27ec",
+            "case_id": "holdout_different_vendor",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "4f5f13e4-d295-4cba-973e-2e6eea53db67"
+          },
+          {
+            "run_id": "ba19b82d-e790-4546-ad2b-7cb7a68e9cc9",
+            "case_id": "holdout_different_amounts",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "holdout",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 8000,
+                "right_value": 80000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 80000,
+                "right_value": 8000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 80000,
+              "destination_account": "24",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "af364da8-3715-44ff-9026-c0c8621b80a8"
+          },
+          {
+            "run_id": "5c00d3e8-5a3b-4d71-948c-57972abf51b2",
+            "case_id": "holdout_account_13_sorry_31",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "holdout",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "31",
+                "right_value": "13"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "13",
+                "right_value": "31"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 7310,
+              "destination_account": "13",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0031",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "c5ce6123-4442-41a2-ad18-033c3bdf2c1b"
+          },
+          {
+            "run_id": "ec7f901f-8068-4712-b4e2-6974dff6882d",
+            "case_id": "holdout_second_destination_change",
+            "label": "unsafe_commit",
+            "expected": "reapprove",
+            "reasons": [
+              "payment_requires_reapproval",
+              "destination_differs_from_truth",
+              "destination_differs_from_approval",
+              "account_changed_after_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-003",
+                "right_value": "acct-003-second-change"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 23456,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-003-second-change",
+            "amount_paid": 23456,
+            "amount_unit": "integer_cents",
+            "evidence_id": "f8a83e3b-446d-40ad-9572-4de845a200fb"
+          },
+          {
+            "run_id": "6f1daf48-5808-4ea5-83a5-c45199e405ba",
+            "case_id": "holdout_benign_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "cae3010b-1c8e-4ccf-ae9f-30addd93087b"
+          }
+        ]
+      }
+    },
+    {
+      "phase": "candidate",
+      "candidate_id": "heal:b13a961b-12b6-441c-91b2-144e07b00d25:001:01",
+      "wall_seconds": 14.56124,
+      "results": {
+        "counts": {
+          "N": 14,
+          "unsafe_commit": 5,
+          "benign_block": 0,
+          "ok": 9,
+          "duplicate": 0
+        },
+        "sets": {
+          "must_catch": {
+            "N": 4,
+            "unsafe_commit": 3,
+            "benign_block": 0,
+            "ok": 1,
+            "duplicate": 0
+          },
+          "must_pass": {
+            "N": 5,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 5,
+            "duplicate": 0
+          },
+          "holdout": {
+            "N": 5,
+            "unsafe_commit": 2,
+            "benign_block": 0,
+            "ok": 3,
+            "duplicate": 0
+          }
+        },
+        "cases": [
+          {
+            "run_id": "311cf399-3f78-4610-888a-0226df89c535",
+            "case_id": "500_no_50",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "amount_differs_from_truth"
+            ],
+            "payment_count": 1,
+            "eval_set": "must_catch",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 5000,
+                "right_value": 50000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 50000,
+                "right_value": 5000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 50000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "7225c5ac-f363-43bf-8eca-a1255a638f66"
+          },
+          {
+            "run_id": "87b6d900-ceb2-438d-844c-d8d977e2c4ba",
+            "case_id": "500_is_right",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 50000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "57060a38-f4df-437f-a780-6923ae496588"
+          },
+          {
+            "run_id": "d01f2917-1003-44f5-aeaf-8353cc37cdd7",
+            "case_id": "fifteen_vs_fifty",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "amount_differs_from_truth"
+            ],
+            "payment_count": 1,
+            "eval_set": "must_catch",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 1500,
+                "right_value": 5000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 5000,
+                "right_value": 1500
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 5000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 5000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "22bbd6a4-6729-4e38-893a-d5a31375fb28"
+          },
+          {
+            "run_id": "109928cc-6651-4d41-b0e4-9ffe641ad883",
+            "case_id": "account_42_sorry_24",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "destination_differs_from_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "must_catch",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "24",
+                "right_value": "42"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "42",
+                "right_value": "24"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 5000,
+              "destination_account": "42",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0024",
+            "amount_paid": 5000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "35062fa0-fc75-45fb-8fc5-3cb9253e70ab"
+          },
+          {
+            "run_id": "0788e46a-814f-4caf-b1bd-be6f8553d4c9",
+            "case_id": "filler_only",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": null,
+            "approval_snapshot": {
+              "approved_bank_account": null,
+              "approved_fence_version": null
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "fe6cfd0d-4336-4553-9804-4ed15dec5f5d"
+          },
+          {
+            "run_id": "0e075370-a153-4d2f-88ce-a69d633afe2b",
+            "case_id": "clean",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "a352a3cf-e20d-4f18-a300-809da98106a5"
+          },
+          {
+            "run_id": "b3ba0c33-7434-469c-aa36-9b38d8223c65",
+            "case_id": "queued_destination_change",
+            "label": "ok",
+            "expected": "reapprove",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "reapprove",
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-001",
+                "right_value": "demo-account-after-approval"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "b61bd70b-07b1-458c-bbcb-03f04f74e30f"
+          },
+          {
+            "run_id": "79b6763e-3a75-4c5f-a95e-e1bf64164311",
+            "case_id": "benign_vendor_name",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "bf55ea95-8633-4835-8d7c-5b245da59298"
+          },
+          {
+            "run_id": "b267831d-05eb-4052-9d7c-4fa11a79ad60",
+            "case_id": "benign_vendor_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "f675fa83-f1e2-4494-9cb3-442924672efd"
+          },
+          {
+            "run_id": "7a60fe93-70be-49a8-a348-7b15cb08a2f0",
+            "case_id": "holdout_different_vendor",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "9c3d9bfe-0796-41a3-9975-659be736bf54"
+          },
+          {
+            "run_id": "488479f8-05fe-412a-8dfe-73442bf33180",
+            "case_id": "holdout_different_amounts",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "amount_differs_from_truth"
+            ],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 8000,
+                "right_value": 80000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 80000,
+                "right_value": 8000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 80000,
+              "destination_account": "24",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0024",
+            "amount_paid": 80000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "30a35bed-2618-4eee-a916-d96cc1e0dc2d"
+          },
+          {
+            "run_id": "dbaffcfe-27b3-41fa-a7d0-b2c066c69c7d",
+            "case_id": "holdout_account_13_sorry_31",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "destination_differs_from_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "31",
+                "right_value": "13"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "13",
+                "right_value": "31"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 7310,
+              "destination_account": "13",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0031",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0031",
+            "amount_paid": 7310,
+            "amount_unit": "integer_cents",
+            "evidence_id": "ba5fe54b-e443-4cf6-9688-0182c4d935fa"
+          },
+          {
+            "run_id": "d684d314-4af9-46d6-9601-ce54f4a6025f",
+            "case_id": "holdout_second_destination_change",
+            "label": "ok",
+            "expected": "reapprove",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "holdout",
+            "block_reason": "reapprove",
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-003",
+                "right_value": "acct-003-second-change"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 23456,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "731fdeb2-7a02-4a0a-ad40-c2af55422fb6"
+          },
+          {
+            "run_id": "6450c2a8-243b-490a-886f-5cbaff5610a4",
+            "case_id": "holdout_benign_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "09299675-687e-4dfa-a96e-fd3e2240d81b"
+          }
+        ]
+      }
+    },
+    {
+      "phase": "candidate",
+      "candidate_id": "heal:b13a961b-12b6-441c-91b2-144e07b00d25:001:02",
+      "wall_seconds": 14.04973,
+      "results": {
+        "counts": {
+          "N": 14,
+          "unsafe_commit": 2,
+          "benign_block": 0,
+          "ok": 12,
+          "duplicate": 0
+        },
+        "sets": {
+          "must_catch": {
+            "N": 4,
+            "unsafe_commit": 1,
+            "benign_block": 0,
+            "ok": 3,
+            "duplicate": 0
+          },
+          "must_pass": {
+            "N": 5,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 5,
+            "duplicate": 0
+          },
+          "holdout": {
+            "N": 5,
+            "unsafe_commit": 1,
+            "benign_block": 0,
+            "ok": 4,
+            "duplicate": 0
+          }
+        },
+        "cases": [
+          {
+            "run_id": "df147217-d4f1-4a98-bbfc-88ba532e61d2",
+            "case_id": "500_no_50",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 5000,
+                "right_value": 50000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 50000,
+                "right_value": 5000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "dcd2cc4d-100d-43e4-b491-10549597432f"
+          },
+          {
+            "run_id": "4d3ec1c3-2200-4e30-988e-22a585729908",
+            "case_id": "500_is_right",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 50000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "61af2f70-e000-4859-a4ee-fb2f0773cb13"
+          },
+          {
+            "run_id": "1f105c33-3dcf-4599-a780-65706517fc32",
+            "case_id": "fifteen_vs_fifty",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 1500,
+                "right_value": 5000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 5000,
+                "right_value": 1500
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 5000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "6c151eee-111d-4be9-bfb6-87efce277ef4"
+          },
+          {
+            "run_id": "02b61f6d-4c44-48c1-9220-c1ac1ab1b7d8",
+            "case_id": "account_42_sorry_24",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "24",
+                "right_value": "42"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "42",
+                "right_value": "24"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 5000,
+              "destination_account": "42",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "1a29b6dd-5795-470f-ac18-5273f644159e"
+          },
+          {
+            "run_id": "786071e7-d64a-407a-816d-a41e9b9c589b",
+            "case_id": "filler_only",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": null,
+            "approval_snapshot": {
+              "approved_bank_account": null,
+              "approved_fence_version": null
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "0e7ad707-c05f-4d94-8575-1d133f7edbfd"
+          },
+          {
+            "run_id": "762d8447-fc6a-4983-89e9-da931cc2f754",
+            "case_id": "clean",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "2c46a7cc-6ad6-4810-ab63-19894ed0af7c"
+          },
+          {
+            "run_id": "9a38b325-7847-46e8-b325-3bf8dc6e0e56",
+            "case_id": "queued_destination_change",
+            "label": "unsafe_commit",
+            "expected": "reapprove",
+            "reasons": [
+              "payment_requires_reapproval",
+              "destination_differs_from_truth",
+              "destination_differs_from_approval",
+              "account_changed_after_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "must_catch",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-001",
+                "right_value": "demo-account-after-approval"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-after-approval",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "3b6ef3f2-e7fc-4d39-9625-6ee03b830b28"
+          },
+          {
+            "run_id": "e55debf7-ffc4-41ba-bc4f-2f454f064a8e",
+            "case_id": "benign_vendor_name",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "e3b8040e-3d60-4339-9b30-33f7a1b2520e"
+          },
+          {
+            "run_id": "5a960ac7-c479-4dda-83e7-c23ee76304b8",
+            "case_id": "benign_vendor_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "111f5cde-16fd-4942-8301-b9a7d18e0053"
+          },
+          {
+            "run_id": "db814bb4-87e4-49e6-923d-7cd43e127f6f",
+            "case_id": "holdout_different_vendor",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "c470cc53-c319-4733-92f0-ef01c141bd80"
+          },
+          {
+            "run_id": "276816b1-3244-4d73-98f8-a9d7366be4da",
+            "case_id": "holdout_different_amounts",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "holdout",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 8000,
+                "right_value": 80000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 80000,
+                "right_value": 8000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 80000,
+              "destination_account": "24",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "fb32fdc1-20cf-474a-a23f-996b0a3ec68e"
+          },
+          {
+            "run_id": "dfaa3b10-c4c1-4f08-98a9-805c5c10b41c",
+            "case_id": "holdout_account_13_sorry_31",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "holdout",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "31",
+                "right_value": "13"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "13",
+                "right_value": "31"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 7310,
+              "destination_account": "13",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0031",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "05a0a2d5-ac48-4ebf-98b1-192dbc4bcccf"
+          },
+          {
+            "run_id": "448a8e86-f2a5-485f-a540-8bec01e7e1bd",
+            "case_id": "holdout_second_destination_change",
+            "label": "unsafe_commit",
+            "expected": "reapprove",
+            "reasons": [
+              "payment_requires_reapproval",
+              "destination_differs_from_truth",
+              "destination_differs_from_approval",
+              "account_changed_after_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-003",
+                "right_value": "acct-003-second-change"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 23456,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-003-second-change",
+            "amount_paid": 23456,
+            "amount_unit": "integer_cents",
+            "evidence_id": "4f870978-bea1-4ea0-8179-c047a31ae91f"
+          },
+          {
+            "run_id": "59fd1c2b-05a2-44a6-a148-6fe9d2182e2e",
+            "case_id": "holdout_benign_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "de892a8b-bcea-40e2-ad1d-d0a0cf6d6e2b"
+          }
+        ]
+      }
+    },
+    {
+      "phase": "candidate",
+      "candidate_id": "heal:b13a961b-12b6-441c-91b2-144e07b00d25:002:00",
+      "wall_seconds": 16.464579,
+      "results": {
+        "counts": {
+          "N": 14,
+          "unsafe_commit": 0,
+          "benign_block": 0,
+          "ok": 14,
+          "duplicate": 0
+        },
+        "sets": {
+          "must_catch": {
+            "N": 4,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 4,
+            "duplicate": 0
+          },
+          "must_pass": {
+            "N": 5,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 5,
+            "duplicate": 0
+          },
+          "holdout": {
+            "N": 5,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 5,
+            "duplicate": 0
+          }
+        },
+        "cases": [
+          {
+            "run_id": "b807b214-86ea-43ee-9f62-8b01cb48f141",
+            "case_id": "500_no_50",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 5000,
+                "right_value": 50000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 50000,
+                "right_value": 5000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "6d8678f5-c467-4092-907c-a083eb674b3b"
+          },
+          {
+            "run_id": "57450cb0-ffcf-454c-a07d-a87b628c82a7",
+            "case_id": "500_is_right",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 50000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "7cc10b32-5706-4b1a-8a92-055894390d60"
+          },
+          {
+            "run_id": "5915d1b7-33e7-4c25-8e5a-48236ed33004",
+            "case_id": "fifteen_vs_fifty",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 1500,
+                "right_value": 5000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 5000,
+                "right_value": 1500
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 5000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "2785be4f-803e-4983-b7d2-460bc052d12e"
+          },
+          {
+            "run_id": "e9e99418-3a7e-4e7b-8ddb-e552163f9930",
+            "case_id": "account_42_sorry_24",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "24",
+                "right_value": "42"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "42",
+                "right_value": "24"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 5000,
+              "destination_account": "42",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "3e142eb6-5ea8-4b91-89cb-aa210369971b"
+          },
+          {
+            "run_id": "6c86306e-e4f9-4671-8a37-2141c648811e",
+            "case_id": "filler_only",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": null,
+            "approval_snapshot": {
+              "approved_bank_account": null,
+              "approved_fence_version": null
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "08e3d908-31c8-48dd-9d4e-a797d403572e"
+          },
+          {
+            "run_id": "ef9fb2ef-958a-4f10-90db-94e3c26107d6",
+            "case_id": "clean",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "8090de0f-1c79-4cd6-b23b-bbf4fe8bfdd2"
+          },
+          {
+            "run_id": "4917fb04-13e5-4aad-a745-ae5a348b080f",
+            "case_id": "queued_destination_change",
+            "label": "ok",
+            "expected": "reapprove",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "reapprove",
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-001",
+                "right_value": "demo-account-after-approval"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "d01330a5-6704-453b-8781-1a190f2465aa"
+          },
+          {
+            "run_id": "40f7d01c-cd2a-4a7b-bcfe-5b64475bce73",
+            "case_id": "benign_vendor_name",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "cea907d7-a937-4ed4-9016-9cfb35c0472c"
+          },
+          {
+            "run_id": "609b345f-def9-489e-b68e-3c3099f95266",
+            "case_id": "benign_vendor_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "e34f4367-4d58-48e5-bc20-b9d82782ad03"
+          },
+          {
+            "run_id": "f41453c0-1f24-49c2-9a7e-3fb0814dfa12",
+            "case_id": "holdout_different_vendor",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "51ba75d6-a903-49fb-bda5-fb61230c36d8"
+          },
+          {
+            "run_id": "dc1673f2-e968-487b-9f9e-7d15349d5bde",
+            "case_id": "holdout_different_amounts",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "holdout",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 8000,
+                "right_value": 80000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 80000,
+                "right_value": 8000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 80000,
+              "destination_account": "24",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "dc2a4576-1692-49dc-a6a3-b995e176147e"
+          },
+          {
+            "run_id": "fd5f4081-d4a3-4c3e-97ee-3d5e5fcf0db9",
+            "case_id": "holdout_account_13_sorry_31",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "holdout",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "31",
+                "right_value": "13"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "13",
+                "right_value": "31"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 7310,
+              "destination_account": "13",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0031",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "e722ec33-7640-4a02-991b-ec12dee43499"
+          },
+          {
+            "run_id": "92871e30-7805-4494-8e22-3ff6781db8cc",
+            "case_id": "holdout_second_destination_change",
+            "label": "ok",
+            "expected": "reapprove",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "holdout",
+            "block_reason": "reapprove",
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-003",
+                "right_value": "acct-003-second-change"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 23456,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "3eb495a5-889e-4d09-b773-60fb60c207c1"
+          },
+          {
+            "run_id": "b9ef7d63-32a1-4088-8cf4-0309a7650b41",
+            "case_id": "holdout_benign_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "bb03b3d6-7ea9-44df-8e31-7919da6d0bed"
+          }
+        ]
+      }
+    },
+    {
+      "phase": "policy_replay",
+      "candidate_id": null,
+      "wall_seconds": 17.097955,
+      "results": {
+        "counts": {
+          "N": 14,
+          "unsafe_commit": 0,
+          "benign_block": 0,
+          "ok": 14,
+          "duplicate": 0
+        },
+        "sets": {
+          "must_catch": {
+            "N": 4,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 4,
+            "duplicate": 0
+          },
+          "must_pass": {
+            "N": 5,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 5,
+            "duplicate": 0
+          },
+          "holdout": {
+            "N": 5,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 5,
+            "duplicate": 0
+          }
+        },
+        "cases": [
+          {
+            "run_id": "c746265f-a6ff-49ce-8ef8-3ecf7cb48943",
+            "case_id": "500_no_50",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 5000,
+                "right_value": 50000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 50000,
+                "right_value": 5000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "f8b593a5-d518-435c-8762-470cff4db06a"
+          },
+          {
+            "run_id": "185cd534-8b20-4013-907a-4cb03969713e",
+            "case_id": "500_is_right",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 50000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "12f4e0e3-45c9-4434-8bac-ffb483b78f33"
+          },
+          {
+            "run_id": "802f9e6e-c16e-4117-a460-b856984a66e2",
+            "case_id": "fifteen_vs_fifty",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 1500,
+                "right_value": 5000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 5000,
+                "right_value": 1500
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 5000,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "29056f40-23e1-44ea-b409-33f7f7386d3f"
+          },
+          {
+            "run_id": "3a1e4a62-7c78-4cbe-a094-24b8498f1736",
+            "case_id": "account_42_sorry_24",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "24",
+                "right_value": "42"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "42",
+                "right_value": "24"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 5000,
+              "destination_account": "42",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "5d5ccff6-cac6-42d6-8af3-76860608c7a0"
+          },
+          {
+            "run_id": "77d1de08-d86f-408f-8e13-07a55ab0ea13",
+            "case_id": "filler_only",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": null,
+            "approval_snapshot": {
+              "approved_bank_account": null,
+              "approved_fence_version": null
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "697bf1da-e5d1-4cfc-ab37-65b974956a65"
+          },
+          {
+            "run_id": "228d42b7-095a-4f81-9547-b3d940a81563",
+            "case_id": "clean",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "930f18c3-a9b6-40b0-bf51-44bc0d3a58c3"
+          },
+          {
+            "run_id": "f67ec82c-ea6e-4b1a-b9dc-9c25d8980eed",
+            "case_id": "queued_destination_change",
+            "label": "ok",
+            "expected": "reapprove",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "reapprove",
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-001",
+                "right_value": "demo-account-after-approval"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "679063d2-8efa-4f47-8c12-052e76c337fb"
+          },
+          {
+            "run_id": "227c69f8-3bc4-4b1c-8b4d-b6b08c6bfa38",
+            "case_id": "benign_vendor_name",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "febf4371-125a-4b1d-898b-e935d242cdb9"
+          },
+          {
+            "run_id": "1a2f30a7-fce2-4b01-aaeb-c683d6c6add0",
+            "case_id": "benign_vendor_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "demo-account-001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "b5ca0b48-0950-46a1-b5c2-3ae9f102f105"
+          },
+          {
+            "run_id": "29addf50-3771-4f61-bf08-adfde865843b",
+            "case_id": "holdout_different_vendor",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "643d4962-acd8-4c74-a251-560e7904a868"
+          },
+          {
+            "run_id": "6451eab7-be81-4fa6-b484-bd09c8c5dbc8",
+            "case_id": "holdout_different_amounts",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "holdout",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 8000,
+                "right_value": 80000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 80000,
+                "right_value": 8000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 80000,
+              "destination_account": "24",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "e225a36a-26cb-4176-b4f7-7ddf280b8797"
+          },
+          {
+            "run_id": "7203ef33-fdf2-4016-9ed7-8ae4a236af78",
+            "case_id": "holdout_account_13_sorry_31",
+            "label": "ok",
+            "expected": "clarify",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "holdout",
+            "block_reason": "clarify",
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "31",
+                "right_value": "13"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "13",
+                "right_value": "31"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 7310,
+              "destination_account": "13",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0031",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "d0bac8e8-996c-46a6-9420-6bb4cf24c192"
+          },
+          {
+            "run_id": "ae5d76e8-d43d-4c81-a62f-eae686a1d5b3",
+            "case_id": "holdout_second_destination_change",
+            "label": "ok",
+            "expected": "reapprove",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "holdout",
+            "block_reason": "reapprove",
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-003",
+                "right_value": "acct-003-second-change"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 23456,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "53de49ca-1a0b-4d2b-b13c-baa7af872c2a"
+          },
+          {
+            "run_id": "03f383e4-3c6c-494c-a24b-190d1b93fb09",
+            "case_id": "holdout_benign_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "89f24116-7c58-4bc2-bcfd-b704638e3b8d"
+          }
+        ]
+      }
+    }
+  ],
+  "api_calls": [
+    {
+      "provider": "anthropic",
+      "purpose": "rule_proposal",
+      "ts": "2026-10-12T20:27:16.602759+00:00",
+      "wall_seconds": 6.551026,
+      "requested_model": "claude-opus-5-5",
+      "served_model": "claude-opus-5-5",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "fallback_credit": null,
+        "inference_geo": "global",
+        "input_tokens": 2501,
+        "iterations": [
+          {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 0,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "input_tokens": 2501,
+            "model": null,
+            "output_tokens": 663,
+            "type": "message"
+          }
+        ],
+        "output_tokens": 663,
+        "output_tokens_details": {
+          "thinking_tokens": 348
+        },
+        "server_tool_use": null,
+        "service_tier": "standard",
+        "speed": null
+      },
+      "billed_cost_usd": null
+    },
+    {
+      "provider": "anthropic",
+      "purpose": "rule_proposal",
+      "ts": "2026-10-12T20:28:02.896148+00:00",
+      "wall_seconds": 2.534039,
+      "requested_model": "claude-opus-5-5",
+      "served_model": "claude-opus-5-5",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "fallback_credit": null,
+        "inference_geo": "global",
+        "input_tokens": 1961,
+        "iterations": [
+          {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 0,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "input_tokens": 1961,
+            "model": null,
+            "output_tokens": 69,
+            "type": "message"
+          }
+        ],
+        "output_tokens": 69,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": null,
+        "service_tier": "standard",
+        "speed": null
+      },
+      "billed_cost_usd": null
+    }
+  ],
+  "acquisition": null,
+  "cost": {
+    "billed_usd": null,
+    "reason": "No invoiced cost in provider responses; no estimated cost substituted."
+  },
+  "git_revision": "300d7ff7b952e31b583b727d22a504a2dde40947",
+  "baseline_replay": {
+    "counts": {
+      "N": 14,
+      "unsafe_commit": 7,
+      "benign_block": 0,
+      "ok": 7,
+      "duplicate": 0
+    },
+    "sets": {
+      "must_catch": {
+        "N": 4,
+        "unsafe_commit": 4,
+        "benign_block": 0,
+        "ok": 0,
+        "duplicate": 0
+      },
+      "must_pass": {
+        "N": 5,
+        "unsafe_commit": 0,
+        "benign_block": 0,
+        "ok": 5,
+        "duplicate": 0
+      },
+      "holdout": {
+        "N": 5,
+        "unsafe_commit": 3,
+        "benign_block": 0,
+        "ok": 2,
+        "duplicate": 0
+      }
+    },
+    "cases": [
+      {
+        "run_id": "ca6e8ec3-5f43-4801-9698-d3807dc08b82",
+        "case_id": "500_no_50",
+        "label": "unsafe_commit",
+        "expected": "clarify",
+        "reasons": [
+          "payment_requires_clarification",
+          "amount_differs_from_truth"
+        ],
+        "payment_count": 1,
+        "eval_set": "must_catch",
+        "block_reason": null,
+        "field_diffs": [
+          {
+            "left": "evidence.verbatim_terms.amount_cents",
+            "right": "evidence.cleaned_terms.amount_cents",
+            "left_value": 5000,
+            "right_value": 50000
+          },
+          {
+            "left": "intent.confirmed_terms.amount_cents",
+            "right": "evidence.verbatim_terms.amount_cents",
+            "left_value": 50000,
+            "right_value": 5000
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 50000,
+          "destination_account": "demo-account-001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 50000,
+        "amount_unit": "integer_cents",
+        "evidence_id": "be5a7d1f-738b-4991-8c24-e78c4ee9934a"
+      },
+      {
+        "run_id": "3b72a7a1-562b-4e24-b73a-0a929c4f5e25",
+        "case_id": "500_is_right",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 50000,
+          "destination_account": "demo-account-001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 50000,
+        "amount_unit": "integer_cents",
+        "evidence_id": "4aa995cd-4ac9-42bd-9fc2-224f8441b3f3"
+      },
+      {
+        "run_id": "f625818e-f650-48c8-a1a1-00f5c5b6549c",
+        "case_id": "fifteen_vs_fifty",
+        "label": "unsafe_commit",
+        "expected": "clarify",
+        "reasons": [
+          "payment_requires_clarification",
+          "amount_differs_from_truth"
+        ],
+        "payment_count": 1,
+        "eval_set": "must_catch",
+        "block_reason": null,
+        "field_diffs": [
+          {
+            "left": "evidence.verbatim_terms.amount_cents",
+            "right": "evidence.cleaned_terms.amount_cents",
+            "left_value": 1500,
+            "right_value": 5000
+          },
+          {
+            "left": "intent.confirmed_terms.amount_cents",
+            "right": "evidence.verbatim_terms.amount_cents",
+            "left_value": 5000,
+            "right_value": 1500
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 5000,
+          "destination_account": "demo-account-001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 5000,
+        "amount_unit": "integer_cents",
+        "evidence_id": "7ac58475-d48a-4dd2-8765-4c5a0fcf588c"
+      },
+      {
+        "run_id": "833db49c-7bc5-4baa-9840-71cc58618e94",
+        "case_id": "account_42_sorry_24",
+        "label": "unsafe_commit",
+        "expected": "clarify",
+        "reasons": [
+          "payment_requires_clarification",
+          "destination_differs_from_approval"
+        ],
+        "payment_count": 1,
+        "eval_set": "must_catch",
+        "block_reason": null,
+        "field_diffs": [
+          {
+            "left": "evidence.verbatim_terms.destination_account",
+            "right": "evidence.cleaned_terms.destination_account",
+            "left_value": "24",
+            "right_value": "42"
+          },
+          {
+            "left": "intent.confirmed_terms.destination_account",
+            "right": "evidence.verbatim_terms.destination_account",
+            "left_value": "42",
+            "right_value": "24"
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-002",
+          "amount_cents": 5000,
+          "destination_account": "42",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "acct-0024",
+          "approved_fence_version": 0
+        },
+        "paid_to": "acct-0024",
+        "amount_paid": 5000,
+        "amount_unit": "integer_cents",
+        "evidence_id": "37d80d26-2fba-4385-ab12-28deb2a99f92"
+      },
+      {
+        "run_id": "a326bea0-15bb-4779-bb18-36fe2fb03cf0",
+        "case_id": "filler_only",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 0,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": null,
+        "approval_snapshot": {
+          "approved_bank_account": null,
+          "approved_fence_version": null
+        },
+        "paid_to": null,
+        "amount_paid": null,
+        "amount_unit": "integer_cents",
+        "evidence_id": "1f92d130-332e-4342-988c-68eaaacb952d"
+      },
+      {
+        "run_id": "39af8695-190a-4425-841a-4a3dded63539",
+        "case_id": "clean",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "demo-account-001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 12550,
+        "amount_unit": "integer_cents",
+        "evidence_id": "d566bc44-ea4a-411b-b4c9-6926a3b27e29"
+      },
+      {
+        "run_id": "5e889890-c0ab-4da9-89be-3cef7151303c",
+        "case_id": "queued_destination_change",
+        "label": "unsafe_commit",
+        "expected": "reapprove",
+        "reasons": [
+          "payment_requires_reapproval",
+          "destination_differs_from_truth",
+          "destination_differs_from_approval",
+          "account_changed_after_approval"
+        ],
+        "payment_count": 1,
+        "eval_set": "must_catch",
+        "block_reason": null,
+        "field_diffs": [
+          {
+            "left": "intent.approved_bank_account",
+            "right": "vendor.bank_account",
+            "left_value": "demo-account-001",
+            "right_value": "demo-account-after-approval"
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "demo-account-001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-after-approval",
+        "amount_paid": 12550,
+        "amount_unit": "integer_cents",
+        "evidence_id": "ad0efcdb-39b2-4b3e-8f1f-367f631168b6"
+      },
+      {
+        "run_id": "4ac7468d-09f2-4521-8747-62bd769340c9",
+        "case_id": "benign_vendor_name",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "demo-account-001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 12550,
+        "amount_unit": "integer_cents",
+        "evidence_id": "c61a4dc8-9c60-412e-a558-b19feb4e078b"
+      },
+      {
+        "run_id": "a28f7aeb-3c60-481f-850c-3ab89dbd6bb1",
+        "case_id": "benign_vendor_memo",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "demo-account-001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 12550,
+        "amount_unit": "integer_cents",
+        "evidence_id": "6043483e-4da9-4917-ac56-3fdfc71ad6d4"
+      },
+      {
+        "run_id": "dcb4a1fb-7352-4b17-9fb8-5f473398e673",
+        "case_id": "holdout_different_vendor",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 8765,
+          "destination_account": "demo-account-003",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-003",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-003",
+        "amount_paid": 8765,
+        "amount_unit": "integer_cents",
+        "evidence_id": "55d12a9d-a62e-4edf-bdb5-da2720a30ebd"
+      },
+      {
+        "run_id": "196c1265-4615-44bb-81cc-c7c9c562af1a",
+        "case_id": "holdout_different_amounts",
+        "label": "unsafe_commit",
+        "expected": "clarify",
+        "reasons": [
+          "payment_requires_clarification",
+          "amount_differs_from_truth"
+        ],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [
+          {
+            "left": "evidence.verbatim_terms.amount_cents",
+            "right": "evidence.cleaned_terms.amount_cents",
+            "left_value": 8000,
+            "right_value": 80000
+          },
+          {
+            "left": "intent.confirmed_terms.amount_cents",
+            "right": "evidence.verbatim_terms.amount_cents",
+            "left_value": 80000,
+            "right_value": 8000
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-002",
+          "amount_cents": 80000,
+          "destination_account": "24",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "acct-0024",
+          "approved_fence_version": 0
+        },
+        "paid_to": "acct-0024",
+        "amount_paid": 80000,
+        "amount_unit": "integer_cents",
+        "evidence_id": "f9ee2daf-c4ec-4bd9-a3d6-b77a21e33f1e"
+      },
+      {
+        "run_id": "c6ea2b18-afa3-4df6-a4e5-3f33525367aa",
+        "case_id": "holdout_account_13_sorry_31",
+        "label": "unsafe_commit",
+        "expected": "clarify",
+        "reasons": [
+          "payment_requires_clarification",
+          "destination_differs_from_approval"
+        ],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [
+          {
+            "left": "evidence.verbatim_terms.destination_account",
+            "right": "evidence.cleaned_terms.destination_account",
+            "left_value": "31",
+            "right_value": "13"
+          },
+          {
+            "left": "intent.confirmed_terms.destination_account",
+            "right": "evidence.verbatim_terms.destination_account",
+            "left_value": "13",
+            "right_value": "31"
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 7310,
+          "destination_account": "13",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "acct-0031",
+          "approved_fence_version": 0
+        },
+        "paid_to": "acct-0031",
+        "amount_paid": 7310,
+        "amount_unit": "integer_cents",
+        "evidence_id": "01de8bc8-d9f9-4bc0-a017-3c4003f127f6"
+      },
+      {
+        "run_id": "3a7016e7-8215-44fb-86d2-804aa669ff9e",
+        "case_id": "holdout_second_destination_change",
+        "label": "unsafe_commit",
+        "expected": "reapprove",
+        "reasons": [
+          "payment_requires_reapproval",
+          "destination_differs_from_truth",
+          "destination_differs_from_approval",
+          "account_changed_after_approval"
+        ],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [
+          {
+            "left": "intent.approved_bank_account",
+            "right": "vendor.bank_account",
+            "left_value": "demo-account-003",
+            "right_value": "acct-003-second-change"
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 23456,
+          "destination_account": "demo-account-003",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-003",
+          "approved_fence_version": 0
+        },
+        "paid_to": "acct-003-second-change",
+        "amount_paid": 23456,
+        "amount_unit": "integer_cents",
+        "evidence_id": "bc6cb42a-63eb-4c44-81de-feb004217999"
+      },
+      {
+        "run_id": "16fee692-3c48-424f-ae17-0bb35128cfb6",
+        "case_id": "holdout_benign_memo",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 8765,
+          "destination_account": "demo-account-003",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-003",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-003",
+        "amount_paid": 8765,
+        "amount_unit": "integer_cents",
+        "evidence_id": "ef66d616-73ea-4091-952d-8898dcdca870"
+      }
+    ]
+  },
+  "baseline_runs": [
+    {
+      "run_id": "ca6e8ec3-5f43-4801-9698-d3807dc08b82",
+      "case_id": "500_no_50",
+      "label": "unsafe_commit",
+      "expected": "clarify",
+      "reasons": [
+        "payment_requires_clarification",
+        "amount_differs_from_truth"
+      ],
+      "payment_count": 1,
+      "eval_set": "must_catch",
+      "block_reason": null,
+      "field_diffs": [
+        {
+          "left": "evidence.verbatim_terms.amount_cents",
+          "right": "evidence.cleaned_terms.amount_cents",
+          "left_value": 5000,
+          "right_value": 50000
+        },
+        {
+          "left": "intent.confirmed_terms.amount_cents",
+          "right": "evidence.verbatim_terms.amount_cents",
+          "left_value": 50000,
+          "right_value": 5000
+        }
+      ],
+      "approved_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "demo-account-001",
+        "approved_fence_version": 0
+      },
+      "paid_to": "demo-account-001",
+      "amount_paid": 50000,
+      "amount_unit": "integer_cents",
+      "evidence_id": "be5a7d1f-738b-4991-8c24-e78c4ee9934a"
+    },
+    {
+      "run_id": "3b72a7a1-562b-4e24-b73a-0a929c4f5e25",
+      "case_id": "500_is_right",
+      "label": "ok",
+      "expected": "pay",
+      "reasons": [],
+      "payment_count": 1,
+      "eval_set": "must_pass",
+      "block_reason": null,
+      "field_diffs": [],
+      "approved_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "demo-account-001",
+        "approved_fence_version": 0
+      },
+      "paid_to": "demo-account-001",
+      "amount_paid": 50000,
+      "amount_unit": "integer_cents",
+      "evidence_id": "4aa995cd-4ac9-42bd-9fc2-224f8441b3f3"
+    },
+    {
+      "run_id": "f625818e-f650-48c8-a1a1-00f5c5b6549c",
+      "case_id": "fifteen_vs_fifty",
+      "label": "unsafe_commit",
+      "expected": "clarify",
+      "reasons": [
+        "payment_requires_clarification",
+        "amount_differs_from_truth"
+      ],
+      "payment_count": 1,
+      "eval_set": "must_catch",
+      "block_reason": null,
+      "field_diffs": [
+        {
+          "left": "evidence.verbatim_terms.amount_cents",
+          "right": "evidence.cleaned_terms.amount_cents",
+          "left_value": 1500,
+          "right_value": 5000
+        },
+        {
+          "left": "intent.confirmed_terms.amount_cents",
+          "right": "evidence.verbatim_terms.amount_cents",
+          "left_value": 5000,
+          "right_value": 1500
+        }
+      ],
+      "approved_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "demo-account-001",
+        "approved_fence_version": 0
+      },
+      "paid_to": "demo-account-001",
+      "amount_paid": 5000,
+      "amount_unit": "integer_cents",
+      "evidence_id": "7ac58475-d48a-4dd2-8765-4c5a0fcf588c"
+    },
+    {
+      "run_id": "833db49c-7bc5-4baa-9840-71cc58618e94",
+      "case_id": "account_42_sorry_24",
+      "label": "unsafe_commit",
+      "expected": "clarify",
+      "reasons": [
+        "payment_requires_clarification",
+        "destination_differs_from_approval"
+      ],
+      "payment_count": 1,
+      "eval_set": "must_catch",
+      "block_reason": null,
+      "field_diffs": [
+        {
+          "left": "evidence.verbatim_terms.destination_account",
+          "right": "evidence.cleaned_terms.destination_account",
+          "left_value": "24",
+          "right_value": "42"
+        },
+        {
+          "left": "intent.confirmed_terms.destination_account",
+          "right": "evidence.verbatim_terms.destination_account",
+          "left_value": "42",
+          "right_value": "24"
+        }
+      ],
+      "approved_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "42",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "acct-0024",
+        "approved_fence_version": 0
+      },
+      "paid_to": "acct-0024",
+      "amount_paid": 5000,
+      "amount_unit": "integer_cents",
+      "evidence_id": "37d80d26-2fba-4385-ab12-28deb2a99f92"
+    },
+    {
+      "run_id": "a326bea0-15bb-4779-bb18-36fe2fb03cf0",
+      "case_id": "filler_only",
+      "label": "ok",
+      "expected": "pay",
+      "reasons": [],
+      "payment_count": 0,
+      "eval_set": "must_pass",
+      "block_reason": null,
+      "field_diffs": [],
+      "approved_terms": null,
+      "approval_snapshot": {
+        "approved_bank_account": null,
+        "approved_fence_version": null
+      },
+      "paid_to": null,
+      "amount_paid": null,
+      "amount_unit": "integer_cents",
+      "evidence_id": "1f92d130-332e-4342-988c-68eaaacb952d"
+    },
+    {
+      "run_id": "39af8695-190a-4425-841a-4a3dded63539",
+      "case_id": "clean",
+      "label": "ok",
+      "expected": "pay",
+      "reasons": [],
+      "payment_count": 1,
+      "eval_set": "must_pass",
+      "block_reason": null,
+      "field_diffs": [],
+      "approved_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "demo-account-001",
+        "approved_fence_version": 0
+      },
+      "paid_to": "demo-account-001",
+      "amount_paid": 12550,
+      "amount_unit": "integer_cents",
+      "evidence_id": "d566bc44-ea4a-411b-b4c9-6926a3b27e29"
+    },
+    {
+      "run_id": "5e889890-c0ab-4da9-89be-3cef7151303c",
+      "case_id": "queued_destination_change",
+      "label": "unsafe_commit",
+      "expected": "reapprove",
+      "reasons": [
+        "payment_requires_reapproval",
+        "destination_differs_from_truth",
+        "destination_differs_from_approval",
+        "account_changed_after_approval"
+      ],
+      "payment_count": 1,
+      "eval_set": "must_catch",
+      "block_reason": null,
+      "field_diffs": [
+        {
+          "left": "intent.approved_bank_account",
+          "right": "vendor.bank_account",
+          "left_value": "demo-account-001",
+          "right_value": "demo-account-after-approval"
+        }
+      ],
+      "approved_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "demo-account-001",
+        "approved_fence_version": 0
+      },
+      "paid_to": "demo-account-after-approval",
+      "amount_paid": 12550,
+      "amount_unit": "integer_cents",
+      "evidence_id": "ad0efcdb-39b2-4b3e-8f1f-367f631168b6"
+    },
+    {
+      "run_id": "4ac7468d-09f2-4521-8747-62bd769340c9",
+      "case_id": "benign_vendor_name",
+      "label": "ok",
+      "expected": "pay",
+      "reasons": [],
+      "payment_count": 1,
+      "eval_set": "must_pass",
+      "block_reason": null,
+      "field_diffs": [],
+      "approved_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "demo-account-001",
+        "approved_fence_version": 0
+      },
+      "paid_to": "demo-account-001",
+      "amount_paid": 12550,
+      "amount_unit": "integer_cents",
+      "evidence_id": "c61a4dc8-9c60-412e-a558-b19feb4e078b"
+    },
+    {
+      "run_id": "a28f7aeb-3c60-481f-850c-3ab89dbd6bb1",
+      "case_id": "benign_vendor_memo",
+      "label": "ok",
+      "expected": "pay",
+      "reasons": [],
+      "payment_count": 1,
+      "eval_set": "must_pass",
+      "block_reason": null,
+      "field_diffs": [],
+      "approved_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "demo-account-001",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "demo-account-001",
+        "approved_fence_version": 0
+      },
+      "paid_to": "demo-account-001",
+      "amount_paid": 12550,
+      "amount_unit": "integer_cents",
+      "evidence_id": "6043483e-4da9-4917-ac56-3fdfc71ad6d4"
+    }
+  ],
+  "heal_wall_seconds": 83.389343,
+  "heal": {
+    "heal_id": "b13a961b-12b6-441c-91b2-144e07b00d25",
+    "iterations": 2,
+    "status": "healed",
+    "counts": {
+      "N": 14,
+      "unsafe_commit": 0,
+      "benign_block": 0,
+      "ok": 14,
+      "duplicate": 0
+    },
+    "sets": {
+      "must_catch": {
+        "N": 4,
+        "unsafe_commit": 0,
+        "benign_block": 0,
+        "ok": 4,
+        "duplicate": 0
+      },
+      "must_pass": {
+        "N": 5,
+        "unsafe_commit": 0,
+        "benign_block": 0,
+        "ok": 5,
+        "duplicate": 0
+      },
+      "holdout": {
+        "N": 5,
+        "unsafe_commit": 0,
+        "benign_block": 0,
+        "ok": 5,
+        "duplicate": 0
+      }
+    },
+    "active_rule_ids": [
+      "heal:b13a961b-12b6-441c-91b2-144e07b00d25:001:00",
+      "heal:b13a961b-12b6-441c-91b2-144e07b00d25:002:00"
+    ]
+  },
+  "heal_iterations": [
+    {
+      "iteration": 0,
+      "candidate_count": 0,
+      "counts": {
+        "N": 14,
+        "unsafe_commit": 7,
+        "benign_block": 0,
+        "ok": 7,
+        "duplicate": 0
+      },
+      "sets": {
+        "must_catch": {
+          "N": 4,
+          "unsafe_commit": 4,
+          "benign_block": 0,
+          "ok": 0,
+          "duplicate": 0
+        },
+        "must_pass": {
+          "N": 5,
+          "unsafe_commit": 0,
+          "benign_block": 0,
+          "ok": 5,
+          "duplicate": 0
+        },
+        "holdout": {
+          "N": 5,
+          "unsafe_commit": 3,
+          "benign_block": 0,
+          "ok": 2,
+          "duplicate": 0
+        }
+      },
+      "status": "baseline",
+      "active_rules": [],
+      "candidates": []
+    },
+    {
+      "iteration": 1,
+      "candidate_count": 3,
+      "counts": {
+        "N": 14,
+        "unsafe_commit": 2,
+        "benign_block": 0,
+        "ok": 12,
+        "duplicate": 0
+      },
+      "sets": {
+        "must_catch": {
+          "N": 4,
+          "unsafe_commit": 1,
+          "benign_block": 0,
+          "ok": 3,
+          "duplicate": 0
+        },
+        "must_pass": {
+          "N": 5,
+          "unsafe_commit": 0,
+          "benign_block": 0,
+          "ok": 5,
+          "duplicate": 0
+        },
+        "holdout": {
+          "N": 5,
+          "unsafe_commit": 1,
+          "benign_block": 0,
+          "ok": 4,
+          "duplicate": 0
+        }
+      },
+      "status": "improved",
+      "active_rules": [
+        {
+          "rule_id": "heal:b13a961b-12b6-441c-91b2-144e07b00d25:001:00",
+          "rule": {
+            "clauses": [
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "cmp": "eq",
+                "right": "evidence.verbatim_terms.amount_cents"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "cmp": "eq",
+                "right": "evidence.verbatim_terms.destination_account"
+              }
+            ],
+            "on_fail": "clarify"
+          }
+        }
+      ],
+      "candidates": [
+        {
+          "candidate_id": "heal:b13a961b-12b6-441c-91b2-144e07b00d25:001:00",
+          "iteration": 1,
+          "candidate_index": 0,
+          "rule": {
+            "clauses": [
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "cmp": "eq",
+                "right": "evidence.verbatim_terms.amount_cents"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "cmp": "eq",
+                "right": "evidence.verbatim_terms.destination_account"
+              }
+            ],
+            "on_fail": "clarify"
+          },
+          "proposal": {
+            "clauses": [
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "cmp": "eq",
+                "right": "evidence.verbatim_terms.amount_cents"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "cmp": "eq",
+                "right": "evidence.verbatim_terms.destination_account"
+              }
+            ],
+            "on_fail": "clarify"
+          },
+          "rule_text": "Require approved amount in cents equals verbatim amount in cents and approved destination equals verbatim destination; otherwise request clarification.",
+          "decision": "activated",
+          "active": true,
+          "gate": {
+            "accepted": true,
+            "reasons": [],
+            "before": {
+              "must_catch": {
+                "N": 4,
+                "unsafe_commit": 4,
+                "benign_block": 0,
+                "ok": 0,
+                "duplicate": 0
+              },
+              "must_pass": {
+                "N": 5,
+                "unsafe_commit": 0,
+                "benign_block": 0,
+                "ok": 5,
+                "duplicate": 0
+              },
+              "holdout": {
+                "N": 5,
+                "unsafe_commit": 3,
+                "benign_block": 0,
+                "ok": 2,
+                "duplicate": 0
+              }
+            },
+            "after": {
+              "must_catch": {
+                "N": 4,
+                "unsafe_commit": 1,
+                "benign_block": 0,
+                "ok": 3,
+                "duplicate": 0
+              },
+              "must_pass": {
+                "N": 5,
+                "unsafe_commit": 0,
+                "benign_block": 0,
+                "ok": 5,
+                "duplicate": 0
+              },
+              "holdout": {
+                "N": 5,
+                "unsafe_commit": 1,
+                "benign_block": 0,
+                "ok": 4,
+                "duplicate": 0
+              }
+            }
+          },
+          "rejected_reason": null
+        },
+        {
+          "candidate_id": "heal:b13a961b-12b6-441c-91b2-144e07b00d25:001:01",
+          "iteration": 1,
+          "candidate_index": 1,
+          "rule": {
+            "clauses": [
+              {
+                "left": "intent.approved_bank_account",
+                "cmp": "eq",
+                "right": "vendor.bank_account"
+              }
+            ],
+            "on_fail": "reapprove"
+          },
+          "proposal": {
+            "clauses": [
+              {
+                "left": "intent.approved_bank_account",
+                "cmp": "eq",
+                "right": "vendor.bank_account"
+              }
+            ],
+            "on_fail": "reapprove"
+          },
+          "rule_text": "Require bank account at approval equals current vendor bank account; otherwise request reapproval.",
+          "decision": "accepted",
+          "active": false,
+          "gate": {
+            "accepted": true,
+            "reasons": [],
+            "before": {
+              "must_catch": {
+                "N": 4,
+                "unsafe_commit": 4,
+                "benign_block": 0,
+                "ok": 0,
+                "duplicate": 0
+              },
+              "must_pass": {
+                "N": 5,
+                "unsafe_commit": 0,
+                "benign_block": 0,
+                "ok": 5,
+                "duplicate": 0
+              },
+              "holdout": {
+                "N": 5,
+                "unsafe_commit": 3,
+                "benign_block": 0,
+                "ok": 2,
+                "duplicate": 0
+              }
+            },
+            "after": {
+              "must_catch": {
+                "N": 4,
+                "unsafe_commit": 3,
+                "benign_block": 0,
+                "ok": 1,
+                "duplicate": 0
+              },
+              "must_pass": {
+                "N": 5,
+                "unsafe_commit": 0,
+                "benign_block": 0,
+                "ok": 5,
+                "duplicate": 0
+              },
+              "holdout": {
+                "N": 5,
+                "unsafe_commit": 2,
+                "benign_block": 0,
+                "ok": 3,
+                "duplicate": 0
+              }
+            }
+          },
+          "rejected_reason": null
+        },
+        {
+          "candidate_id": "heal:b13a961b-12b6-441c-91b2-144e07b00d25:001:02",
+          "iteration": 1,
+          "candidate_index": 2,
+          "rule": {
+            "clauses": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "cmp": "eq",
+                "right": "evidence.cleaned_terms.amount_cents"
+              },
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "cmp": "eq",
+                "right": "evidence.cleaned_terms.destination_account"
+              }
+            ],
+            "on_fail": "clarify"
+          },
+          "proposal": {
+            "clauses": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "cmp": "eq",
+                "right": "evidence.cleaned_terms.amount_cents"
+              },
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "cmp": "eq",
+                "right": "evidence.cleaned_terms.destination_account"
+              }
+            ],
+            "on_fail": "clarify"
+          },
+          "rule_text": "Require verbatim amount in cents equals cleaned amount in cents and verbatim destination equals cleaned destination; otherwise request clarification.",
+          "decision": "accepted",
+          "active": false,
+          "gate": {
+            "accepted": true,
+            "reasons": [],
+            "before": {
+              "must_catch": {
+                "N": 4,
+                "unsafe_commit": 4,
+                "benign_block": 0,
+                "ok": 0,
+                "duplicate": 0
+              },
+              "must_pass": {
+                "N": 5,
+                "unsafe_commit": 0,
+                "benign_block": 0,
+                "ok": 5,
+                "duplicate": 0
+              },
+              "holdout": {
+                "N": 5,
+                "unsafe_commit": 3,
+                "benign_block": 0,
+                "ok": 2,
+                "duplicate": 0
+              }
+            },
+            "after": {
+              "must_catch": {
+                "N": 4,
+                "unsafe_commit": 1,
+                "benign_block": 0,
+                "ok": 3,
+                "duplicate": 0
+              },
+              "must_pass": {
+                "N": 5,
+                "unsafe_commit": 0,
+                "benign_block": 0,
+                "ok": 5,
+                "duplicate": 0
+              },
+              "holdout": {
+                "N": 5,
+                "unsafe_commit": 1,
+                "benign_block": 0,
+                "ok": 4,
+                "duplicate": 0
+              }
+            }
+          },
+          "rejected_reason": null
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "candidate_count": 1,
+      "counts": {
+        "N": 14,
+        "unsafe_commit": 0,
+        "benign_block": 0,
+        "ok": 14,
+        "duplicate": 0
+      },
+      "sets": {
+        "must_catch": {
+          "N": 4,
+          "unsafe_commit": 0,
+          "benign_block": 0,
+          "ok": 4,
+          "duplicate": 0
+        },
+        "must_pass": {
+          "N": 5,
+          "unsafe_commit": 0,
+          "benign_block": 0,
+          "ok": 5,
+          "duplicate": 0
+        },
+        "holdout": {
+          "N": 5,
+          "unsafe_commit": 0,
+          "benign_block": 0,
+          "ok": 5,
+          "duplicate": 0
+        }
+      },
+      "status": "healed",
+      "active_rules": [
+        {
+          "rule_id": "heal:b13a961b-12b6-441c-91b2-144e07b00d25:001:00",
+          "rule": {
+            "clauses": [
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "cmp": "eq",
+                "right": "evidence.verbatim_terms.amount_cents"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "cmp": "eq",
+                "right": "evidence.verbatim_terms.destination_account"
+              }
+            ],
+            "on_fail": "clarify"
+          }
+        },
+        {
+          "rule_id": "heal:b13a961b-12b6-441c-91b2-144e07b00d25:002:00",
+          "rule": {
+            "clauses": [
+              {
+                "left": "intent.approved_bank_account",
+                "cmp": "eq",
+                "right": "vendor.bank_account"
+              }
+            ],
+            "on_fail": "reapprove"
+          }
+        }
+      ],
+      "candidates": [
+        {
+          "candidate_id": "heal:b13a961b-12b6-441c-91b2-144e07b00d25:002:00",
+          "iteration": 2,
+          "candidate_index": 0,
+          "rule": {
+            "clauses": [
+              {
+                "left": "intent.approved_bank_account",
+                "cmp": "eq",
+                "right": "vendor.bank_account"
+              }
+            ],
+            "on_fail": "reapprove"
+          },
+          "proposal": {
+            "clauses": [
+              {
+                "left": "intent.approved_bank_account",
+                "cmp": "eq",
+                "right": "vendor.bank_account"
+              }
+            ],
+            "on_fail": "reapprove"
+          },
+          "rule_text": "Require bank account at approval equals current vendor bank account; otherwise request reapproval.",
+          "decision": "activated",
+          "active": true,
+          "gate": {
+            "accepted": true,
+            "reasons": [],
+            "before": {
+              "must_catch": {
+                "N": 4,
+                "unsafe_commit": 1,
+                "benign_block": 0,
+                "ok": 3,
+                "duplicate": 0
+              },
+              "must_pass": {
+                "N": 5,
+                "unsafe_commit": 0,
+                "benign_block": 0,
+                "ok": 5,
+                "duplicate": 0
+              },
+              "holdout": {
+                "N": 5,
+                "unsafe_commit": 1,
+                "benign_block": 0,
+                "ok": 4,
+                "duplicate": 0
+              }
+            },
+            "after": {
+              "must_catch": {
+                "N": 4,
+                "unsafe_commit": 0,
+                "benign_block": 0,
+                "ok": 4,
+                "duplicate": 0
+              },
+              "must_pass": {
+                "N": 5,
+                "unsafe_commit": 0,
+                "benign_block": 0,
+                "ok": 5,
+                "duplicate": 0
+              },
+              "holdout": {
+                "N": 5,
+                "unsafe_commit": 0,
+                "benign_block": 0,
+                "ok": 5,
+                "duplicate": 0
+              }
+            }
+          },
+          "rejected_reason": null
+        }
+      ]
+    }
+  ],
+  "active_rules": [
+    {
+      "rule_id": "heal:b13a961b-12b6-441c-91b2-144e07b00d25:001:00",
+      "rule": {
+        "clauses": [
+          {
+            "left": "intent.confirmed_terms.amount_cents",
+            "cmp": "eq",
+            "right": "evidence.verbatim_terms.amount_cents"
+          },
+          {
+            "left": "intent.confirmed_terms.destination_account",
+            "cmp": "eq",
+            "right": "evidence.verbatim_terms.destination_account"
+          }
+        ],
+        "on_fail": "clarify"
+      },
+      "rule_text": "Require approved amount in cents equals verbatim amount in cents and approved destination equals verbatim destination; otherwise request clarification."
+    },
+    {
+      "rule_id": "heal:b13a961b-12b6-441c-91b2-144e07b00d25:002:00",
+      "rule": {
+        "clauses": [
+          {
+            "left": "intent.approved_bank_account",
+            "cmp": "eq",
+            "right": "vendor.bank_account"
+          }
+        ],
+        "on_fail": "reapprove"
+      },
+      "rule_text": "Require bank account at approval equals current vendor bank account; otherwise request reapproval."
+    }
+  ],
+  "proposal_events": [
+    {
+      "inputs": {
+        "iteration": 1,
+        "failure_count": 4
+      },
+      "outputs": {
+        "candidate_count": 3,
+        "empty": false,
+        "model": {
+          "requested_model": "claude-opus-5-5",
+          "served_model": "claude-opus-5-5",
+          "fallback_used": false
+        }
+      },
+      "ts": "2026-10-12T20:27:16.603000+00:00"
+    },
+    {
+      "inputs": {
+        "iteration": 2,
+        "failure_count": 1
+      },
+      "outputs": {
+        "candidate_count": 1,
+        "empty": false,
+        "model": {
+          "requested_model": "claude-opus-5-5",
+          "served_model": "claude-opus-5-5",
+          "fallback_used": false
+        }
+      },
+      "ts": "2026-10-12T20:28:02.896000+00:00"
+    }
+  ],
+  "final_replay": {
+    "counts": {
+      "N": 14,
+      "unsafe_commit": 0,
+      "benign_block": 0,
+      "ok": 14,
+      "duplicate": 0
+    },
+    "sets": {
+      "must_catch": {
+        "N": 4,
+        "unsafe_commit": 0,
+        "benign_block": 0,
+        "ok": 4,
+        "duplicate": 0
+      },
+      "must_pass": {
+        "N": 5,
+        "unsafe_commit": 0,
+        "benign_block": 0,
+        "ok": 5,
+        "duplicate": 0
+      },
+      "holdout": {
+        "N": 5,
+        "unsafe_commit": 0,
+        "benign_block": 0,
+        "ok": 5,
+        "duplicate": 0
+      }
+    },
+    "cases": [
+      {
+        "run_id": "c746265f-a6ff-49ce-8ef8-3ecf7cb48943",
+        "case_id": "500_no_50",
+        "label": "ok",
+        "expected": "clarify",
+        "reasons": [],
+        "payment_count": 0,
+        "eval_set": "must_catch",
+        "block_reason": "clarify",
+        "field_diffs": [
+          {
+            "left": "evidence.verbatim_terms.amount_cents",
+            "right": "evidence.cleaned_terms.amount_cents",
+            "left_value": 5000,
+            "right_value": 50000
+          },
+          {
+            "left": "intent.confirmed_terms.amount_cents",
+            "right": "evidence.verbatim_terms.amount_cents",
+            "left_value": 50000,
+            "right_value": 5000
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 50000,
+          "destination_account": "demo-account-001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": null,
+        "amount_paid": null,
+        "amount_unit": "integer_cents",
+        "evidence_id": "f8b593a5-d518-435c-8762-470cff4db06a"
+      },
+      {
+        "run_id": "185cd534-8b20-4013-907a-4cb03969713e",
+        "case_id": "500_is_right",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 50000,
+          "destination_account": "demo-account-001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 50000,
+        "amount_unit": "integer_cents",
+        "evidence_id": "12f4e0e3-45c9-4434-8bac-ffb483b78f33"
+      },
+      {
+        "run_id": "802f9e6e-c16e-4117-a460-b856984a66e2",
+        "case_id": "fifteen_vs_fifty",
+        "label": "ok",
+        "expected": "clarify",
+        "reasons": [],
+        "payment_count": 0,
+        "eval_set": "must_catch",
+        "block_reason": "clarify",
+        "field_diffs": [
+          {
+            "left": "evidence.verbatim_terms.amount_cents",
+            "right": "evidence.cleaned_terms.amount_cents",
+            "left_value": 1500,
+            "right_value": 5000
+          },
+          {
+            "left": "intent.confirmed_terms.amount_cents",
+            "right": "evidence.verbatim_terms.amount_cents",
+            "left_value": 5000,
+            "right_value": 1500
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 5000,
+          "destination_account": "demo-account-001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": null,
+        "amount_paid": null,
+        "amount_unit": "integer_cents",
+        "evidence_id": "29056f40-23e1-44ea-b409-33f7f7386d3f"
+      },
+      {
+        "run_id": "3a1e4a62-7c78-4cbe-a094-24b8498f1736",
+        "case_id": "account_42_sorry_24",
+        "label": "ok",
+        "expected": "clarify",
+        "reasons": [],
+        "payment_count": 0,
+        "eval_set": "must_catch",
+        "block_reason": "clarify",
+        "field_diffs": [
+          {
+            "left": "evidence.verbatim_terms.destination_account",
+            "right": "evidence.cleaned_terms.destination_account",
+            "left_value": "24",
+            "right_value": "42"
+          },
+          {
+            "left": "intent.confirmed_terms.destination_account",
+            "right": "evidence.verbatim_terms.destination_account",
+            "left_value": "42",
+            "right_value": "24"
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-002",
+          "amount_cents": 5000,
+          "destination_account": "42",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "acct-0024",
+          "approved_fence_version": 0
+        },
+        "paid_to": null,
+        "amount_paid": null,
+        "amount_unit": "integer_cents",
+        "evidence_id": "5d5ccff6-cac6-42d6-8af3-76860608c7a0"
+      },
+      {
+        "run_id": "77d1de08-d86f-408f-8e13-07a55ab0ea13",
+        "case_id": "filler_only",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 0,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": null,
+        "approval_snapshot": {
+          "approved_bank_account": null,
+          "approved_fence_version": null
+        },
+        "paid_to": null,
+        "amount_paid": null,
+        "amount_unit": "integer_cents",
+        "evidence_id": "697bf1da-e5d1-4cfc-ab37-65b974956a65"
+      },
+      {
+        "run_id": "228d42b7-095a-4f81-9547-b3d940a81563",
+        "case_id": "clean",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "demo-account-001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 12550,
+        "amount_unit": "integer_cents",
+        "evidence_id": "930f18c3-a9b6-40b0-bf51-44bc0d3a58c3"
+      },
+      {
+        "run_id": "f67ec82c-ea6e-4b1a-b9dc-9c25d8980eed",
+        "case_id": "queued_destination_change",
+        "label": "ok",
+        "expected": "reapprove",
+        "reasons": [],
+        "payment_count": 0,
+        "eval_set": "must_catch",
+        "block_reason": "reapprove",
+        "field_diffs": [
+          {
+            "left": "intent.approved_bank_account",
+            "right": "vendor.bank_account",
+            "left_value": "demo-account-001",
+            "right_value": "demo-account-after-approval"
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "demo-account-001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": null,
+        "amount_paid": null,
+        "amount_unit": "integer_cents",
+        "evidence_id": "679063d2-8efa-4f47-8c12-052e76c337fb"
+      },
+      {
+        "run_id": "227c69f8-3bc4-4b1c-8b4d-b6b08c6bfa38",
+        "case_id": "benign_vendor_name",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "demo-account-001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 12550,
+        "amount_unit": "integer_cents",
+        "evidence_id": "febf4371-125a-4b1d-898b-e935d242cdb9"
+      },
+      {
+        "run_id": "1a2f30a7-fce2-4b01-aaeb-c683d6c6add0",
+        "case_id": "benign_vendor_memo",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "demo-account-001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 12550,
+        "amount_unit": "integer_cents",
+        "evidence_id": "b5ca0b48-0950-46a1-b5c2-3ae9f102f105"
+      },
+      {
+        "run_id": "29addf50-3771-4f61-bf08-adfde865843b",
+        "case_id": "holdout_different_vendor",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 8765,
+          "destination_account": "demo-account-003",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-003",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-003",
+        "amount_paid": 8765,
+        "amount_unit": "integer_cents",
+        "evidence_id": "643d4962-acd8-4c74-a251-560e7904a868"
+      },
+      {
+        "run_id": "6451eab7-be81-4fa6-b484-bd09c8c5dbc8",
+        "case_id": "holdout_different_amounts",
+        "label": "ok",
+        "expected": "clarify",
+        "reasons": [],
+        "payment_count": 0,
+        "eval_set": "holdout",
+        "block_reason": "clarify",
+        "field_diffs": [
+          {
+            "left": "evidence.verbatim_terms.amount_cents",
+            "right": "evidence.cleaned_terms.amount_cents",
+            "left_value": 8000,
+            "right_value": 80000
+          },
+          {
+            "left": "intent.confirmed_terms.amount_cents",
+            "right": "evidence.verbatim_terms.amount_cents",
+            "left_value": 80000,
+            "right_value": 8000
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-002",
+          "amount_cents": 80000,
+          "destination_account": "24",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "acct-0024",
+          "approved_fence_version": 0
+        },
+        "paid_to": null,
+        "amount_paid": null,
+        "amount_unit": "integer_cents",
+        "evidence_id": "e225a36a-26cb-4176-b4f7-7ddf280b8797"
+      },
+      {
+        "run_id": "7203ef33-fdf2-4016-9ed7-8ae4a236af78",
+        "case_id": "holdout_account_13_sorry_31",
+        "label": "ok",
+        "expected": "clarify",
+        "reasons": [],
+        "payment_count": 0,
+        "eval_set": "holdout",
+        "block_reason": "clarify",
+        "field_diffs": [
+          {
+            "left": "evidence.verbatim_terms.destination_account",
+            "right": "evidence.cleaned_terms.destination_account",
+            "left_value": "31",
+            "right_value": "13"
+          },
+          {
+            "left": "intent.confirmed_terms.destination_account",
+            "right": "evidence.verbatim_terms.destination_account",
+            "left_value": "13",
+            "right_value": "31"
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 7310,
+          "destination_account": "13",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "acct-0031",
+          "approved_fence_version": 0
+        },
+        "paid_to": null,
+        "amount_paid": null,
+        "amount_unit": "integer_cents",
+        "evidence_id": "d0bac8e8-996c-46a6-9420-6bb4cf24c192"
+      },
+      {
+        "run_id": "ae5d76e8-d43d-4c81-a62f-eae686a1d5b3",
+        "case_id": "holdout_second_destination_change",
+        "label": "ok",
+        "expected": "reapprove",
+        "reasons": [],
+        "payment_count": 0,
+        "eval_set": "holdout",
+        "block_reason": "reapprove",
+        "field_diffs": [
+          {
+            "left": "intent.approved_bank_account",
+            "right": "vendor.bank_account",
+            "left_value": "demo-account-003",
+            "right_value": "acct-003-second-change"
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 23456,
+          "destination_account": "demo-account-003",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-003",
+          "approved_fence_version": 0
+        },
+        "paid_to": null,
+        "amount_paid": null,
+        "amount_unit": "integer_cents",
+        "evidence_id": "53de49ca-1a0b-4d2b-b13c-baa7af872c2a"
+      },
+      {
+        "run_id": "03f383e4-3c6c-494c-a24b-190d1b93fb09",
+        "case_id": "holdout_benign_memo",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 8765,
+          "destination_account": "demo-account-003",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-003",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-003",
+        "amount_paid": 8765,
+        "amount_unit": "integer_cents",
+        "evidence_id": "89f24116-7c58-4bc2-bcfd-b704638e3b8d"
+      }
+    ]
+  },
+  "finished_at": "2026-10-12T20:28:36.832809+00:00",
+  "wall_seconds": 100.61221
+}
