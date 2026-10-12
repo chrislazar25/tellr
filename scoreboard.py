@@ -44,7 +44,8 @@ def _field_name(field):
         return names[field]
     root, suffix = field.rsplit(".", 1)
     root = {"evidence.verbatim_terms": "verbatim", "evidence.cleaned_terms": "cleaned",
-            "intent.confirmed_terms": "approved"}[root]
+            "intent.confirmed_terms": "approved", "evidence.recognizer_a_terms": "recognizer A",
+            "evidence.recognizer_b_terms": "recognizer B"}[root]
     suffix = {"vendor_id": "vendor", "amount_cents": "amount in cents",
               "destination_account": "destination", "date": "date"}[suffix]
     return f"{root} {suffix}"
@@ -63,7 +64,7 @@ def render(data):
         lines.append("  None; payments are allowed by default.")
     for document in data["active_rules"]:
         rule = document["rule"]
-        clauses = [f"{_field_name(clause['left'])} {'equals' if clause['cmp'] == 'eq' else 'differs from'} "
+        clauses = [f"{_field_name(clause['left'])} { {'eq': 'equals', 'neq': 'differs from', 'suffix_match': 'matches the suffix of'}[clause['cmp']]} "
                    f"{_field_name(clause['right'])}" for clause in rule["clauses"]]
         action = "request clarification" if rule["on_fail"] == "clarify" else "request reapproval"
         lines.append(f"  {document['rule_id']}: require {' and '.join(clauses)}; otherwise {action}.")

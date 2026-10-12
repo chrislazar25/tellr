@@ -40,7 +40,7 @@ def prepare_intent(
         }, session=session)
         log_step(db, run_id, "store_evidence", {}, {"evidence_id": evidence_id}, session=session)
         if terms is None:
-            log_step(db, run_id, "no_terms", {"evidence_id": evidence_id}, {"status": "no_terms"}, session=session)
+            log_step(db, run_id, "no_terms", {"evidence_id": evidence_id}, {"status": "no_terms", "reason": "clarify"}, session=session)
             return
         db.intents.insert_one({
             "_id": intent_id, "run_id": run_id, "evidence_id": evidence_id,
@@ -58,7 +58,7 @@ def prepare_intent(
 def confirm_intent(db: Database, intent_id: str, terms: dict, *, source: str = "manual") -> dict:
     """Persist chosen terms and a coherent vendor/fence snapshot at approval."""
     terms = interfaces.validate_terms(terms)
-    if source not in {"verbatim", "cleaned", "manual"}:
+    if source not in {"verbatim", "cleaned", "manual", "recognizer_a"}:
         raise ValueError("Unknown confirmation source")
 
     def confirm(session):
@@ -124,7 +124,7 @@ def approve_and_enqueue(
     if confirmed_terms is not None and confirmation_source is not None:
         raise ValueError("Choose a transcript or supply manual confirmed terms, not both")
     source = "manual" if confirmed_terms is not None else confirmation_source
-    if source not in {"verbatim", "cleaned", "manual"}:
+    if source not in {"verbatim", "cleaned", "manual", "recognizer_a"}:
         raise ValueError("Unknown confirmation source")
     terms = confirmed_terms if source == "manual" else prepared["candidates"][source]
     if terms is None:

@@ -1,24 +1,32 @@
 """Fixed-vocabulary conjunctions; deterministic and free of side effects."""
 
 from typing import Callable
+from db.accounts import destination_matches
 
 Evaluator = Callable[[dict, dict], str | None]
 TERM_FIELDS = ("vendor_id", "amount_cents", "destination_account", "date")
 VOCABULARY = tuple(
     f"{root}.{field}"
-    for root in ("evidence.verbatim_terms", "evidence.cleaned_terms", "intent.confirmed_terms")
+    for root in ("evidence.verbatim_terms", "evidence.cleaned_terms", "intent.confirmed_terms",
+                 "evidence.recognizer_a_terms", "evidence.recognizer_b_terms")
     for field in TERM_FIELDS
 ) + ("intent.approved_bank_account", "intent.approved_fence_version", "vendor.bank_account")
+DESTINATION_FIELDS = tuple(field for field in VOCABULARY if field.endswith(".destination_account"))
+
+def _clause_schema(comparisons, left_fields, right_fields):
+    return {"type": "object", "additionalProperties": False, "required": ["left", "cmp", "right"],
+            "properties": {"left": {"type": "string", "enum": list(left_fields)},
+                           "cmp": {"type": "string", "enum": list(comparisons)},
+                           "right": {"type": "string", "enum": list(right_fields)}}}
+
 
 RULE_SCHEMA = {
     "type": "object", "additionalProperties": False, "required": ["clauses", "on_fail"],
     "properties": {
-        "clauses": {"type": "array", "minItems": 1, "maxItems": 16, "items": {
-            "type": "object", "additionalProperties": False, "required": ["left", "cmp", "right"],
-            "properties": {"left": {"type": "string", "enum": list(VOCABULARY)},
-                           "cmp": {"type": "string", "enum": ["eq", "neq"]},
-                           "right": {"type": "string", "enum": list(VOCABULARY)}},
-        }},
+        "clauses": {"type": "array", "minItems": 1, "maxItems": 16, "items": {"oneOf": [
+            _clause_schema(("eq", "neq"), VOCABULARY, VOCABULARY),
+            _clause_schema(("suffix_match",), DESTINATION_FIELDS, ("vendor.bank_account",)),
+        ]}},
         "on_fail": {"type": "string", "enum": ["clarify", "reapprove"]},
     },
 }
@@ -38,8 +46,10 @@ def validate_rule(rule: dict) -> dict:
             raise ValueError("Clause must contain exactly left, cmp, and right")
         if clause["left"] not in VOCABULARY or clause["right"] not in VOCABULARY:
             raise ValueError("Clause field is outside the fixed vocabulary")
-        if clause["cmp"] not in {"eq", "neq"}:
-            raise ValueError("Clause cmp must be eq or neq")
+        if clause["cmp"] not in {"eq", "neq", "suffix_match"}:
+            raise ValueError("Clause cmp must be eq, neq or suffix_match")
+        if clause["cmp"] == "suffix_match" and (clause["left"] not in DESTINATION_FIELDS or clause["right"] != "vendor.bank_account"):
+            raise ValueError("suffix_match requires a spoken destination on the left and vendor.bank_account on the right")
         result.append(dict(clause))
     return {"clauses": result, "on_fail": rule["on_fail"]}
 
@@ -65,6 +75,10 @@ def evaluate(rule: dict, context: dict) -> str | None:
         left, right = (field_value(context, clause[side]) for side in ("left", "right"))
         if left is _MISSING or right is _MISSING or left is None or right is None:
             return predicate["on_fail"]
+        if clause["cmp"] == "suffix_match":
+            if not isinstance(left, str) or not isinstance(right, str) or not left or not right or not destination_matches(left, right):
+                return predicate["on_fail"]
+            continue
         same_type = (isinstance(left, str) and isinstance(right, str)) or (
             isinstance(left, int) and not isinstance(left, bool)
             and isinstance(right, int) and not isinstance(right, bool)

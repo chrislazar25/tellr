@@ -13,7 +13,11 @@ SYSTEM_PROMPT = """Propose payment safety predicates in the supplied rule langua
 Choose how many candidates are useful, from zero to five. An empty list is valid
 when no useful candidate is available. Never pad the response with duplicate rules.
 All clauses in a rule must pass for payment; otherwise its on_fail action blocks.
-Use only the supplied field vocabulary, eq/neq comparisons, and clarify/reapprove.
+Use only the supplied field vocabulary, eq/neq/suffix_match comparisons, and clarify/reapprove.
+suffix_match requires a spoken destination field on the left and vendor.bank_account
+on the right: a numeric suffix must match the current account ending; full identifiers
+require exact equality. Missing terms fail closed. Recognizer disagreement can block
+good A approvals when B is wrong; gates check that behavior on must_pass.
 No literal values, code, labels, or external data may appear in predicates.
 Repair the training failures while preserving ordinary payments and harmless
 vendor edits. Compare actual bank identity rather than treating all fence bumps

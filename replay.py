@@ -11,7 +11,7 @@ from db.vendors import update_vendor_bank_account, update_vendor_profile
 from fixtures.catalog import fixture_cases
 from interfaces import Adapters, DEFAULT_ADAPTERS, validate_terms
 from oracle import label_run
-from pipeline import run_pipeline
+from pipeline import approve_and_enqueue, prepare_intent, run_pipeline
 from rules import TERM_FIELDS, field_value, validate_rule
 from worker import process_one
 
@@ -28,6 +28,9 @@ def field_diffs(context):
     pairs = [(f"evidence.verbatim_terms.{field}", f"evidence.cleaned_terms.{field}") for field in TERM_FIELDS]
     pairs += [(f"intent.confirmed_terms.{field}", f"evidence.verbatim_terms.{field}") for field in TERM_FIELDS]
     pairs += [("intent.approved_bank_account", "vendor.bank_account")]
+    if "recognizer_b_terms" in context.get("evidence", {}):
+        pairs += [(f"evidence.recognizer_a_terms.{field}", f"evidence.recognizer_b_terms.{field}") for field in TERM_FIELDS]
+        pairs += [("evidence.recognizer_a_terms.destination_account", "vendor.bank_account")]
     diffs = []
     for left, right in pairs:
         values = [field_value(context, name) for name in (left, right)]
@@ -62,7 +65,16 @@ def _run_case(db, case):
     vendor_id = terms["vendor_id"] if terms else None
     if case.get("initial_vendor"):
         db.vendors.update_one({"_id": vendor_id}, {"$set": case["initial_vendor"]})
-    result = run_pipeline(db, case["audio_file"], hold=True, adapters=_adapters(case))
+    if "recognizer_b_terms" in case:
+        adapters = _adapters(case)
+        prepared = prepare_intent(db, case["audio_file"], adapters=adapters)
+        db.evidence.update_one({"_id": prepared["evidence_id"]}, {"$set": {
+            field: case[field] for field in ("recognizer_a_text", "recognizer_a_terms", "recognizer_b_text", "recognizer_b_terms")
+        }})
+        prepared["candidates"]["recognizer_a"] = case["recognizer_a_terms"]
+        result = approve_and_enqueue(db, prepared, confirmation_source="recognizer_a", adapters=adapters)
+    else:
+        result = run_pipeline(db, case["audio_file"], hold=True, adapters=_adapters(case))
     db.evidence.update_one({"_id": result["evidence_id"]}, {"$set": {"fixture_case_id": case["case_id"]}})
     for change in case.get("changes", []):
         if "bank_account" in change:
@@ -78,7 +90,7 @@ def _run_case(db, case):
     verdict = label_run(db, result["run_id"], reference_case=case)
     receipt = db.payments.find_one({"run_id": result["run_id"]})
     intent = context["intent"]
-    return {**verdict, "eval_set": case["eval_set"], "block_reason": outcome.get("reason") if outcome else None,
+    return {**verdict, "eval_set": case["eval_set"], "block_reason": outcome.get("reason") if outcome else "clarify" if result["status"] == "no_terms" else None,
             "field_diffs": field_diffs(context), "approved_terms": intent.get("confirmed_terms"),
             "approval_snapshot": {key: intent.get(key) for key in ("approved_bank_account", "approved_fence_version")},
             "paid_to": receipt["paid_to"] if receipt else None,

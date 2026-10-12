@@ -244,62 +244,115 @@
           "minItems": 1,
           "maxItems": 16,
           "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "left",
-              "cmp",
-              "right"
-            ],
-            "properties": {
-              "left": {
-                "type": "string",
-                "enum": [
-                  "evidence.verbatim_terms.vendor_id",
-                  "evidence.verbatim_terms.amount_cents",
-                  "evidence.verbatim_terms.destination_account",
-                  "evidence.verbatim_terms.date",
-                  "evidence.cleaned_terms.vendor_id",
-                  "evidence.cleaned_terms.amount_cents",
-                  "evidence.cleaned_terms.destination_account",
-                  "evidence.cleaned_terms.date",
-                  "intent.confirmed_terms.vendor_id",
-                  "intent.confirmed_terms.amount_cents",
-                  "intent.confirmed_terms.destination_account",
-                  "intent.confirmed_terms.date",
-                  "intent.approved_bank_account",
-                  "intent.approved_fence_version",
-                  "vendor.bank_account"
-                ]
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "left",
+                  "cmp",
+                  "right"
+                ],
+                "properties": {
+                  "left": {
+                    "type": "string",
+                    "enum": [
+                      "evidence.verbatim_terms.vendor_id",
+                      "evidence.verbatim_terms.amount_cents",
+                      "evidence.verbatim_terms.destination_account",
+                      "evidence.verbatim_terms.date",
+                      "evidence.cleaned_terms.vendor_id",
+                      "evidence.cleaned_terms.amount_cents",
+                      "evidence.cleaned_terms.destination_account",
+                      "evidence.cleaned_terms.date",
+                      "intent.confirmed_terms.vendor_id",
+                      "intent.confirmed_terms.amount_cents",
+                      "intent.confirmed_terms.destination_account",
+                      "intent.confirmed_terms.date",
+                      "evidence.recognizer_a_terms.vendor_id",
+                      "evidence.recognizer_a_terms.amount_cents",
+                      "evidence.recognizer_a_terms.destination_account",
+                      "evidence.recognizer_a_terms.date",
+                      "evidence.recognizer_b_terms.vendor_id",
+                      "evidence.recognizer_b_terms.amount_cents",
+                      "evidence.recognizer_b_terms.destination_account",
+                      "evidence.recognizer_b_terms.date",
+                      "intent.approved_bank_account",
+                      "intent.approved_fence_version",
+                      "vendor.bank_account"
+                    ]
+                  },
+                  "cmp": {
+                    "type": "string",
+                    "enum": [
+                      "eq",
+                      "neq"
+                    ]
+                  },
+                  "right": {
+                    "type": "string",
+                    "enum": [
+                      "evidence.verbatim_terms.vendor_id",
+                      "evidence.verbatim_terms.amount_cents",
+                      "evidence.verbatim_terms.destination_account",
+                      "evidence.verbatim_terms.date",
+                      "evidence.cleaned_terms.vendor_id",
+                      "evidence.cleaned_terms.amount_cents",
+                      "evidence.cleaned_terms.destination_account",
+                      "evidence.cleaned_terms.date",
+                      "intent.confirmed_terms.vendor_id",
+                      "intent.confirmed_terms.amount_cents",
+                      "intent.confirmed_terms.destination_account",
+                      "intent.confirmed_terms.date",
+                      "evidence.recognizer_a_terms.vendor_id",
+                      "evidence.recognizer_a_terms.amount_cents",
+                      "evidence.recognizer_a_terms.destination_account",
+                      "evidence.recognizer_a_terms.date",
+                      "evidence.recognizer_b_terms.vendor_id",
+                      "evidence.recognizer_b_terms.amount_cents",
+                      "evidence.recognizer_b_terms.destination_account",
+                      "evidence.recognizer_b_terms.date",
+                      "intent.approved_bank_account",
+                      "intent.approved_fence_version",
+                      "vendor.bank_account"
+                    ]
+                  }
+                }
               },
-              "cmp": {
-                "type": "string",
-                "enum": [
-                  "eq",
-                  "neq"
-                ]
-              },
-              "right": {
-                "type": "string",
-                "enum": [
-                  "evidence.verbatim_terms.vendor_id",
-                  "evidence.verbatim_terms.amount_cents",
-                  "evidence.verbatim_terms.destination_account",
-                  "evidence.verbatim_terms.date",
-                  "evidence.cleaned_terms.vendor_id",
-                  "evidence.cleaned_terms.amount_cents",
-                  "evidence.cleaned_terms.destination_account",
-                  "evidence.cleaned_terms.date",
-                  "intent.confirmed_terms.vendor_id",
-                  "intent.confirmed_terms.amount_cents",
-                  "intent.confirmed_terms.destination_account",
-                  "intent.confirmed_terms.date",
-                  "intent.approved_bank_account",
-                  "intent.approved_fence_version",
-                  "vendor.bank_account"
-                ]
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "left",
+                  "cmp",
+                  "right"
+                ],
+                "properties": {
+                  "left": {
+                    "type": "string",
+                    "enum": [
+                      "evidence.verbatim_terms.destination_account",
+                      "evidence.cleaned_terms.destination_account",
+                      "intent.confirmed_terms.destination_account",
+                      "evidence.recognizer_a_terms.destination_account",
+                      "evidence.recognizer_b_terms.destination_account"
+                    ]
+                  },
+                  "cmp": {
+                    "type": "string",
+                    "enum": [
+                      "suffix_match"
+                    ]
+                  },
+                  "right": {
+                    "type": "string",
+                    "enum": [
+                      "vendor.bank_account"
+                    ]
+                  }
+                }
               }
-            }
+            ]
           }
         },
         "on_fail": {

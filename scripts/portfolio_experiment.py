@@ -62,7 +62,7 @@ def measured_cases(measurement):
 def rule_text(rule):
     if rule is None:
         return "Invalid predicate; not activated."
-    clauses = [f"{_field_name(clause['left'])} {'equals' if clause['cmp'] == 'eq' else 'differs from'} {_field_name(clause['right'])}"
+    clauses = [f"{_field_name(clause['left'])} { {'eq': 'equals', 'neq': 'differs from', 'suffix_match': 'matches the suffix of'}[clause['cmp']]} {_field_name(clause['right'])}"
                for clause in rule["clauses"]]
     action = "request clarification" if rule["on_fail"] == "clarify" else "request reapproval"
     return f"Require {' and '.join(clauses)}; otherwise {action}."

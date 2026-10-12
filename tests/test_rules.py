@@ -46,9 +46,26 @@ def test_invalid_language_is_rejected(invalid):
 
 
 def test_vocabulary_has_no_truth_labels_literals_or_current_fence():
-    assert len(VOCABULARY) == 15
+    assert len(VOCABULARY) == 23
     assert not any("true_terms" in field or "expected" in field or "vendor.name" in field for field in VOCABULARY)
     assert "vendor.fence_version" not in VOCABULARY
+
+
+@pytest.mark.parametrize("spoken,bank,outcome", [
+    ("24", "acct-0024", None), ("001", "demo-account-001", None),
+    ("13", "acct-0024", "clarify"), ("demo-account-001", "demo-account-001", None),
+    ("", "acct-0024", "clarify"), (24, "acct-0024", "clarify"),
+])
+def test_suffix_match_uses_spoken_destinations_without_number_coercion(spoken, bank, outcome):
+    context = {"evidence": {"recognizer_a_terms": {"destination_account": spoken}}, "vendor": {"bank_account": bank}}
+    assert evaluate(predicate("evidence.recognizer_a_terms.destination_account", "vendor.bank_account", cmp="suffix_match"), context) == outcome
+
+
+def test_suffix_match_cannot_compare_amounts_or_reverse_the_account_fields():
+    for left, right in [("evidence.recognizer_b_terms.amount_cents", "vendor.bank_account"),
+                        ("vendor.bank_account", "evidence.recognizer_a_terms.destination_account")]:
+        with pytest.raises(ValueError):
+            validate_rule(predicate(left, right, cmp="suffix_match"))
 
 
 @pytest.mark.integration

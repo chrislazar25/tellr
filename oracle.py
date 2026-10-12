@@ -108,6 +108,8 @@ def label_run(db, run_id: str, *, case_id: str | None = None, reference_case: di
         intent_id = queue[0]["intent_id"] if queue else None
         intent = db.intents.find_one({"_id": intent_id}, session=session) if intent_id else None
         block_reason = next((item.get("reason") for item in queue if item["status"] == "blocked"), None)
+        if not queue and no_terms:
+            block_reason = no_terms["outputs"].get("reason")
         label, reasons = classify(payments, intent, fixture["true_terms"],
                                   expected=fixture["expected"], block_reason=block_reason)
         if payments and (not queue or any(item["status"] == "blocked" for item in queue)) and label != "duplicate":

@@ -43,13 +43,15 @@ VALIDATORS = {
         "verbatim_terms": OPTIONAL_TERMS, "cleaned_terms": OPTIONAL_TERMS, "created_at": TIMESTAMP,
         "audio_hash": {"bsonType": "string", "pattern": "^[a-f0-9]{64}$"}, "adapter_key": STRING,
         "fixture_case_id": STRING,
+        "recognizer_a_text": {"bsonType": "string"}, "recognizer_b_text": {"bsonType": "string"},
+        "recognizer_a_terms": OPTIONAL_TERMS, "recognizer_b_terms": OPTIONAL_TERMS,
     }),
     "intents": schema([*TERMS, "run_id", "evidence_id", "status", "created_at"], {
         **TERMS, "run_id": STRING, "evidence_id": STRING,
         "status": {"enum": ["draft", "confirmed"]}, "created_at": TIMESTAMP,
         "confirmed_terms": TERM_OBJECT, "confirmed_at": TIMESTAMP,
         "approved_bank_account": STRING, "approved_fence_version": INTEGER,
-        "confirmation_source": {"enum": ["verbatim", "cleaned", "manual"]},
+        "confirmation_source": {"enum": ["verbatim", "cleaned", "manual", "recognizer_a"]},
     }),
     "queue": schema(["intent_id", "vendor_id", "run_id", "status", "created_at"], {
         "intent_id": STRING, "vendor_id": STRING, "run_id": STRING,
