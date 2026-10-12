@@ -21,10 +21,11 @@ dev = ["pytest>=8,<10"]
 
 [tool.setuptools]
 py-modules = ["config", "heal", "interfaces", "live_adapters", "observability", "oracle", "pipeline", "proposer", "replay", "rules", "scoreboard", "worker"]
-packages = ["db", "fixtures", "scripts"]
+packages = ["db", "fixtures", "scripts", "experiments", "experiments.failure_hunt"]
 
 [tool.setuptools.package-data]
 fixtures = ["*.json"]
+"experiments.failure_hunt" = ["*.json", "*.jsonl", "audio/*.json", "audio/*.wav", "audio/*.mp3"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
