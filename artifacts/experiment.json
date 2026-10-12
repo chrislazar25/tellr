@@ -1,0 +1,3987 @@
+{
+  "schema_version": 1,
+  "experiment_id": "723f58e9-9548-4e46-bbf1-80d9c918d84f",
+  "suite": "measured",
+  "started_at": "2026-10-12T20:25:36.212249+00:00",
+  "database_backend": "atlas",
+  "audit_database": "portfolio_experiment_dd7159eb48124293b620411eb482269a",
+  "reference_date": "2026-10-11",
+  "amount_unit": "integer_cents",
+  "status": "complete",
+  "clips": [
+    {
+      "case_id": "500_no_50",
+      "audio_file": "audio/amount-correction.wav",
+      "audio_sha256": "162d38c92d6f9f77c7fc5d74da3abf3f2231675273a556534b29606aea88401f",
+      "duration_seconds": 10.0,
+      "run_id": "b651725c-ba64-4bd0-92a2-c566554a9eed",
+      "verbatim": "Pay demo paper supply five hundred no fifty dollars to account ending zero zero one today.",
+      "cleaned": "Pay demo paper supply 500 No. $50 to account ending 001 today.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+      "money_terms_diverged": false,
+      "wall_seconds": 3.411115,
+      "cache": [
+        {
+          "step": "transcribe",
+          "mode": "verbatim",
+          "hit": true
+        },
+        {
+          "step": "extract_terms",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "transcribe",
+          "mode": "cleaned",
+          "hit": true
+        },
+        {
+          "step": "extract_terms",
+          "mode": "cleaned",
+          "hit": false
+        }
+      ],
+      "adapter_metadata": {
+        "audio_hash": "162d38c92d6f9f77c7fc5d74da3abf3f2231675273a556534b29606aea88401f",
+        "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+      },
+      "source": "measured_live_audio",
+      "truth_mismatches": {
+        "verbatim": [],
+        "cleaned": []
+      }
+    },
+    {
+      "case_id": "500_is_right",
+      "audio_file": "audio/amount-reaffirmation.wav",
+      "audio_sha256": "a842af2a757ee34c11ce429e82f998313c2862bd22cf3ec44332ab18f3632768",
+      "duration_seconds": 10.0,
+      "run_id": "8a9397ec-4a1b-4ec6-b4b6-a15e28d1164d",
+      "verbatim": "Pay demo paper supply 500. No wait 500 is right to account ending zero zero one today.",
+      "cleaned": "Pay demo paper supply 500. No wait, 500 is right to account ending 001 today.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+      "money_terms_diverged": false,
+      "wall_seconds": 4.921868,
+      "cache": [
+        {
+          "step": "transcribe",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "transcribe",
+          "mode": "cleaned",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "cleaned",
+          "hit": false
+        }
+      ],
+      "adapter_metadata": {
+        "audio_hash": "a842af2a757ee34c11ce429e82f998313c2862bd22cf3ec44332ab18f3632768",
+        "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+      },
+      "source": "measured_live_audio",
+      "truth_mismatches": {
+        "verbatim": [],
+        "cleaned": []
+      }
+    },
+    {
+      "case_id": "fifteen_vs_fifty",
+      "audio_file": "audio/fifteen-vs-fifty.wav",
+      "audio_sha256": "8f3a8d0db55459f1f3d9fec09ca1ccb6dd9323749cb0e81fd1a1e8482a0c2cab",
+      "duration_seconds": 10.0,
+      "run_id": "d653046f-40ce-4852-a7a9-1067aa4536da",
+      "verbatim": "Pay demo paper supply $15 not 50 to account ending zero zero one today.",
+      "cleaned": "Pay demo paper supply $15, not 50 to account ending 001 today.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 1500,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 1500,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 1500,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+      "money_terms_diverged": false,
+      "wall_seconds": 4.493825,
+      "cache": [
+        {
+          "step": "transcribe",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "transcribe",
+          "mode": "cleaned",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "cleaned",
+          "hit": false
+        }
+      ],
+      "adapter_metadata": {
+        "audio_hash": "8f3a8d0db55459f1f3d9fec09ca1ccb6dd9323749cb0e81fd1a1e8482a0c2cab",
+        "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+      },
+      "source": "measured_live_audio",
+      "truth_mismatches": {
+        "verbatim": [],
+        "cleaned": []
+      }
+    },
+    {
+      "case_id": "account_42_sorry_24",
+      "audio_file": "audio/account-correction.wav",
+      "audio_sha256": "af33fe84e5cf26845bd8c375696a50e5919f9630ab402a2fbb9abb943868d42c",
+      "duration_seconds": 10.0,
+      "run_id": "97450955-5ebd-4cc6-bd87-7a4880b2bc7b",
+      "verbatim": "Pay demo catering $50 to account ending 42, sorry 24 today.",
+      "cleaned": "Pay demo catering $50 to account ending 42, sorry, 24 today.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      },
+      "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+      "money_terms_diverged": false,
+      "wall_seconds": 6.059646,
+      "cache": [
+        {
+          "step": "transcribe",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "transcribe",
+          "mode": "cleaned",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "cleaned",
+          "hit": false
+        }
+      ],
+      "adapter_metadata": {
+        "audio_hash": "af33fe84e5cf26845bd8c375696a50e5919f9630ab402a2fbb9abb943868d42c",
+        "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+      },
+      "source": "measured_live_audio",
+      "truth_mismatches": {
+        "verbatim": [],
+        "cleaned": []
+      }
+    },
+    {
+      "case_id": "filler_only",
+      "audio_file": "audio/filler-only.wav",
+      "audio_sha256": "3fa5d2b6c3d4fb7177159fe129a3c4023bdec8ee9ce466deb082b5560096e056",
+      "duration_seconds": 5.0,
+      "run_id": "305ce86c-3cc8-48d3-8fad-24a54e631dbd",
+      "verbatim": "Um, uh, well, hmm.",
+      "cleaned": "Um, uh, well, hmm.",
+      "verbatim_terms": null,
+      "cleaned_terms": null,
+      "true_terms": null,
+      "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+      "money_terms_diverged": false,
+      "wall_seconds": 3.758079,
+      "cache": [
+        {
+          "step": "transcribe",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "transcribe",
+          "mode": "cleaned",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "cleaned",
+          "hit": false
+        }
+      ],
+      "adapter_metadata": {
+        "audio_hash": "3fa5d2b6c3d4fb7177159fe129a3c4023bdec8ee9ce466deb082b5560096e056",
+        "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+      },
+      "source": "measured_live_audio",
+      "truth_mismatches": {
+        "verbatim": [],
+        "cleaned": []
+      }
+    },
+    {
+      "case_id": "clean",
+      "audio_file": "audio/demo-invoice.wav",
+      "audio_sha256": "7865f9a237a7eb56418f9f8d7b0db2995ea3aebc86a36dfa0dbc9f0901e26279",
+      "duration_seconds": 10.0,
+      "run_id": "03928782-03c4-4dee-af7d-83d670d5d534",
+      "verbatim": "Um, pay demo paper supply $125.50 to account ending 001 today.",
+      "cleaned": "Paid demo paper supply $125.50 to account ending 001 today.",
+      "verbatim_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "cleaned_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+      "money_terms_diverged": false,
+      "wall_seconds": 4.622746,
+      "cache": [
+        {
+          "step": "transcribe",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "verbatim",
+          "hit": false
+        },
+        {
+          "step": "transcribe",
+          "mode": "cleaned",
+          "hit": false
+        },
+        {
+          "step": "extract_terms",
+          "mode": "cleaned",
+          "hit": false
+        }
+      ],
+      "adapter_metadata": {
+        "audio_hash": "7865f9a237a7eb56418f9f8d7b0db2995ea3aebc86a36dfa0dbc9f0901e26279",
+        "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+      },
+      "source": "measured_live_audio",
+      "truth_mismatches": {
+        "verbatim": [],
+        "cleaned": []
+      }
+    }
+  ],
+  "case_manifest": [
+    {
+      "case_id": "500_no_50",
+      "audio_file": "audio/amount-correction.wav",
+      "eval_set": "must_pass",
+      "expected": "pay",
+      "source": "measured_live_audio",
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "500_is_right",
+      "audio_file": "audio/amount-reaffirmation.wav",
+      "eval_set": "must_pass",
+      "expected": "pay",
+      "source": "measured_live_audio",
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "fifteen_vs_fifty",
+      "audio_file": "audio/fifteen-vs-fifty.wav",
+      "eval_set": "must_pass",
+      "expected": "pay",
+      "source": "measured_live_audio",
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 1500,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "account_42_sorry_24",
+      "audio_file": "audio/account-correction.wav",
+      "eval_set": "must_pass",
+      "expected": "pay",
+      "source": "measured_live_audio",
+      "true_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "filler_only",
+      "audio_file": "audio/filler-only.wav",
+      "eval_set": "must_pass",
+      "expected": "pay",
+      "source": "measured_live_audio",
+      "true_terms": null
+    },
+    {
+      "case_id": "clean",
+      "audio_file": "audio/demo-invoice.wav",
+      "eval_set": "must_pass",
+      "expected": "pay",
+      "source": "measured_live_audio",
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "queued_destination_change",
+      "audio_file": "audio/demo-invoice.wav",
+      "eval_set": "must_catch",
+      "expected": "reapprove",
+      "source": "controlled_vendor_edit_using_measured_audio",
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "benign_vendor_name",
+      "audio_file": "audio/demo-invoice.wav",
+      "eval_set": "must_pass",
+      "expected": "pay",
+      "source": "controlled_vendor_edit_using_measured_audio",
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "benign_vendor_memo",
+      "audio_file": "audio/demo-invoice.wav",
+      "eval_set": "must_pass",
+      "expected": "pay",
+      "source": "controlled_vendor_edit_using_measured_audio",
+      "true_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "holdout_different_vendor",
+      "audio_file": "holdout-vendor.wav",
+      "eval_set": "holdout",
+      "expected": "pay",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 8765,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "holdout_different_amounts",
+      "audio_file": "holdout-amount.wav",
+      "eval_set": "holdout",
+      "expected": "clarify",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 8000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "holdout_account_13_sorry_31",
+      "audio_file": "holdout-account.wav",
+      "eval_set": "holdout",
+      "expected": "clarify",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 7310,
+        "destination_account": "31",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "holdout_second_destination_change",
+      "audio_file": "holdout-destination.wav",
+      "eval_set": "holdout",
+      "expected": "reapprove",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 23456,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      }
+    },
+    {
+      "case_id": "holdout_benign_memo",
+      "audio_file": "holdout-memo.wav",
+      "eval_set": "holdout",
+      "expected": "pay",
+      "source": "synthetic_fixture",
+      "true_terms": {
+        "vendor_id": "vendor-003",
+        "amount_cents": 8765,
+        "destination_account": "demo-account-003",
+        "date": "2026-10-11"
+      }
+    }
+  ],
+  "replay_log": [
+    {
+      "phase": "baseline",
+      "candidate_id": null,
+      "wall_seconds": 16.639258,
+      "results": {
+        "counts": {
+          "N": 14,
+          "unsafe_commit": 4,
+          "benign_block": 0,
+          "ok": 10,
+          "duplicate": 0
+        },
+        "sets": {
+          "must_catch": {
+            "N": 1,
+            "unsafe_commit": 1,
+            "benign_block": 0,
+            "ok": 0,
+            "duplicate": 0
+          },
+          "must_pass": {
+            "N": 8,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 8,
+            "duplicate": 0
+          },
+          "holdout": {
+            "N": 5,
+            "unsafe_commit": 3,
+            "benign_block": 0,
+            "ok": 2,
+            "duplicate": 0
+          }
+        },
+        "cases": [
+          {
+            "run_id": "e9c2c538-0841-4ab8-8108-5df4bf5805ac",
+            "case_id": "500_no_50",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 5000,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 5000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "eba11029-70e7-4118-9347-81c9c028d480"
+          },
+          {
+            "run_id": "f81a92f3-3863-422d-977f-b9ab9e4ee529",
+            "case_id": "500_is_right",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 50000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "bdb767a5-4be4-4758-94a8-eaeb6e909fa0"
+          },
+          {
+            "run_id": "a86213d5-ef7d-4ea8-b119-ed8ac1360546",
+            "case_id": "fifteen_vs_fifty",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 1500,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 1500,
+            "amount_unit": "integer_cents",
+            "evidence_id": "e1f57d66-b951-445d-a380-f312f492554b"
+          },
+          {
+            "run_id": "a9f6ed84-5ba5-4703-801b-08c77bd16aa0",
+            "case_id": "account_42_sorry_24",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 5000,
+              "destination_account": "24",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0024",
+            "amount_paid": 5000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "a4900171-8a4e-4cdf-abfa-9293057670eb"
+          },
+          {
+            "run_id": "02be7531-4a2d-4bf4-90c0-814394a3ae4c",
+            "case_id": "filler_only",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": null,
+            "approval_snapshot": {
+              "approved_bank_account": null,
+              "approved_fence_version": null
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "a93334af-5e8f-410d-b4bb-6c22298dffb5"
+          },
+          {
+            "run_id": "d41425cd-98fb-4dd8-b92e-671aedbbfa18",
+            "case_id": "clean",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "2e069dbc-3055-494f-ad93-7c54151de927"
+          },
+          {
+            "run_id": "c3e683a9-3eab-4240-9a6b-6fdebbe2cbfc",
+            "case_id": "queued_destination_change",
+            "label": "unsafe_commit",
+            "expected": "reapprove",
+            "reasons": [
+              "payment_requires_reapproval",
+              "destination_differs_from_truth",
+              "destination_differs_from_approval",
+              "account_changed_after_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "must_catch",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-001",
+                "right_value": "demo-account-after-approval"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-after-approval",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "c91f518e-2937-4bb2-8e27-d571678e034d"
+          },
+          {
+            "run_id": "9dacf150-73d1-43dd-b819-06637f66cd50",
+            "case_id": "benign_vendor_name",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "869b5664-e137-42ef-a618-c217f5e567f1"
+          },
+          {
+            "run_id": "a661b3a9-fc6c-42cd-845c-6e8358a2228c",
+            "case_id": "benign_vendor_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "26ab13ba-ca04-4fd3-a70f-150f2e2f26d2"
+          },
+          {
+            "run_id": "84d71a70-1a61-4b4b-b399-0d8e8336ac4a",
+            "case_id": "holdout_different_vendor",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "06774463-0bb4-4c68-bead-809e2bb1aa01"
+          },
+          {
+            "run_id": "d45ccd01-59dc-4e26-bb73-9760f5863aa8",
+            "case_id": "holdout_different_amounts",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "amount_differs_from_truth"
+            ],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 8000,
+                "right_value": 80000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 80000,
+                "right_value": 8000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 80000,
+              "destination_account": "24",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0024",
+            "amount_paid": 80000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "e693b673-2c0a-4f4c-89b8-1a0930c737fa"
+          },
+          {
+            "run_id": "f3e7c756-be7a-4412-935a-2cf0115ea413",
+            "case_id": "holdout_account_13_sorry_31",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "destination_differs_from_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "31",
+                "right_value": "13"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "13",
+                "right_value": "31"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 7310,
+              "destination_account": "13",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0031",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0031",
+            "amount_paid": 7310,
+            "amount_unit": "integer_cents",
+            "evidence_id": "3b343988-62c6-40fc-88db-4a4afa13e513"
+          },
+          {
+            "run_id": "28f365ea-e4c2-4552-adf4-c572b95dfdfc",
+            "case_id": "holdout_second_destination_change",
+            "label": "unsafe_commit",
+            "expected": "reapprove",
+            "reasons": [
+              "payment_requires_reapproval",
+              "destination_differs_from_truth",
+              "destination_differs_from_approval",
+              "account_changed_after_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-003",
+                "right_value": "acct-003-second-change"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 23456,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-003-second-change",
+            "amount_paid": 23456,
+            "amount_unit": "integer_cents",
+            "evidence_id": "fe3c6366-3165-4a0c-91b2-5831a9719446"
+          },
+          {
+            "run_id": "ef9cb330-8525-4f2e-8362-d4b55933df02",
+            "case_id": "holdout_benign_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "6b90b533-19a7-430e-8e29-056d45b979fd"
+          }
+        ]
+      }
+    },
+    {
+      "phase": "candidate",
+      "candidate_id": "heal:1bb343ff-0701-4474-ab55-6f6a30f0ac2c:001:00",
+      "wall_seconds": 13.707225,
+      "results": {
+        "counts": {
+          "N": 14,
+          "unsafe_commit": 2,
+          "benign_block": 0,
+          "ok": 12,
+          "duplicate": 0
+        },
+        "sets": {
+          "must_catch": {
+            "N": 1,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 1,
+            "duplicate": 0
+          },
+          "must_pass": {
+            "N": 8,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 8,
+            "duplicate": 0
+          },
+          "holdout": {
+            "N": 5,
+            "unsafe_commit": 2,
+            "benign_block": 0,
+            "ok": 3,
+            "duplicate": 0
+          }
+        },
+        "cases": [
+          {
+            "run_id": "ca7074aa-9301-4728-b828-46f0490d2920",
+            "case_id": "500_no_50",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 5000,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 5000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "59a03e6e-b20d-4882-ba94-cb95048be675"
+          },
+          {
+            "run_id": "a0619849-1b3f-4acb-935f-c86ec14781cd",
+            "case_id": "500_is_right",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 50000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "eaf753f4-2e4a-4396-a99f-29e60252c1d4"
+          },
+          {
+            "run_id": "525b45d7-a4fd-4515-9fe6-038335e10e22",
+            "case_id": "fifteen_vs_fifty",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 1500,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 1500,
+            "amount_unit": "integer_cents",
+            "evidence_id": "412a4472-3ea4-479e-a42c-05a358f597fd"
+          },
+          {
+            "run_id": "429581ab-e8ec-4633-b7e6-33a9b3198369",
+            "case_id": "account_42_sorry_24",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 5000,
+              "destination_account": "24",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0024",
+            "amount_paid": 5000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "6d766980-c6a6-41e8-b4f4-4142c469c133"
+          },
+          {
+            "run_id": "63d3707c-f81c-4761-8d81-bca2293743f5",
+            "case_id": "filler_only",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": null,
+            "approval_snapshot": {
+              "approved_bank_account": null,
+              "approved_fence_version": null
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "ce064fdd-507f-4628-b413-bd672300586c"
+          },
+          {
+            "run_id": "cdb5998f-6f79-4efa-8318-c130713ee513",
+            "case_id": "clean",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "ec870a35-fea1-49ac-b8fb-f3d76e32789c"
+          },
+          {
+            "run_id": "9e764672-2b34-477a-bcf1-340a8149372b",
+            "case_id": "queued_destination_change",
+            "label": "ok",
+            "expected": "reapprove",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "reapprove",
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-001",
+                "right_value": "demo-account-after-approval"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "124c32b9-3480-4346-a315-dc97866ffcc9"
+          },
+          {
+            "run_id": "b8783684-99f7-49e6-a100-cefc8952e367",
+            "case_id": "benign_vendor_name",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "29b7c9dd-622e-4446-b7e5-63645221a7f5"
+          },
+          {
+            "run_id": "a22f0d81-e7b4-4e9e-9a08-3225e4577c3b",
+            "case_id": "benign_vendor_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "58b6257d-9967-4841-a997-85c73b89aaa5"
+          },
+          {
+            "run_id": "7f354fe8-b3cd-45a7-b665-d022cf2de7b6",
+            "case_id": "holdout_different_vendor",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "627fe5b1-15c8-4cdf-9e49-a42923d121c3"
+          },
+          {
+            "run_id": "bc4ba0eb-5091-48ce-b26f-25bbdd4d7568",
+            "case_id": "holdout_different_amounts",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "amount_differs_from_truth"
+            ],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 8000,
+                "right_value": 80000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 80000,
+                "right_value": 8000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 80000,
+              "destination_account": "24",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0024",
+            "amount_paid": 80000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "f00afa5e-75a1-4454-b780-60dd03e72f7a"
+          },
+          {
+            "run_id": "fe591575-e1c9-4ca7-b9f7-e691ad981869",
+            "case_id": "holdout_account_13_sorry_31",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "destination_differs_from_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "31",
+                "right_value": "13"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "13",
+                "right_value": "31"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 7310,
+              "destination_account": "13",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0031",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0031",
+            "amount_paid": 7310,
+            "amount_unit": "integer_cents",
+            "evidence_id": "9cb04a91-38a1-4ce1-a595-3f2407aaf04e"
+          },
+          {
+            "run_id": "899c0aea-697b-447f-90e2-bd8b1b00f093",
+            "case_id": "holdout_second_destination_change",
+            "label": "ok",
+            "expected": "reapprove",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "holdout",
+            "block_reason": "reapprove",
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-003",
+                "right_value": "acct-003-second-change"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 23456,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "18094bc8-6dcd-4b5a-9f3d-9306b8a1d5a4"
+          },
+          {
+            "run_id": "a82b27ac-d896-4887-af1c-625585c867ae",
+            "case_id": "holdout_benign_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "50999f4f-3238-4e39-9a37-ec7468b56e34"
+          }
+        ]
+      }
+    },
+    {
+      "phase": "policy_replay",
+      "candidate_id": null,
+      "wall_seconds": 15.874396,
+      "results": {
+        "counts": {
+          "N": 14,
+          "unsafe_commit": 2,
+          "benign_block": 0,
+          "ok": 12,
+          "duplicate": 0
+        },
+        "sets": {
+          "must_catch": {
+            "N": 1,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 1,
+            "duplicate": 0
+          },
+          "must_pass": {
+            "N": 8,
+            "unsafe_commit": 0,
+            "benign_block": 0,
+            "ok": 8,
+            "duplicate": 0
+          },
+          "holdout": {
+            "N": 5,
+            "unsafe_commit": 2,
+            "benign_block": 0,
+            "ok": 3,
+            "duplicate": 0
+          }
+        },
+        "cases": [
+          {
+            "run_id": "98d7c110-eccc-4986-86cd-38aac02fb98d",
+            "case_id": "500_no_50",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 5000,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 5000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "09cd882d-4132-42b9-bf8c-afce2ba5ad5c"
+          },
+          {
+            "run_id": "879f3eaa-931f-40f6-9999-cb97e91e2c26",
+            "case_id": "500_is_right",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 50000,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 50000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "abf9f59a-ea0d-41c8-86c3-ccff50063217"
+          },
+          {
+            "run_id": "cc909598-0ba3-4540-81b6-eb8e84c1bcf7",
+            "case_id": "fifteen_vs_fifty",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 1500,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 1500,
+            "amount_unit": "integer_cents",
+            "evidence_id": "d262f284-c7d1-40c7-9f5f-668f27498442"
+          },
+          {
+            "run_id": "69557740-e66c-4e40-bef2-3f0acfbca01a",
+            "case_id": "account_42_sorry_24",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 5000,
+              "destination_account": "24",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0024",
+            "amount_paid": 5000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "bcad7992-713a-4565-95d3-880197501697"
+          },
+          {
+            "run_id": "22867a0f-8f48-4087-a831-ace61ab5744a",
+            "case_id": "filler_only",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": null,
+            "approval_snapshot": {
+              "approved_bank_account": null,
+              "approved_fence_version": null
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "bad3897c-e6da-4971-8cab-17c181deabd1"
+          },
+          {
+            "run_id": "99b26128-f05a-433c-b7ef-46c8ab47630f",
+            "case_id": "clean",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "171eb273-1102-4d4a-b8cb-e9969434a21c"
+          },
+          {
+            "run_id": "ec7c78f8-6a1a-472e-985f-aca81a33aa7c",
+            "case_id": "queued_destination_change",
+            "label": "ok",
+            "expected": "reapprove",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "must_catch",
+            "block_reason": "reapprove",
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-001",
+                "right_value": "demo-account-after-approval"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "07929f7f-4f62-4d1e-a0b2-debd7fb4cd3e"
+          },
+          {
+            "run_id": "fd3bb9a2-4b96-462c-82dc-b25895faa88a",
+            "case_id": "benign_vendor_name",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "8f25481a-b43d-4a1f-aa1e-88cf65ca580e"
+          },
+          {
+            "run_id": "bffe9d9e-8f21-4328-bb5a-06f0858d1491",
+            "case_id": "benign_vendor_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "must_pass",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-001",
+              "amount_cents": 12550,
+              "destination_account": "001",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-001",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-001",
+            "amount_paid": 12550,
+            "amount_unit": "integer_cents",
+            "evidence_id": "b2c3745e-f8b3-44bc-a661-70655d611e63"
+          },
+          {
+            "run_id": "8af8e384-3a7d-46f1-bf15-2cedf8897e44",
+            "case_id": "holdout_different_vendor",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "e4166ac3-b5f8-43f2-a6c4-2aa7c6b5f610"
+          },
+          {
+            "run_id": "6f41c387-1e84-4f06-9395-c0759924aec1",
+            "case_id": "holdout_different_amounts",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "amount_differs_from_truth"
+            ],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.amount_cents",
+                "right": "evidence.cleaned_terms.amount_cents",
+                "left_value": 8000,
+                "right_value": 80000
+              },
+              {
+                "left": "intent.confirmed_terms.amount_cents",
+                "right": "evidence.verbatim_terms.amount_cents",
+                "left_value": 80000,
+                "right_value": 8000
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-002",
+              "amount_cents": 80000,
+              "destination_account": "24",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0024",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0024",
+            "amount_paid": 80000,
+            "amount_unit": "integer_cents",
+            "evidence_id": "27d72557-ca4f-4538-9249-3f9fc3dc18f9"
+          },
+          {
+            "run_id": "1fffe5e1-1357-4a86-8176-6eb71a8a3b59",
+            "case_id": "holdout_account_13_sorry_31",
+            "label": "unsafe_commit",
+            "expected": "clarify",
+            "reasons": [
+              "payment_requires_clarification",
+              "destination_differs_from_approval"
+            ],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [
+              {
+                "left": "evidence.verbatim_terms.destination_account",
+                "right": "evidence.cleaned_terms.destination_account",
+                "left_value": "31",
+                "right_value": "13"
+              },
+              {
+                "left": "intent.confirmed_terms.destination_account",
+                "right": "evidence.verbatim_terms.destination_account",
+                "left_value": "13",
+                "right_value": "31"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 7310,
+              "destination_account": "13",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "acct-0031",
+              "approved_fence_version": 0
+            },
+            "paid_to": "acct-0031",
+            "amount_paid": 7310,
+            "amount_unit": "integer_cents",
+            "evidence_id": "c4c97506-062b-4a23-9fc0-dd7f693567e3"
+          },
+          {
+            "run_id": "212163e7-bb93-4a29-b685-5d8a23f90e25",
+            "case_id": "holdout_second_destination_change",
+            "label": "ok",
+            "expected": "reapprove",
+            "reasons": [],
+            "payment_count": 0,
+            "eval_set": "holdout",
+            "block_reason": "reapprove",
+            "field_diffs": [
+              {
+                "left": "intent.approved_bank_account",
+                "right": "vendor.bank_account",
+                "left_value": "demo-account-003",
+                "right_value": "acct-003-second-change"
+              }
+            ],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 23456,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": null,
+            "amount_paid": null,
+            "amount_unit": "integer_cents",
+            "evidence_id": "696b80c3-cdb1-4203-bec3-da4ea448957f"
+          },
+          {
+            "run_id": "0ad04374-a40b-4d85-ba92-09f97e527540",
+            "case_id": "holdout_benign_memo",
+            "label": "ok",
+            "expected": "pay",
+            "reasons": [],
+            "payment_count": 1,
+            "eval_set": "holdout",
+            "block_reason": null,
+            "field_diffs": [],
+            "approved_terms": {
+              "vendor_id": "vendor-003",
+              "amount_cents": 8765,
+              "destination_account": "demo-account-003",
+              "date": "2026-10-11"
+            },
+            "approval_snapshot": {
+              "approved_bank_account": "demo-account-003",
+              "approved_fence_version": 0
+            },
+            "paid_to": "demo-account-003",
+            "amount_paid": 8765,
+            "amount_unit": "integer_cents",
+            "evidence_id": "1f649389-9661-4e2b-9840-07ec7b956a1e"
+          }
+        ]
+      }
+    }
+  ],
+  "api_calls": [
+    {
+      "provider": "anthropic",
+      "purpose": "rule_proposal",
+      "ts": "2026-10-12T20:25:55.566720+00:00",
+      "wall_seconds": 2.633308,
+      "requested_model": "claude-opus-5-5",
+      "served_model": "claude-opus-5-5",
+      "no_verbatim": null,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "fallback_credit": null,
+        "inference_geo": "global",
+        "input_tokens": 1834,
+        "iterations": [
+          {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 0,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "input_tokens": 1834,
+            "model": null,
+            "output_tokens": 69,
+            "type": "message"
+          }
+        ],
+        "output_tokens": 69,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": null,
+        "service_tier": "standard",
+        "speed": null
+      },
+      "billed_cost_usd": null
+    }
+  ],
+  "acquisition": {
+    "schema_version": 1,
+    "experiment_id": "a45458b3-e64f-4e3d-9f14-d983c07ad4e4",
+    "started_at": "2026-10-12T00:48:02.045687+00:00",
+    "source": "live_api",
+    "reference_date": "2026-10-11",
+    "approval_performed": false,
+    "clips": [
+      {
+        "case_id": "500_no_50",
+        "audio_file": "audio/amount-correction.wav",
+        "audio_sha256": "162d38c92d6f9f77c7fc5d74da3abf3f2231675273a556534b29606aea88401f",
+        "duration_seconds": 10.0,
+        "run_id": "b651725c-ba64-4bd0-92a2-c566554a9eed",
+        "verbatim": "Pay demo paper supply five hundred no fifty dollars to account ending zero zero one today.",
+        "cleaned": "Pay demo paper supply 500 No. $50 to account ending 001 today.",
+        "verbatim_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 5000,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "cleaned_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 5000,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "true_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 5000,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+        "money_terms_diverged": false,
+        "wall_seconds": 3.411115,
+        "cache": [
+          {
+            "step": "transcribe",
+            "mode": "verbatim",
+            "hit": true
+          },
+          {
+            "step": "extract_terms",
+            "mode": "verbatim",
+            "hit": false
+          },
+          {
+            "step": "transcribe",
+            "mode": "cleaned",
+            "hit": true
+          },
+          {
+            "step": "extract_terms",
+            "mode": "cleaned",
+            "hit": false
+          }
+        ],
+        "adapter_metadata": {
+          "audio_hash": "162d38c92d6f9f77c7fc5d74da3abf3f2231675273a556534b29606aea88401f",
+          "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+        }
+      },
+      {
+        "case_id": "500_is_right",
+        "audio_file": "audio/amount-reaffirmation.wav",
+        "audio_sha256": "a842af2a757ee34c11ce429e82f998313c2862bd22cf3ec44332ab18f3632768",
+        "duration_seconds": 10.0,
+        "run_id": "8a9397ec-4a1b-4ec6-b4b6-a15e28d1164d",
+        "verbatim": "Pay demo paper supply 500. No wait 500 is right to account ending zero zero one today.",
+        "cleaned": "Pay demo paper supply 500. No wait, 500 is right to account ending 001 today.",
+        "verbatim_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 50000,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "cleaned_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 50000,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "true_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 50000,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+        "money_terms_diverged": false,
+        "wall_seconds": 4.921868,
+        "cache": [
+          {
+            "step": "transcribe",
+            "mode": "verbatim",
+            "hit": false
+          },
+          {
+            "step": "extract_terms",
+            "mode": "verbatim",
+            "hit": false
+          },
+          {
+            "step": "transcribe",
+            "mode": "cleaned",
+            "hit": false
+          },
+          {
+            "step": "extract_terms",
+            "mode": "cleaned",
+            "hit": false
+          }
+        ],
+        "adapter_metadata": {
+          "audio_hash": "a842af2a757ee34c11ce429e82f998313c2862bd22cf3ec44332ab18f3632768",
+          "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+        }
+      },
+      {
+        "case_id": "fifteen_vs_fifty",
+        "audio_file": "audio/fifteen-vs-fifty.wav",
+        "audio_sha256": "8f3a8d0db55459f1f3d9fec09ca1ccb6dd9323749cb0e81fd1a1e8482a0c2cab",
+        "duration_seconds": 10.0,
+        "run_id": "d653046f-40ce-4852-a7a9-1067aa4536da",
+        "verbatim": "Pay demo paper supply $15 not 50 to account ending zero zero one today.",
+        "cleaned": "Pay demo paper supply $15, not 50 to account ending 001 today.",
+        "verbatim_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 1500,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "cleaned_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 1500,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "true_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 1500,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+        "money_terms_diverged": false,
+        "wall_seconds": 4.493825,
+        "cache": [
+          {
+            "step": "transcribe",
+            "mode": "verbatim",
+            "hit": false
+          },
+          {
+            "step": "extract_terms",
+            "mode": "verbatim",
+            "hit": false
+          },
+          {
+            "step": "transcribe",
+            "mode": "cleaned",
+            "hit": false
+          },
+          {
+            "step": "extract_terms",
+            "mode": "cleaned",
+            "hit": false
+          }
+        ],
+        "adapter_metadata": {
+          "audio_hash": "8f3a8d0db55459f1f3d9fec09ca1ccb6dd9323749cb0e81fd1a1e8482a0c2cab",
+          "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+        }
+      },
+      {
+        "case_id": "account_42_sorry_24",
+        "audio_file": "audio/account-correction.wav",
+        "audio_sha256": "af33fe84e5cf26845bd8c375696a50e5919f9630ab402a2fbb9abb943868d42c",
+        "duration_seconds": 10.0,
+        "run_id": "97450955-5ebd-4cc6-bd87-7a4880b2bc7b",
+        "verbatim": "Pay demo catering $50 to account ending 42, sorry 24 today.",
+        "cleaned": "Pay demo catering $50 to account ending 42, sorry, 24 today.",
+        "verbatim_terms": {
+          "vendor_id": "vendor-002",
+          "amount_cents": 5000,
+          "destination_account": "24",
+          "date": "2026-10-11"
+        },
+        "cleaned_terms": {
+          "vendor_id": "vendor-002",
+          "amount_cents": 5000,
+          "destination_account": "24",
+          "date": "2026-10-11"
+        },
+        "true_terms": {
+          "vendor_id": "vendor-002",
+          "amount_cents": 5000,
+          "destination_account": "24",
+          "date": "2026-10-11"
+        },
+        "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+        "money_terms_diverged": false,
+        "wall_seconds": 6.059646,
+        "cache": [
+          {
+            "step": "transcribe",
+            "mode": "verbatim",
+            "hit": false
+          },
+          {
+            "step": "extract_terms",
+            "mode": "verbatim",
+            "hit": false
+          },
+          {
+            "step": "transcribe",
+            "mode": "cleaned",
+            "hit": false
+          },
+          {
+            "step": "extract_terms",
+            "mode": "cleaned",
+            "hit": false
+          }
+        ],
+        "adapter_metadata": {
+          "audio_hash": "af33fe84e5cf26845bd8c375696a50e5919f9630ab402a2fbb9abb943868d42c",
+          "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+        }
+      },
+      {
+        "case_id": "filler_only",
+        "audio_file": "audio/filler-only.wav",
+        "audio_sha256": "3fa5d2b6c3d4fb7177159fe129a3c4023bdec8ee9ce466deb082b5560096e056",
+        "duration_seconds": 5.0,
+        "run_id": "305ce86c-3cc8-48d3-8fad-24a54e631dbd",
+        "verbatim": "Um, uh, well, hmm.",
+        "cleaned": "Um, uh, well, hmm.",
+        "verbatim_terms": null,
+        "cleaned_terms": null,
+        "true_terms": null,
+        "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+        "money_terms_diverged": false,
+        "wall_seconds": 3.758079,
+        "cache": [
+          {
+            "step": "transcribe",
+            "mode": "verbatim",
+            "hit": false
+          },
+          {
+            "step": "extract_terms",
+            "mode": "verbatim",
+            "hit": false
+          },
+          {
+            "step": "transcribe",
+            "mode": "cleaned",
+            "hit": false
+          },
+          {
+            "step": "extract_terms",
+            "mode": "cleaned",
+            "hit": false
+          }
+        ],
+        "adapter_metadata": {
+          "audio_hash": "3fa5d2b6c3d4fb7177159fe129a3c4023bdec8ee9ce466deb082b5560096e056",
+          "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+        }
+      },
+      {
+        "case_id": "clean",
+        "audio_file": "audio/demo-invoice.wav",
+        "audio_sha256": "7865f9a237a7eb56418f9f8d7b0db2995ea3aebc86a36dfa0dbc9f0901e26279",
+        "duration_seconds": 10.0,
+        "run_id": "03928782-03c4-4dee-af7d-83d670d5d534",
+        "verbatim": "Um, pay demo paper supply $125.50 to account ending 001 today.",
+        "cleaned": "Paid demo paper supply $125.50 to account ending 001 today.",
+        "verbatim_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "cleaned_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "true_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "truth_source": "user-confirmed amounts/vendors; spoken suffix and recording reference date; independent of API output",
+        "money_terms_diverged": false,
+        "wall_seconds": 4.622746,
+        "cache": [
+          {
+            "step": "transcribe",
+            "mode": "verbatim",
+            "hit": false
+          },
+          {
+            "step": "extract_terms",
+            "mode": "verbatim",
+            "hit": false
+          },
+          {
+            "step": "transcribe",
+            "mode": "cleaned",
+            "hit": false
+          },
+          {
+            "step": "extract_terms",
+            "mode": "cleaned",
+            "hit": false
+          }
+        ],
+        "adapter_metadata": {
+          "audio_hash": "7865f9a237a7eb56418f9f8d7b0db2995ea3aebc86a36dfa0dbc9f0901e26279",
+          "adapter_key": "bc2d7e7c83aa07f39afdc302f404d87c1787f98401dab740db6ea3eac63f28e6"
+        }
+      }
+    ],
+    "api_calls": [
+      {
+        "provider": "anthropic",
+        "purpose": "extraction",
+        "ts": "2026-10-12T00:48:06.323682+00:00",
+        "wall_seconds": 1.782215,
+        "requested_model": "claude-sonnet-4-6",
+        "served_model": "claude-sonnet-4-6",
+        "no_verbatim": null,
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 1100,
+          "output_tokens": 61,
+          "output_tokens_details": null,
+          "server_tool_use": null,
+          "service_tier": "standard"
+        },
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "anthropic",
+        "purpose": "extraction",
+        "ts": "2026-10-12T00:48:07.801859+00:00",
+        "wall_seconds": 1.415275,
+        "requested_model": "claude-sonnet-4-6",
+        "served_model": "claude-sonnet-4-6",
+        "no_verbatim": null,
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 1103,
+          "output_tokens": 61,
+          "output_tokens_details": null,
+          "server_tool_use": null,
+          "service_tier": "standard"
+        },
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "elevenlabs",
+        "purpose": "transcription",
+        "ts": "2026-10-12T00:48:08.843000+00:00",
+        "wall_seconds": 0.905127,
+        "requested_model": "scribe_v2",
+        "served_model": null,
+        "no_verbatim": false,
+        "usage": null,
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "anthropic",
+        "purpose": "extraction",
+        "ts": "2026-10-12T00:48:10.463828+00:00",
+        "wall_seconds": 1.574763,
+        "requested_model": "claude-sonnet-4-6",
+        "served_model": "claude-sonnet-4-6",
+        "no_verbatim": null,
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 1105,
+          "output_tokens": 61,
+          "output_tokens_details": null,
+          "server_tool_use": null,
+          "service_tier": "standard"
+        },
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "elevenlabs",
+        "purpose": "transcription",
+        "ts": "2026-10-12T00:48:11.283458+00:00",
+        "wall_seconds": 0.770331,
+        "requested_model": "scribe_v2",
+        "served_model": null,
+        "no_verbatim": true,
+        "usage": null,
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "anthropic",
+        "purpose": "extraction",
+        "ts": "2026-10-12T00:48:12.723949+00:00",
+        "wall_seconds": 1.39275,
+        "requested_model": "claude-sonnet-4-6",
+        "served_model": "claude-sonnet-4-6",
+        "no_verbatim": null,
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 1106,
+          "output_tokens": 61,
+          "output_tokens_details": null,
+          "server_tool_use": null,
+          "service_tier": "standard"
+        },
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "elevenlabs",
+        "purpose": "transcription",
+        "ts": "2026-10-12T00:48:13.490177+00:00",
+        "wall_seconds": 0.629697,
+        "requested_model": "scribe_v2",
+        "served_model": null,
+        "no_verbatim": false,
+        "usage": null,
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "anthropic",
+        "purpose": "extraction",
+        "ts": "2026-10-12T00:48:14.969348+00:00",
+        "wall_seconds": 1.441629,
+        "requested_model": "claude-sonnet-4-6",
+        "served_model": "claude-sonnet-4-6",
+        "no_verbatim": null,
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 1102,
+          "output_tokens": 61,
+          "output_tokens_details": null,
+          "server_tool_use": null,
+          "service_tier": "standard"
+        },
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "elevenlabs",
+        "purpose": "transcription",
+        "ts": "2026-10-12T00:48:15.694582+00:00",
+        "wall_seconds": 0.68076,
+        "requested_model": "scribe_v2",
+        "served_model": null,
+        "no_verbatim": true,
+        "usage": null,
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "anthropic",
+        "purpose": "extraction",
+        "ts": "2026-10-12T00:48:17.222292+00:00",
+        "wall_seconds": 1.480979,
+        "requested_model": "claude-sonnet-4-6",
+        "served_model": "claude-sonnet-4-6",
+        "no_verbatim": null,
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 1102,
+          "output_tokens": 61,
+          "output_tokens_details": null,
+          "server_tool_use": null,
+          "service_tier": "standard"
+        },
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "elevenlabs",
+        "purpose": "transcription",
+        "ts": "2026-10-12T00:48:18.048121+00:00",
+        "wall_seconds": 0.691237,
+        "requested_model": "scribe_v2",
+        "served_model": null,
+        "no_verbatim": false,
+        "usage": null,
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "anthropic",
+        "purpose": "extraction",
+        "ts": "2026-10-12T00:48:19.579634+00:00",
+        "wall_seconds": 1.482593,
+        "requested_model": "claude-sonnet-4-6",
+        "served_model": "claude-sonnet-4-6",
+        "no_verbatim": null,
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 1102,
+          "output_tokens": 61,
+          "output_tokens_details": null,
+          "server_tool_use": null,
+          "service_tier": "standard"
+        },
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "elevenlabs",
+        "purpose": "transcription",
+        "ts": "2026-10-12T00:48:21.143250+00:00",
+        "wall_seconds": 1.518604,
+        "requested_model": "scribe_v2",
+        "served_model": null,
+        "no_verbatim": true,
+        "usage": null,
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "anthropic",
+        "purpose": "extraction",
+        "ts": "2026-10-12T00:48:23.280906+00:00",
+        "wall_seconds": 2.095563,
+        "requested_model": "claude-sonnet-4-6",
+        "served_model": "claude-sonnet-4-6",
+        "no_verbatim": null,
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 1103,
+          "output_tokens": 61,
+          "output_tokens_details": null,
+          "server_tool_use": null,
+          "service_tier": "standard"
+        },
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "elevenlabs",
+        "purpose": "transcription",
+        "ts": "2026-10-12T00:48:24.089035+00:00",
+        "wall_seconds": 0.671656,
+        "requested_model": "scribe_v2",
+        "served_model": null,
+        "no_verbatim": false,
+        "usage": null,
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "anthropic",
+        "purpose": "extraction",
+        "ts": "2026-10-12T00:48:25.209457+00:00",
+        "wall_seconds": 1.077808,
+        "requested_model": "claude-sonnet-4-6",
+        "served_model": "claude-sonnet-4-6",
+        "no_verbatim": null,
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 1093,
+          "output_tokens": 24,
+          "output_tokens_details": null,
+          "server_tool_use": null,
+          "service_tier": "standard"
+        },
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "elevenlabs",
+        "purpose": "transcription",
+        "ts": "2026-10-12T00:48:25.819254+00:00",
+        "wall_seconds": 0.568394,
+        "requested_model": "scribe_v2",
+        "served_model": null,
+        "no_verbatim": true,
+        "usage": null,
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "anthropic",
+        "purpose": "extraction",
+        "ts": "2026-10-12T00:48:27.053467+00:00",
+        "wall_seconds": 1.193174,
+        "requested_model": "claude-sonnet-4-6",
+        "served_model": "claude-sonnet-4-6",
+        "no_verbatim": null,
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 1093,
+          "output_tokens": 24,
+          "output_tokens_details": null,
+          "server_tool_use": null,
+          "service_tier": "standard"
+        },
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "elevenlabs",
+        "purpose": "transcription",
+        "ts": "2026-10-12T00:48:27.816062+00:00",
+        "wall_seconds": 0.631889,
+        "requested_model": "scribe_v2",
+        "served_model": null,
+        "no_verbatim": false,
+        "usage": null,
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "anthropic",
+        "purpose": "extraction",
+        "ts": "2026-10-12T00:48:29.308394+00:00",
+        "wall_seconds": 1.447497,
+        "requested_model": "claude-sonnet-4-6",
+        "served_model": "claude-sonnet-4-6",
+        "no_verbatim": null,
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 1102,
+          "output_tokens": 61,
+          "output_tokens_details": null,
+          "server_tool_use": null,
+          "service_tier": "standard"
+        },
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "elevenlabs",
+        "purpose": "transcription",
+        "ts": "2026-10-12T00:48:30.133623+00:00",
+        "wall_seconds": 0.776831,
+        "requested_model": "scribe_v2",
+        "served_model": null,
+        "no_verbatim": true,
+        "usage": null,
+        "billed_cost_usd": null
+      },
+      {
+        "provider": "anthropic",
+        "purpose": "extraction",
+        "ts": "2026-10-12T00:48:31.670136+00:00",
+        "wall_seconds": 1.486891,
+        "requested_model": "claude-sonnet-4-6",
+        "served_model": "claude-sonnet-4-6",
+        "no_verbatim": null,
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 1101,
+          "output_tokens": 61,
+          "output_tokens_details": null,
+          "server_tool_use": null,
+          "service_tier": "standard"
+        },
+        "billed_cost_usd": null
+      }
+    ],
+    "cost": {
+      "billed_usd": null,
+      "reason": "Provider responses do not include invoiced cost; no estimate substituted."
+    },
+    "vendor_catalog": [
+      {
+        "_id": "vendor-001",
+        "bank_account": "demo-account-001",
+        "name": "Demo Paper Supply"
+      },
+      {
+        "_id": "vendor-002",
+        "bank_account": "acct-0024",
+        "name": "Demo Catering"
+      },
+      {
+        "_id": "vendor-003",
+        "bank_account": "demo-account-003",
+        "name": "Demo Equipment"
+      }
+    ],
+    "wall_seconds": 29.694956,
+    "finished_at": "2026-10-12T00:48:31.740530+00:00"
+  },
+  "cost": {
+    "billed_usd": null,
+    "reason": "No invoiced cost in provider responses; no estimated cost substituted."
+  },
+  "git_revision": "300d7ff7b952e31b583b727d22a504a2dde40947",
+  "baseline_replay": {
+    "counts": {
+      "N": 14,
+      "unsafe_commit": 4,
+      "benign_block": 0,
+      "ok": 10,
+      "duplicate": 0
+    },
+    "sets": {
+      "must_catch": {
+        "N": 1,
+        "unsafe_commit": 1,
+        "benign_block": 0,
+        "ok": 0,
+        "duplicate": 0
+      },
+      "must_pass": {
+        "N": 8,
+        "unsafe_commit": 0,
+        "benign_block": 0,
+        "ok": 8,
+        "duplicate": 0
+      },
+      "holdout": {
+        "N": 5,
+        "unsafe_commit": 3,
+        "benign_block": 0,
+        "ok": 2,
+        "duplicate": 0
+      }
+    },
+    "cases": [
+      {
+        "run_id": "e9c2c538-0841-4ab8-8108-5df4bf5805ac",
+        "case_id": "500_no_50",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 5000,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 5000,
+        "amount_unit": "integer_cents",
+        "evidence_id": "eba11029-70e7-4118-9347-81c9c028d480"
+      },
+      {
+        "run_id": "f81a92f3-3863-422d-977f-b9ab9e4ee529",
+        "case_id": "500_is_right",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 50000,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 50000,
+        "amount_unit": "integer_cents",
+        "evidence_id": "bdb767a5-4be4-4758-94a8-eaeb6e909fa0"
+      },
+      {
+        "run_id": "a86213d5-ef7d-4ea8-b119-ed8ac1360546",
+        "case_id": "fifteen_vs_fifty",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 1500,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 1500,
+        "amount_unit": "integer_cents",
+        "evidence_id": "e1f57d66-b951-445d-a380-f312f492554b"
+      },
+      {
+        "run_id": "a9f6ed84-5ba5-4703-801b-08c77bd16aa0",
+        "case_id": "account_42_sorry_24",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-002",
+          "amount_cents": 5000,
+          "destination_account": "24",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "acct-0024",
+          "approved_fence_version": 0
+        },
+        "paid_to": "acct-0024",
+        "amount_paid": 5000,
+        "amount_unit": "integer_cents",
+        "evidence_id": "a4900171-8a4e-4cdf-abfa-9293057670eb"
+      },
+      {
+        "run_id": "02be7531-4a2d-4bf4-90c0-814394a3ae4c",
+        "case_id": "filler_only",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 0,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": null,
+        "approval_snapshot": {
+          "approved_bank_account": null,
+          "approved_fence_version": null
+        },
+        "paid_to": null,
+        "amount_paid": null,
+        "amount_unit": "integer_cents",
+        "evidence_id": "a93334af-5e8f-410d-b4bb-6c22298dffb5"
+      },
+      {
+        "run_id": "d41425cd-98fb-4dd8-b92e-671aedbbfa18",
+        "case_id": "clean",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 12550,
+        "amount_unit": "integer_cents",
+        "evidence_id": "2e069dbc-3055-494f-ad93-7c54151de927"
+      },
+      {
+        "run_id": "c3e683a9-3eab-4240-9a6b-6fdebbe2cbfc",
+        "case_id": "queued_destination_change",
+        "label": "unsafe_commit",
+        "expected": "reapprove",
+        "reasons": [
+          "payment_requires_reapproval",
+          "destination_differs_from_truth",
+          "destination_differs_from_approval",
+          "account_changed_after_approval"
+        ],
+        "payment_count": 1,
+        "eval_set": "must_catch",
+        "block_reason": null,
+        "field_diffs": [
+          {
+            "left": "intent.approved_bank_account",
+            "right": "vendor.bank_account",
+            "left_value": "demo-account-001",
+            "right_value": "demo-account-after-approval"
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-after-approval",
+        "amount_paid": 12550,
+        "amount_unit": "integer_cents",
+        "evidence_id": "c91f518e-2937-4bb2-8e27-d571678e034d"
+      },
+      {
+        "run_id": "9dacf150-73d1-43dd-b819-06637f66cd50",
+        "case_id": "benign_vendor_name",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 12550,
+        "amount_unit": "integer_cents",
+        "evidence_id": "869b5664-e137-42ef-a618-c217f5e567f1"
+      },
+      {
+        "run_id": "a661b3a9-fc6c-42cd-845c-6e8358a2228c",
+        "case_id": "benign_vendor_memo",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 12550,
+        "amount_unit": "integer_cents",
+        "evidence_id": "26ab13ba-ca04-4fd3-a70f-150f2e2f26d2"
+      },
+      {
+        "run_id": "84d71a70-1a61-4b4b-b399-0d8e8336ac4a",
+        "case_id": "holdout_different_vendor",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 8765,
+          "destination_account": "demo-account-003",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-003",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-003",
+        "amount_paid": 8765,
+        "amount_unit": "integer_cents",
+        "evidence_id": "06774463-0bb4-4c68-bead-809e2bb1aa01"
+      },
+      {
+        "run_id": "d45ccd01-59dc-4e26-bb73-9760f5863aa8",
+        "case_id": "holdout_different_amounts",
+        "label": "unsafe_commit",
+        "expected": "clarify",
+        "reasons": [
+          "payment_requires_clarification",
+          "amount_differs_from_truth"
+        ],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [
+          {
+            "left": "evidence.verbatim_terms.amount_cents",
+            "right": "evidence.cleaned_terms.amount_cents",
+            "left_value": 8000,
+            "right_value": 80000
+          },
+          {
+            "left": "intent.confirmed_terms.amount_cents",
+            "right": "evidence.verbatim_terms.amount_cents",
+            "left_value": 80000,
+            "right_value": 8000
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-002",
+          "amount_cents": 80000,
+          "destination_account": "24",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "acct-0024",
+          "approved_fence_version": 0
+        },
+        "paid_to": "acct-0024",
+        "amount_paid": 80000,
+        "amount_unit": "integer_cents",
+        "evidence_id": "e693b673-2c0a-4f4c-89b8-1a0930c737fa"
+      },
+      {
+        "run_id": "f3e7c756-be7a-4412-935a-2cf0115ea413",
+        "case_id": "holdout_account_13_sorry_31",
+        "label": "unsafe_commit",
+        "expected": "clarify",
+        "reasons": [
+          "payment_requires_clarification",
+          "destination_differs_from_approval"
+        ],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [
+          {
+            "left": "evidence.verbatim_terms.destination_account",
+            "right": "evidence.cleaned_terms.destination_account",
+            "left_value": "31",
+            "right_value": "13"
+          },
+          {
+            "left": "intent.confirmed_terms.destination_account",
+            "right": "evidence.verbatim_terms.destination_account",
+            "left_value": "13",
+            "right_value": "31"
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 7310,
+          "destination_account": "13",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "acct-0031",
+          "approved_fence_version": 0
+        },
+        "paid_to": "acct-0031",
+        "amount_paid": 7310,
+        "amount_unit": "integer_cents",
+        "evidence_id": "3b343988-62c6-40fc-88db-4a4afa13e513"
+      },
+      {
+        "run_id": "28f365ea-e4c2-4552-adf4-c572b95dfdfc",
+        "case_id": "holdout_second_destination_change",
+        "label": "unsafe_commit",
+        "expected": "reapprove",
+        "reasons": [
+          "payment_requires_reapproval",
+          "destination_differs_from_truth",
+          "destination_differs_from_approval",
+          "account_changed_after_approval"
+        ],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [
+          {
+            "left": "intent.approved_bank_account",
+            "right": "vendor.bank_account",
+            "left_value": "demo-account-003",
+            "right_value": "acct-003-second-change"
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 23456,
+          "destination_account": "demo-account-003",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-003",
+          "approved_fence_version": 0
+        },
+        "paid_to": "acct-003-second-change",
+        "amount_paid": 23456,
+        "amount_unit": "integer_cents",
+        "evidence_id": "fe3c6366-3165-4a0c-91b2-5831a9719446"
+      },
+      {
+        "run_id": "ef9cb330-8525-4f2e-8362-d4b55933df02",
+        "case_id": "holdout_benign_memo",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 8765,
+          "destination_account": "demo-account-003",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-003",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-003",
+        "amount_paid": 8765,
+        "amount_unit": "integer_cents",
+        "evidence_id": "6b90b533-19a7-430e-8e29-056d45b979fd"
+      }
+    ]
+  },
+  "baseline_runs": [
+    {
+      "run_id": "e9c2c538-0841-4ab8-8108-5df4bf5805ac",
+      "case_id": "500_no_50",
+      "label": "ok",
+      "expected": "pay",
+      "reasons": [],
+      "payment_count": 1,
+      "eval_set": "must_pass",
+      "block_reason": null,
+      "field_diffs": [],
+      "approved_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 5000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "demo-account-001",
+        "approved_fence_version": 0
+      },
+      "paid_to": "demo-account-001",
+      "amount_paid": 5000,
+      "amount_unit": "integer_cents",
+      "evidence_id": "eba11029-70e7-4118-9347-81c9c028d480"
+    },
+    {
+      "run_id": "f81a92f3-3863-422d-977f-b9ab9e4ee529",
+      "case_id": "500_is_right",
+      "label": "ok",
+      "expected": "pay",
+      "reasons": [],
+      "payment_count": 1,
+      "eval_set": "must_pass",
+      "block_reason": null,
+      "field_diffs": [],
+      "approved_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 50000,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "demo-account-001",
+        "approved_fence_version": 0
+      },
+      "paid_to": "demo-account-001",
+      "amount_paid": 50000,
+      "amount_unit": "integer_cents",
+      "evidence_id": "bdb767a5-4be4-4758-94a8-eaeb6e909fa0"
+    },
+    {
+      "run_id": "a86213d5-ef7d-4ea8-b119-ed8ac1360546",
+      "case_id": "fifteen_vs_fifty",
+      "label": "ok",
+      "expected": "pay",
+      "reasons": [],
+      "payment_count": 1,
+      "eval_set": "must_pass",
+      "block_reason": null,
+      "field_diffs": [],
+      "approved_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 1500,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "demo-account-001",
+        "approved_fence_version": 0
+      },
+      "paid_to": "demo-account-001",
+      "amount_paid": 1500,
+      "amount_unit": "integer_cents",
+      "evidence_id": "e1f57d66-b951-445d-a380-f312f492554b"
+    },
+    {
+      "run_id": "a9f6ed84-5ba5-4703-801b-08c77bd16aa0",
+      "case_id": "account_42_sorry_24",
+      "label": "ok",
+      "expected": "pay",
+      "reasons": [],
+      "payment_count": 1,
+      "eval_set": "must_pass",
+      "block_reason": null,
+      "field_diffs": [],
+      "approved_terms": {
+        "vendor_id": "vendor-002",
+        "amount_cents": 5000,
+        "destination_account": "24",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "acct-0024",
+        "approved_fence_version": 0
+      },
+      "paid_to": "acct-0024",
+      "amount_paid": 5000,
+      "amount_unit": "integer_cents",
+      "evidence_id": "a4900171-8a4e-4cdf-abfa-9293057670eb"
+    },
+    {
+      "run_id": "02be7531-4a2d-4bf4-90c0-814394a3ae4c",
+      "case_id": "filler_only",
+      "label": "ok",
+      "expected": "pay",
+      "reasons": [],
+      "payment_count": 0,
+      "eval_set": "must_pass",
+      "block_reason": null,
+      "field_diffs": [],
+      "approved_terms": null,
+      "approval_snapshot": {
+        "approved_bank_account": null,
+        "approved_fence_version": null
+      },
+      "paid_to": null,
+      "amount_paid": null,
+      "amount_unit": "integer_cents",
+      "evidence_id": "a93334af-5e8f-410d-b4bb-6c22298dffb5"
+    },
+    {
+      "run_id": "d41425cd-98fb-4dd8-b92e-671aedbbfa18",
+      "case_id": "clean",
+      "label": "ok",
+      "expected": "pay",
+      "reasons": [],
+      "payment_count": 1,
+      "eval_set": "must_pass",
+      "block_reason": null,
+      "field_diffs": [],
+      "approved_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "demo-account-001",
+        "approved_fence_version": 0
+      },
+      "paid_to": "demo-account-001",
+      "amount_paid": 12550,
+      "amount_unit": "integer_cents",
+      "evidence_id": "2e069dbc-3055-494f-ad93-7c54151de927"
+    },
+    {
+      "run_id": "c3e683a9-3eab-4240-9a6b-6fdebbe2cbfc",
+      "case_id": "queued_destination_change",
+      "label": "unsafe_commit",
+      "expected": "reapprove",
+      "reasons": [
+        "payment_requires_reapproval",
+        "destination_differs_from_truth",
+        "destination_differs_from_approval",
+        "account_changed_after_approval"
+      ],
+      "payment_count": 1,
+      "eval_set": "must_catch",
+      "block_reason": null,
+      "field_diffs": [
+        {
+          "left": "intent.approved_bank_account",
+          "right": "vendor.bank_account",
+          "left_value": "demo-account-001",
+          "right_value": "demo-account-after-approval"
+        }
+      ],
+      "approved_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "demo-account-001",
+        "approved_fence_version": 0
+      },
+      "paid_to": "demo-account-after-approval",
+      "amount_paid": 12550,
+      "amount_unit": "integer_cents",
+      "evidence_id": "c91f518e-2937-4bb2-8e27-d571678e034d"
+    },
+    {
+      "run_id": "9dacf150-73d1-43dd-b819-06637f66cd50",
+      "case_id": "benign_vendor_name",
+      "label": "ok",
+      "expected": "pay",
+      "reasons": [],
+      "payment_count": 1,
+      "eval_set": "must_pass",
+      "block_reason": null,
+      "field_diffs": [],
+      "approved_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "demo-account-001",
+        "approved_fence_version": 0
+      },
+      "paid_to": "demo-account-001",
+      "amount_paid": 12550,
+      "amount_unit": "integer_cents",
+      "evidence_id": "869b5664-e137-42ef-a618-c217f5e567f1"
+    },
+    {
+      "run_id": "a661b3a9-fc6c-42cd-845c-6e8358a2228c",
+      "case_id": "benign_vendor_memo",
+      "label": "ok",
+      "expected": "pay",
+      "reasons": [],
+      "payment_count": 1,
+      "eval_set": "must_pass",
+      "block_reason": null,
+      "field_diffs": [],
+      "approved_terms": {
+        "vendor_id": "vendor-001",
+        "amount_cents": 12550,
+        "destination_account": "001",
+        "date": "2026-10-11"
+      },
+      "approval_snapshot": {
+        "approved_bank_account": "demo-account-001",
+        "approved_fence_version": 0
+      },
+      "paid_to": "demo-account-001",
+      "amount_paid": 12550,
+      "amount_unit": "integer_cents",
+      "evidence_id": "26ab13ba-ca04-4fd3-a70f-150f2e2f26d2"
+    }
+  ],
+  "heal_wall_seconds": 33.278549,
+  "heal": {
+    "heal_id": "1bb343ff-0701-4474-ab55-6f6a30f0ac2c",
+    "iterations": 1,
+    "status": "healed",
+    "counts": {
+      "N": 14,
+      "unsafe_commit": 2,
+      "benign_block": 0,
+      "ok": 12,
+      "duplicate": 0
+    },
+    "sets": {
+      "must_catch": {
+        "N": 1,
+        "unsafe_commit": 0,
+        "benign_block": 0,
+        "ok": 1,
+        "duplicate": 0
+      },
+      "must_pass": {
+        "N": 8,
+        "unsafe_commit": 0,
+        "benign_block": 0,
+        "ok": 8,
+        "duplicate": 0
+      },
+      "holdout": {
+        "N": 5,
+        "unsafe_commit": 2,
+        "benign_block": 0,
+        "ok": 3,
+        "duplicate": 0
+      }
+    },
+    "active_rule_ids": [
+      "heal:1bb343ff-0701-4474-ab55-6f6a30f0ac2c:001:00"
+    ]
+  },
+  "heal_iterations": [
+    {
+      "iteration": 0,
+      "candidate_count": 0,
+      "counts": {
+        "N": 14,
+        "unsafe_commit": 4,
+        "benign_block": 0,
+        "ok": 10,
+        "duplicate": 0
+      },
+      "sets": {
+        "must_catch": {
+          "N": 1,
+          "unsafe_commit": 1,
+          "benign_block": 0,
+          "ok": 0,
+          "duplicate": 0
+        },
+        "must_pass": {
+          "N": 8,
+          "unsafe_commit": 0,
+          "benign_block": 0,
+          "ok": 8,
+          "duplicate": 0
+        },
+        "holdout": {
+          "N": 5,
+          "unsafe_commit": 3,
+          "benign_block": 0,
+          "ok": 2,
+          "duplicate": 0
+        }
+      },
+      "status": "baseline",
+      "active_rules": [],
+      "candidates": []
+    },
+    {
+      "iteration": 1,
+      "candidate_count": 1,
+      "counts": {
+        "N": 14,
+        "unsafe_commit": 2,
+        "benign_block": 0,
+        "ok": 12,
+        "duplicate": 0
+      },
+      "sets": {
+        "must_catch": {
+          "N": 1,
+          "unsafe_commit": 0,
+          "benign_block": 0,
+          "ok": 1,
+          "duplicate": 0
+        },
+        "must_pass": {
+          "N": 8,
+          "unsafe_commit": 0,
+          "benign_block": 0,
+          "ok": 8,
+          "duplicate": 0
+        },
+        "holdout": {
+          "N": 5,
+          "unsafe_commit": 2,
+          "benign_block": 0,
+          "ok": 3,
+          "duplicate": 0
+        }
+      },
+      "status": "healed",
+      "active_rules": [
+        {
+          "rule_id": "heal:1bb343ff-0701-4474-ab55-6f6a30f0ac2c:001:00",
+          "rule": {
+            "clauses": [
+              {
+                "left": "intent.approved_bank_account",
+                "cmp": "eq",
+                "right": "vendor.bank_account"
+              }
+            ],
+            "on_fail": "reapprove"
+          }
+        }
+      ],
+      "candidates": [
+        {
+          "candidate_id": "heal:1bb343ff-0701-4474-ab55-6f6a30f0ac2c:001:00",
+          "iteration": 1,
+          "candidate_index": 0,
+          "rule": {
+            "clauses": [
+              {
+                "left": "intent.approved_bank_account",
+                "cmp": "eq",
+                "right": "vendor.bank_account"
+              }
+            ],
+            "on_fail": "reapprove"
+          },
+          "proposal": {
+            "clauses": [
+              {
+                "left": "intent.approved_bank_account",
+                "cmp": "eq",
+                "right": "vendor.bank_account"
+              }
+            ],
+            "on_fail": "reapprove"
+          },
+          "rule_text": "Require bank account at approval equals current vendor bank account; otherwise request reapproval.",
+          "decision": "activated",
+          "active": true,
+          "gate": {
+            "accepted": true,
+            "reasons": [],
+            "before": {
+              "must_catch": {
+                "N": 1,
+                "unsafe_commit": 1,
+                "benign_block": 0,
+                "ok": 0,
+                "duplicate": 0
+              },
+              "must_pass": {
+                "N": 8,
+                "unsafe_commit": 0,
+                "benign_block": 0,
+                "ok": 8,
+                "duplicate": 0
+              },
+              "holdout": {
+                "N": 5,
+                "unsafe_commit": 3,
+                "benign_block": 0,
+                "ok": 2,
+                "duplicate": 0
+              }
+            },
+            "after": {
+              "must_catch": {
+                "N": 1,
+                "unsafe_commit": 0,
+                "benign_block": 0,
+                "ok": 1,
+                "duplicate": 0
+              },
+              "must_pass": {
+                "N": 8,
+                "unsafe_commit": 0,
+                "benign_block": 0,
+                "ok": 8,
+                "duplicate": 0
+              },
+              "holdout": {
+                "N": 5,
+                "unsafe_commit": 2,
+                "benign_block": 0,
+                "ok": 3,
+                "duplicate": 0
+              }
+            }
+          },
+          "rejected_reason": null
+        }
+      ]
+    }
+  ],
+  "active_rules": [
+    {
+      "rule_id": "heal:1bb343ff-0701-4474-ab55-6f6a30f0ac2c:001:00",
+      "rule": {
+        "clauses": [
+          {
+            "left": "intent.approved_bank_account",
+            "cmp": "eq",
+            "right": "vendor.bank_account"
+          }
+        ],
+        "on_fail": "reapprove"
+      },
+      "rule_text": "Require bank account at approval equals current vendor bank account; otherwise request reapproval."
+    }
+  ],
+  "proposal_events": [
+    {
+      "inputs": {
+        "iteration": 1,
+        "failure_count": 1
+      },
+      "outputs": {
+        "candidate_count": 1,
+        "empty": false,
+        "model": {
+          "requested_model": "claude-opus-5-5",
+          "served_model": "claude-opus-5-5",
+          "fallback_used": false
+        }
+      },
+      "ts": "2026-10-12T20:25:55.566000+00:00"
+    }
+  ],
+  "final_replay": {
+    "counts": {
+      "N": 14,
+      "unsafe_commit": 2,
+      "benign_block": 0,
+      "ok": 12,
+      "duplicate": 0
+    },
+    "sets": {
+      "must_catch": {
+        "N": 1,
+        "unsafe_commit": 0,
+        "benign_block": 0,
+        "ok": 1,
+        "duplicate": 0
+      },
+      "must_pass": {
+        "N": 8,
+        "unsafe_commit": 0,
+        "benign_block": 0,
+        "ok": 8,
+        "duplicate": 0
+      },
+      "holdout": {
+        "N": 5,
+        "unsafe_commit": 2,
+        "benign_block": 0,
+        "ok": 3,
+        "duplicate": 0
+      }
+    },
+    "cases": [
+      {
+        "run_id": "98d7c110-eccc-4986-86cd-38aac02fb98d",
+        "case_id": "500_no_50",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 5000,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 5000,
+        "amount_unit": "integer_cents",
+        "evidence_id": "09cd882d-4132-42b9-bf8c-afce2ba5ad5c"
+      },
+      {
+        "run_id": "879f3eaa-931f-40f6-9999-cb97e91e2c26",
+        "case_id": "500_is_right",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 50000,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 50000,
+        "amount_unit": "integer_cents",
+        "evidence_id": "abf9f59a-ea0d-41c8-86c3-ccff50063217"
+      },
+      {
+        "run_id": "cc909598-0ba3-4540-81b6-eb8e84c1bcf7",
+        "case_id": "fifteen_vs_fifty",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 1500,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 1500,
+        "amount_unit": "integer_cents",
+        "evidence_id": "d262f284-c7d1-40c7-9f5f-668f27498442"
+      },
+      {
+        "run_id": "69557740-e66c-4e40-bef2-3f0acfbca01a",
+        "case_id": "account_42_sorry_24",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-002",
+          "amount_cents": 5000,
+          "destination_account": "24",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "acct-0024",
+          "approved_fence_version": 0
+        },
+        "paid_to": "acct-0024",
+        "amount_paid": 5000,
+        "amount_unit": "integer_cents",
+        "evidence_id": "bcad7992-713a-4565-95d3-880197501697"
+      },
+      {
+        "run_id": "22867a0f-8f48-4087-a831-ace61ab5744a",
+        "case_id": "filler_only",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 0,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": null,
+        "approval_snapshot": {
+          "approved_bank_account": null,
+          "approved_fence_version": null
+        },
+        "paid_to": null,
+        "amount_paid": null,
+        "amount_unit": "integer_cents",
+        "evidence_id": "bad3897c-e6da-4971-8cab-17c181deabd1"
+      },
+      {
+        "run_id": "99b26128-f05a-433c-b7ef-46c8ab47630f",
+        "case_id": "clean",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 12550,
+        "amount_unit": "integer_cents",
+        "evidence_id": "171eb273-1102-4d4a-b8cb-e9969434a21c"
+      },
+      {
+        "run_id": "ec7c78f8-6a1a-472e-985f-aca81a33aa7c",
+        "case_id": "queued_destination_change",
+        "label": "ok",
+        "expected": "reapprove",
+        "reasons": [],
+        "payment_count": 0,
+        "eval_set": "must_catch",
+        "block_reason": "reapprove",
+        "field_diffs": [
+          {
+            "left": "intent.approved_bank_account",
+            "right": "vendor.bank_account",
+            "left_value": "demo-account-001",
+            "right_value": "demo-account-after-approval"
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": null,
+        "amount_paid": null,
+        "amount_unit": "integer_cents",
+        "evidence_id": "07929f7f-4f62-4d1e-a0b2-debd7fb4cd3e"
+      },
+      {
+        "run_id": "fd3bb9a2-4b96-462c-82dc-b25895faa88a",
+        "case_id": "benign_vendor_name",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 12550,
+        "amount_unit": "integer_cents",
+        "evidence_id": "8f25481a-b43d-4a1f-aa1e-88cf65ca580e"
+      },
+      {
+        "run_id": "bffe9d9e-8f21-4328-bb5a-06f0858d1491",
+        "case_id": "benign_vendor_memo",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "must_pass",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-001",
+          "amount_cents": 12550,
+          "destination_account": "001",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-001",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-001",
+        "amount_paid": 12550,
+        "amount_unit": "integer_cents",
+        "evidence_id": "b2c3745e-f8b3-44bc-a661-70655d611e63"
+      },
+      {
+        "run_id": "8af8e384-3a7d-46f1-bf15-2cedf8897e44",
+        "case_id": "holdout_different_vendor",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 8765,
+          "destination_account": "demo-account-003",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-003",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-003",
+        "amount_paid": 8765,
+        "amount_unit": "integer_cents",
+        "evidence_id": "e4166ac3-b5f8-43f2-a6c4-2aa7c6b5f610"
+      },
+      {
+        "run_id": "6f41c387-1e84-4f06-9395-c0759924aec1",
+        "case_id": "holdout_different_amounts",
+        "label": "unsafe_commit",
+        "expected": "clarify",
+        "reasons": [
+          "payment_requires_clarification",
+          "amount_differs_from_truth"
+        ],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [
+          {
+            "left": "evidence.verbatim_terms.amount_cents",
+            "right": "evidence.cleaned_terms.amount_cents",
+            "left_value": 8000,
+            "right_value": 80000
+          },
+          {
+            "left": "intent.confirmed_terms.amount_cents",
+            "right": "evidence.verbatim_terms.amount_cents",
+            "left_value": 80000,
+            "right_value": 8000
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-002",
+          "amount_cents": 80000,
+          "destination_account": "24",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "acct-0024",
+          "approved_fence_version": 0
+        },
+        "paid_to": "acct-0024",
+        "amount_paid": 80000,
+        "amount_unit": "integer_cents",
+        "evidence_id": "27d72557-ca4f-4538-9249-3f9fc3dc18f9"
+      },
+      {
+        "run_id": "1fffe5e1-1357-4a86-8176-6eb71a8a3b59",
+        "case_id": "holdout_account_13_sorry_31",
+        "label": "unsafe_commit",
+        "expected": "clarify",
+        "reasons": [
+          "payment_requires_clarification",
+          "destination_differs_from_approval"
+        ],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [
+          {
+            "left": "evidence.verbatim_terms.destination_account",
+            "right": "evidence.cleaned_terms.destination_account",
+            "left_value": "31",
+            "right_value": "13"
+          },
+          {
+            "left": "intent.confirmed_terms.destination_account",
+            "right": "evidence.verbatim_terms.destination_account",
+            "left_value": "13",
+            "right_value": "31"
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 7310,
+          "destination_account": "13",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "acct-0031",
+          "approved_fence_version": 0
+        },
+        "paid_to": "acct-0031",
+        "amount_paid": 7310,
+        "amount_unit": "integer_cents",
+        "evidence_id": "c4c97506-062b-4a23-9fc0-dd7f693567e3"
+      },
+      {
+        "run_id": "212163e7-bb93-4a29-b685-5d8a23f90e25",
+        "case_id": "holdout_second_destination_change",
+        "label": "ok",
+        "expected": "reapprove",
+        "reasons": [],
+        "payment_count": 0,
+        "eval_set": "holdout",
+        "block_reason": "reapprove",
+        "field_diffs": [
+          {
+            "left": "intent.approved_bank_account",
+            "right": "vendor.bank_account",
+            "left_value": "demo-account-003",
+            "right_value": "acct-003-second-change"
+          }
+        ],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 23456,
+          "destination_account": "demo-account-003",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-003",
+          "approved_fence_version": 0
+        },
+        "paid_to": null,
+        "amount_paid": null,
+        "amount_unit": "integer_cents",
+        "evidence_id": "696b80c3-cdb1-4203-bec3-da4ea448957f"
+      },
+      {
+        "run_id": "0ad04374-a40b-4d85-ba92-09f97e527540",
+        "case_id": "holdout_benign_memo",
+        "label": "ok",
+        "expected": "pay",
+        "reasons": [],
+        "payment_count": 1,
+        "eval_set": "holdout",
+        "block_reason": null,
+        "field_diffs": [],
+        "approved_terms": {
+          "vendor_id": "vendor-003",
+          "amount_cents": 8765,
+          "destination_account": "demo-account-003",
+          "date": "2026-10-11"
+        },
+        "approval_snapshot": {
+          "approved_bank_account": "demo-account-003",
+          "approved_fence_version": 0
+        },
+        "paid_to": "demo-account-003",
+        "amount_paid": 8765,
+        "amount_unit": "integer_cents",
+        "evidence_id": "1f649389-9661-4e2b-9840-07ec7b956a1e"
+      }
+    ]
+  },
+  "finished_at": "2026-10-12T20:26:25.459198+00:00",
+  "wall_seconds": 49.247092
+}
