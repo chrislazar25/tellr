@@ -21,8 +21,7 @@ the Atlas experiments were run on 2026-10-12 (America/Los_Angeles).
 - `artifacts/secret_scan.json` records full-history scan scope and findings.
   `.gitleaks.toml` retains default detection with a narrow exemption for
   documented SHA-256 cache fingerprints. No credential values are in reports.
-- MIT license added; generated egg-info removed and ignored. Repository remains
-  private and retains the placeholder name. No post was published.
+- MIT license added; generated egg-info removed and ignored. Repository is now `chrislazar25/tellr` and remains private. No post was published.
 - Full tests: 220 passed on local MongoDB rs0. Tests never use Atlas/API keys.
 
 Inspect saved scoreboards without any services:

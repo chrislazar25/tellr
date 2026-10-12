@@ -1,4 +1,4 @@
-# Payment Approval Fences
+# tellr
 
 A caller can correct an amount mid-sentence, approve a payment, and then have the vendor’s bank account change before the worker commits. What commits must still match what the caller authorized. This Python 3.11 prototype stores both transcript candidates, an immutable approval snapshot, and an actual payment receipt, then evaluates commit-time rules inside a fenced MongoDB transaction. An oracle checks the result against independently labeled intent; a model proposes rule changes that must pass replay gates before activation. Payments here are database receipts, not money transfers. The project started at the MongoDB x Cerebral Valley harness hackathon and is now a portfolio experiment.
 
@@ -128,4 +128,4 @@ gitleaks git --log-opts=--all --redact=100 --no-banner .
 
 The configuration retains default detectors and narrowly exempts only SHA-256 adapter-cache fingerprint lines in the two acquisition-containing exports. API key fields remain detectable. See the recorded scan for its exact revision and limitations.
 
-[MIT licensed](LICENSE). Repository name remains the original placeholder.
+[MIT licensed](LICENSE). Private repository: [chrislazar25/tellr](https://github.com/chrislazar25/tellr).
