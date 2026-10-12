@@ -17,6 +17,13 @@ CPU int8, English, beam size 5, VAD off. This is not the earlier Scribe
 verbatim-versus-cleaned experiment. Acquisition API usage/request IDs and
 original local library versions were not recorded in the supplied archive.
 
+Replay stores explicit `recognizer_a_text/terms` and `recognizer_b_text/terms` in
+evidence and records `confirmation_source=recognizer_a`. Legacy verbatim/cleaned
+fields are compatibility aliases of A for this suite, not separate Scribe modes.
+B is never substituted when A extracts no complete instruction. Transcription
+and extraction adapters read frozen outputs; no STT/extraction API is called by
+the comparison. Only the live rule proposer calls an API.
+
 **Retention choice: keep all 705 files** in `audio/` (30,974,242 bytes): 63 TTS
 MP3 sources, 213 channel WAVs, 3 generated non-speech WAVs, and 426 transcript
 JSON caches. Existing channel hashes and noise seeds use absolute source paths;
