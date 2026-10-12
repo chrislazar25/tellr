@@ -2,6 +2,7 @@
 
 import argparse
 import json
+from pathlib import Path
 
 from config import print_error
 from db.connection import connect
@@ -21,6 +22,18 @@ def report(db, *, heal_id=None):
     return {"heal_id": heal_id, "status": iterations[-1]["status"] if iterations else "no_history",
             "iterations": iterations,
             "active_rules": [{"rule_id": rule["_id"], "rule": rule["rule"]} for rule in active_rules(db)]}
+
+
+def artifact_report(path):
+    """Read a saved completed experiment without contacting MongoDB or APIs."""
+    data = json.loads(Path(path).read_text())
+    if data.get("schema_version") != 1 or data.get("status") != "complete":
+        raise ValueError("Scoreboard requires a completed version-1 experiment artifact")
+    return {"heal_id": data["heal"]["heal_id"], "status": data["heal"]["status"],
+            "iterations": [{key: row[key] for key in
+                            ("iteration", "candidate_count", "counts", "sets", "status", "active_rules")}
+                           for row in data["heal_iterations"]],
+            "active_rules": [{key: row[key] for key in ("rule_id", "rule")} for row in data["active_rules"]]}
 
 
 def _field_name(field):
@@ -59,13 +72,18 @@ def render(data):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--heal-id", help="Choose a healing session; default is latest")
+    source = parser.add_mutually_exclusive_group()
+    source.add_argument("--heal-id", help="Choose a healing session; default is latest")
+    source.add_argument("--artifact", type=Path, help="Read a saved experiment without database or API access")
     parser.add_argument("--json", action="store_true", help="Structured output for a UI")
     args = parser.parse_args(argv)
     db = None
     try:
-        db = connect()
-        result = report(db, heal_id=args.heal_id)
+        if args.artifact:
+            result = artifact_report(args.artifact)
+        else:
+            db = connect()
+            result = report(db, heal_id=args.heal_id)
         print(json.dumps(result, indent=2) if args.json else render(result))
         return 0
     except Exception as error:
