@@ -5,6 +5,7 @@ from collections import Counter
 from copy import deepcopy
 
 from pymongo.write_concern import WriteConcern
+from pymongo import ReplaceOne
 
 from db.seed import SAMPLE_VENDORS, seed
 from db.vendors import update_vendor_bank_account, update_vendor_profile
@@ -56,10 +57,10 @@ def _adapters(case):
 def _run_case(db, case):
     # Only this private scratch database is reset. Stored receipts and approval
     # snapshots remain sufficient for historical oracle checks across cases.
-    for vendor in SAMPLE_VENDORS:
-        db.vendors.replace_one({"_id": vendor["_id"]}, dict(vendor), upsert=True)
-        db.fences.replace_one({"_id": f"fence:{vendor['_id']}"},
-                              {"_id": f"fence:{vendor['_id']}", "version": 0}, upsert=True)
+    db.vendors.bulk_write([ReplaceOne({"_id": vendor["_id"]}, dict(vendor), upsert=True) for vendor in SAMPLE_VENDORS])
+    db.fences.bulk_write([ReplaceOne({"_id": f"fence:{vendor['_id']}"},
+                                    {"_id": f"fence:{vendor['_id']}", "version": 0}, upsert=True)
+                          for vendor in SAMPLE_VENDORS])
     # Scenario setup follows extracted candidates; truth is oracle-only data.
     terms = case["cleaned_terms"] or case["verbatim_terms"]
     vendor_id = terms["vendor_id"] if terms else None
