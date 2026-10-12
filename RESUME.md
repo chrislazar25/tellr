@@ -1,38 +1,45 @@
-# Portfolio phase completed
+# tellr — completed failure-hunt integration
 
-The restart checkpoint has been completed. Acquisition was saved on 2026-10-11;
-the Atlas experiments were run on 2026-10-12 (America/Los_Angeles).
+GitHub repository: `chrislazar25/tellr`, renamed at the user's explicit request.
+Visibility remains private. The local directory retains its existing path.
 
-- `artifacts/live_clips.json`: six real recordings, dual Scribe transcripts,
-  independent Sonnet terms, user-confirmed truth, audio hashes and API usage.
-  No money divergence or truth mismatch was observed. Corrections survived.
-- `artifacts/experiment.json`: independent Atlas audit database, empty-rules
-  baseline and one real Opus healing iteration. must_catch 1/1 ok, must_pass
-  8/8 ok; synthetic holdout 3/5 ok with two unsafe transcription cases left.
-- `artifacts/fixture_stress.json`: separately synthetic transcription stress
-  inputs, real Atlas worker/oracle/gate measurements, real Opus proposals.
-  Two iterations, final 4/4 must_catch, 5/5 must_pass, 5/5 holdout ok.
-- Every candidate and gate result is exported; all five measured candidates
-  passed their gates, three activated across two independent experiments.
-  No rejected candidate was invented. Holdouts were not proposal inputs.
-- `RESULTS.md`, rewritten `README.md`, and unpublished `LINKEDIN.md` use measured
-  facts and disclose small-set limits. Dollar API cost is unavailable/null.
-- `artifacts/experiment.schema.json` validates both complete experiment exports.
-- `artifacts/secret_scan.json` records full-history scan scope and findings.
-  `.gitleaks.toml` retains default detection with a narrow exemption for
-  documented SHA-256 cache fingerprints. No credential values are in reports.
-- MIT license added; generated egg-info removed and ignored. Repository is now `chrislazar25/tellr` and remains private. No post was published.
-- Full tests: 220 passed on local MongoDB rs0. Tests never use Atlas/API keys.
+Latest result: `artifacts/failure_hunt_experiment.json`, validated against its
+schema. All 180 payment attempts and 33 confirmations are retained, including
+explicit outcomes for 12 excluded off-file-account requests. Eligible set:
+12 must_catch, 100 must_pass, 56 Alice holdouts. Roger/Charlie supply training.
+Seven absent A instructions are intake clarification outcomes, never B approvals.
 
-Inspect saved scoreboards without any services:
+Actual Atlas comparator metrics:
+- Empty rules: 23 unsafe, 138 correct payments, seven intake clarifications.
+- A/B agreement: catches 22/23 unsafe; blocks 42/138 correct payments; gate rejects.
+- Spoken account on file: catches 22/23; blocks 0/138; gate accepts.
+- Live Opus healing: same 22/23 and 0/138; one iteration, two accepted candidates,
+  shorter activated, other accepted/inactive. One Alice fourteen-to-$40 holdout
+  remains; its allowed rule context equals 12 correct $40 cases.
+
+All 705 supplied audio/source/cache files remain committed. Use the supplied
+`experiments/failure_hunt/manifest.json`, never recompute old absolute-path hashes.
+Future acquisition hashes repo-relative paths and logs explicit file links.
+All hunt keys use `experiments/failure_hunt/keys.py` and ignored root env files.
+Cached scorer imports and default replays make no STT/extraction calls.
+
+The refusal-to-"Thank you very much" confirmation finding is documented separately:
+Sonnet classified it UNCLEAR; no payment rule or authorization used that label.
+README, RESULTS and unpublished LinkedIn draft disclose TTS/channel/search limits.
+The voice split withholds Alice from the proposer, not phrases or prior discovery.
+
+Full local rs0 tests: 241 passed. All pipeline/worker/oracle/gate comparisons used
+Atlas; scratch databases were removed and candidate audits remain persisted.
+Earlier six-recording and synthetic-stress exports remain available unchanged.
+Actual API billing is unavailable/null; the live proposal token usage is saved.
 
 ```sh
-uv run python scoreboard.py --artifact artifacts/experiment.json
-uv run python scoreboard.py --artifact artifacts/fixture_stress.json --json
+uv run python scoreboard.py --artifact artifacts/failure_hunt_experiment.json
+uv run python scoreboard.py --artifact artifacts/failure_hunt_experiment.json --json
 ```
 
-Future live acquisition can reuse persisted evidence caches. Do not relabel
-recordings to obtain a preferred result. "Today" uses recording date 2026-10-11;
-spoken destinations are suffix 001 or 24. All actual credentials remain in
-ignored `.env.secrets`; never print or stage them. Continue atomic commits with
-explicit paths, no `.env*` or incidental lockfile changes.
+Preserve independent labeled truth. Do not silently relabel or discard failed
+attempts. Do not claim synthetic selected-input counts are deployment error rates.
+Secrets remain in ignored `.env.secrets`; never print or stage them. Commit one
+logical change at a time with explicit paths; do not stage `.env*` or lockfile churn.
+The LinkedIn post has not been published. Repository visibility must stay private.
