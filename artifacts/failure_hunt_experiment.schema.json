@@ -1,0 +1,1183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tellr:failure-hunt-experiment:1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "experiment_id": {
+      "type": "string"
+    },
+    "status": {
+      "const": "complete"
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "finished_at": {
+      "type": "string"
+    },
+    "database_backend": {
+      "type": "string"
+    },
+    "audit_database": {
+      "type": "string"
+    },
+    "amount_unit": {
+      "const": "integer_cents"
+    },
+    "approval_source": {
+      "const": "recognizer_a"
+    },
+    "recognizers": {
+      "type": "object",
+      "properties": {
+        "a": {
+          "type": "string"
+        },
+        "b": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "a",
+        "b"
+      ],
+      "additionalProperties": false
+    },
+    "split": {
+      "type": "object",
+      "properties": {
+        "training_voices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "holdout_voice": {
+          "type": "string"
+        },
+        "counts": {
+          "type": "object",
+          "properties": {
+            "must_catch": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "must_pass": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "holdout": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "must_catch",
+            "must_pass",
+            "holdout"
+          ],
+          "additionalProperties": false
+        },
+        "voice_disjoint": {
+          "const": true
+        },
+        "phrase_disjoint": {
+          "const": false
+        }
+      },
+      "required": [
+        "training_voices",
+        "holdout_voice",
+        "counts",
+        "voice_disjoint",
+        "phrase_disjoint"
+      ],
+      "additionalProperties": false
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "payment_attempts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "confirmation_attempts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "payment_eval_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "excluded_spoken_account_not_on_file": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "intake_clarifications": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "payment_attempts",
+        "confirmation_attempts",
+        "payment_eval_cases",
+        "excluded_spoken_account_not_on_file",
+        "intake_clarifications"
+      ],
+      "additionalProperties": false
+    },
+    "payment_attempts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/attempt"
+      }
+    },
+    "excluded": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/attempt"
+      }
+    },
+    "confirmation_attempts": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "confirmation_manifest": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "comparators": {
+      "type": "object",
+      "properties": {
+        "empty_rules": {
+          "$ref": "#/$defs/comparator"
+        },
+        "recognizer_agreement": {
+          "$ref": "#/$defs/comparator"
+        },
+        "spoken_account_on_file": {
+          "$ref": "#/$defs/comparator"
+        },
+        "live_heal": {
+          "$ref": "#/$defs/comparator"
+        }
+      },
+      "required": [
+        "empty_rules",
+        "recognizer_agreement",
+        "spoken_account_on_file",
+        "live_heal"
+      ],
+      "additionalProperties": false
+    },
+    "replays": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "phase": {
+            "type": "string"
+          },
+          "candidate_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "wall_seconds": {
+            "type": "number",
+            "minimum": 0
+          },
+          "results": {
+            "$ref": "#/$defs/replay"
+          }
+        },
+        "required": [
+          "phase",
+          "candidate_id",
+          "wall_seconds",
+          "results"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "api_calls": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "acquisition_api_usage": {
+      "type": "null"
+    },
+    "cost": {
+      "type": "object",
+      "properties": {
+        "billed_usd": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "billed_usd",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "input_hashes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    },
+    "identical_rule_contexts": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "heal_wall_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "heal": {
+      "type": "object"
+    },
+    "heal_iterations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/iteration"
+      }
+    },
+    "active_rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/active_rule"
+      }
+    },
+    "proposal_events": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "final_replay": {
+      "$ref": "#/$defs/replay"
+    },
+    "wall_seconds": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "status",
+    "started_at",
+    "finished_at",
+    "database_backend",
+    "audit_database",
+    "amount_unit",
+    "approval_source",
+    "recognizers",
+    "split",
+    "coverage",
+    "payment_attempts",
+    "excluded",
+    "confirmation_attempts",
+    "confirmation_manifest",
+    "comparators",
+    "replays",
+    "api_calls",
+    "acquisition_api_usage",
+    "cost",
+    "input_hashes",
+    "identical_rule_contexts",
+    "heal_wall_seconds",
+    "heal",
+    "heal_iterations",
+    "active_rules",
+    "proposal_events",
+    "final_replay",
+    "wall_seconds"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "terms": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": [
+            "vendor_id",
+            "amount_cents",
+            "destination_account",
+            "date"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "vendor_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "amount_cents": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9223372036854775807
+            },
+            "destination_account": {
+              "type": "string",
+              "minLength": 1
+            },
+            "date": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clauses",
+        "on_fail"
+      ],
+      "properties": {
+        "clauses": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "left",
+                  "cmp",
+                  "right"
+                ],
+                "properties": {
+                  "left": {
+                    "type": "string",
+                    "enum": [
+                      "evidence.verbatim_terms.vendor_id",
+                      "evidence.verbatim_terms.amount_cents",
+                      "evidence.verbatim_terms.destination_account",
+                      "evidence.verbatim_terms.date",
+                      "evidence.cleaned_terms.vendor_id",
+                      "evidence.cleaned_terms.amount_cents",
+                      "evidence.cleaned_terms.destination_account",
+                      "evidence.cleaned_terms.date",
+                      "intent.confirmed_terms.vendor_id",
+                      "intent.confirmed_terms.amount_cents",
+                      "intent.confirmed_terms.destination_account",
+                      "intent.confirmed_terms.date",
+                      "evidence.recognizer_a_terms.vendor_id",
+                      "evidence.recognizer_a_terms.amount_cents",
+                      "evidence.recognizer_a_terms.destination_account",
+                      "evidence.recognizer_a_terms.date",
+                      "evidence.recognizer_b_terms.vendor_id",
+                      "evidence.recognizer_b_terms.amount_cents",
+                      "evidence.recognizer_b_terms.destination_account",
+                      "evidence.recognizer_b_terms.date",
+                      "intent.approved_bank_account",
+                      "intent.approved_fence_version",
+                      "vendor.bank_account"
+                    ]
+                  },
+                  "cmp": {
+                    "type": "string",
+                    "enum": [
+                      "eq",
+                      "neq"
+                    ]
+                  },
+                  "right": {
+                    "type": "string",
+                    "enum": [
+                      "evidence.verbatim_terms.vendor_id",
+                      "evidence.verbatim_terms.amount_cents",
+                      "evidence.verbatim_terms.destination_account",
+                      "evidence.verbatim_terms.date",
+                      "evidence.cleaned_terms.vendor_id",
+                      "evidence.cleaned_terms.amount_cents",
+                      "evidence.cleaned_terms.destination_account",
+                      "evidence.cleaned_terms.date",
+                      "intent.confirmed_terms.vendor_id",
+                      "intent.confirmed_terms.amount_cents",
+                      "intent.confirmed_terms.destination_account",
+                      "intent.confirmed_terms.date",
+                      "evidence.recognizer_a_terms.vendor_id",
+                      "evidence.recognizer_a_terms.amount_cents",
+                      "evidence.recognizer_a_terms.destination_account",
+                      "evidence.recognizer_a_terms.date",
+                      "evidence.recognizer_b_terms.vendor_id",
+                      "evidence.recognizer_b_terms.amount_cents",
+                      "evidence.recognizer_b_terms.destination_account",
+                      "evidence.recognizer_b_terms.date",
+                      "intent.approved_bank_account",
+                      "intent.approved_fence_version",
+                      "vendor.bank_account"
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "left",
+                  "cmp",
+                  "right"
+                ],
+                "properties": {
+                  "left": {
+                    "type": "string",
+                    "enum": [
+                      "evidence.verbatim_terms.destination_account",
+                      "evidence.cleaned_terms.destination_account",
+                      "intent.confirmed_terms.destination_account",
+                      "evidence.recognizer_a_terms.destination_account",
+                      "evidence.recognizer_b_terms.destination_account"
+                    ]
+                  },
+                  "cmp": {
+                    "type": "string",
+                    "enum": [
+                      "suffix_match"
+                    ]
+                  },
+                  "right": {
+                    "type": "string",
+                    "enum": [
+                      "vendor.bank_account"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "on_fail": {
+          "type": "string",
+          "enum": [
+            "clarify",
+            "reapprove"
+          ]
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "N": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ok": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unsafe_commit": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "benign_block": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "duplicate": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "N",
+        "ok",
+        "unsafe_commit",
+        "benign_block",
+        "duplicate"
+      ],
+      "additionalProperties": false
+    },
+    "sets": {
+      "type": "object",
+      "properties": {
+        "must_catch": {
+          "$ref": "#/$defs/counts"
+        },
+        "must_pass": {
+          "$ref": "#/$defs/counts"
+        },
+        "holdout": {
+          "$ref": "#/$defs/counts"
+        }
+      },
+      "required": [
+        "must_catch",
+        "must_pass",
+        "holdout"
+      ],
+      "additionalProperties": false
+    },
+    "active_rule": {
+      "type": "object",
+      "properties": {
+        "rule_id": {
+          "type": "string"
+        },
+        "rule": {
+          "$ref": "#/$defs/rule"
+        },
+        "rule_text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "rule_id",
+        "rule"
+      ],
+      "additionalProperties": false
+    },
+    "gate": {
+      "type": "object",
+      "properties": {
+        "accepted": {
+          "type": "boolean"
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "before": {
+          "$ref": "#/$defs/sets"
+        },
+        "after": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/sets"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "accepted",
+        "reasons",
+        "before",
+        "after"
+      ],
+      "additionalProperties": false
+    },
+    "candidate": {
+      "type": "object",
+      "properties": {
+        "candidate_id": {
+          "type": "string"
+        },
+        "iteration": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "candidate_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rule": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/rule"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "proposal": {
+          "type": "object"
+        },
+        "rule_text": {
+          "type": "string"
+        },
+        "decision": {
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected",
+            "activated"
+          ]
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "gate": {
+          "$ref": "#/$defs/gate"
+        },
+        "rejected_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "candidate_id",
+        "iteration",
+        "candidate_index",
+        "rule",
+        "proposal",
+        "rule_text",
+        "decision",
+        "active",
+        "gate",
+        "rejected_reason"
+      ],
+      "additionalProperties": false
+    },
+    "clip": {
+      "type": "object",
+      "properties": {
+        "case_id": {
+          "type": "string"
+        },
+        "audio_file": {
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "measured_live_audio",
+            "synthetic_fixture"
+          ]
+        },
+        "verbatim": {
+          "type": "string"
+        },
+        "cleaned": {
+          "type": "string"
+        },
+        "verbatim_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "cleaned_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "true_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "money_terms_diverged": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "case_id",
+        "audio_file",
+        "source",
+        "verbatim",
+        "cleaned",
+        "verbatim_terms",
+        "cleaned_terms",
+        "true_terms",
+        "money_terms_diverged"
+      ],
+      "additionalProperties": true
+    },
+    "run": {
+      "type": "object",
+      "properties": {
+        "run_id": {
+          "type": "string"
+        },
+        "case_id": {
+          "type": "string"
+        },
+        "label": {
+          "enum": [
+            "ok",
+            "unsafe_commit",
+            "benign_block",
+            "duplicate"
+          ]
+        },
+        "expected": {
+          "enum": [
+            "pay",
+            "clarify",
+            "reapprove"
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "payment_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "eval_set": {
+          "enum": [
+            "must_catch",
+            "must_pass",
+            "holdout"
+          ]
+        },
+        "block_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "field_diffs": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "approved_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "approval_snapshot": {
+          "type": "object"
+        },
+        "paid_to": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "amount_paid": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "amount_unit": {
+          "const": "integer_cents"
+        },
+        "evidence_id": {
+          "type": "string"
+        },
+        "rule_context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "confirmation_source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "run_id",
+        "case_id",
+        "label",
+        "expected",
+        "reasons",
+        "payment_count",
+        "eval_set",
+        "block_reason",
+        "field_diffs",
+        "approved_terms",
+        "approval_snapshot",
+        "paid_to",
+        "amount_paid",
+        "amount_unit",
+        "evidence_id",
+        "rule_context",
+        "confirmation_source"
+      ],
+      "additionalProperties": false
+    },
+    "replay": {
+      "type": "object",
+      "properties": {
+        "counts": {
+          "$ref": "#/$defs/counts"
+        },
+        "sets": {
+          "$ref": "#/$defs/sets"
+        },
+        "cases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/run"
+          }
+        }
+      },
+      "required": [
+        "counts",
+        "sets",
+        "cases"
+      ],
+      "additionalProperties": false
+    },
+    "iteration": {
+      "type": "object",
+      "properties": {
+        "iteration": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "candidate_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "counts": {
+          "$ref": "#/$defs/counts"
+        },
+        "sets": {
+          "$ref": "#/$defs/sets"
+        },
+        "status": {
+          "type": "string"
+        },
+        "active_rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/active_rule"
+          }
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/candidate"
+          }
+        }
+      },
+      "required": [
+        "iteration",
+        "candidate_count",
+        "counts",
+        "sets",
+        "status",
+        "active_rules",
+        "candidates"
+      ],
+      "additionalProperties": false
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "unsafe_baseline": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "good_baseline_payments": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "caught_unsafe": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "blocked_good": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unsafe_remaining": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "intake_clarifications": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "unsafe_baseline",
+        "good_baseline_payments",
+        "caught_unsafe",
+        "blocked_good",
+        "unsafe_remaining",
+        "intake_clarifications"
+      ],
+      "additionalProperties": false
+    },
+    "comparator_rule": {
+      "type": "object",
+      "properties": {
+        "rule_id": {
+          "type": "string"
+        },
+        "rule": {
+          "$ref": "#/$defs/rule"
+        },
+        "rule_text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "rule",
+        "rule_text"
+      ],
+      "additionalProperties": false
+    },
+    "comparator": {
+      "type": "object",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/comparator_rule"
+          }
+        },
+        "results": {
+          "$ref": "#/$defs/replay"
+        },
+        "metrics": {
+          "$ref": "#/$defs/metrics"
+        }
+      },
+      "required": [
+        "rules",
+        "results",
+        "metrics"
+      ],
+      "additionalProperties": false
+    },
+    "attempt": {
+      "type": "object",
+      "properties": {
+        "case_id": {
+          "type": "string"
+        },
+        "attempt_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prompt": {
+          "type": "string"
+        },
+        "voice_id": {
+          "type": "string"
+        },
+        "voice_name": {
+          "type": "string"
+        },
+        "speed": {
+          "type": "number"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "audio_file": {
+          "type": "string"
+        },
+        "tts_file": {
+          "type": "string"
+        },
+        "audio_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "recognizer_a_text": {
+          "type": "string"
+        },
+        "recognizer_b_text": {
+          "type": "string"
+        },
+        "recognizer_a_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "recognizer_b_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "true_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "expected": {
+          "enum": [
+            "pay",
+            "clarify",
+            "reapprove"
+          ]
+        },
+        "eval_set": {
+          "enum": [
+            "must_catch",
+            "must_pass",
+            "holdout",
+            "excluded"
+          ]
+        },
+        "disposition": {
+          "type": "string"
+        },
+        "outcomes": {
+          "type": "object",
+          "properties": {
+            "empty_rules": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/run"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "const": "excluded"
+                    },
+                    "expected": {
+                      "const": "clarify"
+                    },
+                    "reason": {
+                      "const": "spoken_account_not_on_file"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "expected",
+                    "reason"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "recognizer_agreement": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/run"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "const": "excluded"
+                    },
+                    "expected": {
+                      "const": "clarify"
+                    },
+                    "reason": {
+                      "const": "spoken_account_not_on_file"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "expected",
+                    "reason"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "spoken_account_on_file": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/run"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "const": "excluded"
+                    },
+                    "expected": {
+                      "const": "clarify"
+                    },
+                    "reason": {
+                      "const": "spoken_account_not_on_file"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "expected",
+                    "reason"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "live_heal": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/run"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "const": "excluded"
+                    },
+                    "expected": {
+                      "const": "clarify"
+                    },
+                    "reason": {
+                      "const": "spoken_account_not_on_file"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "expected",
+                    "reason"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": [
+            "empty_rules",
+            "recognizer_agreement",
+            "spoken_account_on_file",
+            "live_heal"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "case_id",
+        "attempt_index",
+        "prompt",
+        "voice_id",
+        "voice_name",
+        "speed",
+        "channel",
+        "audio_file",
+        "tts_file",
+        "audio_sha256",
+        "recognizer_a_text",
+        "recognizer_b_text",
+        "recognizer_a_terms",
+        "recognizer_b_terms",
+        "true_terms",
+        "expected",
+        "eval_set",
+        "disposition",
+        "outcomes"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

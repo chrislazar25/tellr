@@ -91,16 +91,22 @@ def _run_case(db, case):
     verdict = label_run(db, result["run_id"], reference_case=case)
     receipt = db.payments.find_one({"run_id": result["run_id"]})
     intent = context["intent"]
-    return {**verdict, "eval_set": case["eval_set"], "block_reason": outcome.get("reason") if outcome else "clarify" if result["status"] == "no_terms" else None,
+    row = {**verdict, "eval_set": case["eval_set"], "block_reason": outcome.get("reason") if outcome else "clarify" if result["status"] == "no_terms" else None,
             "field_diffs": field_diffs(context), "approved_terms": intent.get("confirmed_terms"),
             "approval_snapshot": {key: intent.get(key) for key in ("approved_bank_account", "approved_fence_version")},
             "paid_to": receipt["paid_to"] if receipt else None,
             "amount_paid": receipt["amount_cents"] if receipt else None,
             "amount_unit": "integer_cents", "evidence_id": result["evidence_id"]}
+    if "recognizer_b_terms" in case:
+        from rules import VOCABULARY
+        row["rule_context"] = {field: value if isinstance(value, (str, int)) else None
+                               for field in VOCABULARY for value in [field_value(context, field)]}
+        row["confirmation_source"] = intent.get("confirmation_source")
+    return row
 
 
 def replay_suite(client, current_rules: list[dict], *, candidate: dict | None = None,
-                 sets=EVAL_SETS, cases=None) -> dict:
+                 sets=EVAL_SETS, cases=None, on_case=None) -> dict:
     """Own and drop a fresh scratch database; never copy application data into it."""
     documents = deepcopy(current_rules) + ([deepcopy(candidate)] if candidate is not None else [])
     for document in documents:
@@ -116,7 +122,13 @@ def replay_suite(client, current_rules: list[dict], *, candidate: dict | None = 
                 {"_id": document["_id"], "version": document["version"], "active": True, "rule": document["rule"]}
                 for document in documents
             ])
-        rows = [_run_case(db, case) for case in (fixture_cases() if cases is None else cases) if case["eval_set"] in sets]
+        rows = []
+        for case in fixture_cases() if cases is None else cases:
+            if case["eval_set"] in sets:
+                row = _run_case(db, case)
+                rows.append(row)
+                if on_case:
+                    on_case(row)
         return {"counts": summarize(rows),
                 "sets": {eval_set: summarize([row for row in rows if row["eval_set"] == eval_set]) for eval_set in sets},
                 "cases": rows}
