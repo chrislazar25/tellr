@@ -176,6 +176,47 @@
           },
           "disposition": {
             "type": "string"
+          },
+          "outcomes": {
+            "type": "object",
+            "properties": {
+              "empty_rules": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/run"
+                  },
+                  {
+                    "$ref": "#/$defs/excluded_outcome"
+                  }
+                ]
+              },
+              "recognizer_agreement": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/run"
+                  },
+                  {
+                    "$ref": "#/$defs/excluded_outcome"
+                  }
+                ]
+              },
+              "frozen_learned": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/run"
+                  },
+                  {
+                    "$ref": "#/$defs/excluded_outcome"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "empty_rules",
+              "recognizer_agreement",
+              "frozen_learned"
+            ],
+            "additionalProperties": false
           }
         },
         "required": [
