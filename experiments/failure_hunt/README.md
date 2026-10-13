@@ -59,3 +59,22 @@ Those commands append new attempts and can call paid APIs when caches miss.
 The current archive is frozen input to the recorded comparison. Generated audio
 attribution: ElevenLabs, using stock voices; these are synthetic utterances and
 simulated channels, not human caller recordings or field traffic.
+
+## Sealed Bill archive
+
+`sealed_voice.py` records a fixed 60-clip schedule for stock Bill; importing it
+never generates audio. Running it can call paid APIs. `sealed_score.py` reads
+its saved Sonnet terms by default; `--live` explicitly permits new extraction
+if the saved file is absent. Keys use the same ignored-file-only `keys.py`.
+
+`sealed_manifest.json` pins the exact 198 Bill source/channel/cache files, with
+9,559,445 bytes retained. These are additional to the original 705-file hunt
+manifest. Links come from the logs, never audio-directory discovery.
+
+`sealed_eval.py` snapshots the learned rules from a completed experiment export,
+records source/rule fingerprints, and replays cached Bill evidence through real
+Atlas worker/oracle transactions. It reports empty, agreement and frozen policies
+on identical inputs; it performs no proposal, gate decision or activation.
+Bill had no part in search, proposal, or gate. Phrases/channels remain shared
+with the original hunt, and the absence of unsafe baseline receipts means this
+sealed set cannot measure unsafe-payment recall. See the root RESULTS.md.

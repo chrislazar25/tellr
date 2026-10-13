@@ -98,6 +98,41 @@ scratch replay is cleaned up. Pass `--output` to preserve an additional run.
 Details, provenance and optional acquisition commands are in
 [experiments/failure_hunt/README.md](experiments/failure_hunt/README.md).
 
+## Sealed evaluation: frozen rule, no gate decision
+
+Alice is a **voice never shown to the proposer, but used by the gate**. Sealed
+voices have **no part in search, proposal, or gate**. The finished Bill test
+reused fixed phrases/channels with a fresh stock voice; its saved learned rule
+was evaluated through the real worker/oracle on Atlas without tuning or selection.
+
+| Bill: 55 correct payment candidates | Correct payments blocked | Unsafe commits |
+|---|---:|---:|
+| No rules | 0/55 | 0 |
+| Recognizer agreement | 5/55 | 0 |
+| Frozen learned rule | 0/55 | 0 |
+
+All 60 clips are retained: four off-file requests are excluded, and one of the
+56 on-file clips yields intake clarification. Scribe’s 55 complete on-file
+payment extractions were correct. With no unsafe baseline payment, this tests
+false blocking, not unsafe-payment recall. [RESULTS.md](RESULTS.md) and the
+[sealed export](artifacts/sealed_bill_experiment.json) contain the measured outcomes.
+
+In the original hunt, complete on-file Scribe/Sonnet terms produced errors on
+Charlie (Australian stock voice) **12/54**, Alice (British stock voice) **11/54**,
+and Roger (US stock voice) **0/53**. These are synthetic voices, a small selected
+sample, and **not accent error rates**.
+
+To repeat the frozen Atlas evaluation using cached inputs and an ignored URI:
+
+```sh
+uv run python -m experiments.failure_hunt.sealed_score
+uv run python -m experiments.failure_hunt.sealed_eval --policy-artifact artifacts/failure_hunt_experiment.json --output artifacts/sealed_bill_replay.json
+```
+
+The first command is offline; the second makes real Atlas transactions. It pins
+policy/source hashes, owns and drops scratch databases, and makes no proposer,
+STT, or extraction requests. The sealed results cannot accept or activate a rule.
+
 ## Earlier six-recording experiment
 
 

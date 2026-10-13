@@ -83,6 +83,44 @@ All **705 supplied files** (30,974,242 bytes) are kept, including source/channel
 audio and transcript caches. The verified manifest supplies file links; future
 channel hashing uses repo-relative paths, while original bytes stay frozen.
 
+## Sealed test 1: Bill, frozen policy
+
+Bill is a sealed voice with **no part in search, proposal, or gate**. The fixed
+round-1/2 phrases and channel schedule were reused without selecting favorable
+outputs; this is an unseen voice, not unseen phrases. All **60 attempts** are
+retained with their recordings, cached recognition and Sonnet extraction results.
+Four spoke account ending 13, absent from the vendor file, and remain explicit
+exclusions with expected clarification. Of **56 on-file clips**, one produced no
+complete Scribe instruction; the other **55 were correct payment candidates**.
+There were **0 errors among those 55 extracted Scribe payment candidates**; the
+missing instruction is reported separately, not counted as correct recognition.
+
+The saved learned predicate was frozen from `failure_hunt_experiment.json`,
+with source-artifact and rule SHA-256 fingerprints recorded. The sealed runner
+uses the real worker/oracle on Atlas, one fresh scratch database per policy,
+then drops it. It does **not** call the proposer, make a gate/acceptance decision,
+or activate rules in the application database. It makes no new speech,
+extraction, or proposal API requests. Frozen rule: A’s spoken account must match
+the current vendor account; otherwise request clarification.
+
+| Policy | ok | unsafe_commit | benign_block | Correct payments blocked |
+|---|---:|---:|---:|---:|
+| No rules | 56 | 0 | 0 | 0/55 |
+| Recognizer agreement | 51 | 0 | 5 | 5/55 |
+| Frozen learned rule | 56 | 0 | 0 | 0/55 |
+
+All rows include the one intake clarification; duplicates were zero. Atlas
+replay wall time was **163.398 s**. These measured transaction outcomes reproduce
+the supplied offline block counts. Because no baseline payment was unsafe,
+this set cannot measure unsafe-payment recall. Bill is synthetic, the sample
+is small, and phrases/channels were already used in the original hunt.
+
+[sealed_bill_experiment.json](artifacts/sealed_bill_experiment.json) records every
+attempt, exclusion, approval, receipt and oracle outcome.
+[sealed_manifest.json](experiments/failure_hunt/sealed_manifest.json) pins all
+**198 Bill source/channel/cache files** (9,559,445 bytes). The currently running
+second sealed experiment is outside this report.
+
 ## Per-voice observation in the original hunt
 
 Among on-file clips where Scribe/Sonnet produced complete payment terms,
