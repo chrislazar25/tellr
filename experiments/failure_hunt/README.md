@@ -60,21 +60,46 @@ The current archive is frozen input to the recorded comparison. Generated audio
 attribution: ElevenLabs, using stock voices; these are synthetic utterances and
 simulated channels, not human caller recordings or field traffic.
 
-## Sealed Bill archive
+## Sealed archives
 
-`sealed_voice.py` records a fixed 60-clip schedule for stock Bill; importing it
-never generates audio. Running it can call paid APIs. `sealed_score.py` reads
-its saved Sonnet terms by default; `--live` explicitly permits new extraction
-if the saved file is absent. Keys use the same ignored-file-only `keys.py`.
+Bill (`sealed_*`) and Lily (`sealed2_*`) each preserve the fixed 60-clip protocol.
+Lily’s preregistration names its voice before generation; it was chosen because
+errors in the original hunt clustered on non-American stock voices. Neither
+sealed voice’s outcomes entered search, proposal, or gate. Phrases/channels are
+shared with the original hunt, so these are unseen voices, not unseen phrases.
+Generated Bill/Lily audio is also attributed to ElevenLabs `eleven_flash_v2_5`.
 
-`sealed_manifest.json` pins the exact 198 Bill source/channel/cache files, with
-9,559,445 bytes retained. These are additional to the original 705-file hunt
-manifest. Links come from the logs, never audio-directory discovery.
+Importing either voice script never generates audio. Executing acquisition can
+call paid APIs. Both scoring scripts read the once-scored Sonnet terms by default;
+`--live` explicitly permits new extraction only if the saved file is absent.
+Keys use the ignored-file-only `keys.py`. No cached terms were re-extracted for
+these sealed worker comparisons.
+
+The exact additional audio/cache archives are retained:
+
+| Manifest | Files | Bytes |
+|---|---:|---:|
+| `sealed_manifest.json` (Bill) | 198 | 9,559,445 |
+| `sealed2_manifest.json` (Lily) | 198 | 8,426,987 |
+
+These are additional to the original 705-file hunt manifest. Links come from
+logs, not audio-directory discovery. Lily’s manifest also pins the original
+preregistration bytes. The runner copies that provenance into its export.
 
 `sealed_eval.py` snapshots the learned rules from a completed experiment export,
-records source/rule fingerprints, and replays cached Bill evidence through real
-Atlas worker/oracle transactions. It reports empty, agreement and frozen policies
-on identical inputs; it performs no proposal, gate decision or activation.
-Bill had no part in search, proposal, or gate. Phrases/channels remain shared
-with the original hunt, and the absence of unsafe baseline receipts means this
-sealed set cannot measure unsafe-payment recall. See the root RESULTS.md.
+records source/rule fingerprints, and replays one explicitly selected cached set
+through real Atlas worker/oracle transactions. It reports empty, agreement and
+frozen policies on identical inputs; it performs no proposal, gate decision or
+activation. Select Bill by default, or Lily with `--set lily`:
+
+```sh
+uv run python -m experiments.failure_hunt.sealed_score
+uv run python -m experiments.failure_hunt.sealed2_score
+uv run python -m experiments.failure_hunt.sealed_eval --set lily --output artifacts/sealed_lily_replay.json
+```
+
+The scoring commands are offline; the last needs the ignored Atlas URI. Outputs
+validate against `artifacts/sealed_experiment.schema.json`. Error annotations
+separate wrong numeric destinations from garbled identifiers. In particular,
+`vending 003` keeps the intended digits but needs clarification; its block is
+not credited as a wrong-account catch. See root RESULTS.md for measured outcomes.

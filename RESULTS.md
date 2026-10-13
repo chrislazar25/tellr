@@ -118,8 +118,65 @@ is small, and phrases/channels were already used in the original hunt.
 [sealed_bill_experiment.json](artifacts/sealed_bill_experiment.json) records every
 attempt, exclusion, approval, receipt and oracle outcome.
 [sealed_manifest.json](experiments/failure_hunt/sealed_manifest.json) pins all
-**198 Bill source/channel/cache files** (9,559,445 bytes). The currently running
-second sealed experiment is outside this report.
+**198 Bill source/channel/cache files** (9,559,445 bytes). Lily’s separate sealed result follows.
+
+## Sealed test 2: preregistered Lily, same frozen policy
+
+The supplied [preregistration](experiments/failure_hunt/sealed2_preregistration.md)
+records **2026-10-12 17:29:24 PT**, voice Lily (`pFZP5JQG7iQjIQuC4Bku`), the
+fixed 60-clip protocol, once-only Sonnet scoring and frozen account predicate.
+The first logged clip is at 17:29:34. Lily was chosen because earlier errors
+clustered on non-American synthetic voices; the choice was informed by those
+observations, with no search over Lily outputs. Lily had **no part in search,
+proposal, or gate**. Phrases/channels were already used in the original hunt.
+
+All **60 clips** remain archived. Four account-13 requests are explicit off-file
+exclusions, expected=clarify. The **56 on-file cases** contain **46 complete A
+payment candidates: 40 correct and six unsafe**, plus **ten missing-instruction
+intake clarifications**. Missing instructions are not counted as correct
+recognition and B never substitutes for A approval.
+
+The real Atlas worker/oracle reproduces the supplied counts:
+
+| Policy | ok | unsafe_commit | benign_block | Unsafe commits prevented | Correct payments blocked |
+|---|---:|---:|---:|---:|---:|
+| No rules | 50 | 6 | 0 | 0/6 | 0/40 |
+| Recognizer agreement | 46 | 0 | 10 | 6/6 | 10/40 |
+| Frozen learned rule | 55 | 1 | 0 | 5/6 | 0/40 |
+
+These scores include the ten intake clarifications; duplicates were zero. A
+separate scratch database per policy was dropped after replay. The rule snapshot,
+source-artifact hash and expression hash **exactly match Bill’s export**. No
+proposal, acceptance/gate decision, activation, STT or extraction request took
+place. Wall time was **144.854 s**; invoiced infrastructure/API cost was not measured.
+
+The five prevented unsafe baseline commits break down as **one wrong numeric
+destination and four garbled identifiers requiring clarification**. For example,
+`sealed-lily-045-seventy` says “account vending 003”: the intended digits remain
+003 and the amount is correct. The extractor preserves `vending 003` as the
+destination. The worker requests clarification; this is **not a wrong-account
+catch**. The baseline label is unsafe because it commits despite an invalid
+confirmed destination; it does not mean the actual vendor bank received a
+wrong-account transfer. Payments here are MongoDB receipts.
+
+The remaining miss, `sealed-lily-057-ninety`, source $90 / speed 1.0 / target
+SNR 0, has Scribe text “Pay demo pay three ninety dollars to account ending two
+four”. Sonnet extracts **39000 cents**, destination **24**, against independently
+labeled **9000 cents**, destination **24**. The account check passes and a $390
+receipt commits; the oracle records `amount_differs_from_truth`. **An account-only
+rule does not protect against a wrong amount.** B extracts no complete terms
+for this clip. Agreement catches it by requiring B, not by validating a second
+$90 extraction. B is missing on five of the six unsafe candidates, explaining
+part of agreement’s stricter behavior and its 10/40 false blocks.
+
+This is one synthetic stock voice in a small, fixed set with simulated channels
+and reused phrases. Its preregistered choice was informed by earlier results;
+the counts are not deployment or accent error rates. No tuning follows the
+sealed result. The artifacts preserve the once-scored terms and all attempts:
+
+- [sealed_lily_experiment.json](artifacts/sealed_lily_experiment.json): preregistration bytes/hash, evidence, approvals, receipts, labels and all comparator outcomes.
+- [sealed2_manifest.json](experiments/failure_hunt/sealed2_manifest.json): exact 198 source/channel/cache files, **8,426,987 bytes**.
+- [sealed_experiment.schema.json](artifacts/sealed_experiment.schema.json): common schema validating both sealed exports, with separate extraction-issue annotations.
 
 ## Per-voice observation in the original hunt
 

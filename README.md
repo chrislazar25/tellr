@@ -101,37 +101,57 @@ Details, provenance and optional acquisition commands are in
 ## Sealed evaluation: frozen rule, no gate decision
 
 Alice is a **voice never shown to the proposer, but used by the gate**. Sealed
-voices have **no part in search, proposal, or gate**. The finished Bill test
-reused fixed phrases/channels with a fresh stock voice; its saved learned rule
-was evaluated through the real worker/oracle on Atlas without tuning or selection.
+voices have **no part in search, proposal, or gate**. Bill and Lily each used the
+same fixed 60-clip protocol; both were replayed through the real worker/oracle
+on Atlas with the identical frozen policy. No rule was tuned or selected from
+these results. Lily’s supplied preregistration names the voice before generation;
+it was chosen after earlier errors clustered on non-American stock voices.
 
-| Bill: 55 correct payment candidates | Correct payments blocked | Unsafe commits |
-|---|---:|---:|
-| No rules | 0/55 | 0 |
-| Recognizer agreement | 5/55 | 0 |
-| Frozen learned rule | 0/55 | 0 |
+| Sealed voice | Policy | Unsafe commits prevented | Correct payments blocked | Unsafe remaining |
+|---|---|---:|---:|---:|
+| Bill | No rules | n/a | 0/55 | 0 |
+| Bill | Recognizer agreement | n/a | 5/55 | 0 |
+| Bill | Frozen learned rule | n/a | 0/55 | 0 |
+| Lily | No rules | 0/6 | 0/40 | 6 |
+| Lily | Recognizer agreement | 6/6 | 10/40 | 0 |
+| Lily | Frozen learned rule | 5/6 | 0/40 | 1 |
 
-All 60 clips are retained: four off-file requests are excluded, and one of the
-56 on-file clips yields intake clarification. Scribe’s 55 complete on-file
-payment extractions were correct. With no unsafe baseline payment, this tests
-false blocking, not unsafe-payment recall. [RESULTS.md](RESULTS.md) and the
-[sealed export](artifacts/sealed_bill_experiment.json) contain the measured outcomes.
+Each voice has 56 on-file clips plus four explicit off-file exclusions. Bill has
+55 complete A payment candidates and one intake clarification; Lily has 46
+candidates (40 correct, six unsafe) and ten intake clarifications. Bill had no
+unsafe baseline payment, so its unsafe-payment recall is not measurable.
+All 120 attempts, cached extractions and exact audio bytes are retained.
 
-In the original hunt, complete on-file Scribe/Sonnet terms produced errors on
-Charlie (Australian stock voice) **12/54**, Alice (British stock voice) **11/54**,
-and Roger (US stock voice) **0/53**. These are synthetic voices, a small selected
-sample, and **not accent error rates**.
+Lily’s missed **“ninety” → “three ninety” → $390** paid 39000 cents instead of
+9000: the account-only predicate cannot catch that amount error. The five
+prevented commits comprise one wrong numeric destination and four garbled
+identifiers requiring clarification. **“vending 003” retains the intended digits;
+its block is a clarification, not a wrong-account catch.** Agreement also blocks
+when B has no complete instruction, including five of the six unsafe candidates.
 
-To repeat the frozen Atlas evaluation using cached inputs and an ignored URI:
+These are synthetic voices, simulated channels, small samples and reused phrases;
+Lily’s choice was informed by earlier observations. In the original hunt,
+complete on-file Scribe/Sonnet terms produced errors on Charlie (Australian stock
+voice) **12/54**, Alice (British stock voice) **11/54**, and Roger (US stock voice)
+**0/53**. These counts are **not accent error rates**.
+
+[RESULTS.md](RESULTS.md) has complete scores and timing. Both sealed exports
+([Bill](artifacts/sealed_bill_experiment.json),
+[Lily](artifacts/sealed_lily_experiment.json)) pin the same rule/source hashes,
+record every approval/receipt/oracle outcome, and include explicit exclusions.
+
+To inspect cached scoring or repeat one frozen Atlas replay:
 
 ```sh
 uv run python -m experiments.failure_hunt.sealed_score
-uv run python -m experiments.failure_hunt.sealed_eval --policy-artifact artifacts/failure_hunt_experiment.json --output artifacts/sealed_bill_replay.json
+uv run python -m experiments.failure_hunt.sealed2_score
+uv run python -m experiments.failure_hunt.sealed_eval --set lily --output artifacts/sealed_lily_replay.json
 ```
 
-The first command is offline; the second makes real Atlas transactions. It pins
-policy/source hashes, owns and drops scratch databases, and makes no proposer,
-STT, or extraction requests. The sealed results cannot accept or activate a rule.
+The scoring commands are offline; the last uses the ignored Atlas URI. Use
+`--set bill` for Bill. Replays own and drop scratch databases, make no proposer,
+STT or extraction requests, and cannot accept or activate a rule. New exports
+validate against [sealed_experiment.schema.json](artifacts/sealed_experiment.schema.json).
 
 ## Earlier six-recording experiment
 
