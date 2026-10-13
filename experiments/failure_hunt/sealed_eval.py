@@ -37,13 +37,35 @@ def frozen_policy(path):
             "source_rule_ids": [row["rule_id"] for row in artifact["active_rules"]]}
 
 
-def read_sealed(root=ROOT):
-    """Use explicit Bill manifest links; do not discover other audio or sealed sets."""
+def extraction_issues(terms, truth):
+    """Describe errors without equating garbled identifiers with wrong digits."""
+    if terms is None:
+        return ["missing_instruction"]
+    issues = []
+    for field, issue in (("vendor_id", "vendor_error"), ("amount_cents", "amount_error"), ("date", "date_error")):
+        if terms[field] != truth[field]:
+            issues.append(issue)
+    account = next(v["bank_account"] for v in SAMPLE_VENDORS if v["_id"] == truth["vendor_id"])
+    destination = terms["destination_account"]
+    if not destination_matches(destination, account):
+        if destination.isascii() and destination.isdigit():
+            issues.append("wrong_numeric_destination")
+        elif destination in {v["bank_account"] for v in SAMPLE_VENDORS}:
+            issues.append("destination_identifier_mismatch")
+        else:
+            issues.append("garbled_destination")
+    return issues
+
+
+def read_sealed(root=ROOT, *, prefix="sealed"):
+    """Read one explicitly selected sealed manifest, without audio discovery."""
+    if prefix not in {"sealed", "sealed2"}:
+        raise ValueError("Unknown sealed dataset prefix")
     root = Path(root)
     repo = root.parents[1]
-    attempts = [json.loads(line) for line in (root / "sealed_attempts.jsonl").read_text().splitlines()]
-    scored = score(root)
-    manifest = json.loads((root / "sealed_manifest.json").read_text())
+    attempts = [json.loads(line) for line in (root / f"{prefix}_attempts.jsonl").read_text().splitlines()]
+    scored = score(root, prefix=prefix)
+    manifest = json.loads((root / f"{prefix}_manifest.json").read_text())
     if len(attempts) != manifest["attempt_count"] or len(manifest["attempts"]) != len(attempts):
         raise ValueError("Sealed manifest coverage mismatch")
     entries = {entry["file"]: entry for entry in manifest["files"]}
@@ -56,6 +78,17 @@ def read_sealed(root=ROOT):
         raw = path.read_bytes()
         if len(raw) != entry["bytes"] or hashlib.sha256(raw).hexdigest() != entry["sha256"]:
             raise ValueError("Sealed audio/cache bytes differ from their frozen manifest")
+    preregistration = None
+    if prefix == "sealed2":
+        path = root / "sealed2_preregistration.md"
+        if manifest.get("preregistration_file") != path.relative_to(repo).as_posix():
+            raise ValueError("Sealed preregistration link differs")
+        raw = path.read_bytes()
+        if hashlib.sha256(raw).hexdigest() != manifest.get("preregistration_sha256"):
+            raise ValueError("Sealed preregistration differs from its pinned bytes")
+        preregistration = {"file": manifest["preregistration_file"], "sha256": manifest["preregistration_sha256"], "text": raw.decode()}
+        if manifest["voice_id"] not in preregistration["text"]:
+            raise ValueError("Sealed voice differs from its preregistration")
     cases, records, exclusions, errors = [], [], [], []
     for index, (attempt, row, link) in enumerate(zip(attempts, scored, manifest["attempts"])):
         if attempt["voice"] != manifest["voice_id"]:
@@ -76,27 +109,29 @@ def read_sealed(root=ROOT):
                  "destination_account": attempt["truth"]["acct"], "date": "2026-10-11"}
         a, b = deepcopy(row["terms_a"]), deepcopy(row["terms_b"])
         on_file = destination_matches(truth["destination_account"], vendor["bank_account"])
-        differs = a is not None and any(a[field] != truth[field] for field in truth)
-        record = {"case_id": f"sealed-bill-{index + 1:03d}-{attempt['case']}", "attempt_index": index,
+        issues = extraction_issues(a, truth)
+        differs = a is not None and bool(issues)
+        record = {"case_id": f"sealed-{manifest['voice'].lower()}-{index + 1:03d}-{attempt['case']}", "attempt_index": index,
                   "voice_name": manifest["voice"], "voice_id": attempt["voice"], "prompt": attempt["text"],
                   "speed": attempt["speed"], "channel": attempt["channel"], "audio_file": link["channel_file"],
                   "tts_file": link["tts_file"], "audio_sha256": entries[link["channel_file"]]["sha256"],
                   "recognizer_a_text": row["scribe"], "recognizer_b_text": row["whisper"],
                   "recognizer_a_terms": a, "recognizer_b_terms": b, "true_terms": truth,
                   "expected": "clarify" if a is None or differs or not on_file else "pay",
-                  "eval_set": "sealed" if on_file else "excluded"}
+                  "eval_set": "sealed" if on_file else "excluded", "extraction_issues": issues}
         if on_file:
             cases.append({**record, "verbatim_text": row["scribe"], "cleaned_text": row["scribe"],
                           "verbatim_terms": a, "cleaned_terms": a, "eval_set": "holdout"})
             if differs:
-                errors.append({"case_id": record["case_id"], "true_terms": truth, "observed_terms": a})
+                errors.append({"case_id": record["case_id"], "true_terms": truth, "observed_terms": a, "extraction_issues": issues})
         else:
             record["disposition"] = "spoken_account_not_on_file"
             exclusions.append(record)
         records.append(record)
     return {"cases": cases, "payment_attempts": records, "excluded": exclusions, "scribe_errors": errors,
-            "voice": manifest["voice"], "input_hashes": {name: hashlib.sha256((root / name).read_bytes()).hexdigest()
-                for name in ("sealed_attempts.jsonl", "sealed_scored.json", "sealed_manifest.json")}}
+            "voice": manifest["voice"], "preregistration": preregistration, "input_hashes": {name: hashlib.sha256((root / name).read_bytes()).hexdigest()
+                for name in (f"{prefix}_attempts.jsonl", f"{prefix}_scored.json", f"{prefix}_manifest.json",
+                             *(["sealed2_preregistration.md"] if preregistration else []))}}
 
 
 def evaluate_sealed(client, policy, output, *, data=None, backend="configured_mongodb"):
@@ -117,6 +152,8 @@ def evaluate_sealed(client, policy, output, *, data=None, backend="configured_mo
                 "payment_attempts": data["payment_attempts"], "excluded": data["excluded"],
                 "scribe_errors": data["scribe_errors"], "input_hashes": data["input_hashes"],
                 "api_calls": [], "comparators": {}}
+    if data.get("preregistration"):
+        artifact["preregistration"] = deepcopy(data["preregistration"])
     baseline = None
     for name, expressions in (("empty_rules", []), ("recognizer_agreement", [AGREEMENT]), ("frozen_learned", policy["rules"])):
         progress = []
@@ -146,18 +183,20 @@ def evaluate_sealed(client, policy, output, *, data=None, backend="configured_mo
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--set", choices=("bill", "lily"), default="bill", help="Choose one sealed set explicitly")
     parser.add_argument("--policy-artifact", type=Path, default=Path("artifacts/failure_hunt_experiment.json"))
-    parser.add_argument("--output", type=Path, default=Path("artifacts/sealed_bill_experiment.json"))
+    parser.add_argument("--output", type=Path, help="Default: artifacts/sealed_<set>_experiment.json")
     args = parser.parse_args(argv)
+    output = args.output or Path(f"artifacts/sealed_{args.set}_experiment.json")
     configured = None
     try:
-        policy, data = frozen_policy(args.policy_artifact), read_sealed()
+        policy, data = frozen_policy(args.policy_artifact), read_sealed(prefix="sealed2" if args.set == "lily" else "sealed")
         uri = keys.get("MONGODB_URI")
         if not uri.startswith("mongodb+srv://"):
             raise ValueError("Sealed live evaluation requires the configured Atlas SRV connection")
         configured = connect(uri)
         seed(configured)
-        artifact = evaluate_sealed(configured.client, policy, args.output, data=data, backend="atlas")
+        artifact = evaluate_sealed(configured.client, policy, output, data=data, backend="atlas")
         print(json.dumps({name: value["results"]["counts"] for name, value in artifact["comparators"].items()}, indent=2))
         return 0
     except Exception as error:

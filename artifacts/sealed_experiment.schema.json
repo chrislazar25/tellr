@@ -1,0 +1,953 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/chrislazar25/tellr/artifacts/sealed_experiment.schema.json",
+  "title": "Frozen sealed-voice evaluation with preregistration provenance",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "status": {
+      "const": "complete"
+    },
+    "evaluation_type": {
+      "const": "sealed_frozen_policy"
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "finished_at": {
+      "type": "string"
+    },
+    "database_backend": {
+      "type": "string"
+    },
+    "voice": {
+      "type": "string"
+    },
+    "policy": {
+      "type": "object",
+      "properties": {
+        "source_file": {
+          "type": "string"
+        },
+        "source_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_experiment_id": {
+          "type": "string"
+        },
+        "source_finished_at": {
+          "type": "string"
+        },
+        "rules_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rule"
+          }
+        },
+        "source_rule_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "source_file",
+        "source_sha256",
+        "source_experiment_id",
+        "source_finished_at",
+        "rules_sha256",
+        "rules",
+        "source_rule_ids"
+      ],
+      "additionalProperties": false
+    },
+    "selection_performed": {
+      "const": false
+    },
+    "approval_source": {
+      "const": "recognizer_a"
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "payment_attempts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sealed_eval_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "excluded_spoken_account_not_on_file": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "intake_clarifications": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "payment_attempts",
+        "sealed_eval_cases",
+        "excluded_spoken_account_not_on_file",
+        "intake_clarifications"
+      ],
+      "additionalProperties": false
+    },
+    "payment_attempts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      }
+    },
+    "excluded": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string"
+          },
+          "voice_name": {
+            "type": "string"
+          },
+          "voice_id": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "channel": {
+            "type": "string"
+          },
+          "audio_file": {
+            "type": "string"
+          },
+          "tts_file": {
+            "type": "string"
+          },
+          "recognizer_a_text": {
+            "type": "string"
+          },
+          "recognizer_b_text": {
+            "type": "string"
+          },
+          "attempt_index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "speed": {
+            "type": "number"
+          },
+          "audio_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "recognizer_a_terms": {
+            "$ref": "#/$defs/terms"
+          },
+          "recognizer_b_terms": {
+            "$ref": "#/$defs/terms"
+          },
+          "true_terms": {
+            "$ref": "#/$defs/terms"
+          },
+          "expected": {
+            "enum": [
+              "pay",
+              "clarify",
+              "reapprove"
+            ]
+          },
+          "eval_set": {
+            "enum": [
+              "sealed",
+              "excluded"
+            ]
+          },
+          "disposition": {
+            "type": "string"
+          },
+          "outcomes": {
+            "type": "object",
+            "properties": {
+              "empty_rules": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/run"
+                  },
+                  {
+                    "$ref": "#/$defs/excluded_outcome"
+                  }
+                ]
+              },
+              "recognizer_agreement": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/run"
+                  },
+                  {
+                    "$ref": "#/$defs/excluded_outcome"
+                  }
+                ]
+              },
+              "frozen_learned": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/run"
+                  },
+                  {
+                    "$ref": "#/$defs/excluded_outcome"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "empty_rules",
+              "recognizer_agreement",
+              "frozen_learned"
+            ],
+            "additionalProperties": false
+          },
+          "extraction_issues": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "missing_instruction",
+                "vendor_error",
+                "amount_error",
+                "date_error",
+                "wrong_numeric_destination",
+                "destination_identifier_mismatch",
+                "garbled_destination"
+              ]
+            }
+          }
+        },
+        "required": [
+          "case_id",
+          "voice_name",
+          "voice_id",
+          "prompt",
+          "channel",
+          "audio_file",
+          "tts_file",
+          "recognizer_a_text",
+          "recognizer_b_text",
+          "attempt_index",
+          "speed",
+          "audio_sha256",
+          "recognizer_a_terms",
+          "recognizer_b_terms",
+          "true_terms",
+          "expected",
+          "eval_set"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "scribe_errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string"
+          },
+          "true_terms": {
+            "$ref": "#/$defs/terms"
+          },
+          "observed_terms": {
+            "$ref": "#/$defs/terms"
+          },
+          "extraction_issues": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "missing_instruction",
+                "vendor_error",
+                "amount_error",
+                "date_error",
+                "wrong_numeric_destination",
+                "destination_identifier_mismatch",
+                "garbled_destination"
+              ]
+            }
+          }
+        },
+        "required": [
+          "case_id",
+          "true_terms",
+          "observed_terms"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "input_hashes": {
+      "type": "object",
+      "minProperties": 3,
+      "propertyNames": {
+        "pattern": "^sealed(?:2)?_(?:attempts\\.jsonl|scored\\.json|manifest\\.json|preregistration\\.md)$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    },
+    "api_calls": {
+      "type": "array",
+      "maxItems": 0
+    },
+    "comparators": {
+      "type": "object",
+      "properties": {
+        "empty_rules": {
+          "$ref": "#/$defs/comparator"
+        },
+        "recognizer_agreement": {
+          "$ref": "#/$defs/comparator"
+        },
+        "frozen_learned": {
+          "$ref": "#/$defs/comparator"
+        }
+      },
+      "required": [
+        "empty_rules",
+        "recognizer_agreement",
+        "frozen_learned"
+      ],
+      "additionalProperties": false
+    },
+    "wall_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "preregistration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file",
+        "sha256",
+        "text"
+      ],
+      "properties": {
+        "file": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "evaluation_type",
+    "started_at",
+    "finished_at",
+    "database_backend",
+    "voice",
+    "policy",
+    "selection_performed",
+    "approval_source",
+    "coverage",
+    "payment_attempts",
+    "excluded",
+    "scribe_errors",
+    "input_hashes",
+    "api_calls",
+    "comparators",
+    "wall_seconds"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "terms": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": [
+            "vendor_id",
+            "amount_cents",
+            "destination_account",
+            "date"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "vendor_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "amount_cents": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9223372036854775807
+            },
+            "destination_account": {
+              "type": "string",
+              "minLength": 1
+            },
+            "date": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clauses",
+        "on_fail"
+      ],
+      "properties": {
+        "clauses": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "left",
+                  "cmp",
+                  "right"
+                ],
+                "properties": {
+                  "left": {
+                    "type": "string",
+                    "enum": [
+                      "evidence.verbatim_terms.vendor_id",
+                      "evidence.verbatim_terms.amount_cents",
+                      "evidence.verbatim_terms.destination_account",
+                      "evidence.verbatim_terms.date",
+                      "evidence.cleaned_terms.vendor_id",
+                      "evidence.cleaned_terms.amount_cents",
+                      "evidence.cleaned_terms.destination_account",
+                      "evidence.cleaned_terms.date",
+                      "intent.confirmed_terms.vendor_id",
+                      "intent.confirmed_terms.amount_cents",
+                      "intent.confirmed_terms.destination_account",
+                      "intent.confirmed_terms.date",
+                      "evidence.recognizer_a_terms.vendor_id",
+                      "evidence.recognizer_a_terms.amount_cents",
+                      "evidence.recognizer_a_terms.destination_account",
+                      "evidence.recognizer_a_terms.date",
+                      "evidence.recognizer_b_terms.vendor_id",
+                      "evidence.recognizer_b_terms.amount_cents",
+                      "evidence.recognizer_b_terms.destination_account",
+                      "evidence.recognizer_b_terms.date",
+                      "intent.approved_bank_account",
+                      "intent.approved_fence_version",
+                      "vendor.bank_account"
+                    ]
+                  },
+                  "cmp": {
+                    "type": "string",
+                    "enum": [
+                      "eq",
+                      "neq"
+                    ]
+                  },
+                  "right": {
+                    "type": "string",
+                    "enum": [
+                      "evidence.verbatim_terms.vendor_id",
+                      "evidence.verbatim_terms.amount_cents",
+                      "evidence.verbatim_terms.destination_account",
+                      "evidence.verbatim_terms.date",
+                      "evidence.cleaned_terms.vendor_id",
+                      "evidence.cleaned_terms.amount_cents",
+                      "evidence.cleaned_terms.destination_account",
+                      "evidence.cleaned_terms.date",
+                      "intent.confirmed_terms.vendor_id",
+                      "intent.confirmed_terms.amount_cents",
+                      "intent.confirmed_terms.destination_account",
+                      "intent.confirmed_terms.date",
+                      "evidence.recognizer_a_terms.vendor_id",
+                      "evidence.recognizer_a_terms.amount_cents",
+                      "evidence.recognizer_a_terms.destination_account",
+                      "evidence.recognizer_a_terms.date",
+                      "evidence.recognizer_b_terms.vendor_id",
+                      "evidence.recognizer_b_terms.amount_cents",
+                      "evidence.recognizer_b_terms.destination_account",
+                      "evidence.recognizer_b_terms.date",
+                      "intent.approved_bank_account",
+                      "intent.approved_fence_version",
+                      "vendor.bank_account"
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "left",
+                  "cmp",
+                  "right"
+                ],
+                "properties": {
+                  "left": {
+                    "type": "string",
+                    "enum": [
+                      "evidence.verbatim_terms.destination_account",
+                      "evidence.cleaned_terms.destination_account",
+                      "intent.confirmed_terms.destination_account",
+                      "evidence.recognizer_a_terms.destination_account",
+                      "evidence.recognizer_b_terms.destination_account"
+                    ]
+                  },
+                  "cmp": {
+                    "type": "string",
+                    "enum": [
+                      "suffix_match"
+                    ]
+                  },
+                  "right": {
+                    "type": "string",
+                    "enum": [
+                      "vendor.bank_account"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "on_fail": {
+          "type": "string",
+          "enum": [
+            "clarify",
+            "reapprove"
+          ]
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "N": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ok": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unsafe_commit": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "benign_block": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "duplicate": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "N",
+        "ok",
+        "unsafe_commit",
+        "benign_block",
+        "duplicate"
+      ],
+      "additionalProperties": false
+    },
+    "run": {
+      "type": "object",
+      "properties": {
+        "run_id": {
+          "type": "string"
+        },
+        "case_id": {
+          "type": "string"
+        },
+        "label": {
+          "enum": [
+            "ok",
+            "unsafe_commit",
+            "benign_block",
+            "duplicate"
+          ]
+        },
+        "expected": {
+          "enum": [
+            "pay",
+            "clarify",
+            "reapprove"
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "payment_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "eval_set": {
+          "const": "sealed"
+        },
+        "block_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "field_diffs": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "approved_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "approval_snapshot": {
+          "type": "object"
+        },
+        "paid_to": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "amount_paid": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "amount_unit": {
+          "const": "integer_cents"
+        },
+        "evidence_id": {
+          "type": "string"
+        },
+        "rule_context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "confirmation_source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "run_id",
+        "case_id",
+        "label",
+        "expected",
+        "reasons",
+        "payment_count",
+        "eval_set",
+        "block_reason",
+        "field_diffs",
+        "approved_terms",
+        "approval_snapshot",
+        "paid_to",
+        "amount_paid",
+        "amount_unit",
+        "evidence_id",
+        "rule_context",
+        "confirmation_source"
+      ],
+      "additionalProperties": false
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "unsafe_baseline": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "good_baseline_payments": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "caught_unsafe": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "blocked_good": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unsafe_remaining": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "intake_clarifications": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "unsafe_baseline",
+        "good_baseline_payments",
+        "caught_unsafe",
+        "blocked_good",
+        "unsafe_remaining",
+        "intake_clarifications"
+      ],
+      "additionalProperties": false
+    },
+    "excluded_outcome": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "excluded"
+        },
+        "expected": {
+          "const": "clarify"
+        },
+        "reason": {
+          "const": "spoken_account_not_on_file"
+        }
+      },
+      "required": [
+        "status",
+        "expected",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "record": {
+      "type": "object",
+      "properties": {
+        "case_id": {
+          "type": "string"
+        },
+        "voice_name": {
+          "type": "string"
+        },
+        "voice_id": {
+          "type": "string"
+        },
+        "prompt": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "audio_file": {
+          "type": "string"
+        },
+        "tts_file": {
+          "type": "string"
+        },
+        "recognizer_a_text": {
+          "type": "string"
+        },
+        "recognizer_b_text": {
+          "type": "string"
+        },
+        "attempt_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "speed": {
+          "type": "number"
+        },
+        "audio_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "recognizer_a_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "recognizer_b_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "true_terms": {
+          "$ref": "#/$defs/terms"
+        },
+        "expected": {
+          "enum": [
+            "pay",
+            "clarify",
+            "reapprove"
+          ]
+        },
+        "eval_set": {
+          "enum": [
+            "sealed",
+            "excluded"
+          ]
+        },
+        "disposition": {
+          "type": "string"
+        },
+        "outcomes": {
+          "type": "object",
+          "properties": {
+            "empty_rules": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/run"
+                },
+                {
+                  "$ref": "#/$defs/excluded_outcome"
+                }
+              ]
+            },
+            "recognizer_agreement": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/run"
+                },
+                {
+                  "$ref": "#/$defs/excluded_outcome"
+                }
+              ]
+            },
+            "frozen_learned": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/run"
+                },
+                {
+                  "$ref": "#/$defs/excluded_outcome"
+                }
+              ]
+            }
+          },
+          "required": [
+            "empty_rules",
+            "recognizer_agreement",
+            "frozen_learned"
+          ],
+          "additionalProperties": false
+        },
+        "extraction_issues": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "missing_instruction",
+              "vendor_error",
+              "amount_error",
+              "date_error",
+              "wrong_numeric_destination",
+              "destination_identifier_mismatch",
+              "garbled_destination"
+            ]
+          }
+        }
+      },
+      "required": [
+        "case_id",
+        "voice_name",
+        "voice_id",
+        "prompt",
+        "channel",
+        "audio_file",
+        "tts_file",
+        "recognizer_a_text",
+        "recognizer_b_text",
+        "attempt_index",
+        "speed",
+        "audio_sha256",
+        "recognizer_a_terms",
+        "recognizer_b_terms",
+        "true_terms",
+        "expected",
+        "eval_set",
+        "outcomes"
+      ],
+      "additionalProperties": false
+    },
+    "replay": {
+      "type": "object",
+      "properties": {
+        "counts": {
+          "$ref": "#/$defs/counts"
+        },
+        "sets": {
+          "type": "object",
+          "properties": {
+            "sealed": {
+              "$ref": "#/$defs/counts"
+            }
+          },
+          "required": [
+            "sealed"
+          ],
+          "additionalProperties": false
+        },
+        "cases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/run"
+          }
+        }
+      },
+      "required": [
+        "counts",
+        "sets",
+        "cases"
+      ],
+      "additionalProperties": false
+    },
+    "comparator": {
+      "type": "object",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rule"
+          }
+        },
+        "results": {
+          "$ref": "#/$defs/replay"
+        },
+        "metrics": {
+          "$ref": "#/$defs/metrics"
+        }
+      },
+      "required": [
+        "rules",
+        "results",
+        "metrics"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

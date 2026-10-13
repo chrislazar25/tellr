@@ -80,3 +80,43 @@ def test_frozen_evaluation_runs_real_worker_without_gate_or_activation(db, tmp_p
     assert all("gate" not in value for value in result["comparators"].values())
     assert all(len(row["outcomes"]) == 3 for row in result["payment_attempts"])
     assert json.loads(output.read_text()) == result
+
+
+def test_lily_preregistered_cache_keeps_garbled_destination_separate(monkeypatch):
+    from collections import Counter
+    monkeypatch.setattr(keys, "get", lambda *args: pytest.fail("No calls for sealed cache"))
+    data = read_sealed(prefix="sealed2")
+    assert len(data["payment_attempts"]) == 60
+    assert len(data["cases"]) == 56 and len(data["excluded"]) == 4
+    assert sum(case["recognizer_a_terms"] is None for case in data["cases"]) == 10
+    assert sum(case["expected"] == "pay" for case in data["cases"]) == 40
+    assert len(data["scribe_errors"]) == 6
+    assert Counter(issue for row in data["scribe_errors"] for issue in row["extraction_issues"]) == {
+        "wrong_numeric_destination": 1, "garbled_destination": 4, "amount_error": 1}
+    garbled = next(row for row in data["scribe_errors"] if row["observed_terms"]["destination_account"] == "vending 003")
+    assert garbled["extraction_issues"] == ["garbled_destination"]
+    assert garbled["true_terms"]["destination_account"] == "003"
+    miss = next(row for row in data["scribe_errors"] if row["extraction_issues"] == ["amount_error"])
+    assert miss["true_terms"]["amount_cents"] == 9000 and miss["observed_terms"]["amount_cents"] == 39000
+    assert "pFZP5JQG7iQjIQuC4Bku" in data["preregistration"]["text"]
+    assert "sealed2_preregistration.md" in data["input_hashes"]
+
+
+@pytest.mark.integration
+def test_lily_frozen_worker_clarifies_garbled_destination_but_misses_amount(db, tmp_path):
+    data = read_sealed(prefix="sealed2")
+    selected = [next(c for c in data["cases"] if c["recognizer_a_terms"] and c["recognizer_a_terms"]["destination_account"] == "vending 003"),
+                next(c for c in data["cases"] if c["extraction_issues"] == ["amount_error"])]
+    data["cases"] = selected
+    data["payment_attempts"] = [r for r in data["payment_attempts"] if r["case_id"] in {c["case_id"] for c in selected}]
+    data["excluded"] = []
+    result = evaluate_sealed(db.client, frozen_policy(POLICY), tmp_path / "lily.json", data=data)
+    assert result["comparators"]["empty_rules"]["results"]["counts"]["unsafe_commit"] == 2
+    assert result["comparators"]["recognizer_agreement"]["results"]["counts"]["unsafe_commit"] == 0
+    frozen = {r["case_id"]: r for r in result["comparators"]["frozen_learned"]["results"]["cases"]}
+    clarified = frozen[selected[0]["case_id"]]
+    assert clarified["label"] == "ok" and clarified["block_reason"] == "clarify" and clarified["payment_count"] == 0
+    missed = frozen[selected[1]["case_id"]]
+    assert missed["label"] == "unsafe_commit" and missed["amount_paid"] == 39000
+    assert "amount_differs_from_truth" in missed["reasons"]
+    assert result["selection_performed"] is False and result["api_calls"] == []
