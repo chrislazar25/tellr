@@ -47,7 +47,10 @@ def extraction_issues(terms, truth):
             issues.append(issue)
     account = next(v["bank_account"] for v in SAMPLE_VENDORS if v["_id"] == truth["vendor_id"])
     destination = terms["destination_account"]
-    if not destination_matches(destination, account):
+    agrees_with_truth = destination == truth["destination_account"] or (
+        destination_matches(truth["destination_account"], account) and destination_matches(destination, account)
+    )
+    if not agrees_with_truth:
         if destination.isascii() and destination.isdigit():
             issues.append("wrong_numeric_destination")
         elif destination in {v["bank_account"] for v in SAMPLE_VENDORS}:

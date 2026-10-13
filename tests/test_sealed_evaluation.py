@@ -120,3 +120,12 @@ def test_lily_frozen_worker_clarifies_garbled_destination_but_misses_amount(db, 
     assert missed["label"] == "unsafe_commit" and missed["amount_paid"] == 39000
     assert "amount_differs_from_truth" in missed["reasons"]
     assert result["selection_performed"] is False and result["api_calls"] == []
+
+
+def test_off_file_request_is_not_an_extraction_error():
+    from experiments.failure_hunt.sealed_eval import extraction_issues
+    truth = {"vendor_id": "vendor-002", "amount_cents": 1800, "destination_account": "13", "date": "2026-10-11"}
+    assert extraction_issues(dict(truth), truth) == []
+    data = read_sealed(prefix="sealed2")
+    correct = [row for row in data["excluded"] if row["recognizer_a_terms"] == row["true_terms"]]
+    assert correct and all(row["extraction_issues"] == [] for row in correct)
