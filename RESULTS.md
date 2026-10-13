@@ -20,7 +20,7 @@ instructions. Missing A instructions produce intake clarification, never a B
 approval. All 180 payment attempts have explicit outcomes or exclusion reasons
 for every comparator in [failure_hunt_experiment.json](artifacts/failure_hunt_experiment.json).
 
-Roger and Charlie supply training/benign cases; **Alice alone is holdout**:
+Roger and Charlie supply training/benign cases; **Alice is a voice never shown to the proposer, but used by the gate**:
 
 | Set | N | Composition |
 |---|---:|---|
@@ -75,13 +75,23 @@ in the supplied hunt; invoiced dollar cost is unavailable/null.
 
 Limits: these are stock TTS voices and simulated channels, with inputs chosen by
 an iterative failure search. The voice split is not a phrase split; all voices
-were already examined during corpus discovery. Alice was withheld from the
-proposer, while holdout results are used by the gate. This is not an untouched
+were already examined during corpus discovery. Alice is a voice never shown
+to the proposer, but used by the gate. This is not an untouched
 prospective test set or a production failure-rate estimate. Dates use the
 extractor's fixed reference date 2026-10-11, not a spoken date in these prompts.
 All **705 supplied files** (30,974,242 bytes) are kept, including source/channel
 audio and transcript caches. The verified manifest supplies file links; future
 channel hashing uses repo-relative paths, while original bytes stay frozen.
+
+## Per-voice observation in the original hunt
+
+Among on-file clips where Scribe/Sonnet produced complete payment terms,
+errors clustered on Charlie (Australian stock voice) and Alice (British stock
+voice): **12/54** and **11/54**, versus **0/53** for Roger (US stock voice).
+The seven missing instructions are reported separately; twelve off-file requests
+are excluded. These counts reproduce the baseline oracle’s unsafe receipts.
+They describe synthetic voices in a small, iteratively selected sample;
+**they are not accent error rates** and do not establish a causal accent effect.
 
 ## Earlier six-recording experiment
 

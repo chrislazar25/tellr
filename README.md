@@ -1,8 +1,34 @@
 # tellr
 
-A caller can correct an amount mid-sentence, approve a payment, and then have the vendor’s bank account change before the worker commits. What commits must still match what the caller authorized. This Python 3.11 prototype stores both transcript candidates, an immutable approval snapshot, and an actual payment receipt, then evaluates commit-time rules inside a fenced MongoDB transaction. An oracle checks the result against independently labeled intent; a model proposes rule changes that must pass replay gates before activation. Payments here are database receipts, not money transfers. The project started at the MongoDB x Cerebral Valley harness hackathon and is now a portfolio experiment.
+Voice payment receipts that must still match the caller’s authorization when they commit.
 
-## Failure hunt: measured policy comparisons
+## What it does
+
+- Store two recognizers’ transcripts and extracted payment terms as evidence.
+- Approve from recognizer A with an immutable bank-account snapshot.
+- Check deterministic rules inside a fenced MongoDB transaction before writing a receipt.
+- Label receipts against independent truth and approval with an oracle.
+- Let Claude propose rules; replay gates reject fixes that block good payments or worsen holdouts.
+
+Payments are MongoDB receipts, not money transfers. This Python 3.11 portfolio
+project started at the MongoDB x Cerebral Valley harness hackathon; no submission
+or award is claimed.
+
+## Quickstart: cached results, no API keys
+
+From a fresh clone, with [uv](https://docs.astral.sh/uv/) installed:
+
+```sh
+uv sync --frozen --python 3.11
+uv run python scoreboard.py --artifact artifacts/failure_hunt_experiment.json
+uv run pytest -q -m 'not integration'
+```
+
+This prints the saved measured scoreboard and runs unit checks. It requires no
+MongoDB, speech model, recordings to regenerate, or API keys. The fixture pipeline
+and full transaction tests use local MongoDB; commands are below.
+
+## Measured comparison
 
 The current hunt uses **180 synthetic payment clips plus 33 confirmation clips**:
 ElevenLabs stock voices Roger, Charlie and Alice, two speech speeds, and clean
@@ -15,17 +41,18 @@ Atlas; it made no new TTS, STT or extraction requests.
 Twelve spoken account-13 requests are absent from the vendor file and are
 explicitly excluded, expected=clarify. All 180 attempts remain in the export.
 The eligible 168 cases comprise **must_catch 12**, **must_pass 100**, and
-**holdout 56**. Roger/Charlie supply training and benign cases; Alice alone is
-held out from the proposer. Seven missing-A instructions stay as intake
+**holdout 56**. Roger/Charlie supply training and benign cases. Alice is a
+voice never shown to the proposer, but used by the gate. Seven missing-A
+instructions stay as intake
 clarification outcomes; B never supplies their approval. All policies use the
 same suites and approve from A.
 
 | Policy | Unsafe caught | Correct payments blocked | Unsafe remaining |
 |---|---:|---:|---:|
-| Empty rules | 0/23 | 0/138 | 23 |
-| A/B amount + account agreement | 22/23 | 42/138 | 1 |
-| Spoken account on file | 22/23 | 0/138 | 1 |
-| Live Opus healing | 22/23 | 0/138 | 1 |
+| No rules | 0/23 | 0/138 | 23 |
+| Recognizer agreement | 22/23 | 42/138 | 1 |
+| Account-on-file | 22/23 | 0/138 | 1 |
+| Learned rule (live Opus) | 22/23 | 0/138 | 1 |
 
 The agreement comparator fails the replay gate because it blocks correct
 payments. The account rule passes. Opus proposed two account-check candidates
@@ -41,7 +68,7 @@ training failures are gone, not that holdouts are all safe.
 These inputs were selected by an iterative search using stock TTS voices and
 simulated channels. The split withholds a voice, not phrases; designers already
 saw all voices, and holdouts participate in gating. The counts are not deployment
-error rates. **All 705 supplied source/channel/cache files are retained**
+error rates. **All 705 original hunt source/channel/cache files are retained**
 (30,974,242 bytes), linked by the verified manifest. Original channels used
 absolute-path noise seeds; future hashes use repo-relative paths. Keeping exact
 bytes avoids claiming portable reconstruction of the original experiment.
@@ -130,7 +157,7 @@ The oracle uses independent `true_terms` and `expected: pay | clarify | reapprov
 
 The proposer sees only `must_catch` failures, their reasons/diffs, current predicate bodies, and vocabulary. `must_pass` and `holdout` scenarios never enter its prompt. Opus 5.5 uses high-effort JSON-schema output, no forced tool choice, and the requested server fallback beta. It may return zero to five candidates. Every candidate receives an audit with per-set before/after counts and rejection reasons. Acceptance requires fewer must-catch failures, zero must-pass benign blocks, and no worse holdouts. Only the best accepted candidate activates; limits are three iterations and eight active rules.
 
-## Run locally without API keys
+## Run the fixture pipeline and transaction tests
 
 Install Python 3.11, Docker Compose, and uv:
 
@@ -202,4 +229,4 @@ gitleaks git --log-opts=--all --redact=100 --no-banner .
 
 The configuration retains default detectors and narrowly exempts only SHA-256 adapter-cache fingerprint lines in the two acquisition-containing exports. API key fields remain detectable. See the recorded scan for its exact revision and limitations.
 
-[MIT licensed](LICENSE). Private repository: [chrislazar25/tellr](https://github.com/chrislazar25/tellr).
+[MIT licensed](LICENSE). Repository: [chrislazar25/tellr](https://github.com/chrislazar25/tellr).
