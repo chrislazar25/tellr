@@ -1,4 +1,4 @@
-"""Inspect frozen Bill extractions; new Sonnet calls require explicit --live."""
+"""Inspect frozen sealed extractions; new Sonnet calls require explicit --live."""
 import argparse
 import json
 from pathlib import Path
@@ -11,10 +11,12 @@ from interfaces import validate_terms
 ROOT = Path(__file__).resolve().parent
 
 
-def score(root=ROOT, *, live=False):
+def score(root=ROOT, *, live=False, prefix="sealed"):
+    if prefix not in {"sealed", "sealed2"}:
+        raise ValueError("Unknown sealed dataset prefix")
     root = Path(root)
-    attempts = [json.loads(line) for line in (root / "sealed_attempts.jsonl").read_text().splitlines()]
-    path = root / "sealed_scored.json"
+    attempts = [json.loads(line) for line in (root / f"{prefix}_attempts.jsonl").read_text().splitlines()]
+    path = root / f"{prefix}_scored.json"
     cached = json.loads(path.read_text()) if path.exists() else []
     if cached and len(cached) != len(attempts):
         raise ValueError("Sealed extraction coverage differs from logged attempts")
@@ -54,13 +56,13 @@ def score(root=ROOT, *, live=False):
             client.close()
 
 
-def main(argv=None):
+def main(argv=None, *, prefix="sealed"):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--live", action="store_true")
     args = parser.parse_args(argv)
-    rows = score(live=args.live)
+    rows = score(live=args.live, prefix=prefix)
     if args.live:
-        (ROOT / "sealed_scored.json").write_text(json.dumps(rows, indent=1) + "\n")
+        (ROOT / f"{prefix}_scored.json").write_text(json.dumps(rows, indent=1) + "\n")
     pay = [row for row in rows if row["terms_a"] is not None and not row["off_file"]]
     good = [row for row in pay if not row["a_wrong"]]
     print(f"Cached diagnostic only: {len(rows)} clips, {len(pay)} on-file payments, {len(pay) - len(good)} Scribe errors")

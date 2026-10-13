@@ -22,7 +22,7 @@ def test_hunt_keys_are_loaded_only_from_ignored_files(monkeypatch, tmp_path):
 
 def test_importing_hunt_rounds_never_generates_audio_or_calls_apis(monkeypatch):
     monkeypatch.setattr(keys, "get", lambda *args: pytest.fail("No key access during import"))
-    for name in ["hunt", "round1", "round2", "sealed_voice", "sealed_score"]:
+    for name in ["hunt", "round1", "round2", "sealed_voice", "sealed_score", "sealed2_voice", "sealed2_score"]:
         importlib.import_module("experiments.failure_hunt." + name)
 
 
@@ -82,3 +82,26 @@ def test_sealed_bill_archive_is_complete_without_key_access(monkeypatch):
         path = ROOT.parents[1] / entry["file"]
         assert path.stat().st_size == entry["bytes"]
         assert hashlib.sha256(path.read_bytes()).hexdigest() == entry["sha256"]
+
+
+def test_lily_archive_preserves_every_recorded_input_without_calls(monkeypatch):
+    from experiments.failure_hunt.sealed_score import score
+    from experiments.failure_hunt.sealed_voice import R1, R2
+    from experiments.failure_hunt import sealed2_voice
+    monkeypatch.setattr(keys, "get", lambda *args: pytest.fail("No calls for Lily archive"))
+    assert (sealed2_voice.R1, sealed2_voice.R2) == (R1, R2)
+    assert sealed2_voice.VOICE[1] == "pFZP5JQG7iQjIQuC4Bku"
+    rows = score(prefix="sealed2")
+    assert rows == json.loads((ROOT / "sealed2_scored.json").read_text())
+    assert len(rows) == 60
+    pay = [row for row in rows if row["terms_a"] is not None and not row["off_file"]]
+    assert len(pay) == 46 and sum(row["a_wrong"] for row in pay) == 6
+    manifest = json.loads((ROOT / "sealed2_manifest.json").read_text())
+    assert manifest["file_count"] == len(manifest["files"]) == 198
+    assert len(manifest["attempts"]) == 60
+    for entry in manifest["files"]:
+        path = ROOT.parents[1] / entry["file"]
+        assert path.stat().st_size == entry["bytes"]
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == entry["sha256"]
+    preregistration = ROOT.parents[1] / manifest["preregistration_file"]
+    assert hashlib.sha256(preregistration.read_bytes()).hexdigest() == manifest["preregistration_sha256"]
