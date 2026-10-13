@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-13T00:46:41.816305+00:00",
+  "source_revision": "65d1a93154382b1f9ee0482acea541463e22ceda",
+  "repository": "https://github.com/chrislazar25/tellr",
+  "visibility": "PRIVATE",
+  "visibility_changed": false,
+  "fresh_clone": {
+    "source": "gh repo clone chrislazar25/tellr",
+    "api_variables_removed": true,
+    "secret_files_absent": true,
+    "tracked_worktree_clean": true,
+    "python_version": "3.11.16",
+    "quickstart": [
+      {
+        "command": "uv sync --frozen --python 3.11",
+        "exit_code": 0
+      },
+      {
+        "command": "uv run python scoreboard.py --artifact artifacts/failure_hunt_experiment.json",
+        "exit_code": 0
+      },
+      {
+        "command": "uv run pytest -q -m 'not integration'",
+        "exit_code": 0,
+        "passed": 119,
+        "deselected": 127,
+        "wall_seconds": 9.48
+      }
+    ],
+    "full_tests": {
+      "command": "uv run pytest -q",
+      "exit_code": 0,
+      "passed": 246,
+      "wall_seconds": 159.16,
+      "backend": "local loopback MongoDB rs0"
+    }
+  },
+  "workspace_full_tests": {
+    "passed": 246,
+    "wall_seconds": 158.04,
+    "backend": "local loopback MongoDB rs0"
+  },
+  "ci": {
+    "revision": "65d1a93154382b1f9ee0482acea541463e22ceda",
+    "conclusion": "success",
+    "url": "https://github.com/chrislazar25/tellr/actions/runs/38328563468"
+  },
+  "sealed_export": {
+    "file": "artifacts/sealed_bill_experiment.json",
+    "schema": "artifacts/sealed_bill_experiment.schema.json",
+    "schema_validation": "Draft 2020-12: valid",
+    "backend": "Atlas",
+    "gate_or_selection_performed": false,
+    "new_speech_extraction_proposal_calls": 0
+  },
+  "secret_scan": {
+    "tool": "gitleaks",
+    "version": "8.30.1",
+    "scope": "All reachable Git history; untracked active experiments excluded",
+    "command": "gitleaks git --log-opts=--all --redact=100 --no-banner .",
+    "configuration": "Existing default detectors with narrow legacy SHA-256 adapter fingerprint exemption; no new exemptions",
+    "scanned_revision": "65d1a93154382b1f9ee0482acea541463e22ceda",
+    "reachable_commits": 69,
+    "reachable_blobs": 1016,
+    "configured_credential_matching_blobs": 0,
+    "gitleaks_findings": 0,
+    "configured_credential_method": "Raw and percent-encoded configured keys, URI, database credentials and Atlas hostname against every reachable blob; values never printed"
+  },
+  "sealed2_files_read_or_staged": false
+}

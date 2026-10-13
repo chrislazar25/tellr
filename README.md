@@ -253,6 +253,7 @@ Approval defaults to the cleaned transcript; `--confirm-from verbatim` overrides
 - [artifacts/live_clips.json](artifacts/live_clips.json): audio hashes, both transcripts/terms, independently confirmed truth and cache provenance.
 - [artifacts/experiment.json](artifacts/experiment.json): measured baseline receipts, approvals, every candidate/gate, per-iteration scores and final replay.
 - [artifacts/fixture_stress.json](artifacts/fixture_stress.json): separately labeled synthetic stress experiment with live proposals.
+- [artifacts/launch_checks.json](artifacts/launch_checks.json): fresh GitHub clone quickstart, 246 passing local transaction/unit tests, CI and the launch history scan.
 - [artifacts/secret_scan.json](artifacts/secret_scan.json): full-history scan scope and reviewed findings; no credential values.
 - [LINKEDIN.md](LINKEDIN.md): a draft post based on these measurements.
 
