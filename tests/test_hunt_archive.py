@@ -1,3 +1,4 @@
+import hashlib
 import importlib
 import json
 from pathlib import Path
@@ -21,7 +22,7 @@ def test_hunt_keys_are_loaded_only_from_ignored_files(monkeypatch, tmp_path):
 
 def test_importing_hunt_rounds_never_generates_audio_or_calls_apis(monkeypatch):
     monkeypatch.setattr(keys, "get", lambda *args: pytest.fail("No key access during import"))
-    for name in ["hunt", "round1", "round2"]:
+    for name in ["hunt", "round1", "round2", "sealed_voice", "sealed_score"]:
         importlib.import_module("experiments.failure_hunt." + name)
 
 
@@ -35,7 +36,10 @@ def test_archive_preserves_every_logged_attempt_and_recognizer_output():
         for row in pair:
             assert row["text"] == attempt["results"][row["recognizer"]]["text"]
             assert all(row[key] == attempt[key] for key in ["case", "voice", "speed", "channel"])
-    assert len(list((ROOT / "audio").iterdir())) == 705
+    manifest = json.loads((ROOT / "audio_manifest.json").read_text())
+    assert manifest["file_count"] == len(manifest["files"]) == 705
+    for entry in manifest["files"]:
+        assert hashlib.sha256((ROOT / entry["file"]).read_bytes()).hexdigest() == entry["sha256"]
 
 
 def test_rescoring_is_cache_only_without_key_access(monkeypatch):
@@ -63,3 +67,18 @@ def test_supplied_manifest_links_every_cache_without_path_reconstruction():
     for entry in manifest["attempts"]:
         for key in ["tts_file", "channel_file", "scribe_cache", "whisper_cache"]:
             assert (ROOT / entry[key]).is_file()
+
+
+def test_sealed_bill_archive_is_complete_without_key_access(monkeypatch):
+    from experiments.failure_hunt.sealed_score import score
+    monkeypatch.setattr(keys, "get", lambda *args: pytest.fail("Sealed cache needs no keys"))
+    rows = score()
+    assert len(rows) == 60
+    assert rows == json.loads((ROOT / "sealed_scored.json").read_text())
+    manifest = json.loads((ROOT / "sealed_manifest.json").read_text())
+    assert len(manifest["attempts"]) == 60
+    assert len(manifest["files"]) == manifest["file_count"] == 198
+    for entry in manifest["files"]:
+        path = ROOT.parents[1] / entry["file"]
+        assert path.stat().st_size == entry["bytes"]
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == entry["sha256"]
