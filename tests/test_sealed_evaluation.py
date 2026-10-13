@@ -65,12 +65,19 @@ def test_frozen_evaluation_runs_real_worker_without_gate_or_activation(db, tmp_p
     original = deepcopy(policy)
     sentinel = {"_id": "existing-policy", "version": 1, "active": True, "rule": policy["rules"][0]}
     db.rule_versions.insert_one(sentinel)
-    databases = set(db.client.list_database_names())
+    dropped = []
+    original_drop = db.client.drop_database
+    def record_owned_cleanup(name, *args, **kwargs):
+        dropped.append(name)
+        return original_drop(name, *args, **kwargs)
+    monkeypatch.setattr(db.client, "drop_database", record_owned_cleanup)
     output = tmp_path / "sealed.json"
     result = evaluate_sealed(db.client, policy, output, data=data)
     assert policy == original
     assert db.rule_versions.find_one({"_id": sentinel["_id"]}) == sentinel
-    assert set(db.client.list_database_names()) == databases
+    assert len(set(dropped)) == 3
+    assert all(name.startswith("mongodb_hackathon_replay_") for name in dropped)
+    assert not (set(dropped) & set(db.client.list_database_names()))
     assert result["selection_performed"] is False and result["api_calls"] == []
     assert result["comparators"]["empty_rules"]["results"]["counts"]["ok"] == 2
     assert result["comparators"]["recognizer_agreement"]["results"]["counts"]["benign_block"] == 1
