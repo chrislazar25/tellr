@@ -275,7 +275,6 @@ Approval defaults to the cleaned transcript; `--confirm-from verbatim` overrides
 - [artifacts/fixture_stress.json](artifacts/fixture_stress.json): separately labeled synthetic stress experiment with live proposals.
 - [artifacts/launch_checks.json](artifacts/launch_checks.json): fresh GitHub clone quickstart, 246 passing local transaction/unit tests, CI and the launch history scan.
 - [artifacts/secret_scan.json](artifacts/secret_scan.json): full-history scan scope and reviewed findings; no credential values.
-- [LINKEDIN.md](LINKEDIN.md): a draft post based on these measurements.
 
 Secrets, generated egg-info and build output are ignored. CLI errors show sanitized exception type/message; `db.ping` prints only `ok`/`fail` on stdout. No real URI or API key is in an artifact. To repeat the history scan with Gitleaks:
 
